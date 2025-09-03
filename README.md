@@ -29,6 +29,10 @@ docker run -it -v `pwd`:/workdir beveradb/audio-separator --output_format wav --
 
 With a drums, stem get the beat timings using sonic-annotator:
 
+OK wait. So instead of the below, I've got a script called `kick_snare_hat_separator.py` that uses librosa (or aubio if
+available) for onsets, then clusters around the beats found with the BeatRoot sonic-annotator plugin. It separates into
+3 wav files (kick, snare, hat) and does the midi conversion and events.csv so it's pretty good!
+
 ```
 sonic-annotator -d vamp:beatroot-vamp:beatroot:beats \
   -w csv --csv-omit-filename --csv-one-file drum_beats.csv

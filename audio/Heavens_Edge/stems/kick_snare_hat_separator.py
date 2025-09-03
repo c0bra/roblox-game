@@ -327,6 +327,56 @@ def reconstruct_sources(S_complex: np.ndarray, masks: Dict[str, np.ndarray]) -> 
         out[cls] = out_spec
     return out
 
+def _freq_prior(freqs: np.ndarray, kind: str) -> np.ndarray:
+    """Smooth 0..1 priors over frequency."""
+    f = freqs
+    if kind == 'kick_low':      # emphasise <~150 Hz
+        return 1.0 / (1.0 + np.exp((f - 150.0) / 30.0))
+    if kind == 'snare_mid':     # 200 Hz..4 kHz band
+        return 1.0 / (1.0 + np.exp((200.0 - f) / 50.0)) * 1.0 / (1.0 + np.exp((f - 4000.0) / 400.0))
+    if kind == 'hat_high':      # >~5 kHz
+        return 1.0 / (1.0 + np.exp((5000.0 - f) / 400.0))
+    return np.ones_like(f)
+
+def refine_masks_eventwise(
+    masks: Dict[str, np.ndarray],
+    hits: List[Hit],
+    labels: np.ndarray,
+    mapping: Dict[int, str],
+    freqs: np.ndarray,
+    time_sigma_frames: int = 3,
+    kick_duck_in_snare: float = 0.6,
+    boost_kick_low: float = 0.3,
+) -> Dict[str, np.ndarray]:
+    """
+    Reduce kick bleed in snare by ducking snare mask at low freqs near kick events.
+    Optionally boost kick low band near its own events to win mask competition.
+    """
+    F, T = masks['snare'].shape
+    t_grid = np.arange(T)
+    low_prior = _freq_prior(freqs, 'kick_low')[:, None]  # (F,1)
+
+    sn = masks['snare']
+    kk = masks['kick']
+
+    for h, lab in zip(hits, labels):
+        if mapping.get(lab) != 'kick':
+            continue
+        # time-localised Gaussian around the kick frame
+        w = np.exp(-0.5 * ((t_grid - h.i) / max(1, time_sigma_frames))**2)[None, :]  # (1,T)
+        # Duck snare low band
+        sn *= (1.0 - kick_duck_in_snare * (low_prior @ w))
+        # Slightly boost kick low band
+        kk *= (1.0 + boost_kick_low * (low_prior @ w))
+
+    # Clamp & renormalise so masks remain in [0,1] and sum≈1
+    eps = 1e-8
+    for cls in ('kick','snare','hats'):
+        masks[cls] = np.clip(masks[cls], 0.0, None)
+    total = masks['kick'] + masks['snare'] + masks['hats'] + eps
+    for cls in ('kick','snare','hats'):
+        masks[cls] = masks[cls] / total
+    return masks
 
 # -------------------------
 # Main
@@ -391,6 +441,10 @@ def main():
     # Templates and soft masks
     tpls = build_class_templates(mag, freqs, snapped, labels, mapping, win_frames=6)
     masks = soft_masks_from_templates(mag, tpls, snapped, labels, mapping, time_sigma_frames=3)
+    masks = refine_masks_eventwise(masks, snapped, labels, mapping, freqs,
+                               time_sigma_frames=3,    # widen if your hop is large
+                               kick_duck_in_snare=0.6, # 0.4–0.8 is a good range
+                               boost_kick_low=0.3)     # 0.2–0.5 optional
 
     # Apply masks (use mixture phase)
     sep_specs = {cls: masks[cls] * S for cls in masks}
