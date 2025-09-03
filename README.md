@@ -36,6 +36,37 @@ sonic-annotator -d vamp:beatroot-vamp:beatroot:beats \
   1_heavens_edge_\(Drums\).mp3
 ```
 
+Then get the split out drum parts by using split_drum_wav.py:
+
+`python split_drum_wav.py "input_(Drums)_htdemucs.wav"`
+
+which internally uses various ffmpeg passes to split them out. THEN use `sonic-annotator` with the `vamp:vamp-example-plugins:percussiononsets:onsets` plugin to get the percussion onsets:
+
+* or maybe `vamp:qm-vamp-plugins:qm-onsetdetector:onsets` which seems better with the hats and kick?
+* Seems like `vamp:expressive-means:onsets` works for kick on Heaven's Edge.
+* `vamp:vamp-aubio:aubioonset:onsets` works for snare mostly (but snare and kick are mixed together).
+
+
+```
+sonic-annotator -d vamp:vamp-example-plugins:percussiononsets:onsets \
+  --force -w --csv-omit-filename --csv-one-file kick.csv \
+  kick.wav
+
+sonic-annotator -d vamp:vamp-example-plugins:percussiononsets:onsets \
+  --force -w --csv-omit-filename --csv-one-file snare.csv \
+  snare.wav
+```
+
+Hats needs a different one:
+
+```
+sonic-annotator -d vamp:expressive-means:onsets \
+  --force -w --csv-omit-filename --csv-one-file hats.csv \
+  hats.wav
+```
+
+## 
+
 ## Vocals
 
 Once you have the beats from the drums, you can extract the vocal notes with sonic-annotator and the pyin plugin:
