@@ -16,7 +16,7 @@ pip install "numpy<2" "cython<3" "scipy<1.12"
 pip install madmom==0.16.1
 ```
 
-# Processing
+# Music Processing
 
 Split the mp3 from Suno.ai into stems using python-audio-separator (Docker image), which is based on Ultimate Voice Remover,
 which in turns uses demucs (and other models) internally (it takes about as long as the song is, on my Mac).
@@ -85,3 +85,10 @@ And then quantize the vocal notes to our beat with this script:
 ```
 python pyin_csv_to_midi_quant.py "input_(Vocals)_htdemucs_vamp_pyin_pyin_notes.csv" drum_beats.csv pyin_notes.mid
 ```
+
+# Sound Effects
+
+* Find some here: https://pixabay.com/sound-effects/search
+  * Bad ukelele strumming: https://pixabay.com/sound-effects/bad-ukulele-strumming-2-40667/
+* Generate them here: https://elevenlabs.io/sound-effects and use my extension to download them freely.
+* https://directory.audio/
