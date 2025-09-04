@@ -27,12 +27,7 @@ docker run -it -v `pwd`:/workdir beveradb/audio-separator --output_format wav --
 
 ## Drums
 
-With a drums, stem get the beat timings using sonic-annotator:
-
-OK wait. So instead of the below, I've got a script called `kick_snare_hat_separator.py` that uses librosa (or aubio if
-available) for onsets, then clusters around the beats found with the BeatRoot sonic-annotator plugin. It separates into
-3 wav files (kick, snare, hat) and does the midi conversion and events.csv so it's pretty good!
-
+Get the beats first (TODO: try using librosa first for tempo):
 ```
 sonic-annotator -d vamp:beatroot-vamp:beatroot:beats \
   -w csv --csv-omit-filename --csv-one-file drum_beats.csv
@@ -40,34 +35,10 @@ sonic-annotator -d vamp:beatroot-vamp:beatroot:beats \
   1_heavens_edge_\(Drums\).mp3
 ```
 
-Then get the split out drum parts by using split_drum_wav.py:
+OK wait. So instead of the below, I've got a script called `kick_snare_hat_separator.py` that uses librosa (or aubio if
+available) for onsets, then clusters around the beats found with the BeatRoot sonic-annotator plugin. It separates into
+3 wav files (kick, snare, hat) and does the midi conversion and events.csv so it's pretty good!
 
-`python split_drum_wav.py "input_(Drums)_htdemucs.wav"`
-
-which internally uses various ffmpeg passes to split them out. THEN use `sonic-annotator` with the `vamp:vamp-example-plugins:percussiononsets:onsets` plugin to get the percussion onsets:
-
-* or maybe `vamp:qm-vamp-plugins:qm-onsetdetector:onsets` which seems better with the hats and kick?
-* Seems like `vamp:expressive-means:onsets` works for kick on Heaven's Edge.
-* `vamp:vamp-aubio:aubioonset:onsets` works for snare mostly (but snare and kick are mixed together).
-
-
-```
-sonic-annotator -d vamp:vamp-example-plugins:percussiononsets:onsets \
-  --force -w --csv-omit-filename --csv-one-file kick.csv \
-  kick.wav
-
-sonic-annotator -d vamp:vamp-example-plugins:percussiononsets:onsets \
-  --force -w --csv-omit-filename --csv-one-file snare.csv \
-  snare.wav
-```
-
-Hats needs a different one:
-
-```
-sonic-annotator -d vamp:expressive-means:onsets \
-  --force -w --csv-omit-filename --csv-one-file hats.csv \
-  hats.wav
-```
 
 ## 
 

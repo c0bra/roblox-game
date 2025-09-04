@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vocal Lane Visualization</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .controls {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+
+    .lanes-container {
+      display: flex;
+      justify-content: space-between;
+      height: 200px;
+      margin-bottom: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    .lane {
+      width: 30%;
+      border: 2px solid #333;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background-color: #f9f9f9;
+    }
+
+    .lane-label {
+      position: absolute;
+      top: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .flash-circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .progress-container {
+      width: 100%;
+      background-color: #ddd;
+      border-radius: 5px;
+      margin: 10px 0;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 20px;
+      background-color: #4CAF50;
+      border-radius: 5px;
+      transition: width 0.1s;
+    }
+
+    .time-display {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Vocal Lane Visualization</h1>
+
+    <div class="controls">
+      <button id="playButton">Play</button>
+    </div>
+
+    <div class="time-display">
+      Time: <span id="currentTime">0.00</span>s
+    </div>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="lanes-container">
+      <div class="lane" id="lane0">
+        <div class="lane-label">Lane 0</div>
+      </div>
+      <div class="lane" id="lane1">
+        <div class="lane-label">Lane 1</div>
+      </div>
+      <div class="lane" id="lane2">
+        <div class="lane-label">Lane 2</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Audio element
+    const audio = new Audio('input_(Vocals)_htdemucs.wav');
+
+    // DOM elements
+    const playButton = document.getElementById('playButton');
+    const currentTimeDisplay = document.getElementById('currentTime');
+    const progressBar = document.getElementById('progressBar');
+    const lanes = [
+      document.getElementById('lane0'),
+      document.getElementById('lane1'),
+      document.getElementById('lane2')
+    ];
+
+    // CSV data
+    let noteEvents = [];
+    let nextEventIndex = 0;
+
+    // Colors for each lane
+    const laneColors = ['#FF6B6B', '#4ECDC4', '#45B7D1'];
+
+    // Load CSV data
+    async function loadCSV() {
+      try {
+        const response = await fetch('vocal_lanes.csv');
+        const csvText = await response.text();
+
+        // Parse CSV (skip header)
+        const lines = csvText.split('\n').slice(1);
+        noteEvents = lines
+          .filter(line => line.trim() !== '')
+          .map(line => {
+            const [time_s, lane, pitch, dur_s] = line.split(',');
+            return {
+              time: parseFloat(time_s),
+              lane: parseInt(lane),
+              pitch: parseInt(pitch),
+              duration: parseFloat(dur_s)
+            };
+          })
+          .sort((a, b) => a.time - b.time); // Sort by time
+
+        console.log('Loaded', noteEvents.length, 'note events');
+      } catch (error) {
+        console.error('Error loading CSV:', error);
+      }
+    }
+
+    // Create a flash circle in the specified lane
+    function createFlash(laneIndex) {
+      const lane = lanes[laneIndex];
+      if (!lane) return;
+
+      const circle = document.createElement('div');
+      circle.className = 'flash-circle';
+      circle.style.backgroundColor = laneColors[laneIndex];
+      circle.style.opacity = '1';
+
+      // Position randomly in the lane
+      const maxX = lane.offsetWidth - 50;
+      const maxY = lane.offsetHeight - 50;
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      circle.style.left = randomX + 'px';
+      circle.style.top = randomY + 'px';
+
+      lane.appendChild(circle);
+
+      // Remove the circle after 250ms
+      setTimeout(() => {
+        circle.style.opacity = '0';
+        setTimeout(() => {
+          if (circle.parentNode) {
+            circle.parentNode.removeChild(circle);
+          }
+        }, 250);
+      }, 250);
+    }
+
+    // Update the visualization based on current time
+    function updateVisualization(currentTime) {
+      // Update time display
+      currentTimeDisplay.textContent = currentTime.toFixed(2);
+
+      // Update progress bar
+      const progress = (currentTime / audio.duration) * 100;
+      progressBar.style.width = progress + '%';
+
+      // Process note events
+      while (nextEventIndex < noteEvents.length &&
+        noteEvents[nextEventIndex].time <= currentTime) {
+        const event = noteEvents[nextEventIndex];
+        createFlash(event.lane);
+        nextEventIndex++;
+      }
+    }
+
+    // Audio event handlers
+    playButton.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playButton.textContent = 'Pause';
+      } else {
+        audio.pause();
+        playButton.textContent = 'Play';
+      }
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      updateVisualization(audio.currentTime);
+    });
+
+    audio.addEventListener('ended', () => {
+      playButton.textContent = 'Play';
+      nextEventIndex = 0;
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      console.log('Audio loaded, duration:', audio.duration);
+    });
+
+    // Initialize
+    loadCSV();
+  </script>
+</body>
+
+</html>
