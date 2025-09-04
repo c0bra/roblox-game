@@ -86,12 +86,68 @@ def _target_from_percentiles(pitches: np.ndarray, num_lanes: int) -> np.ndarray:
     x = np.clip(x, 0.0, 1.0)
     return x * (num_lanes - 1)  # 0..L-1
 
-def _beat_at_time(beats: np.ndarray, t: float) -> float:
-    i = np.searchsorted(beats, t)
-    if i == 0: return 0.0
-    if i >= len(beats): return float(len(beats)-1)
-    t0, t1 = beats[i-1], beats[i]
-    return (i-1) + (t - t0)/max(1e-6, (t1 - t0))
+def build_subbeat_grid(beats: np.ndarray, subdiv: int) -> np.ndarray:
+    """Interpolate a dense grid between beats with `subdiv` slots per beat."""
+    if subdiv <= 1 or len(beats) < 2:
+        return beats.copy()
+    g = []
+    for i in range(len(beats) - 1):
+        b0, b1 = beats[i], beats[i+1]
+        step = (b1 - b0) / subdiv
+        for k in range(subdiv):
+            g.append(b0 + k * step)
+    g.append(float(beats[-1]))
+    return np.asarray(g, float)
+
+def _nearest(arr: np.ndarray, x: float) -> float:
+    i = np.searchsorted(arr, x)
+    cand = []
+    if i < len(arr): cand.append(arr[i])
+    if i > 0:         cand.append(arr[i-1])
+    return min(cand, key=lambda v: abs(v - x)) if cand else x
+
+def _next_at_or_after(arr: np.ndarray, x: float) -> float:
+    i = np.searchsorted(arr, x)
+    if i >= len(arr):  # extend with last step size (fallback)
+        return arr[-1] + (arr[-1] - arr[-2] if len(arr) > 1 else 0.25)
+    return arr[i]
+
+def quantize_notes_to_grid(
+    notes: List[Note],
+    grid: np.ndarray,
+    snap_ms: float = 60.0,
+    min_dur_s: float = 0.08,
+    mode: str = "start_to_nearest_end_to_next",
+) -> List[Note]:
+    """Quantize monophonic notes to a sub-beat grid and enforce min duration/overlap rules."""
+    if not notes: return []
+    tol = snap_ms / 1000.0
+    out: List[Note] = []
+    last_end = -1e9
+    for n in sorted(notes, key=lambda x: x.t):
+        s_raw, e_raw = n.t, n.t + max(n.d, 0.0)
+        if mode == "both_to_nearest":
+            s_q = _nearest(grid, s_raw); e_q = _nearest(grid, e_raw)
+            if e_q <= s_q: e_q = s_q + min_dur_s
+        else:  # "start_to_nearest_end_to_next"
+            s_q = _nearest(grid, s_raw)
+            if abs(s_q - s_raw) > tol:
+                s_q = s_raw  # too far: leave start (or skip if you prefer)
+            e_q = _next_at_or_after(grid, max(e_raw, s_q + 1e-6))
+            if e_q - s_q < min_dur_s:
+                nxt = _next_at_or_after(grid, e_q + 1e-6)
+                e_q = max(s_q + min_dur_s, nxt)
+        # prevent overlap (monophonic)
+        if s_q < last_end:
+            if last_end - s_q <= tol:
+                s_q = last_end
+            else:
+                continue  # drop colliding note
+        if e_q - s_q < min_dur_s:
+            e_q = s_q + min_dur_s
+        out.append(Note(t=float(s_q), d=float(e_q - s_q), pitch=int(n.pitch), strength=n.strength))
+        last_end = e_q
+    return out
 
 # ---------------- Main ----------------
 
@@ -99,32 +155,41 @@ def assign_melody_to_lanes(
     notes: List[Note],
     beats: np.ndarray,
     settings: MelodyLaneSettings = MELODY_PRESETS["Medium"],
+    *,
+    subdiv: int = 4,                 # 4=16ths, 3=triplet 8ths, 2=8ths
+    snap_ms: float = 60.0,
+    quant_mode: str = "start_to_nearest_end_to_next",
 ) -> List[Tuple[float, int, int, float]]:
+    """Quantize to sub-beat grid from `beats` then do contour-preserving DP lane mapping."""
     if not notes:
         return []
 
-    notes = sorted(notes, key=lambda n: n.t)
+    # 1) Build grid from beats and quantize notes
+    grid = build_subbeat_grid(beats, subdiv=subdiv)
+    q_notes = quantize_notes_to_grid(notes, grid, snap_ms=snap_ms, min_dur_s=0.08, mode=quant_mode)
+    if not q_notes:
+        return []
+
+    # 2) DP/Viterbi lane mapping (same logic as before)
+    q_notes = sorted(q_notes, key=lambda n: n.t)
     num_lanes = max(2, settings.num_lanes)
 
-    P = np.asarray([n.pitch for n in notes], float)
-    T = np.asarray([n.t for n in notes], float)
-    D = np.asarray([n.d for n in notes], float)
+    P = np.asarray([n.pitch for n in q_notes], float)
+    T = np.asarray([n.t for n in q_notes], float)
+    D = np.asarray([n.d for n in q_notes], float)
 
     target = _target_from_percentiles(P, num_lanes)  # 0..L-1
 
-    N = len(notes)
-    # DP tables: cost C[i, l], backpointer B[i, l], and streak S[i, l] (approx.)
+    N = len(q_notes)
     C = np.full((N, num_lanes), 1e9, float)
     B = np.full((N, num_lanes), -1, int)
-    S = np.zeros((N, num_lanes), int)  # streak length if we choose lane l at i
+    S = np.zeros((N, num_lanes), int)
 
-    # init: choose lane closest to target
     for l in range(num_lanes):
         C[0, l] = settings.w_span * abs(l - target[0])
         B[0, l] = -1
         S[0, l] = 1
 
-    # recurrence
     for i in range(1, N):
         dp = P[i] - P[i-1]
         dir_clear = abs(dp) >= settings.dir_semitones
@@ -133,18 +198,12 @@ def assign_melody_to_lanes(
             best_cost, best_lp, best_streak = 1e9, -1, 1
             for lp in range(num_lanes):
                 cost = C[i-1, lp]
-                # direction: if pitch rises, prefer l >= lp; if falls, prefer l <= lp
                 if dir_clear:
-                    if dp > 0 and l < lp:
-                        cost += settings.w_dir
-                    if dp < 0 and l > lp:
-                        cost += settings.w_dir
-                    # also discourage "not moving" when direction is clear
+                    if dp > 0 and l < lp: cost += settings.w_dir
+                    if dp < 0 and l > lp: cost += settings.w_dir
                     if (dp > 0 and l == lp) or (dp < 0 and l == lp):
                         cost += settings.w_inertia
-                # jump penalty
                 cost += settings.w_jump * abs(l - lp)
-                # anti-streak (look back via S)
                 streak = (S[i-1, lp] + 1) if l == lp else 1
                 if streak > settings.streak_lookback:
                     cost += settings.streak_penalty * (streak - settings.streak_lookback)
@@ -154,21 +213,19 @@ def assign_melody_to_lanes(
             B[i, l] = best_lp
             S[i, l] = best_streak
 
-    # backtrack best path
     last_lane = int(np.argmin(C[-1]))
     lanes = [last_lane]
     for i in range(N-1, 0, -1):
         last_lane = int(B[i, last_lane])
         lanes.append(last_lane)
-    lanes = lanes[::-1]  # 0-based lane indices
+    lanes = lanes[::-1]
 
-    # cooldown pass (greedy)
+    # 3) Cooldown pass (greedy)
     last_t: Dict[int, float] = {}
     keep = [True]*N
     for i, (t, l) in enumerate(zip(T, lanes)):
         lt = last_t.get(l, -1e9)
         if t - lt < settings.cooldown_s:
-            # try neighbors; else drop
             moved = False
             for nl in [l-1, l+1]:
                 if 0 <= nl < num_lanes:
@@ -186,5 +243,6 @@ def assign_melody_to_lanes(
     out = []
     for i, k in enumerate(keep):
         if not k: continue
-        out.append((notes[i].t, lanes[i], notes[i].pitch, notes[i].d))
+        n = q_notes[i]
+        out.append((n.t, lanes[i], n.pitch, n.d))
     return out

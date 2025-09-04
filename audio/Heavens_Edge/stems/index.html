@@ -108,6 +108,21 @@
       font-weight: bold;
       margin: 10px 0;
     }
+
+    .waveform-container {
+      width: 100%;
+      height: 100px;
+      margin: 10px 0;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    #waveformCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
   </style>
 </head>
 
@@ -121,6 +136,10 @@
 
     <div class="time-display">
       Time: <span id="currentTime">0.00</span>s
+    </div>
+
+    <div class="waveform-container">
+      <canvas id="waveformCanvas"></canvas>
     </div>
 
     <div class="progress-container">
@@ -144,10 +163,20 @@
     // Audio element
     const audio = new Audio('input_(Vocals)_htdemucs.wav');
 
+    // Web Audio API context and nodes
+    let audioContext;
+    let audioSource;
+    let analyser;
+    let audioBuffer;
+    let javascriptNode;
+    let isPlaying = false;
+
     // DOM elements
     const playButton = document.getElementById('playButton');
     const currentTimeDisplay = document.getElementById('currentTime');
     const progressBar = document.getElementById('progressBar');
+    const waveformCanvas = document.getElementById('waveformCanvas');
+    const canvasContext = waveformCanvas.getContext('2d');
     const lanes = [
       document.getElementById('lane0'),
       document.getElementById('lane1'),
@@ -186,6 +215,130 @@
       } catch (error) {
         console.error('Error loading CSV:', error);
       }
+    }
+
+    // Load audio buffer for waveform visualization
+    async function loadAudioBuffer() {
+      try {
+        if (!audioContext) {
+          audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        // Create analyser node
+        analyser = audioContext.createAnalyser();
+        analyser.fftSize = 2048;
+        analyser.smoothingTimeConstant = 0.8;
+
+        // Create audio source from audio element
+        audioSource = audioContext.createMediaElementSource(audio);
+
+        // Connect audio source to analyser and destination
+        audioSource.connect(analyser);
+        analyser.connect(audioContext.destination);
+
+        const response = await fetch('input_(Vocals)_htdemucs.wav');
+        const arrayBuffer = await response.arrayBuffer();
+        audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+        console.log('Audio buffer loaded');
+        drawStaticWaveform();
+      } catch (error) {
+        console.error('Error loading audio buffer:', error);
+      }
+    }
+
+    // Draw the static waveform on the canvas (original visualization)
+    function drawStaticWaveform() {
+      if (!audioBuffer) return;
+
+      // Set canvas dimensions
+      waveformCanvas.width = waveformCanvas.offsetWidth;
+      waveformCanvas.height = waveformCanvas.offsetHeight;
+
+      const width = waveformCanvas.width;
+      const height = waveformCanvas.height;
+
+      // Clear canvas
+      canvasContext.clearRect(0, 0, width, height);
+
+      // Get audio data (use left channel or first channel)
+      const channelData = audioBuffer.getChannelData(0);
+      const step = Math.ceil(channelData.length / width);
+      const amp = height / 2;
+
+      // Draw waveform
+      canvasContext.fillStyle = '#4CAF50';
+      canvasContext.beginPath();
+
+      for (let i = 0; i < width; i++) {
+        const idx = Math.floor(i * step);
+        const value = channelData[idx];
+        const x = i;
+        const y = amp + value * amp;
+
+        if (i === 0) {
+          canvasContext.moveTo(x, y);
+        } else {
+          canvasContext.lineTo(x, y);
+        }
+      }
+
+      // Close the path and fill
+      canvasContext.lineTo(width, height);
+      canvasContext.lineTo(0, height);
+      canvasContext.closePath();
+      canvasContext.fill();
+    }
+
+    // Draw the live waveform on the canvas
+    function drawLiveWaveform() {
+      if (!analyser) return;
+
+      // Set canvas dimensions
+      waveformCanvas.width = waveformCanvas.offsetWidth;
+      waveformCanvas.height = waveformCanvas.offsetHeight;
+
+      const width = waveformCanvas.width;
+      const height = waveformCanvas.height;
+
+      // Clear canvas
+      canvasContext.clearRect(0, 0, width, height);
+
+      // Get time domain data from analyser
+      const bufferLength = analyser.fftSize;
+      const dataArray = new Uint8Array(bufferLength);
+      analyser.getByteTimeDomainData(dataArray);
+
+      // Draw waveform
+      canvasContext.lineWidth = 2;
+      canvasContext.strokeStyle = '#4CAF50';
+      canvasContext.beginPath();
+
+      const sliceWidth = width / bufferLength;
+      let x = 0;
+
+      for (let i = 0; i < bufferLength; i++) {
+        const v = dataArray[i] / 128.0;
+        const y = v * height / 2;
+
+        if (i === 0) {
+          canvasContext.moveTo(x, y);
+        } else {
+          canvasContext.lineTo(x, y);
+        }
+
+        x += sliceWidth;
+      }
+
+      canvasContext.lineTo(width, height / 2);
+      canvasContext.stroke();
+    }
+
+    // Rendering loop for live visualization
+    function renderLoop() {
+      if (!isPlaying) return;
+
+      drawLiveWaveform();
+      requestAnimationFrame(renderLoop);
     }
 
     // Create a flash circle in the specified lane
@@ -241,10 +394,18 @@
     // Audio event handlers
     playButton.addEventListener('click', () => {
       if (audio.paused) {
+        // Resume audio context if suspended
+        if (audioContext && audioContext.state === 'suspended') {
+          audioContext.resume();
+        }
+
         audio.play();
+        isPlaying = true;
+        renderLoop(); // Start the rendering loop
         playButton.textContent = 'Pause';
       } else {
         audio.pause();
+        isPlaying = false;
         playButton.textContent = 'Play';
       }
     });
@@ -255,6 +416,7 @@
 
     audio.addEventListener('ended', () => {
       playButton.textContent = 'Play';
+      isPlaying = false;
       nextEventIndex = 0;
     });
 
@@ -264,6 +426,10 @@
 
     // Initialize
     loadCSV();
+    loadAudioBuffer();
+
+    // Handle window resize
+    window.addEventListener('resize', drawStaticWaveform);
   </script>
 </body>
 
