@@ -30,9 +30,8 @@ docker run -it -v `pwd`:/workdir beveradb/audio-separator --output_format wav --
 Get the beats first (TODO: try using librosa first for tempo):
 ```
 sonic-annotator -d vamp:beatroot-vamp:beatroot:beats \
-  -w csv --csv-omit-filename --csv-one-file drum_beats.csv
-  --force \
-  1_heavens_edge_\(Drums\).mp3
+  -w csv --csv-omit-filename --csv-one-file drum_beats.csv \
+  --csv-force --force "input_(Drums)_htdemucs.wav"
 ```
 
 OK wait. So instead of the below, I've got a script called `kick_snare_hat_separator.py` that uses librosa (or aubio if

@@ -34,13 +34,13 @@ def load_beats_txt(path: str):
 # --- usage example ---
 pyin_csv   = "input_(Vocals)_htdemucs_vamp_pyin_pyin_notes.csv"      # time,duration,frequencyHz (no header)
 beat_times = "drum_beats.csv"      # one time (s) per line from your temp grid
-difficulty = "Medium"              # "Easy" | "Medium" | "Hard" | "TwoLane"
+difficulty = "Easy"              # "Easy" | "Medium" | "Hard" | "TwoLane"
 
 notes = load_pyin_notes_csv(pyin_csv)
 beats = load_beats_txt(beat_times)
 
 settings = MELODY_PRESETS[difficulty]
-assignments = assign_melody_to_lanes(notes, beats, settings)
+assignments = assign_melody_to_lanes(notes, beats, settings, subdiv=4)
 # assignments: list of (time_s, lane_idx, midi_pitch, duration_s)
 
 # Dump a simple CSV for your game:

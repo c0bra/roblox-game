@@ -93,6 +93,7 @@
       background-color: #ddd;
       border-radius: 5px;
       margin: 10px 0;
+      cursor: pointer;
     }
 
     .progress-bar {
@@ -142,7 +143,7 @@
       <canvas id="waveformCanvas"></canvas>
     </div>
 
-    <div class="progress-container">
+    <div class="progress-container" id="progressContainer">
       <div class="progress-bar" id="progressBar"></div>
     </div>
 
@@ -175,6 +176,7 @@
     const playButton = document.getElementById('playButton');
     const currentTimeDisplay = document.getElementById('currentTime');
     const progressBar = document.getElementById('progressBar');
+    const progressContainer = document.getElementById('progressContainer');
     const waveformCanvas = document.getElementById('waveformCanvas');
     const canvasContext = waveformCanvas.getContext('2d');
     const lanes = [
@@ -342,7 +344,7 @@
     }
 
     // Create a flash circle in the specified lane
-    function createFlash(laneIndex) {
+    function createFlash(laneIndex, duration) {
       const lane = lanes[laneIndex];
       if (!lane) return;
 
@@ -362,7 +364,11 @@
 
       lane.appendChild(circle);
 
-      // Remove the circle after 250ms
+      // Calculate display time: minimum 250ms, maximum note duration
+      // Duration is in seconds, convert to milliseconds
+      const displayTime = Math.max(250, duration * 1000);
+
+      // Remove the circle after displayTime
       setTimeout(() => {
         circle.style.opacity = '0';
         setTimeout(() => {
@@ -370,7 +376,25 @@
             circle.parentNode.removeChild(circle);
           }
         }, 250);
-      }, 250);
+      }, displayTime);
+    }
+
+    // Find the next event index for a given time
+    function findNextEventIndex(time) {
+      // Binary search for the first event that occurs after the given time
+      let low = 0;
+      let high = noteEvents.length;
+
+      while (low < high) {
+        const mid = Math.floor((low + high) / 2);
+        if (noteEvents[mid].time <= time) {
+          low = mid + 1;
+        } else {
+          high = mid;
+        }
+      }
+
+      return low;
     }
 
     // Update the visualization based on current time
@@ -386,9 +410,66 @@
       while (nextEventIndex < noteEvents.length &&
         noteEvents[nextEventIndex].time <= currentTime) {
         const event = noteEvents[nextEventIndex];
-        createFlash(event.lane);
+        createFlash(event.lane, event.duration);
         nextEventIndex++;
       }
+    }
+
+    // Seek to a specific time in the audio
+    function seekToTime(time) {
+      // Clamp time to valid range
+      const clampedTime = Math.max(0, Math.min(time, audio.duration));
+
+      // Update audio currentTime
+      audio.currentTime = clampedTime;
+
+      // Reset nextEventIndex to match the new time
+      nextEventIndex = findNextEventIndex(clampedTime);
+
+      // Update visualization immediately
+      updateVisualization(clampedTime);
+    }
+
+    // Handle progress bar click/drag
+    function setupProgressScrubbing() {
+      let isDragging = false;
+
+      // Click on progress bar
+      progressContainer.addEventListener('click', (e) => {
+        if (!audio.duration) return;
+
+        const rect = progressContainer.getBoundingClientRect();
+        const pos = (e.clientX - rect.left) / rect.width;
+        const time = pos * audio.duration;
+
+        seekToTime(time);
+      });
+
+      // Dragging functionality
+      progressContainer.addEventListener('mousedown', (e) => {
+        if (!audio.duration) return;
+
+        isDragging = true;
+        const rect = progressContainer.getBoundingClientRect();
+        const pos = (e.clientX - rect.left) / rect.width;
+        const time = pos * audio.duration;
+
+        seekToTime(time);
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (!isDragging || !audio.duration) return;
+
+        const rect = progressContainer.getBoundingClientRect();
+        const pos = (e.clientX - rect.left) / rect.width;
+        const time = pos * audio.duration;
+
+        seekToTime(time);
+      });
+
+      document.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
     }
 
     // Audio event handlers
@@ -411,6 +492,7 @@
     });
 
     audio.addEventListener('timeupdate', () => {
+      // Only update visualization through timeupdate if not dragging
       updateVisualization(audio.currentTime);
     });
 
@@ -427,6 +509,7 @@
     // Initialize
     loadCSV();
     loadAudioBuffer();
+    setupProgressScrubbing();
 
     // Handle window resize
     window.addEventListener('resize', drawStaticWaveform);
