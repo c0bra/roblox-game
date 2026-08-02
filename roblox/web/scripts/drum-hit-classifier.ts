@@ -165,6 +165,7 @@ export const classifyDrumHits = (
             time,
             pitch: drumPitch[label],
             strength: profile.strength / peakStrength,
+            duration: 0,
             label,
           },
         ]

@@ -145,10 +145,27 @@ Battle composition:
 ### Tap Pad
 
 - Structure: native `button`, geometric lane glyph, keyboard hint.
-- States: ready, pressed, hit, miss, disabled.
+- States: ready, pressed, held, hit, miss, disabled.
 - Touch: fills one-third of the bottom control row with an 8px gap; no precision gesture.
 - Motion: immediate 0.96 press scale; hit emits an inward ring; miss flashes a static
   danger rim under reduced motion.
+
+### Sustain Note
+
+- Structure: the existing lane glyph forms the note head; a tapered energy ribbon extends
+  toward the detected end of the sung or played note.
+- Scope: vocals, guitar, and bass notes at least 350ms long. Drum transients remain taps.
+- States: approaching, head hit, holding, completed, and broken by early release.
+- Input: pointer and keyboard press begin the note; release ends it. Authored melodic charts
+  prevent sustain overlap with the next playable note so the one-thumb mobile persona never
+  needs to hold one lane while reaching for another.
+- Feedback: the ribbon drains into the lightline while held, the pad keeps its energy fill,
+  and completion earns a concise `HELD` judgment. Early release produces `HOLD BROKEN` and
+  resets combo; duration is never communicated by color alone.
+- Motion: adapted from the beui.dev `expanding-arrow-button` hold mechanism: continuous
+  state is represented spatially, input stays interruptible, and release immediately
+  retargets the state. Reduced motion keeps the linear ribbon travel because it communicates
+  authored song time, while removing non-essential glow changes.
 
 ### Game Screen
 
@@ -168,6 +185,9 @@ Battle composition:
 
 Spatial movement is interruptible and uses transforms. Color and opacity use short
 easings. Gameplay note travel is linear because it represents time, not decoration.
+Sustain ribbons shorten linearly into the strike line and remain visible for the entire
+required hold. This timing motion is essential gameplay information and remains enabled
+under reduced motion.
 
 Reduced motion removes camera shake, idle bob, particles, scale entrances, and repeated
 pulsing. It preserves linear note travel, immediate press feedback, and static attack

@@ -128,9 +128,13 @@ const analyzeEvents = async (
   const melodic = (rows: readonly (readonly number[])[]): RawChartEvent[] =>
     rows.flatMap((row) => {
       const time = row[0];
+      const duration = row[1];
       const frequency = row[2];
-      return time !== undefined && frequency !== undefined && frequency > 0
-        ? [{ time, pitch: hzToMidi(frequency), strength: 1 }]
+      return time !== undefined &&
+        duration !== undefined &&
+        frequency !== undefined &&
+        frequency > 0
+        ? [{ time, pitch: hzToMidi(frequency), strength: 1, duration }]
         : [];
     });
   return {

@@ -7,6 +7,7 @@ export interface RawChartEvent {
   readonly time: number;
   readonly pitch: number;
   readonly strength: number;
+  readonly duration: number;
   readonly label?: DrumHitLabel;
 }
 
@@ -34,6 +35,7 @@ interface CompileInput {
 interface CompiledNote {
   readonly time: number;
   readonly lane: Lane;
+  readonly duration: number;
 }
 
 interface CompiledChart {
@@ -58,6 +60,8 @@ export interface CompileResult {
 
 const subdivisionsPerBeat = 4;
 const notesPerBeat = { easy: 1, medium: 2, hard: 4 } as const;
+const minimumSustainSeconds = 0.35;
+const releaseGapSeconds = 0.08;
 const drumLaneByLabel: Record<DrumHitLabel, Lane> = {
   kick: 0,
   snare: 1,
@@ -187,6 +191,7 @@ const assignLanes = (
   events: readonly QuantizedEvent[],
   instrument: Instrument,
   clipStart: number,
+  clipDuration: number,
 ): readonly CompiledNote[] => {
   const pitches = events
     .map((event) => event.pitch)
@@ -195,12 +200,13 @@ const assignLanes = (
   const upper = pitches[Math.floor((pitches.length * 2) / 3)] ?? 67;
   let previousLane: Lane = 1;
   let streak = 0;
-  return events.map((event) => {
+  const notes = events.map((event): CompiledNote => {
     if (instrument === "drums") {
       if (!event.label) throw new UnclassifiedDrumEvent(event.time);
       return {
         time: roundSeconds(event.time - clipStart),
         lane: drumLaneByLabel[event.label],
+        duration: 0,
       };
     }
     let lane: Lane = event.pitch < lower ? 0 : event.pitch > upper ? 2 : 1;
@@ -210,7 +216,27 @@ const assignLanes = (
       streak = 1;
     }
     previousLane = lane;
-    return { time: roundSeconds(event.time - clipStart), lane };
+    return {
+      time: roundSeconds(event.time - clipStart),
+      lane,
+      duration: event.duration,
+    };
+  });
+  return notes.map((note, index) => {
+    if (instrument === "drums") return note;
+    const next = notes[index + 1];
+    const available = Math.max(
+      0,
+      Math.min(
+        clipDuration - note.time,
+        next ? next.time - note.time - releaseGapSeconds : clipDuration,
+      ),
+    );
+    const duration = Math.min(note.duration, available);
+    return {
+      ...note,
+      duration: duration >= minimumSustainSeconds ? roundSeconds(duration) : 0,
+    };
   });
 };
 
@@ -224,6 +250,7 @@ export const compileDifficulties = (input: CompileInput): CompileResult => {
       chooseDifficulty(quantized.events, difficulty),
       input.instrument,
       input.clip.start,
+      input.clip.duration,
     ),
   });
   const charts = {

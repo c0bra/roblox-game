@@ -2,6 +2,7 @@ import ky from "ky";
 import { BattleAudio } from "../audio/battle-audio";
 import {
   type ChartDifficulty,
+  type ChartNote,
   chartDifficulties,
   chartPath,
   chartSchema,
@@ -22,7 +23,12 @@ import {
   showResult,
   showSelect,
 } from "../ui/view";
-import { judgeTap, resolveAttackWindow, scoreForGrade } from "./judgement";
+import {
+  judgeTap,
+  resolveAttackWindow,
+  resolveSustain,
+  scoreForGrade,
+} from "./judgement";
 
 const isInstrument = (value: string | undefined): value is Instrument =>
   instruments.some((instrument) => instrument === value);
@@ -52,6 +58,8 @@ export class GameController {
     | undefined;
   private judged = new Set<number>();
   private hits = new Set<number>();
+  private activeSustains = new Map<Lane, number>();
+  private pressedLanes = new Set<Lane>();
   private playerHealth = 100;
   private score = 0;
   private combo = 0;
@@ -114,8 +122,17 @@ export class GameController {
         button.addEventListener("pointerdown", (event) => {
           event.preventDefault();
           const lane = laneFrom(button.dataset.lane);
-          if (lane !== undefined) this.tap(lane, button);
+          if (lane === undefined) return;
+          button.setPointerCapture(event.pointerId);
+          this.pressLane(lane, button);
         });
+        const release = (): void => {
+          const lane = laneFrom(button.dataset.lane);
+          if (lane !== undefined) this.releaseLane(lane, button);
+        };
+        button.addEventListener("pointerup", release);
+        button.addEventListener("pointercancel", release);
+        button.addEventListener("lostpointercapture", release);
       });
     element("start-button").addEventListener("click", () => void this.start());
     element("pause-button").addEventListener("click", () => this.pause());
@@ -135,17 +152,22 @@ export class GameController {
       if (document.hidden && this.running) this.pause();
     });
     window.addEventListener("keydown", (event) => {
-      const lane =
-        event.key === "d" || event.key === "1"
-          ? 0
-          : event.key === "f" || event.key === "2"
-            ? 1
-            : event.key === "k" || event.key === "3"
-              ? 2
-              : undefined;
-      if (lane !== undefined) this.tap(lane);
+      const lane = this.laneForKey(event.key);
+      if (lane !== undefined && !event.repeat) this.pressLane(lane);
       if (event.key === "Escape" && this.running) this.pause();
     });
+    window.addEventListener("keyup", (event) => {
+      const lane = this.laneForKey(event.key);
+      if (lane !== undefined) this.releaseLane(lane);
+    });
+    window.addEventListener("blur", () => this.releaseAllLanes());
+  }
+
+  private laneForKey(key: string): Lane | undefined {
+    if (key === "d" || key === "1") return 0;
+    if (key === "f" || key === "2") return 1;
+    if (key === "k" || key === "3") return 2;
+    return undefined;
   }
 
   private chooseInstrument(button: HTMLButtonElement): void {
@@ -242,6 +264,8 @@ export class GameController {
     this.audio.stop();
     this.judged = new Set();
     this.hits = new Set();
+    this.activeSustains = new Map();
+    this.releaseAllLanes();
     this.playerHealth = 100;
     this.score = 0;
     this.combo = 0;
@@ -266,6 +290,7 @@ export class GameController {
   private update(): void {
     if (!this.running || !this.chart) return;
     const time = this.audio.time;
+    this.resolveActiveSustains(time);
     this.markLateNotes(time);
     this.telegraphAttack(time);
     this.resolveAttacks(time);
@@ -274,7 +299,12 @@ export class GameController {
       this.boss?.setMood("defeated", 4);
       showCallout("FINAL CHORD", "perfect");
     }
-    this.highway.draw(this.chart.notes, this.judged, time);
+    this.highway.draw(
+      this.chart.notes,
+      this.judged,
+      new Set(this.activeSustains.values()),
+      time,
+    );
     renderHud({
       duration: this.chart.duration,
       time,
@@ -291,11 +321,11 @@ export class GameController {
     this.frame = requestAnimationFrame(() => this.update());
   }
 
-  private tap(lane: Lane, button?: HTMLButtonElement): void {
+  private pressLane(lane: Lane, button?: HTMLButtonElement): void {
     if (!this.running || !this.chart) return;
-    button?.classList.add("is-pressed");
-    if (button)
-      window.setTimeout(() => button.classList.remove("is-pressed"), 90);
+    if (this.pressedLanes.has(lane)) return;
+    this.pressedLanes.add(lane);
+    this.laneButton(lane, button)?.classList.add("is-pressed");
     const result = judgeTap(
       this.chart.notes,
       this.judged,
@@ -317,6 +347,58 @@ export class GameController {
       Math.max(1, Math.min(4, Math.ceil(this.combo / 10)));
     this.boss?.setMood("hit", 0.2);
     showCallout(result.grade.toUpperCase(), result.grade);
+    const note = this.chart.notes[result.noteIndex];
+    if (note && note.duration > 0) {
+      this.activeSustains.set(lane, result.noteIndex);
+      this.laneButton(lane, button)?.classList.add("is-held");
+    }
+  }
+
+  private releaseLane(lane: Lane, button?: HTMLButtonElement): void {
+    if (!this.pressedLanes.delete(lane)) return;
+    this.laneButton(lane, button)?.classList.remove("is-pressed");
+    if (this.running) this.resolveActiveSustains(this.audio.time);
+  }
+
+  private releaseAllLanes(): void {
+    this.pressedLanes.clear();
+    document
+      .querySelectorAll<HTMLButtonElement>("[data-lane]")
+      .forEach((button) => {
+        button.classList.remove("is-pressed", "is-held");
+      });
+  }
+
+  private laneButton(
+    lane: Lane,
+    button?: HTMLButtonElement,
+  ): HTMLButtonElement | undefined {
+    return (
+      button ??
+      document.querySelector<HTMLButtonElement>(`[data-lane="${lane}"]`) ??
+      undefined
+    );
+  }
+
+  private resolveActiveSustains(time: number): void {
+    if (!this.chart) return;
+    for (const [lane, noteIndex] of this.activeSustains) {
+      const note: ChartNote | undefined = this.chart.notes[noteIndex];
+      if (!note) continue;
+      const result = resolveSustain(note, time, this.pressedLanes.has(lane));
+      if (result === "holding") continue;
+      this.activeSustains.delete(lane);
+      this.laneButton(lane)?.classList.remove("is-held");
+      if (result === "complete") {
+        this.score += Math.round(note.duration * 500);
+        showCallout("HELD", "perfect");
+        continue;
+      }
+      this.hits.delete(noteIndex);
+      this.combo = 0;
+      this.audio.duck();
+      showCallout("HOLD BROKEN", "miss");
+    }
   }
 
   private markLateNotes(time: number): void {
@@ -373,6 +455,7 @@ export class GameController {
   private pause(): void {
     if (!this.running) return;
     this.running = false;
+    this.releaseAllLanes();
     cancelAnimationFrame(this.frame);
     this.audio.pause();
     element("pause-overlay").hidden = false;
@@ -389,6 +472,7 @@ export class GameController {
 
   private finish(victory: boolean): void {
     this.running = false;
+    this.releaseAllLanes();
     this.audio.stop();
     const total = this.chart?.notes.length ?? 0;
     element("battle-screen").hidden = true;
@@ -409,6 +493,7 @@ export class GameController {
     cancelAnimationFrame(this.frame);
     this.audio.stop();
     this.running = false;
+    this.releaseAllLanes();
     showSelect();
   }
 

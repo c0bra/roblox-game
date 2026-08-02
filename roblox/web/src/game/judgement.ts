@@ -2,6 +2,7 @@ import type { ChartNote, Lane } from "../data/level";
 
 export type Grade = "perfect" | "great" | "good" | "miss";
 export type AttackResult = "blocked" | "struck";
+export type SustainResult = "holding" | "complete" | "broken";
 
 export interface TapResult {
   grade: Grade;
@@ -15,6 +16,8 @@ const gradeForOffset = (offsetMs: number): Grade => {
   if (offsetMs <= 170) return "good";
   return "miss";
 };
+
+const sustainReleaseWindowSeconds = 0.08;
 
 export const judgeTap = (
   notes: ChartNote[],
@@ -45,6 +48,16 @@ export const resolveAttackWindow = (
   threshold: number,
 ): AttackResult =>
   total > 0 && hits / total >= threshold ? "blocked" : "struck";
+
+export const resolveSustain = (
+  note: ChartNote,
+  songTime: number,
+  held: boolean,
+): SustainResult => {
+  if (songTime >= note.time + note.duration - sustainReleaseWindowSeconds)
+    return "complete";
+  return held ? "holding" : "broken";
+};
 
 export const scoreForGrade = (grade: Grade): number => {
   if (grade === "perfect") return 1_000;

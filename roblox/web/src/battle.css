@@ -225,16 +225,19 @@
   color: #bf83ff;
 }
 .tap-pad.is-pressed,
+.tap-pad.is-held,
 .tap-pad:active {
   background: currentColor;
   transform: translateY(3px);
 }
 .tap-pad.is-pressed span,
+.tap-pad.is-held span,
 .tap-pad:active span {
   border-color: #08101a;
 }
 
 .tap-pad.lane-2.is-pressed span,
+.tap-pad.lane-2.is-held span,
 .tap-pad.lane-2:active span {
   background: #08101a;
 }

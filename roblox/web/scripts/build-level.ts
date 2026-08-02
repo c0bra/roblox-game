@@ -45,6 +45,7 @@ const loadMidi = async (file: string): Promise<RawChartEvent[]> => {
       time: note.time,
       pitch: note.midi,
       strength: note.velocity,
+      duration: note.duration,
     }));
 };
 
@@ -62,16 +63,20 @@ const loadVocals = async (): Promise<RawChartEvent[]> => {
     .trim()
     .split("\n")
     .map((line) => {
-      const [timeText, , frequencyText] = line.split(",");
+      const [timeText, durationText, frequencyText] = line.split(",");
       const frequency = Number(frequencyText);
       return {
         time: Number(timeText),
         pitch: 69 + 12 * Math.log2(frequency / 440),
         strength: 1,
+        duration: Number(durationText),
       };
     })
     .filter(
-      (note) => Number.isFinite(note.time) && Number.isFinite(note.pitch),
+      (note) =>
+        Number.isFinite(note.time) &&
+        Number.isFinite(note.pitch) &&
+        Number.isFinite(note.duration),
     );
 };
 

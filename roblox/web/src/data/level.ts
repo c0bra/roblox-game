@@ -11,6 +11,7 @@ const laneSchema = z.union([z.literal(0), z.literal(1), z.literal(2)]);
 const noteSchema = z.object({
   time: z.number().nonnegative(),
   lane: laneSchema,
+  duration: z.number().nonnegative(),
 });
 const attackSchema = z.object({
   start: z.number().nonnegative(),

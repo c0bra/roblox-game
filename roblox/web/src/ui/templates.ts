@@ -65,7 +65,7 @@ export const appShell = (): string => `
       <button class="primary-action" id="start-button" type="button">
         <span class="action-label">Enter the breach</span><span class="action-loading">Summoning…</span>
       </button>
-      <p class="microcopy"><kbd>Tap</kbd> the three sigils as notes meet the lightline. Headphones recommended.</p>
+      <p class="microcopy"><kbd>Tap or hold</kbd> the three sigils as notes meet the lightline. Long ribbons last for the sung or played note.</p>
     </section>
 
     <section class="battle-screen" id="battle-screen" aria-label="Battle" tabindex="-1" hidden>
@@ -78,7 +78,7 @@ export const appShell = (): string => `
       <div class="scoreline"><span id="combo">0×</span><strong id="score">000000</strong><time id="timer">1:30</time></div>
       <canvas class="highway-canvas" id="highway-canvas"></canvas>
       <div class="tap-pads" aria-label="Note controls">
-        ${[0, 1, 2].map((lane) => `<button class="tap-pad lane-${lane}" type="button" data-lane="${lane}" aria-label="${laneLabels[lane]}"><span></span></button>`).join("")}
+        ${[0, 1, 2].map((lane) => `<button class="tap-pad lane-${lane}" type="button" data-lane="${lane}" aria-label="${laneLabels[lane]}; tap short notes and hold long notes"><span></span></button>`).join("")}
       </div>
     </section>
 

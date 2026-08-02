@@ -2,10 +2,11 @@ import { describe, expect, test } from "bun:test";
 import { compileDifficulties } from "../scripts/chart-compiler";
 import { classifyDrumHits } from "../scripts/drum-onsets";
 
-const rawEvent = (time: number, pitch = 60, strength = 1) => ({
+const rawEvent = (time: number, pitch = 60, strength = 1, duration = 0) => ({
   time,
   pitch,
   strength,
+  duration,
 });
 
 describe("chart compiler", () => {
@@ -40,6 +41,20 @@ describe("chart compiler", () => {
     expect(result.report.rejectedOffGrid).toBe(1);
     expect(result.charts.hard.notes.map((note) => note.time)).toEqual([
       0, 0.125,
+    ]);
+  });
+
+  test("Given detected melodic note lengths, when compiled, then playable sustains preserve audible duration and short notes remain taps", () => {
+    const result = compileDifficulties({
+      instrument: "vocals",
+      events: [rawEvent(0.01, 60, 1, 0.8), rawEvent(1.01, 64, 1, 0.2)],
+      beatTimes: [0, 1, 2],
+      clip: { start: 0, duration: 2 },
+      maxSnapSeconds: 0.02,
+    });
+
+    expect(result.charts.easy.notes.map((note) => note.duration)).toEqual([
+      0.8, 0,
     ]);
   });
 
