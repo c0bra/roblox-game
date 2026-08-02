@@ -1,0 +1,62 @@
+{
+  "clip": {
+    "start": 60,
+    "duration": 90
+  },
+  "beatCount": 499,
+  "maxSnapMs": 80,
+  "instruments": {
+    "drums": {
+      "inputEvents": 452,
+      "acceptedEvents": 411,
+      "rejectedOffGrid": 0,
+      "duplicateGridEvents": 41,
+      "maxGridErrorMs": 51.9,
+      "medianGridErrorMs": 3.6,
+      "noteCounts": {
+        "easy": 201,
+        "medium": 380,
+        "hard": 411
+      }
+    },
+    "vocals": {
+      "inputEvents": 303,
+      "acceptedEvents": 135,
+      "rejectedOffGrid": 3,
+      "duplicateGridEvents": 0,
+      "maxGridErrorMs": 53.9,
+      "medianGridErrorMs": 26,
+      "noteCounts": {
+        "easy": 113,
+        "medium": 135,
+        "hard": 135
+      }
+    },
+    "guitar": {
+      "inputEvents": 614,
+      "acceptedEvents": 207,
+      "rejectedOffGrid": 2,
+      "duplicateGridEvents": 73,
+      "maxGridErrorMs": 54.5,
+      "medianGridErrorMs": 26.8,
+      "noteCounts": {
+        "easy": 119,
+        "medium": 178,
+        "hard": 207
+      }
+    },
+    "bass": {
+      "inputEvents": 344,
+      "acceptedEvents": 94,
+      "rejectedOffGrid": 14,
+      "duplicateGridEvents": 56,
+      "maxGridErrorMs": 10.9,
+      "medianGridErrorMs": 0.5,
+      "noteCounts": {
+        "easy": 94,
+        "medium": 94,
+        "hard": 94
+      }
+    }
+  }
+}
