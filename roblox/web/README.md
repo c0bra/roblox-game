@@ -9,7 +9,7 @@ bun install
 bun run dev
 ```
 
-Open the printed local URL, choose an instrument and difficulty, and press **Enter the breach**. Easy is selected by default. On desktop, lanes also respond to `D/F/K` or `1/2/3`.
+Open the printed local URL, choose an instrument and difficulty, and press **Enter the breach**. Easy is selected by default. Tap short notes and keep the lane pressed for the full length of melodic ribbon notes. On desktop, lanes also respond to `D/F/K` or `1/2/3`.
 
 ## Commands
 
@@ -26,9 +26,9 @@ Append `?qa=1` for the 12-second browser-QA version of the encounter. The normal
 ## Level data
 
 - Drums: 201 easy / 380 medium / 411 hard notes
-- Vocals: 135 notes
-- Guitar: 178 notes
-- Bass: 94 notes
+- Vocals: 113 easy / 135 medium / 135 hard notes; 44 / 59 / 59 sustains
+- Guitar: 119 easy / 178 medium / 207 hard notes; 27 / 16 / 15 sustains
+- Bass: 94 notes on each difficulty; 71 sustains
 - Perfect / Great / Good windows: ±60 ms / ±110 ms / ±170 ms
 - Four boss attack phrases; a failed phrase costs 28 ward health
 
@@ -41,6 +41,9 @@ source audio. Melodic notes snap to a piecewise 16th-note grid between detected 
 Drums use Aubio onsets from the exact playable stem and preserve those audible transient
 timestamps; the beat grid only groups them for difficulty density. The pipeline does not
 convert through a constant-BPM MIDI timeline or substitute legacy clustered drum events.
+Vocals, guitar, and bass preserve pYIN or MIDI note duration. Notes at least 350 ms long
+become holdable sustain ribbons and are clipped before the next playable note; drum
+transients always remain taps.
 
 If your music service already supplies stems, put audio files containing `drum`,
 `vocal`, `bass`, and `guitar` in their names into one directory. A four-stem Demucs
@@ -94,6 +97,8 @@ already uses its checked-in Basic Pitch MIDI.
   theoretical subdivision.
 - Melodic quantization follows the detected beat timestamps locally, so live tempo
   drift is preserved instead of flattened to one BPM.
+- Melodic note durations come from the transcription source, remain in seconds, and
+  never overlap the next playable note after difficulty filtering.
 - Events farther than 80 ms from the nearest grid point are rejected by default. Change
   this with `--snap-ms`; they are never silently emitted at their raw timestamps.
 - The Heaven's Edge audio builder uses `atrim` plus `asetpts=PTS-STARTPTS` for exact,
