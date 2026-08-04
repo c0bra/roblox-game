@@ -1,0 +1,142 @@
+kraken_cyclops Stage 4 Validation
+=================================
+
+Result: PASS - ready for Stage 5 Roblox export and import validation.
+
+Character and rig
+-----------------
+Character: kraken_cyclops
+Creature type: Multi-limbed crawling monster
+Armature object: kraken_cyclops_Rig
+Armature data: kraken_cyclops_RigData
+FPS: 30
+Bone count: 27 total, 26 deforming, 1 non-deforming
+Root: Root is top-level, Deform disabled, fixed at neutral, and has zero vertex weights
+Armature transforms: location 0/0/0, rotation 0/0/0, scale 1/1/1
+Hierarchy and bone names: unchanged from Stage 3
+Constraints / drivers / NLA tracks: 0 / 0 / 0
+
+Action audit
+------------
+Total Action count: 9 (8 Stage 4 gameplay Actions plus preserved kraken_cyclops_RIG_TEST)
+All Stage 4 Actions use frame 1 as their first frame, have explicit ranges and metadata, enable Fake User, contain no object-transform curves, contain no scale curves, contain no empty F-curves, and evaluate independently.
+
+kraken_cyclops_Idle
+  Range / duration: 1-60 / 2.0 s
+  Looping / root motion: Yes / No
+  Event: None
+  Beat alignment / BPM: No / 120 design reference
+  Keyframe points: 307
+  Meaningfully animated bones: Body, Mantle, TentacleFront_03_L/R, TentacleMid_03_L/R, TentacleOuter_03_L/R, TentacleRear_03_L/R
+  Loop boundary maximum transform difference: 0.0
+
+kraken_cyclops_Crawl
+  Range / duration: 1-30 / 1.0 s
+  Looping / root motion: Yes / No
+  Event: None
+  Beat alignment / BPM: No / 120 design reference
+  Keyframe points: 312
+  Meaningfully animated bones: Body, Mantle, TentacleFront_01_L/R, TentacleFront_02_L/R, TentacleMid_01_L/R, TentacleOuter_02_L/R, TentacleRear_02_L/R
+  Loop boundary maximum transform difference: 0.0
+
+kraken_cyclops_AttackPrimary
+  Range / duration: 1-27 / 0.9 s
+  Looping / root motion: No / No
+  Event: Hit, frame 16
+  Beat alignment / BPM: No / 120 design reference
+  Keyframe points: 324
+  Meaningfully animated bones: Body, Mantle, TentacleOuter_01_R, TentacleOuter_02_R, TentacleOuter_03_R, support tentacles
+
+kraken_cyclops_AttackSecondary
+  Range / duration: 1-36 / 1.2 s
+  Looping / root motion: No / No
+  Event: AOE, frame 22
+  Beat alignment / BPM: No / 120 design reference
+  Keyframe points: 360
+  Meaningfully animated bones: Body, Mantle, paired front/mid chains, supporting outer tentacles
+
+kraken_cyclops_HitFront
+  Range / duration: 1-14 / 0.4667 s
+  Looping / root motion: No / No
+  Event: Damage, frame 2
+  Beat alignment / BPM: No / 120 design reference
+  Keyframe points: 277
+  Meaningfully animated bones: Body, Mantle, paired front tentacles, outer/rear secondary bones
+
+kraken_cyclops_Spawn
+  Range / duration: 1-36 / 1.2 s
+  Looping / root motion: No / No
+  Event: SpawnComplete, frame 36
+  Beat alignment / BPM: No / 120 design reference
+  Keyframe points: 291
+  Meaningfully animated bones: Body, Mantle, paired proximal front/mid/outer/rear tentacles
+
+kraken_cyclops_Victory
+  Range / duration: 1-60 / 2.0 s
+  Looping / root motion: No / No
+  Event: DisplayPeak, frame 25
+  Beat alignment / BPM: No / 120 design reference
+  Keyframe points: 334
+  Meaningfully animated bones: Body, Mantle, paired outer chains, paired mid/distal front bones
+
+kraken_cyclops_Death
+  Range / duration: 1-45 / 1.5 s
+  Looping / root motion: No / No
+  Event: DeathImpact, frame 30
+  Beat alignment / BPM: No / 120 design reference
+  Keyframe points: 349
+  Meaningfully animated bones: Body, Mantle, left outer/mid/front chains with right-side settling
+
+Keyframe and transition cleanup
+-------------------------------
+Redundant keys removed: 0. Constant frame-1/end keys were intentionally retained to prevent residual transforms when Actions are switched independently.
+Loop problems found and corrected: Idle and Crawl boundary transforms are exact matches. Preview repetition excludes the duplicate boundary frame to avoid a one-frame hold.
+Transition problems found and corrected: Attack, HitFront, Spawn end, Victory end, and Death start match the neutral pose exactly. Idle/Crawl differs by only 0.0872 local units and 10.81 degrees at the largest tentacle joint, suitable for a short 0.15 s movement blend.
+Temporary NLA tracks after testing: 0.
+
+Deformation and ground-contact validation
+-----------------------------------------
+Inspection views: front, rear, left, right, top, bottom, three-quarter front, and three-quarter rear at the major pose of every Stage 4 Action.
+Observed defects after correction: no holes, tears, sharp weight spikes, detached eye layers, unsupported floating components, distant weight leakage, or severe fused-root collapse at gameplay ranges.
+Ground-contact problem found: distal tentacle tips dipped below Z=0 during several broad bends, with the largest pre-correction penetration occurring during Death.
+Correction: 30 sparse Body-height/contact keys were added at authored or worst-case frames. Root remained fixed. Final lowest evaluated Z values are between -0.0158 m and +0.0022 m across all clips, within the 2 cm contact tolerance.
+Weight corrections made: none.
+Remaining deformation limitation: the single continuous low-poly body/tentacle topology can compress at extreme fused-root bends. The three-bone chains cannot form tight tip curls without topology or rig revision. Current gameplay poses remain acceptable.
+Topology revision recommended: none for the delivered clips. Return to Stage 2 only if future animations require much deeper root folds or tightly curled tentacle tips.
+
+Mesh and skin validation
+------------------------
+Mesh objects: 6
+Totals: 3,137 vertices, 6,262 triangles
+Armature modifiers: 6 total, exactly one per deforming mesh, all targeting kraken_cyclops_Rig
+Weighted vertices: 3,137
+Unweighted vertices: 0
+Vertices over four influences: 0
+Maximum influences on any vertex: 2
+Vertices outside normalized tolerance: 0
+Root-weighted vertices: 0
+Non-deforming-bone weighted vertices: 0
+Empty vertex groups: none
+Geometry, vertex count, triangle count, UV maps, material slots, and vertex weights: unchanged from Stage 3
+UV maps: one intact UV map per mesh
+Materials: one intact material slot per mesh
+Textures: packed BaseColor and Roughness images remain connected and valid on all final materials
+
+Final file state
+----------------
+Output: kraken_cyclops_stage4_animated.blend
+Active Action: kraken_cyclops_Idle
+Active frame: 1
+Visible final collection: kraken_cyclops_STAGE4_FINAL
+Hidden source/backup collections: kraken_cyclops_STAGE3_SOURCE, kraken_cyclops_STAGE3_FINAL, kraken_cyclops_STAGE3_BACKUPS
+Object-level animation: none; the armature owns pose-bone Actions only
+Animated bone scales differing from 1/1/1: none
+Accidental mesh/material/visibility/modifier animation: none
+Temporary NLA strips: none
+All Actions evaluate independently: yes
+Stage 3 diagnostic Action preserved: yes
+Final gameplay animation or export beyond Stage 4: not performed
+
+Stage 5 import requirement
+--------------------------
+Preserve the zero-influence Root bone during Roblox export/import. It is intentionally non-deforming and must remain the hierarchy root.

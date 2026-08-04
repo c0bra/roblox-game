@@ -1,0 +1,28 @@
+Root | Parent: NONE | Deform: Disabled | Purpose: Zero-influence whole-character hierarchy and placement | Weighted: No | Meaningful vertices: 0
+  Body | Parent: Root | Deform: Enabled | Purpose: Central lower body and fused tentacle-root support | Weighted: Yes | Meaningful vertices: 1013
+    Mantle | Parent: Body | Deform: Enabled | Purpose: Upper mantle, orbital mass, and rigid eye layers | Weighted: Yes | Meaningful vertices: 1164
+    TentacleFront_01_L | Parent: Body | Deform: Enabled | Purpose: Proximal FK deformation for the left front tentacle | Weighted: Yes | Meaningful vertices: 94
+      TentacleFront_02_L | Parent: TentacleFront_01_L | Deform: Enabled | Purpose: Middle FK deformation for the left front tentacle | Weighted: Yes | Meaningful vertices: 80
+        TentacleFront_03_L | Parent: TentacleFront_02_L | Deform: Enabled | Purpose: Distal FK deformation for the left front tentacle | Weighted: Yes | Meaningful vertices: 73
+    TentacleFront_01_R | Parent: Body | Deform: Enabled | Purpose: Proximal FK deformation for the right front tentacle | Weighted: Yes | Meaningful vertices: 92
+      TentacleFront_02_R | Parent: TentacleFront_01_R | Deform: Enabled | Purpose: Middle FK deformation for the right front tentacle | Weighted: Yes | Meaningful vertices: 75
+        TentacleFront_03_R | Parent: TentacleFront_02_R | Deform: Enabled | Purpose: Distal FK deformation for the right front tentacle | Weighted: Yes | Meaningful vertices: 68
+    TentacleMid_01_L | Parent: Body | Deform: Enabled | Purpose: Proximal FK deformation for the left mid tentacle | Weighted: Yes | Meaningful vertices: 181
+      TentacleMid_02_L | Parent: TentacleMid_01_L | Deform: Enabled | Purpose: Middle FK deformation for the left mid tentacle | Weighted: Yes | Meaningful vertices: 148
+        TentacleMid_03_L | Parent: TentacleMid_02_L | Deform: Enabled | Purpose: Distal FK deformation for the left mid tentacle | Weighted: Yes | Meaningful vertices: 103
+    TentacleMid_01_R | Parent: Body | Deform: Enabled | Purpose: Proximal FK deformation for the right mid tentacle | Weighted: Yes | Meaningful vertices: 179
+      TentacleMid_02_R | Parent: TentacleMid_01_R | Deform: Enabled | Purpose: Middle FK deformation for the right mid tentacle | Weighted: Yes | Meaningful vertices: 147
+        TentacleMid_03_R | Parent: TentacleMid_02_R | Deform: Enabled | Purpose: Distal FK deformation for the right mid tentacle | Weighted: Yes | Meaningful vertices: 109
+    TentacleOuter_01_L | Parent: Body | Deform: Enabled | Purpose: Proximal FK deformation for the left outer tentacle | Weighted: Yes | Meaningful vertices: 115
+      TentacleOuter_02_L | Parent: TentacleOuter_01_L | Deform: Enabled | Purpose: Middle FK deformation for the left outer tentacle | Weighted: Yes | Meaningful vertices: 97
+        TentacleOuter_03_L | Parent: TentacleOuter_02_L | Deform: Enabled | Purpose: Distal FK deformation for the left outer tentacle | Weighted: Yes | Meaningful vertices: 79
+    TentacleOuter_01_R | Parent: Body | Deform: Enabled | Purpose: Proximal FK deformation for the right outer tentacle | Weighted: Yes | Meaningful vertices: 106
+      TentacleOuter_02_R | Parent: TentacleOuter_01_R | Deform: Enabled | Purpose: Middle FK deformation for the right outer tentacle | Weighted: Yes | Meaningful vertices: 88
+        TentacleOuter_03_R | Parent: TentacleOuter_02_R | Deform: Enabled | Purpose: Distal FK deformation for the right outer tentacle | Weighted: Yes | Meaningful vertices: 71
+    TentacleRear_01_L | Parent: Body | Deform: Enabled | Purpose: Proximal FK deformation for the left rear tentacle | Weighted: Yes | Meaningful vertices: 96
+      TentacleRear_02_L | Parent: TentacleRear_01_L | Deform: Enabled | Purpose: Middle FK deformation for the left rear tentacle | Weighted: Yes | Meaningful vertices: 74
+        TentacleRear_03_L | Parent: TentacleRear_02_L | Deform: Enabled | Purpose: Distal FK deformation for the left rear tentacle | Weighted: Yes | Meaningful vertices: 67
+    TentacleRear_01_R | Parent: Body | Deform: Enabled | Purpose: Proximal FK deformation for the right rear tentacle | Weighted: Yes | Meaningful vertices: 91
+      TentacleRear_02_R | Parent: TentacleRear_01_R | Deform: Enabled | Purpose: Middle FK deformation for the right rear tentacle | Weighted: Yes | Meaningful vertices: 75
+        TentacleRear_03_R | Parent: TentacleRear_02_R | Deform: Enabled | Purpose: Distal FK deformation for the right rear tentacle | Weighted: Yes | Meaningful vertices: 69
+

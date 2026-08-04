@@ -1,0 +1,38 @@
+kraken_cyclops Stage 2 Premium Revision Validation
+===================================================
+
+Total triangles: 6262 / 7000
+Total vertices: 3137
+Final mesh objects: 6
+Lowest contact Z: 0.000000
+
+- kraken_cyclops_BODY: 2377 vertices, 4750 triangles, material=['kraken_cyclops_Body_MAT'], UV=['UVMap'], nonmanifold=0, ngons=0, loose=0, duplicates=0, zero_area=0, uv_oob=0, rotation=[0.0, 0.0, 0.0], scale=[1.0, 1.0, 1.0]
+- kraken_cyclops_EYE: 182 vertices, 360 triangles, material=['kraken_cyclops_Eye_MAT'], UV=['UVMap'], nonmanifold=0, ngons=0, loose=0, duplicates=0, zero_area=0, uv_oob=0, rotation=[0.0, 0.0, 0.0], scale=[1.0, 1.0, 1.0]
+- kraken_cyclops_PUPIL: 114 vertices, 224 triangles, material=['kraken_cyclops_Pupil_MAT'], UV=['UVMap'], nonmanifold=0, ngons=0, loose=0, duplicates=0, zero_area=0, uv_oob=0, rotation=[0.0, 0.0, 0.0], scale=[1.0, 1.0, 1.0]
+- kraken_cyclops_SUCKERS: 320 vertices, 640 triangles, material=['kraken_cyclops_Suckers_MAT'], UV=['UVMap'], nonmanifold=0, ngons=0, loose=0, duplicates=0, zero_area=0, uv_oob=0, rotation=[0.0, 0.0, 0.0], scale=[1.0, 1.0, 1.0]
+- kraken_cyclops_IRIS: 64 vertices, 128 triangles, material=['kraken_cyclops_Iris_MAT'], UV=['UVMap'], nonmanifold=0, ngons=0, loose=0, duplicates=0, zero_area=0, uv_oob=0, rotation=[0.0, 0.0, 0.0], scale=[1.0, 1.0, 1.0]
+- kraken_cyclops_SOCKET_TISSUE: 80 vertices, 160 triangles, material=['kraken_cyclops_SocketTissue_MAT'], UV=['UVMap'], nonmanifold=0, ngons=0, loose=0, duplicates=0, zero_area=0, uv_oob=0, rotation=[0.0, 0.0, 0.0], scale=[1.0, 1.0, 1.0]
+
+Texture maps:
+- kraken_cyclops_BaseColor_512.png: anatomy-driven dark eel skin, layered eye, fleshy tissue and irregular suckers.
+- kraken_cyclops_Roughness_512.png: wet eye/socket/suckers separated from drier dorsal skin.
+- No final normal map: tangent QA on the triangulated Stage 1 topology produced visible seams, so medium detail was moved into exportable vertex relief instead.
+- No metalness map: no metallic material regions.
+- Approximate uncompressed texture memory: 2 MiB for two RGBA8 512x512 maps before compression and mip overhead.
+
+UVs:
+- Exactly one UVMap per mesh; all coordinates remain in 0-1.
+- No intentional overlap; new iris and socket use previously unused atlas regions.
+- Six-object checker validation passed eight angles.
+
+Art-direction changes:
+- Less spherical mantle and more integrated fleshy hood/lower orbital fold.
+- Layered yellow sclera, amber iris, red slit pupil, and burgundy socket tissue.
+- Broad position-driven eel spots with clean tendon transitions at tentacle roots.
+- Ten sucker rings vary in contour and size.
+- Subtle asymmetry and medium-scale vertex relief without a silhouette overhaul.
+
+Rigging readiness:
+- Ready for Stage 3 with the existing caveat that the primary body remains fully triangulated rather than loop-authored.
+- Test tentacle bends carefully and parent the iris/pupil/eye layers as a coordinated eye assembly.
+- No rigging, skinning, animation, collision, export, or Roblox scripts were added.

@@ -1,0 +1,142 @@
+KRAKEN CYCLOPS - STAGE 3 RIG VALIDATION
+========================================
+
+Asset
+-----
+Character: kraken_cyclops
+Creature type: MULTI-LIMBED
+Rig type: CUSTOM_R1 direct FK
+Locomotion: CRAWLING / grounded multi-limb movement
+Expected gameplay scale: BOSS
+Facing direction: Negative Y
+Dimensions: 6.67492 x 2.99451 x 5.89736 m
+Lowest rest contact: Z = 0.00000
+Stage 2 source: kraken_cyclops_stage2_textured.blend
+Stage 3 output: kraken_cyclops_stage3_rigged.blend
+
+Rig Summary
+-----------
+Total bones: 27
+Deforming bones: 26
+Non-deforming bones: 1
+Armatures in file: 1 (kraken_cyclops_Rig)
+Hard ceiling: 40
+Root: top-level, Deform disabled, zero weighted vertices, parent NONE
+Root import requirement: Preserve Root even though it has zero influences. Do not strip unused/zero-influence bones during the later Roblox import stage.
+Bone naming: unique=True, ASCII/no spaces=True, paired suffixes=True
+Bone roll: all edit-bone rolls are zero=True
+Mirrored axis orientation: minimum reflected direction dot=0.9913
+
+Full Bone Hierarchy
+-------------------
+Root | Parent: NONE | Deform: Disabled | Purpose: Zero-influence whole-character hierarchy and placement | Weighted: No | Meaningful vertices: 0
+  Body | Parent: Root | Deform: Enabled | Purpose: Central lower body and fused tentacle-root support | Weighted: Yes | Meaningful vertices: 1013
+    Mantle | Parent: Body | Deform: Enabled | Purpose: Upper mantle, orbital mass, and rigid eye layers | Weighted: Yes | Meaningful vertices: 1164
+    TentacleFront_01_L | Parent: Body | Deform: Enabled | Purpose: Proximal FK deformation for the left front tentacle | Weighted: Yes | Meaningful vertices: 94
+      TentacleFront_02_L | Parent: TentacleFront_01_L | Deform: Enabled | Purpose: Middle FK deformation for the left front tentacle | Weighted: Yes | Meaningful vertices: 80
+        TentacleFront_03_L | Parent: TentacleFront_02_L | Deform: Enabled | Purpose: Distal FK deformation for the left front tentacle | Weighted: Yes | Meaningful vertices: 73
+    TentacleFront_01_R | Parent: Body | Deform: Enabled | Purpose: Proximal FK deformation for the right front tentacle | Weighted: Yes | Meaningful vertices: 92
+      TentacleFront_02_R | Parent: TentacleFront_01_R | Deform: Enabled | Purpose: Middle FK deformation for the right front tentacle | Weighted: Yes | Meaningful vertices: 75
+        TentacleFront_03_R | Parent: TentacleFront_02_R | Deform: Enabled | Purpose: Distal FK deformation for the right front tentacle | Weighted: Yes | Meaningful vertices: 68
+    TentacleMid_01_L | Parent: Body | Deform: Enabled | Purpose: Proximal FK deformation for the left mid tentacle | Weighted: Yes | Meaningful vertices: 181
+      TentacleMid_02_L | Parent: TentacleMid_01_L | Deform: Enabled | Purpose: Middle FK deformation for the left mid tentacle | Weighted: Yes | Meaningful vertices: 148
+        TentacleMid_03_L | Parent: TentacleMid_02_L | Deform: Enabled | Purpose: Distal FK deformation for the left mid tentacle | Weighted: Yes | Meaningful vertices: 103
+    TentacleMid_01_R | Parent: Body | Deform: Enabled | Purpose: Proximal FK deformation for the right mid tentacle | Weighted: Yes | Meaningful vertices: 179
+      TentacleMid_02_R | Parent: TentacleMid_01_R | Deform: Enabled | Purpose: Middle FK deformation for the right mid tentacle | Weighted: Yes | Meaningful vertices: 147
+        TentacleMid_03_R | Parent: TentacleMid_02_R | Deform: Enabled | Purpose: Distal FK deformation for the right mid tentacle | Weighted: Yes | Meaningful vertices: 109
+    TentacleOuter_01_L | Parent: Body | Deform: Enabled | Purpose: Proximal FK deformation for the left outer tentacle | Weighted: Yes | Meaningful vertices: 115
+      TentacleOuter_02_L | Parent: TentacleOuter_01_L | Deform: Enabled | Purpose: Middle FK deformation for the left outer tentacle | Weighted: Yes | Meaningful vertices: 97
+        TentacleOuter_03_L | Parent: TentacleOuter_02_L | Deform: Enabled | Purpose: Distal FK deformation for the left outer tentacle | Weighted: Yes | Meaningful vertices: 79
+    TentacleOuter_01_R | Parent: Body | Deform: Enabled | Purpose: Proximal FK deformation for the right outer tentacle | Weighted: Yes | Meaningful vertices: 106
+      TentacleOuter_02_R | Parent: TentacleOuter_01_R | Deform: Enabled | Purpose: Middle FK deformation for the right outer tentacle | Weighted: Yes | Meaningful vertices: 88
+        TentacleOuter_03_R | Parent: TentacleOuter_02_R | Deform: Enabled | Purpose: Distal FK deformation for the right outer tentacle | Weighted: Yes | Meaningful vertices: 71
+    TentacleRear_01_L | Parent: Body | Deform: Enabled | Purpose: Proximal FK deformation for the left rear tentacle | Weighted: Yes | Meaningful vertices: 96
+      TentacleRear_02_L | Parent: TentacleRear_01_L | Deform: Enabled | Purpose: Middle FK deformation for the left rear tentacle | Weighted: Yes | Meaningful vertices: 74
+        TentacleRear_03_L | Parent: TentacleRear_02_L | Deform: Enabled | Purpose: Distal FK deformation for the left rear tentacle | Weighted: Yes | Meaningful vertices: 67
+    TentacleRear_01_R | Parent: Body | Deform: Enabled | Purpose: Proximal FK deformation for the right rear tentacle | Weighted: Yes | Meaningful vertices: 91
+      TentacleRear_02_R | Parent: TentacleRear_01_R | Deform: Enabled | Purpose: Middle FK deformation for the right rear tentacle | Weighted: Yes | Meaningful vertices: 75
+        TentacleRear_03_R | Parent: TentacleRear_02_R | Deform: Enabled | Purpose: Distal FK deformation for the right rear tentacle | Weighted: Yes | Meaningful vertices: 69
+
+Meshes and Modifiers
+--------------------
+Final mesh objects: 6
+Names: kraken_cyclops_BODY, kraken_cyclops_EYE, kraken_cyclops_PUPIL, kraken_cyclops_SUCKERS, kraken_cyclops_IRIS, kraken_cyclops_SOCKET_TISSUE
+Total vertices: 3137
+Total triangles: 6262
+Armature modifiers: 6
+Exactly one correct Armature modifier per mesh: True
+Applied mesh and armature transforms: True
+Rest-pose maximum evaluated displacement at frame 1: 0.00000054
+Frame 100 return-to-neutral maximum difference: 0.00000000
+
+Skinning Validation
+-------------------
+Total weighted vertices: 3137
+Unweighted vertices: 0
+Vertices exceeding four influences: 0
+Maximum meaningful influences on any vertex: 2
+Weight totals below tolerance: 0
+Weight totals above tolerance: 0
+Vertices influenced by Root: 0
+Vertices influenced by non-deforming bones: 0
+Unexpected cross-body influences: 0
+Empty vertex groups: None
+Unused deform bones: None
+Initial cleanup removed 35 negligible assignments; final weights were limited, normalized, and revalidated.
+
+Rigid Components
+----------------
+kraken_cyclops_EYE -> Mantle (1.0)
+kraken_cyclops_PUPIL -> Mantle (1.0)
+kraken_cyclops_IRIS -> Mantle (1.0)
+kraken_cyclops_SOCKET_TISSUE -> Mantle (1.0)
+kraken_cyclops_SUCKERS -> nearest TentacleMid segment per ring (1.0 rigid ring weighting)
+Weapon or prop: None
+Attachment recommendation: If a future prop is added, keep it separate and attach it to the relevant proximal or distal tentacle bone; do not merge it during animation.
+
+Diagnostic Action
+-----------------
+Action: kraken_cyclops_RIG_TEST
+Actions in file: ['kraken_cyclops_RIG_TEST']
+Frame 1 Neutral
+Frame 10 Left limb bend
+Frame 20 Right limb bend
+Frame 30 Paired outer tentacle raise
+Frame 40 Deep mid-tentacle bend
+Frame 50 Crawling/crouch range
+Frame 60 Body bend and twist
+Frame 70 Mantle/attack-direction aim
+Frame 80 Alternating tentacle wave
+Frame 90 Full-body combat silhouette
+Frame 100 Neutral return
+Interpolation: Linear
+Saved frame: 1
+Eight-view inspection performed for every diagnostic frame: front, rear, left, right, top, bottom, three-quarter front, three-quarter rear.
+Deformation metrics: {10: {'max_stretch': 1.241, 'min_ratio': 0.72, 'min_z': -0.0}, 20: {'max_stretch': 1.254, 'min_ratio': 0.75, 'min_z': 0.0118}, 30: {'max_stretch': 1.422, 'min_ratio': 0.682, 'min_z': -0.0}, 40: {'max_stretch': 1.431, 'min_ratio': 0.634, 'min_z': -0.0}, 50: {'max_stretch': 1.276, 'min_ratio': 0.823, 'min_z': -0.0869}, 60: {'max_stretch': 1.263, 'min_ratio': 0.718, 'min_z': -0.3264}, 70: {'max_stretch': 1.454, 'min_ratio': 0.573, 'min_z': -0.0}, 80: {'max_stretch': 1.272, 'min_ratio': 0.771, 'min_z': 0.0017}, 90: {'max_stretch': 1.421, 'min_ratio': 0.669, 'min_z': -0.1051}}
+
+Corrections and Limitations
+---------------------------
+Corrected proximal tentacle/body blending, removed negligible weights, normalized all vertices, limited influences, verified symmetry, reduced body/mantle test angles after stretch analysis, and confirmed rigid eye/sucker behavior.
+No spikes, tearing, holes, detached eye layers, unsupported floating geometry, distant leakage, or major joint collapse were visible at intended gameplay ranges.
+Remaining limitation: the body and all tentacles are one low-poly continuous mesh, so extreme rotations at fused tentacle roots can compress the sparse root topology. The diagnostic action stays within acceptable gameplay ranges.
+Rigid sucker rings intentionally do not deform; they follow the nearest tentacle segment.
+The eye has no independent bone and follows Mantle intentionally.
+No topology revision is required for Stage 4. If substantially deeper root folds are later required, return to Stage 2 for added deformation loops instead of adding more bones.
+
+Source Fidelity
+---------------
+Topology unchanged from Stage 2: True
+UV coordinates unchanged from Stage 2: True
+Material assignments unchanged from Stage 2: True
+Final texture references valid or packed: True
+Textures: {'kraken_cyclops_BaseColor_512': {'path': '/Users/brianh/repos/projects/roblox-bands-battle/roblox/models/kraken_cyclops_BaseColor_512.png', 'packed': True, 'exists': True}, 'kraken_cyclops_Roughness_512': {'path': '/Users/brianh/repos/projects/roblox-bands-battle/roblox/models/kraken_cyclops_Roughness_512.png', 'packed': True, 'exists': True}}
+Stage 2 source collection hidden/preserved: True
+Stage 3 backup collection hidden/preserved: True
+No vertices, edges, faces, UVs, textures, or materials were added, removed, repainted, or rebuilt during Stage 3.
+
+Readiness
+---------
+Ready for Stage 4 animation: YES
+Do not export or create final gameplay animation in this stage.
+Roblox import reminder: retain the custom hierarchy exactly, preserve the zero-influence Root bone, keep all 27 bones, and do not invoke R15 remapping.
+

@@ -1,0 +1,110 @@
+{
+  "character": "kraken_cyclops",
+  "fps": 30,
+  "animations": [
+    {
+      "name": "kraken_cyclops_Idle",
+      "action": "kraken_cyclops_Idle",
+      "start_frame": 1,
+      "end_frame": 60,
+      "duration_seconds": 2.0,
+      "looping": true,
+      "root_motion": false,
+      "design_bpm": 120,
+      "events": [],
+      "primary_bones": ["Body", "Mantle", "TentacleFront_03_L", "TentacleFront_03_R", "TentacleMid_03_L", "TentacleMid_03_R", "TentacleOuter_03_L", "TentacleOuter_03_R", "TentacleRear_03_L", "TentacleRear_03_R"],
+      "notes": "Heavy breathing and controlled distal-tentacle lag. Frame 60 matches frame 1; exclude the duplicate boundary frame during repeated playback."
+    },
+    {
+      "name": "kraken_cyclops_Crawl",
+      "action": "kraken_cyclops_Crawl",
+      "start_frame": 1,
+      "end_frame": 30,
+      "duration_seconds": 1.0,
+      "looping": true,
+      "root_motion": false,
+      "design_bpm": 120,
+      "events": [],
+      "primary_bones": ["Body", "Mantle", "TentacleFront_01_L", "TentacleFront_01_R", "TentacleFront_02_L", "TentacleFront_02_R", "TentacleMid_01_L", "TentacleMid_01_R", "TentacleOuter_02_L", "TentacleOuter_02_R", "TentacleRear_02_L", "TentacleRear_02_R"],
+      "notes": "In-place alternating multi-tentacle crawl. Frame 30 matches frame 1; exclude the duplicate boundary frame during repeated playback."
+    },
+    {
+      "name": "kraken_cyclops_AttackPrimary",
+      "action": "kraken_cyclops_AttackPrimary",
+      "start_frame": 1,
+      "end_frame": 27,
+      "duration_seconds": 0.9,
+      "looping": false,
+      "root_motion": false,
+      "design_bpm": 120,
+      "events": [{"name": "Hit", "frame": 16, "time_seconds": 0.533}],
+      "primary_bones": ["Body", "Mantle", "TentacleOuter_01_R", "TentacleOuter_02_R", "TentacleOuter_03_R"],
+      "notes": "Fast right outer-tentacle spear strike with maximum extension on the Hit frame."
+    },
+    {
+      "name": "kraken_cyclops_AttackSecondary",
+      "action": "kraken_cyclops_AttackSecondary",
+      "start_frame": 1,
+      "end_frame": 36,
+      "duration_seconds": 1.2,
+      "looping": false,
+      "root_motion": false,
+      "design_bpm": 120,
+      "events": [{"name": "AOE", "frame": 22, "time_seconds": 0.733}],
+      "primary_bones": ["Body", "Mantle", "TentacleFront_01_L", "TentacleFront_01_R", "TentacleFront_02_L", "TentacleFront_02_R", "TentacleFront_03_L", "TentacleFront_03_R", "TentacleMid_01_L", "TentacleMid_01_R"],
+      "notes": "Broad bilateral sweep for close-range area denial."
+    },
+    {
+      "name": "kraken_cyclops_HitFront",
+      "action": "kraken_cyclops_HitFront",
+      "start_frame": 1,
+      "end_frame": 14,
+      "duration_seconds": 0.4667,
+      "looping": false,
+      "root_motion": false,
+      "design_bpm": 120,
+      "events": [{"name": "Damage", "frame": 2, "time_seconds": 0.067}],
+      "primary_bones": ["Body", "Mantle", "TentacleFront_01_L", "TentacleFront_01_R"],
+      "notes": "Immediate frontal recoil with a short recovery, visually distinct from death."
+    },
+    {
+      "name": "kraken_cyclops_Spawn",
+      "action": "kraken_cyclops_Spawn",
+      "start_frame": 1,
+      "end_frame": 36,
+      "duration_seconds": 1.2,
+      "looping": false,
+      "root_motion": false,
+      "design_bpm": 120,
+      "events": [{"name": "SpawnComplete", "frame": 36, "time_seconds": 1.2}],
+      "primary_bones": ["Body", "Mantle", "TentacleFront_01_L", "TentacleFront_01_R", "TentacleMid_01_L", "TentacleMid_01_R", "TentacleOuter_01_L", "TentacleOuter_01_R"],
+      "notes": "Compressed grounded unfold. Visibility, particles, and teleport effects belong in Roblox."
+    },
+    {
+      "name": "kraken_cyclops_Victory",
+      "action": "kraken_cyclops_Victory",
+      "start_frame": 1,
+      "end_frame": 60,
+      "duration_seconds": 2.0,
+      "looping": false,
+      "root_motion": false,
+      "design_bpm": 120,
+      "events": [{"name": "DisplayPeak", "frame": 25, "time_seconds": 0.833}],
+      "primary_bones": ["Body", "Mantle", "TentacleOuter_01_L", "TentacleOuter_01_R", "TentacleOuter_02_L", "TentacleOuter_02_R", "TentacleMid_02_L", "TentacleMid_02_R"],
+      "notes": "Threat display rather than a damaging pose; returns to neutral."
+    },
+    {
+      "name": "kraken_cyclops_Death",
+      "action": "kraken_cyclops_Death",
+      "start_frame": 1,
+      "end_frame": 45,
+      "duration_seconds": 1.5,
+      "looping": false,
+      "root_motion": false,
+      "design_bpm": 120,
+      "events": [{"name": "DeathImpact", "frame": 30, "time_seconds": 1.0}],
+      "primary_bones": ["Body", "Mantle", "TentacleOuter_01_L", "TentacleOuter_02_L", "TentacleMid_02_L", "TentacleFront_02_L"],
+      "notes": "Fixed-Root side collapse with a stable final pose safe to hold indefinitely."
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+kraken_cyclops Stage 4 Animation Summary
+=========================================
+
+Resolved project profile
+------------------------
+Creature: multi-limbed kraken/cyclops NPC
+Locomotion: crawling
+Personality: aggressive, heavy, horror/monster
+Primary attack source: tentacles
+Secondary appendages: tentacles
+FPS: 30
+Beat alignment: disabled
+Root motion: disabled for every clip
+
+The source brief contained placeholder values rather than marked YES/NO fields. The clip set was resolved conservatively from the completed Stage 3 creature and rig: Idle, Crawl, AttackPrimary, AttackSecondary, HitFront, Spawn, Victory, and Death. No humanoid Walk/Run, Hover/Fly, weapon, musical, or stun clips were created.
+
+kraken_cyclops_Idle
+Purpose: Default heavy breathing and controlled tentacle settling.
+Duration / frames: 2.0 s, frames 1-60.
+Looping: Yes. Frame 60 exactly matches frame 1; repeated playback should omit the duplicate boundary frame.
+Beat aligned: No.
+Primary event: None.
+Root motion: No.
+Main animated bones: Body, Mantle, all eight distal tentacle bones.
+Roblox priority: Idle.
+Suggested blend in/out: 0.20 s / 0.20 s.
+Known limitations: Secondary motion is intentionally broad because each tentacle has only three bones.
+
+kraken_cyclops_Crawl
+Purpose: In-place alternating multi-tentacle crawl.
+Duration / frames: 1.0 s, frames 1-30.
+Looping: Yes. Frame 30 exactly matches frame 1; repeated playback should omit the duplicate boundary frame.
+Beat aligned: No.
+Primary event: None.
+Root motion: No.
+Main animated bones: Body, Mantle, paired front/mid/outer/rear tentacle sections.
+Roblox priority: Movement.
+Suggested blend in/out: 0.15 s / 0.15 s.
+Known limitations: No IK foot locking; body-height keys preserve ground contact for the fused low-poly tentacle roots.
+
+kraken_cyclops_AttackPrimary
+Purpose: Fast right outer-tentacle spear strike.
+Duration / frames: 0.9 s, frames 1-27.
+Looping: No.
+Beat aligned: No.
+Primary event: Hit at frame 16 (0.533 s).
+Root motion: No.
+Main animated bones: Body, Mantle, TentacleOuter_01_R through TentacleOuter_03_R, support tentacles.
+Roblox priority: Action.
+Suggested blend in/out: 0.08 s / 0.15 s.
+Known limitations: The three-bone chain favors a broad hook-like strike over a tightly curling tip.
+
+kraken_cyclops_AttackSecondary
+Purpose: Broad bilateral close-range area sweep.
+Duration / frames: 1.2 s, frames 1-36.
+Looping: No.
+Beat aligned: No.
+Primary event: AOE at frame 22 (0.733 s).
+Root motion: No.
+Main animated bones: Body, Mantle, paired front and mid tentacle chains, supporting outer tentacles.
+Roblox priority: Action.
+Suggested blend in/out: 0.10 s / 0.18 s.
+Known limitations: No projectile or visual effect is included; trigger any shockwave in Roblox on frame 22.
+
+kraken_cyclops_HitFront
+Purpose: Short readable frontal damage recoil.
+Duration / frames: 0.4667 s, frames 1-14.
+Looping: No.
+Beat aligned: No.
+Primary event: Damage at frame 2 (0.067 s).
+Root motion: No.
+Main animated bones: Body, Mantle, paired front tentacles, outer/rear secondary follow-through.
+Roblox priority: Action.
+Suggested blend in/out: 0.05 s / 0.12 s.
+Known limitations: Directional variants were not requested and were not created.
+
+kraken_cyclops_Spawn
+Purpose: Compressed grounded unfold into the neutral stance.
+Duration / frames: 1.2 s, frames 1-36.
+Looping: No.
+Beat aligned: No.
+Primary event: SpawnComplete at frame 36 (1.2 s).
+Root motion: No.
+Main animated bones: Body, Mantle, proximal front/mid/outer/rear tentacles.
+Roblox priority: Action.
+Suggested blend in/out: 0.10 s / 0.15 s.
+Known limitations: Visibility, particles, underground travel, and teleport effects must be implemented in Roblox.
+
+kraken_cyclops_Victory
+Purpose: Non-damaging monster threat display.
+Duration / frames: 2.0 s, frames 1-60.
+Looping: No.
+Beat aligned: No.
+Primary event: DisplayPeak at frame 25 (0.833 s).
+Root motion: No.
+Main animated bones: Body, Mantle, paired outer and mid tentacles.
+Roblox priority: Action.
+Suggested blend in/out: 0.12 s / 0.20 s.
+Known limitations: The eye has no independent bone and follows Mantle.
+
+kraken_cyclops_Death
+Purpose: Side collapse ending in a stable hold pose.
+Duration / frames: 1.5 s, frames 1-45.
+Looping: No.
+Beat aligned: No.
+Primary event: DeathImpact at frame 30 (1.0 s).
+Root motion: No.
+Main animated bones: Body, Mantle, left outer/mid/front tentacles with secondary right-side settling.
+Roblox priority: Action4 (or highest uninterruptible priority used by the project).
+Suggested blend in/out: 0.05 s / 0.00 s.
+Known limitations: The final pose is a physical reaction only; dissolve, loot, and removal effects belong in Roblox.
+
+Stage 5 note
+------------
+Preserve the zero-influence non-deforming Root bone during Roblox export/import. All gameplay Actions are in place and contain pose-bone transforms only.
