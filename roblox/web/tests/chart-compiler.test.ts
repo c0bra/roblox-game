@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
-import { compileDifficulties } from "../scripts/chart-compiler";
-import { classifyDrumHits } from "../scripts/drum-onsets";
+import { compileDifficulties } from "@bands-battle/chart-pipeline/compiler";
+import { classifyDrumHits } from "@bands-battle/chart-pipeline/drums";
 
 const rawEvent = (time: number, pitch = 60, strength = 1, duration = 0) => ({
   time,

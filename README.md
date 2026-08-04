@@ -36,6 +36,8 @@ If you are here to generate charts from songs, start with `Current audio pipelin
 ```text
 roblox-bands-battle/
 |-- README.md
+|-- chart                         # repository-root chart pipeline command
+|-- tools/chart-pipeline/         # platform-neutral compiler and bundle format
 |-- GAME_DESIGN.md
 |-- trello_notes.md                 # raw brainstorming notes
 |-- chatgpt_chat.md                 # raw core-loop discussion
@@ -143,6 +145,28 @@ Roblox implementation guidance from official docs and common rhythm-game pattern
   readable and responsive on a phone.
 
 ## Current audio pipeline
+
+### Reusable pipeline
+
+The maintained entry point now lives at the repository root and produces a neutral,
+versioned bundle rather than writing directly into one game client:
+
+```bash
+./chart build --song "/absolute/path/to/song.mp3"
+./chart build --stems "/absolute/path/to/stems"
+./chart validate "/absolute/path/to/build"
+```
+
+The default output is `build/<input-name>`; use `--output` to override it.
+
+Use `--song` to run Docker stem separation automatically, or `--stems` when a music
+service already supplied drums, vocals, guitar, and bass. Both routes create four
+portable audio stems, easy/medium/hard charts for every instrument, validation data,
+and `manifest.json`. See `tools/chart-pipeline/README.md` for the output contract,
+timing rules, and requirements.
+
+The older song-specific Python recipes below remain useful for analysis experiments
+and manual recovery, but new game clients should consume the root bundle format.
 
 ### Environment setup
 

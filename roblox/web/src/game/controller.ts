@@ -1,18 +1,11 @@
-import ky from "ky";
-import { BattleAudio } from "../audio/battle-audio";
+import type { BattleAudio } from "../audio/battle-audio";
 import {
-  type ChartDifficulty,
   type ChartNote,
-  chartDifficulties,
-  chartPath,
-  chartSchema,
-  defaultDifficulty,
-  type Instrument,
   instrumentLabels,
-  instruments,
   type Lane,
   type LevelChart,
 } from "../data/level";
+import type { RunAssetLoader } from "../data/level-loader";
 import { HighwayRenderer } from "../render/highway";
 import {
   element,
@@ -29,12 +22,7 @@ import {
   resolveSustain,
   scoreForGrade,
 } from "./judgement";
-
-const isInstrument = (value: string | undefined): value is Instrument =>
-  instruments.some((instrument) => instrument === value);
-
-const isDifficulty = (value: string | undefined): value is ChartDifficulty =>
-  chartDifficulties.some((difficulty) => difficulty === value);
+import type { SelectionControls } from "./selection-controls";
 
 const laneFrom = (value: string | undefined): Lane | undefined => {
   if (value === "0") return 0;
@@ -44,10 +32,7 @@ const laneFrom = (value: string | undefined): Lane | undefined => {
 };
 
 export class GameController {
-  private selected: Instrument = "drums";
-  private selectedDifficulty: ChartDifficulty = defaultDifficulty;
   private chart: LevelChart | undefined;
-  private readonly audio = new BattleAudio();
   private readonly highway: HighwayRenderer;
   private boss:
     | {
@@ -73,6 +58,9 @@ export class GameController {
   constructor(
     private readonly bossCanvas: HTMLCanvasElement,
     highwayCanvas: HTMLCanvasElement,
+    private readonly selection: SelectionControls,
+    private readonly audio: BattleAudio,
+    private readonly loadRun: RunAssetLoader,
   ) {
     this.highway = new HighwayRenderer(highwayCanvas);
   }
@@ -89,33 +77,7 @@ export class GameController {
   }
 
   private bindControls(): void {
-    document
-      .querySelectorAll<HTMLButtonElement>("[data-instrument]")
-      .forEach((button) => {
-        button.addEventListener("click", () => this.chooseInstrument(button));
-      });
-    document
-      .querySelectorAll<HTMLButtonElement>("[data-difficulty]")
-      .forEach((button) => {
-        button.addEventListener("click", () => this.chooseDifficulty(button));
-        button.addEventListener("keydown", (event) => {
-          const step =
-            event.key === "ArrowLeft" || event.key === "ArrowUp"
-              ? -1
-              : event.key === "ArrowRight" || event.key === "ArrowDown"
-                ? 1
-                : undefined;
-          const edge =
-            event.key === "Home"
-              ? "first"
-              : event.key === "End"
-                ? "last"
-                : undefined;
-          if (step === undefined && edge === undefined) return;
-          event.preventDefault();
-          this.moveDifficulty(button, step, edge);
-        });
-      });
+    this.selection.mount();
     document
       .querySelectorAll<HTMLButtonElement>("[data-lane]")
       .forEach((button) => {
@@ -165,76 +127,25 @@ export class GameController {
 
   private laneForKey(key: string): Lane | undefined {
     if (key === "d" || key === "1") return 0;
-    if (key === "f" || key === "2") return 1;
     if (key === "k" || key === "3") return 2;
     return undefined;
-  }
-
-  private chooseInstrument(button: HTMLButtonElement): void {
-    if (!isInstrument(button.dataset.instrument)) return;
-    this.selected = button.dataset.instrument;
-    document
-      .querySelectorAll<HTMLButtonElement>("[data-instrument]")
-      .forEach((card) => {
-        const chosen = card === button;
-        card.classList.toggle("is-selected", chosen);
-        card.setAttribute("aria-checked", String(chosen));
-      });
-  }
-
-  private chooseDifficulty(button: HTMLButtonElement): void {
-    if (!isDifficulty(button.dataset.difficulty)) return;
-    this.selectedDifficulty = button.dataset.difficulty;
-    document
-      .querySelectorAll<HTMLButtonElement>("[data-difficulty]")
-      .forEach((option) => {
-        const chosen = option === button;
-        option.classList.toggle("is-selected", chosen);
-        option.setAttribute("aria-checked", String(chosen));
-        option.tabIndex = chosen ? 0 : -1;
-      });
-  }
-
-  private moveDifficulty(
-    button: HTMLButtonElement,
-    step: number | undefined,
-    edge: "first" | "last" | undefined,
-  ): void {
-    const options = Array.from(
-      document.querySelectorAll<HTMLButtonElement>("[data-difficulty]"),
-    );
-    const current = options.indexOf(button);
-    const target =
-      edge === "first"
-        ? options[0]
-        : edge === "last"
-          ? options.at(-1)
-          : options[(current + (step ?? 0) + options.length) % options.length];
-    if (!target) return;
-    this.chooseDifficulty(target);
-    target.focus();
   }
 
   private async start(): Promise<void> {
     const startButton = element("start-button");
     startButton.classList.add("is-loading");
     startButton.setAttribute("aria-busy", "true");
+    this.selection.setDisabled(true);
     try {
       element("error-overlay").hidden = true;
-      const chartData = await ky
-        .get(chartPath(this.selected, this.selectedDifficulty))
-        .json();
-      const chart = chartSchema.parse(chartData);
-      this.chart = new URLSearchParams(location.search).has("qa")
-        ? this.qaChart(chart)
-        : chart;
-      await this.audio.prepare(this.selected);
+      this.chart = await this.loadRun(this.selection.current);
       this.beginCountdown();
     } catch {
       showLoadError(
         "The level could not be loaded. Check your connection and try again.",
       );
     } finally {
+      this.selection.setDisabled(false);
       startButton.classList.remove("is-loading");
       startButton.removeAttribute("aria-busy");
     }
@@ -260,6 +171,7 @@ export class GameController {
   }
 
   private resetRun(): void {
+    const selection = this.selection.current;
     cancelAnimationFrame(this.frame);
     this.audio.stop();
     this.judged = new Set();
@@ -275,7 +187,7 @@ export class GameController {
     this.finalTriggered = false;
     this.running = false;
     element("player-name").textContent =
-      `${instrumentLabels[this.selected]} · ${this.selectedDifficulty}`.toUpperCase();
+      `${instrumentLabels[selection.instrument]} · ${selection.difficulty}`.toUpperCase();
     renderHud({
       duration: this.chart?.duration ?? 90,
       time: 0,
@@ -496,21 +408,5 @@ export class GameController {
     this.running = false;
     this.releaseAllLanes();
     showSelect();
-  }
-
-  private qaChart(chart: LevelChart): LevelChart {
-    return {
-      ...chart,
-      duration: 12,
-      notes: chart.notes.slice(0, 12).map((note, index) => ({
-        ...note,
-        time: 1.2 + index * 0.82,
-        duration: Math.min(note.duration, 0.7),
-      })),
-      attacks: [
-        { start: 2.8, end: 4.8, threshold: 0.35 },
-        { start: 6.5, end: 8.5, threshold: 0.35 },
-      ],
-    };
   }
 }

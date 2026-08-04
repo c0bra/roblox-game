@@ -1,3 +1,9 @@
 .venv
 __pycache__
 *.band
+node_modules/
+/build/
+.DS_Store
+.omo/
+.pnpm-store/
+/roblox/web/public/levels/song-id/

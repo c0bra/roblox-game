@@ -107,6 +107,7 @@ button:focus-visible {
   padding: max(24px, env(safe-area-inset-top)) 20px
     max(18px, env(safe-area-inset-bottom));
   text-align: center;
+  overflow-y: auto;
 }
 
 .eyebrow {
@@ -165,7 +166,7 @@ h1 em {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
-  margin-top: auto;
+  margin-top: var(--space-3);
 }
 
 .instrument-card {
@@ -260,6 +261,7 @@ h1 em {
   box-shadow: 0 0 10px var(--cyan);
 }
 
+.level-field,
 .difficulty-field {
   min-width: 0;
   margin: var(--space-3) 0 0;
@@ -267,6 +269,11 @@ h1 em {
   border: 0;
 }
 
+.level-field {
+  margin-top: auto;
+}
+
+.level-field legend,
 .difficulty-field legend {
   width: 100%;
   margin-bottom: var(--space-1);
@@ -276,12 +283,21 @@ h1 em {
   text-transform: uppercase;
 }
 
+.level-grid,
 .difficulty-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-2);
 }
 
+.level-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.difficulty-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.level-option,
 .difficulty-option {
   min-height: 48px;
   padding: var(--space-2) var(--space-1);
@@ -294,11 +310,13 @@ h1 em {
     background-color var(--motion-state);
 }
 
+.level-option b,
 .difficulty-option b,
 .difficulty-option small {
   display: block;
 }
 
+.level-option b,
 .difficulty-option b {
   font: 700 var(--type-label) / 1 var(--font-display);
   letter-spacing: 0.05em;
@@ -311,12 +329,14 @@ h1 em {
   font-size: var(--type-micro);
 }
 
+.level-option.is-selected,
 .difficulty-option.is-selected {
   border-color: var(--cyan);
   background: rgba(12, 33, 49, 0.96);
   box-shadow: inset 0 -2px 0 var(--cyan);
 }
 
+.level-option:active,
 .difficulty-option:active {
   transform: translateY(1px) scale(0.99);
 }
@@ -411,6 +431,10 @@ kbd {
   .difficulty-field {
     margin-top: var(--space-2);
   }
+  .level-field {
+    margin-top: var(--space-2);
+  }
+  .level-field legend,
   .difficulty-field legend {
     margin-bottom: var(--space-1);
   }

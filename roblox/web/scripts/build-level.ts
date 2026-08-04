@@ -1,5 +1,10 @@
 import { mkdir } from "node:fs/promises";
 import { join, resolve } from "node:path";
+import {
+  compileDifficulties,
+  type RawChartEvent,
+} from "@bands-battle/chart-pipeline/compiler";
+import { extractDrumOnsets } from "@bands-battle/chart-pipeline/drums";
 import { Midi } from "@tonejs/midi";
 import {
   attackWindows,
@@ -7,8 +12,6 @@ import {
   type Instrument,
   instruments,
 } from "../src/data/level";
-import { compileDifficulties, type RawChartEvent } from "./chart-compiler";
-import { extractDrumOnsets } from "./drum-onsets";
 
 const songDir = resolve(import.meta.dir, "../../../audio/Heavens_Edge");
 const publicDir = resolve(import.meta.dir, "../public/levels/heavens-edge");

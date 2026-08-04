@@ -1,4 +1,4 @@
-# Heaven's Edge — HTML5 Battle
+# Bands Battle — HTML5 Battle
 
 A portrait-first rhythm boss battle built with strict TypeScript, Vite, Canvas 2D, Web Audio, and Babylon.js.
 
@@ -9,7 +9,7 @@ bun install
 bun run dev
 ```
 
-Open the printed local URL, choose an instrument and difficulty, and press **Enter the breach**. Easy is selected by default. Tap short notes and keep the lane pressed for the full length of melodic ribbon notes. On desktop, lanes also respond to `D/F/K` or `1/2/3`.
+Open the printed local URL, choose a song, instrument, and difficulty, then press **Enter the breach**. Heaven's Edge and Easy are selected by default. Tap short notes and keep the lane pressed for the full length of melodic ribbon notes. On desktop, lanes also respond to `D/F/K` or `1/2/3`.
 
 ## Commands
 
@@ -18,12 +18,25 @@ bun test       # note judgment and attack-window rules
 bun run check  # Biome and strict TypeScript
 bun run build  # production bundle in dist/
 bun run assets # rebuild charts and 90-second stem pairs from ../../audio/Heavens_Edge
-bun run pipeline --stems /path/to/stems --output /path/to/level
+bun run level:import -- /path/to/bundle level-id "Display Title"
+../../chart build --stems /path/to/stems --output /path/to/level
 ```
 
-Append `?qa=1` for the 12-second browser-QA version of the encounter. The normal route plays the full 90-second level.
+Append `?qa=1` for a deterministic 12-second browser-QA version of the selected encounter. The normal route plays the selected level's full authored duration.
 
-## Level data
+## Add a song to the web game
+
+Build a platform-neutral song bundle from an MP3 or WAV at the project root, then import that bundle into the web app:
+
+```bash
+./chart build --song "/absolute/path/to/song.mp3" --output "/absolute/path/to/song-bundle"
+cd roblox/web
+bun run level:import -- "/absolute/path/to/song-bundle" song-id "Song Title"
+```
+
+The importer validates the bundle, copies its 12 instrument/difficulty charts, creates a stem and backing M4A for each instrument, and adds the song to `src/data/levels.json`. It publishes transactionally, so a failed audio encode does not leave a partial level behind. Level IDs use lowercase kebab case, such as `blackened-crown`, and an existing ID is never overwritten.
+
+## Heaven's Edge level data
 
 - Drums: 201 easy / 380 medium / 411 hard notes
 - Vocals: 113 easy / 135 medium / 135 hard notes; 44 / 59 / 59 sustains
@@ -50,7 +63,7 @@ If your music service already supplies stems, put audio files containing `drum`,
 export is also accepted; `other` is used for guitar when no guitar-specific stem exists.
 
 ```bash
-bun run pipeline \
+../../chart build \
   --stems "/absolute/path/to/stems" \
   --output "/absolute/path/to/generated-level" \
   --start 0 \
@@ -62,7 +75,7 @@ To start from one mixed song, omit `--stems` and pass `--song`. This runs the sa
 repository, then analyzes the resulting stems.
 
 ```bash
-bun run pipeline \
+../../chart build \
   --song "/absolute/path/to/song.wav" \
   --output "/absolute/path/to/generated-level" \
   --start 0 \
@@ -75,8 +88,9 @@ Requirements for automatic analysis:
 - `sonic-annotator` with BeatRoot, Aubio onset, and pYIN plugins.
 - Bun and this workspace's installed dependencies.
 
-The command writes `charts/{instrument}-{easy|medium|hard}.json` plus
-`charts/validation.json`. Easy, medium, and hard cap density at one, two, and four
+The command writes a versioned `manifest.json`, portable `audio/stems`,
+`charts/{instrument}-{easy|medium|hard}.json`, and `charts/validation.json`.
+Easy, medium, and hard cap density at one, two, and four
 notes per beat respectively; sparse parts are not padded with invented notes, so a
 sparse bass line can legitimately have the same count at multiple difficulties.
 

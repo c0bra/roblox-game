@@ -1,0 +1,17 @@
+{
+  "defaultLevelId": "heavens-edge",
+  "levels": [
+    {
+      "id": "heavens-edge",
+      "title": "Heaven's Edge"
+    },
+    {
+      "id": "blackened-crown",
+      "title": "Blackened Crown"
+    },
+    {
+      "id": "song-id",
+      "title": "Blackened Crown"
+    }
+  ]
+}

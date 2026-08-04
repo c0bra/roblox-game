@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { selectStemCandidate } from "../scripts/stem-selection";
+import { selectStemCandidate } from "@bands-battle/chart-pipeline/stems";
 
 describe("stem selection", () => {
   test("Given exact and Demucs candidates, when a drum stem is selected, then the exact stem wins", () => {

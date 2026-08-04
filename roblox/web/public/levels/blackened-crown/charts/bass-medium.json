@@ -1,0 +1,243 @@
+{
+  "instrument": "bass",
+  "difficulty": "medium",
+  "duration": 188.71,
+  "notes": [
+    {
+      "time": 8.235,
+      "lane": 0,
+      "duration": 0
+    },
+    {
+      "time": 10.135,
+      "lane": 0,
+      "duration": 0
+    },
+    {
+      "time": 11.826,
+      "lane": 0,
+      "duration": 0
+    },
+    {
+      "time": 12.024,
+      "lane": 0,
+      "duration": 0
+    },
+    {
+      "time": 16.715,
+      "lane": 2,
+      "duration": 0
+    },
+    {
+      "time": 16.913,
+      "lane": 2,
+      "duration": 0
+    },
+    {
+      "time": 18.32,
+      "lane": 2,
+      "duration": 0.853
+    },
+    {
+      "time": 20.817,
+      "lane": 1,
+      "duration": 0.922
+    },
+    {
+      "time": 21.819,
+      "lane": 2,
+      "duration": 0
+    },
+    {
+      "time": 22.62,
+      "lane": 0,
+      "duration": 0
+    },
+    {
+      "time": 24.52,
+      "lane": 0,
+      "duration": 0.377
+    },
+    {
+      "time": 25.22,
+      "lane": 0,
+      "duration": 0
+    },
+    {
+      "time": 25.62,
+      "lane": 2,
+      "duration": 0
+    },
+    {
+      "time": 26.117,
+      "lane": 1,
+      "duration": 0.551
+    },
+    {
+      "time": 27.018,
+      "lane": 2,
+      "duration": 0.517
+    },
+    {
+      "time": 27.725,
+      "lane": 2,
+      "duration": 0
+    },
+    {
+      "time": 28.115,
+      "lane": 1,
+      "duration": 0.54
+    },
+    {
+      "time": 29.91,
+      "lane": 2,
+      "duration": 0
+    },
+    {
+      "time": 31.018,
+      "lane": 2,
+      "duration": 0
+    },
+    {
+      "time": 31.71,
+      "lane": 2,
+      "duration": 0
+    },
+    {
+      "time": 32.013,
+      "lane": 2,
+      "duration": 0
+    },
+    {
+      "time": 35.91,
+      "lane": 0,
+      "duration": 0
+    },
+    {
+      "time": 37.21,
+      "lane": 0,
+      "duration": 0
+    },
+    {
+      "time": 38.41,
+      "lane": 2,
+      "duration": 0
+    },
+    {
+      "time": 39.01,
+      "lane": 1,
+      "duration": 0.383
+    },
+    {
+      "time": 39.813,
+      "lane": 2,
+      "duration": 0.54
+    },
+    {
+      "time": 40.62,
+      "lane": 1,
+      "duration": 0
+    },
+    {
+      "time": 41.22,
+      "lane": 1,
+      "duration": 0
+    },
+    {
+      "time": 85.01,
+      "lane": 0,
+      "duration": 0
+    },
+    {
+      "time": 98.41,
+      "lane": 2,
+      "duration": 0
+    },
+    {
+      "time": 101.617,
+      "lane": 1,
+      "duration": 0
+    },
+    {
+      "time": 102.61,
+      "lane": 0,
+      "duration": 0
+    },
+    {
+      "time": 102.91,
+      "lane": 1,
+      "duration": 0.534
+    },
+    {
+      "time": 105.11,
+      "lane": 0,
+      "duration": 0
+    },
+    {
+      "time": 105.31,
+      "lane": 1,
+      "duration": 0
+    },
+    {
+      "time": 115.72,
+      "lane": 1,
+      "duration": 0
+    },
+    {
+      "time": 117.31,
+      "lane": 1,
+      "duration": 0
+    },
+    {
+      "time": 117.71,
+      "lane": 0,
+      "duration": 0
+    },
+    {
+      "time": 119.12,
+      "lane": 1,
+      "duration": 0
+    },
+    {
+      "time": 119.91,
+      "lane": 2,
+      "duration": 0
+    },
+    {
+      "time": 120.31,
+      "lane": 1,
+      "duration": 0
+    },
+    {
+      "time": 120.515,
+      "lane": 1,
+      "duration": 0.557
+    },
+    {
+      "time": 139.31,
+      "lane": 0,
+      "duration": 0
+    },
+    {
+      "time": 139.91,
+      "lane": 0,
+      "duration": 0
+    },
+    {
+      "time": 140.21,
+      "lane": 1,
+      "duration": 0
+    },
+    {
+      "time": 140.31,
+      "lane": 1,
+      "duration": 0
+    },
+    {
+      "time": 146.92,
+      "lane": 1,
+      "duration": 0
+    }
+  ],
+  "attacks": []
+}

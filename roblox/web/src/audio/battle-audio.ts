@@ -1,5 +1,5 @@
 import ky from "ky";
-import type { Instrument } from "../data/level";
+import type { LevelAudioUrls } from "../data/level-catalog";
 
 export class BattleAudio {
   private context: AudioContext | undefined;
@@ -12,12 +12,11 @@ export class BattleAudio {
   private pausedAt = 0;
   private playing = false;
 
-  async prepare(instrument: Instrument): Promise<void> {
+  async prepare(urls: LevelAudioUrls): Promise<void> {
     this.context ??= new AudioContext({ latencyHint: "interactive" });
-    const base = `/levels/heavens-edge/audio/${instrument}`;
     const [backingData, stemData] = await Promise.all([
-      ky.get(`${base}-backing.m4a`).arrayBuffer(),
-      ky.get(`${base}-stem.m4a`).arrayBuffer(),
+      ky.get(urls.backing).arrayBuffer(),
+      ky.get(urls.stem).arrayBuffer(),
     ]);
     [this.backing, this.stem] = await Promise.all([
       this.context.decodeAudioData(backingData),

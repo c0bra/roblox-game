@@ -1,4 +1,4 @@
-# Heaven's Edge Design System
+# Bands Battle Design System
 
 ## 0. Research Log
 
@@ -20,8 +20,9 @@
 
 ## 1. Atmosphere & Identity
 
-Heaven's Edge is a supernatural concert staged at the last threshold between a cold,
-ordered heaven and an eroding violet void. The interface feels like a premium console
+Bands Battle is a supernatural concert staged at the last threshold between a cold,
+ordered heaven and an eroding violet void. Each song is a distinct battle within the
+same shared arena and against the same Fallen Choir. The interface feels like a premium console
 game compressed into a phone: calm chrome, severe contrast, and explosive feedback only
 when a note or attack earns it. The signature is the "light line": every successful tap
 pulls a narrow white-gold strike from the player through the highway into the boss.
@@ -108,6 +109,16 @@ Battle composition:
 - Bottom 18%: three equal tap pads above the gesture safe area.
 
 ## 5. Components
+
+### Level Selector
+
+- Structure: a labelled native-button radio group generated from the validated level catalog.
+- Content: each option uses the song's display title; level IDs remain internal path-safe keys.
+- States: default, selected, hover, focus-visible, and disabled while loading.
+- Layout: a two-column row above instrument selection, with a 48px touch floor. Additional
+  songs wrap to new rows without changing the shared stage or boss presentation.
+- Keyboard: arrow keys wrap through songs; Home and End jump to the first and last song.
+- Selection preserves the currently chosen instrument and difficulty.
 
 ### Action Button
 
