@@ -1,6 +1,4 @@
-Generate exactly one single isolated character based on the following description:
-
-[DESCRIPTION HERE]
+Generate exactly one single isolated character based on the following description
 
 This image will be used as source material for image-to-3D reconstruction, so prioritize simple, unambiguous physical geometry.
 
@@ -10,9 +8,13 @@ Position the character directly in the center of the image. Show the complete ch
 
 Do not use a three-quarter view. Do not rotate the body. Do not rotate the head. Do not tilt the camera. Do not use a dramatic pose, action pose, contrapposto pose, or leaning stance.
 
-Render the character as a high-quality stylized 3D game asset, not a drawing or cartoon illustration. Use sculptural three-dimensional forms, realistic material response, subtle surface texture, physically believable volume, and soft neutral studio illumination.
+Render the character as a polished stylised 3D game character, not a drawing or flat 2D illustration. Aim for the broad visual language of modern stylised adventure and hero-based games such as Fortnite, Overwatch, and The Legend of Zelda: Breath of the Wild, without copying any existing character, costume, or franchise-specific design.
 
-The visual style should be dark fantasy, ominous, supernatural, and slightly exaggerated, but not cute, childish, comic-book-like, cel-shaded, anime, chibi, or Saturday-morning-cartoon styled.
+Use a strong, instantly readable silhouette; appealing exaggerated proportions; clean sculpted forms; broad curved surfaces; and crisp, intentional edges. Simplify anatomy and costume construction into large, cohesive shapes while preserving believable weight, balance, and three-dimensional volume. Favor expressive shape language over photorealistic anatomy.
+
+Use stylised physically based materials with a softly hand-painted quality: controlled roughness, restrained highlights, subtle color gradients, gentle ambient shading, and selective surface detail. Materials should remain easy to distinguish at a glance, but avoid photorealistic pores, fabric micro-weave, scratches, grime, or noisy procedural texture. A subtle toon-shaded influence is acceptable, but the result must remain visibly sculptural and fully 3D rather than looking like flat cel animation.
+
+The visual tone should be dark fantasy, ominous, supernatural, adventurous, and slightly exaggerated. Keep the design bold and appealing rather than grotesque or horror-realistic. Use a cohesive, controlled color palette with clear value separation between adjacent forms. Avoid chibi proportions, anime facial conventions, childish toy styling, black cartoon outlines, and slapstick or Saturday-morning-cartoon styling.
 
 Make the design suitable for eventual use in Roblox after 3D conversion, but do not imitate the visual style of Roblox avatars. Use simplified production-friendly geometry, strong proportions, large readable forms, and a distinctive silhouette.
 
@@ -42,3 +44,6 @@ No extra objects
 No disconnected fragments
 No cartoon outlines
 No 2D illustration appearance
+
+DESCRIPTION:
+[DESCRIPTION HERE]
