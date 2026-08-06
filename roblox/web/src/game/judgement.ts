@@ -10,7 +10,7 @@ export interface TapResult {
   offsetMs?: number;
 }
 
-const gradeForOffset = (offsetMs: number): Grade => {
+export const gradeForOffsetMilliseconds = (offsetMs: number): Grade => {
   if (offsetMs <= 60) return "perfect";
   if (offsetMs <= 110) return "great";
   if (offsetMs <= 170) return "good";
@@ -36,7 +36,7 @@ export const judgeTap = (
     }
     if (note.time > songTime + 0.17) break;
   }
-  const grade = gradeForOffset(closestOffset);
+  const grade = gradeForOffsetMilliseconds(closestOffset);
   return grade === "miss" || closestIndex < 0
     ? { grade: "miss" }
     : { grade, noteIndex: closestIndex, offsetMs: Math.round(closestOffset) };

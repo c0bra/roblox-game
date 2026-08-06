@@ -4,6 +4,7 @@ import {
   instruments,
 } from "../data/level";
 import { type LevelCatalog, levelIdSchema } from "../data/level-catalog";
+import { LifecycleScope } from "./lifecycle";
 import {
   moveSelectionIndex,
   type RunSelection,
@@ -21,9 +22,13 @@ const selectors: Record<SelectionKind, string> = {
 
 export class SelectionControls {
   private selection: RunSelection;
+  private readonly lifecycle = new LifecycleScope();
 
-  constructor(private readonly catalog: LevelCatalog) {
-    this.selection = {
+  constructor(
+    private readonly catalog: LevelCatalog,
+    initial?: RunSelection,
+  ) {
+    this.selection = initial ?? {
       levelId: catalog.defaultLevelId,
       instrument: "drums",
       difficulty: defaultDifficulty,
@@ -40,8 +45,9 @@ export class SelectionControls {
         document.querySelectorAll<HTMLButtonElement>(selectors[kind]),
       );
       buttons.forEach((button) => {
-        button.addEventListener("click", () => this.choose(kind, button));
-        button.addEventListener("keydown", (event) => {
+        this.lifecycle.listen(button, "click", () => this.choose(kind, button));
+        this.lifecycle.listen(button, "keydown", (rawEvent) => {
+          const event = rawEvent as KeyboardEvent;
           const step =
             event.key === "ArrowLeft" || event.key === "ArrowUp"
               ? -1
@@ -71,6 +77,11 @@ export class SelectionControls {
         });
       });
     }
+    this.syncSelection();
+  }
+
+  dispose(): void {
+    this.lifecycle.dispose();
   }
 
   setDisabled(disabled: boolean): void {
@@ -95,6 +106,24 @@ export class SelectionControls {
         option.setAttribute("aria-checked", String(chosen));
         option.tabIndex = chosen ? 0 : -1;
       });
+  }
+
+  private syncSelection(): void {
+    const values: Record<SelectionKind, string> = {
+      level: this.selection.levelId,
+      instrument: this.selection.instrument,
+      difficulty: this.selection.difficulty,
+    };
+    for (const kind of ["level", "instrument", "difficulty"] as const) {
+      document
+        .querySelectorAll<HTMLButtonElement>(selectors[kind])
+        .forEach((button) => {
+          const selected = button.dataset[kind] === values[kind];
+          button.classList.toggle("is-selected", selected);
+          button.setAttribute("aria-checked", String(selected));
+          button.tabIndex = selected ? 0 : -1;
+        });
+    }
   }
 
   private actionFrom(

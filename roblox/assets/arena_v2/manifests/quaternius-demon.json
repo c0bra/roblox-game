@@ -1,0 +1,83 @@
+{
+  "manifestVersion": 1,
+  "assetId": "quaternius-demon",
+  "kind": "rigged-animated-boss-model",
+  "title": "Demon from Ultimate Monsters",
+  "creator": "Quaternius",
+  "sourceUrl": "https://quaternius.com/packs/ultimatemonsters.html",
+  "downloadUrl": "https://drive.google.com/drive/folders/18m4KpzpEzhC9wl7jzr6dUc0N8Jozr79C",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "originalWork": false,
+  "storage": {
+    "source": "roblox/assets/arena_v2/source/quaternius-ultimate-monsters/Demon.gltf",
+    "license": "roblox/assets/arena_v2/source/quaternius-ultimate-monsters/LICENSE.txt",
+    "runtime": "roblox/web/public/assets/arena/models/quaternius-demon.glb",
+    "publicRepositoryAllowed": true,
+    "browserDeliveryAllowed": true,
+    "protectedPackageRequired": false
+  },
+  "sourceAudit": {
+    "format": "self-contained glTF 2.0",
+    "sourceBytes": 1264925,
+    "sourceSha256": "9ce361b41a0e80d42a70f6325169b9c70a6e3304b8d856b8344a2b7f185067af",
+    "joints": 43,
+    "vertices": 4261,
+    "triangles": 6712,
+    "materials": 1,
+    "textures": [
+      {
+        "name": "Atlas_Monsters",
+        "width": 1024,
+        "height": 1024,
+        "embedded": true
+      }
+    ],
+    "sourceClips": [
+      "Death",
+      "Duck",
+      "HitReact",
+      "Idle",
+      "Jump",
+      "Jump_Idle",
+      "Jump_Land",
+      "No",
+      "Punch",
+      "Run",
+      "Walk",
+      "Wave",
+      "Weapon",
+      "Yes"
+    ]
+  },
+  "semanticClips": {
+    "intro": "Wave",
+    "idle": "Idle",
+    "sweepTelegraph": "No",
+    "sweepAttack": "Weapon",
+    "burstTelegraph": "Jump_Idle",
+    "burstAttack": "Punch",
+    "hit": "HitReact",
+    "staggerOpening": "Duck",
+    "phaseTransition": "Yes",
+    "defeat": "Death"
+  },
+  "export": {
+    "tool": "@gltf-transform/cli copy",
+    "reason": "Blender 5.2.0 crashes before importing both the legacy source blend and the official glTF on the named QA machine.",
+    "axes": "glTF +Y up, +Z forward convention; runtime scene owns scale and facing",
+    "scaleMeters": 1,
+    "runtimeBytes": 620696,
+    "runtimeSha256": "09bd1baf8aeff61d33e44cc5c481d5897bdc9f02967f967aba44b6b7f3708d28"
+  },
+  "previews": [
+    "roblox/web/output/playwright/cert12-phrase-375.png",
+    "roblox/web/output/playwright/cert12-sweep-768.png",
+    "roblox/web/output/playwright/cert12-burst-1280.png"
+  ],
+  "notes": [
+    "Selected over BlueDemon because the separate trident mesh and Weapon clip give the first attack a stronger phone-scale silhouette.",
+    "The downloaded license text names Ultimate Platformer Pack, while the official Ultimate Monsters pack page independently declares the pack CC0. Both the creator page and preserved license text are retained as provenance.",
+    "Runtime retiming and semantic aliases are non-destructive; the CC0 source animations remain unchanged."
+  ]
+}

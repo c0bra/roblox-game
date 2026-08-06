@@ -6,4 +6,6 @@ node_modules/
 .DS_Store
 .omo/
 .pnpm-store/
+.playwright-cli/
+/output/
 /roblox/web/public/levels/song-id/

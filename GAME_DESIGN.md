@@ -27,6 +27,9 @@ their instruments.
 
 ## Style target
 
+The canonical visual language, asset rules, palette, and approval criteria live in
+[`ART_DIRECTION.md`](ART_DIRECTION.md). This section summarizes the product fantasy.
+
 Music prompts from the raw notes converge on:
 
 ```text
@@ -178,7 +181,12 @@ Keep the first schema small:
 
 ## Roblox implementation guidance
 
-The game layer is not implemented yet. When it is added, use these defaults.
+The browser game layer is implemented under `roblox/web/`: Classic preserves the
+lane-based prototype, while opt-in Arena V2 demonstrates the boss-centered rhythm
+combat direction. The native Roblox layer is not implemented yet. When it is
+added, use these defaults and the Arena V2 OpenSpec as the current interaction
+reference rather than assuming the web prototype's DOM or Babylon architecture
+should be copied directly.
 
 ### Client
 

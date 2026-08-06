@@ -1,0 +1,156 @@
+.arena-showcase {
+  width: 100%;
+  min-height: 100%;
+  padding: var(--space-8) var(--space-4) var(--space-10);
+  overflow-y: auto;
+  background:
+    radial-gradient(circle at 50% 0, var(--arena-violet-soft), transparent 32%),
+    var(--void);
+}
+
+.arena-showcase > header,
+.arena-showcase > section {
+  width: min(100%, 980px);
+  margin-inline: auto;
+}
+
+.arena-showcase > header {
+  text-align: center;
+}
+
+.arena-showcase > header > p:last-child {
+  color: var(--muted);
+}
+
+.arena-showcase > section {
+  margin-top: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--line);
+  background: var(--arena-panel-soft);
+}
+
+.arena-showcase h2 {
+  margin: 0 0 var(--space-3);
+  color: var(--muted);
+  font: 650 var(--type-label) / 1 var(--font-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.arena-showcase .mode-selector {
+  margin-top: 0;
+}
+
+.phrase-constellation.is-showcase,
+.attack-banner.is-showcase {
+  position: relative;
+  top: auto;
+  bottom: auto;
+  left: auto;
+  width: 100%;
+  transform: none;
+}
+
+.showcase-row {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.showcase-row .phrase-step {
+  flex-basis: 86px;
+}
+
+.showcase-anchors,
+.showcase-controls,
+.showcase-meters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+}
+
+.showcase-anchors > span {
+  min-height: 92px;
+  padding: var(--space-3);
+  border: 1px solid currentColor;
+  background: var(--arena-panel);
+}
+
+.showcase-anchors .arena-glyph {
+  width: 34px;
+  height: 34px;
+}
+
+.showcase-controls {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.showcase-controls button,
+.showcase-overlay button {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  border: 1px solid var(--line);
+  background: var(--arena-panel);
+  cursor: pointer;
+}
+
+.showcase-controls button.is-held {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+.showcase-controls button:disabled {
+  opacity: 0.38;
+}
+
+.showcase-controls .arena-glyph {
+  width: 26px;
+  height: 26px;
+}
+
+.attack-banner.is-burst {
+  border-radius: 20px;
+}
+
+.showcase-meters {
+  grid-template-columns: 1fr 1fr;
+}
+
+.showcase-meters .arena-meter.is-ward {
+  grid-column: auto;
+}
+
+.showcase-overlay {
+  padding: var(--space-4);
+  border: 1px solid var(--line);
+  background: var(--arena-panel);
+  text-align: center;
+}
+
+.showcase-overlay > b,
+.showcase-overlay > strong {
+  display: block;
+  margin-top: var(--space-2);
+  font: 700 var(--type-h2) / 1 var(--font-display);
+  text-transform: uppercase;
+}
+
+.showcase-overlay > p:not(.arena-kicker) {
+  color: var(--muted);
+}
+
+@media (min-width: 768px) {
+  .arena-showcase {
+    padding-inline: var(--space-8);
+  }
+
+  .arena-showcase > section {
+    padding: var(--space-5);
+  }
+
+  .showcase-controls {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

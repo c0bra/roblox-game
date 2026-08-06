@@ -1,5 +1,6 @@
 import ky from "ky";
 import type { LevelAudioUrls } from "../data/level-catalog";
+import type { Grade } from "../game/judgement";
 
 export class BattleAudio {
   private context: AudioContext | undefined;
@@ -8,6 +9,7 @@ export class BattleAudio {
   private backingSource: AudioBufferSourceNode | undefined;
   private stemSource: AudioBufferSourceNode | undefined;
   private stemGain: GainNode | undefined;
+  private backingGain: GainNode | undefined;
   private startedAt = 0;
   private pausedAt = 0;
   private playing = false;
@@ -34,11 +36,13 @@ export class BattleAudio {
     this.backingSource = context.createBufferSource();
     this.stemSource = context.createBufferSource();
     this.stemGain = context.createGain();
+    this.backingGain = context.createGain();
     this.backingSource.buffer = backing;
     this.stemSource.buffer = stem;
-    this.backingSource.connect(context.destination);
+    this.backingSource.connect(this.backingGain).connect(context.destination);
     this.stemSource.connect(this.stemGain).connect(context.destination);
     this.stemGain.gain.value = 1;
+    this.backingGain.gain.value = 0.88;
     this.backingSource.start(0, offset);
     this.stemSource.start(0, offset);
     this.startedAt = context.currentTime - offset;
@@ -84,10 +88,36 @@ export class BattleAudio {
     oscillator.stop(now + 0.17);
   }
 
+  accent(grade: Exclude<Grade, "miss">): void {
+    const context = this.context;
+    const stem = this.stemGain?.gain;
+    const backing = this.backingGain?.gain;
+    if (!context || !stem || !backing) return;
+    const now = context.currentTime;
+    const strength =
+      grade === "perfect" ? 1.22 : grade === "great" ? 1.15 : 1.1;
+    for (const gain of [stem, backing]) {
+      gain.cancelScheduledValues(now);
+      gain.setValueAtTime(gain.value, now);
+    }
+    stem.linearRampToValueAtTime(strength, now + 0.015);
+    stem.linearRampToValueAtTime(1, now + 0.18);
+    backing.linearRampToValueAtTime(0.72, now + 0.015);
+    backing.linearRampToValueAtTime(0.88, now + 0.18);
+  }
+
   stop(): void {
     this.stopSources();
     this.playing = false;
     this.pausedAt = 0;
+  }
+
+  dispose(): void {
+    this.stop();
+    void this.context?.close();
+    this.context = undefined;
+    this.backing = undefined;
+    this.stem = undefined;
   }
 
   private stopSources(): void {

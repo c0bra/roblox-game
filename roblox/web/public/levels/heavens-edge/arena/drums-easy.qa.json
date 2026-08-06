@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "id": "heavens-edge-drums-easy-arena-qa",
+  "levelId": "heavens-edge",
+  "instrument": "drums",
+  "difficulty": "easy",
+  "duration": 24,
+  "initialWard": 100,
+  "initialResolve": 100,
+  "resolveVictoryThreshold": 35,
+  "finalCadence": 23,
+  "rehearsal": {
+    "duration": 6,
+    "phraseStepTimes": [1.5, 2.5, 3.5],
+    "repositionAt": 4.5
+  },
+  "beats": [
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+    21, 22, 23
+  ],
+  "downbeats": [0, 4, 8, 12, 16, 20],
+  "positions": [
+    {
+      "id": "shelter",
+      "label": "Shelter",
+      "order": 0,
+      "combatMultiplier": 0.75,
+      "songInfluence": 0.8,
+      "exposureMultiplier": 0.5
+    },
+    {
+      "id": "midline",
+      "label": "Midline",
+      "order": 1,
+      "combatMultiplier": 1,
+      "songInfluence": 1,
+      "exposureMultiplier": 1
+    },
+    {
+      "id": "spotlight",
+      "label": "Spotlight",
+      "order": 2,
+      "combatMultiplier": 1.35,
+      "songInfluence": 1.2,
+      "exposureMultiplier": 1.6
+    }
+  ],
+  "phrases": [
+    {
+      "id": "qa-opening",
+      "previewStart": 1,
+      "executionStart": 3,
+      "end": 6,
+      "steps": [
+        {
+          "id": "qa-opening-1",
+          "time": 3,
+          "action": "perform",
+          "resolveDamage": 10
+        },
+        {
+          "id": "qa-opening-2",
+          "time": 4,
+          "action": "perform",
+          "resolveDamage": 10
+        },
+        {
+          "id": "qa-opening-3",
+          "time": 5,
+          "action": "perform",
+          "resolveDamage": 10
+        }
+      ],
+      "positionBonusSteps": []
+    },
+    {
+      "id": "qa-spotlight",
+      "previewStart": 11,
+      "executionStart": 13,
+      "end": 16,
+      "steps": [
+        {
+          "id": "qa-spotlight-1",
+          "time": 13,
+          "action": "perform",
+          "resolveDamage": 10
+        },
+        {
+          "id": "qa-spotlight-2",
+          "time": 14,
+          "action": "perform",
+          "resolveDamage": 12
+        },
+        {
+          "id": "qa-spotlight-3",
+          "time": 15,
+          "action": "perform",
+          "resolveDamage": 14
+        }
+      ],
+      "positionBonusSteps": [
+        {
+          "positionId": "spotlight",
+          "steps": [
+            {
+              "id": "qa-spotlight-bonus",
+              "time": 15.5,
+              "action": "perform",
+              "resolveDamage": 16
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "repositionWindows": [
+    {
+      "id": "qa-first-choice",
+      "start": 6.5,
+      "decisionTime": 7.5,
+      "deadline": 8.5,
+      "travelDuration": 0.8,
+      "bossEventId": "qa-sweep",
+      "choices": [
+        { "from": "midline", "to": "shelter", "action": "retreat" },
+        { "from": "midline", "to": "midline", "action": "hold" },
+        { "from": "midline", "to": "spotlight", "action": "advance" }
+      ]
+    },
+    {
+      "id": "qa-second-choice",
+      "start": 16.5,
+      "decisionTime": 17.25,
+      "deadline": 18.5,
+      "travelDuration": 0.8,
+      "bossEventId": "qa-burst",
+      "choices": [
+        { "from": "shelter", "to": "midline", "action": "advance" },
+        { "from": "midline", "to": "spotlight", "action": "advance" },
+        { "from": "spotlight", "to": "spotlight", "action": "hold" }
+      ]
+    }
+  ],
+  "bossEvents": [
+    {
+      "id": "qa-sweep",
+      "type": "sweep",
+      "telegraphStart": 6.5,
+      "criticalStart": 8.5,
+      "impactTime": 9.5,
+      "recoveryEnd": 10.5,
+      "affectedPositionIds": ["midline", "spotlight"],
+      "safePositionIds": ["shelter"],
+      "damage": 40,
+      "openingEnd": 11
+    },
+    {
+      "id": "qa-burst",
+      "type": "burst",
+      "telegraphStart": 16.5,
+      "criticalStart": 18.5,
+      "impactTime": 19.5,
+      "recoveryEnd": 20.5,
+      "affectedPositionIds": ["shelter", "midline"],
+      "safePositionIds": ["spotlight"],
+      "damage": 70,
+      "openingEnd": 21.5
+    }
+  ],
+  "phases": [
+    { "id": "intro", "type": "intro", "start": 0 },
+    { "id": "combat", "type": "combat", "start": 1 },
+    { "id": "climax", "type": "climax", "start": 21 }
+  ]
+}

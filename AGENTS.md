@@ -31,7 +31,9 @@ roblox-bands-battle/
 | Stems pipeline details | `audio/Heavens_Edge/stems/` | Main code-heavy subtree; check child AGENTS.md |
 | Blackened Crown workflow | `audio/Blackened Crown/README.md` | ffmpeg + shell-script commands |
 | Blackened Crown drum MIDI | `audio/Blackened Crown/stems_to_midi.py` | Smaller sibling script, root-covered |
-| Roblox Blender assets | `models/` | Source `.blend` files plus PNG/MP4 previews |
+| Legacy Blender experiments | `models/` | Source `.blend` files plus PNG/MP4 previews |
+| Browser gameplay demo | `roblox/web/` | Bun/Vite TypeScript app with Classic and opt-in Arena V2 modes |
+| Arena V2 runtime assets | `roblox/assets/arena_v2/` | Browser-ready models, manifests, provenance, and license evidence |
 
 ## CONVENTIONS
 - Treat this repo as a script workspace, not a Python package.
@@ -43,7 +45,8 @@ roblox-bands-battle/
 ## ANTI-PATTERNS (THIS PROJECT)
 - Do not treat generated `.csv`, `.mid`, `.wav`, or `.mp3` artifacts as source of truth when code or docs disagree.
 - Do not add child documentation under output-only folders such as generated drum/output directories.
-- Do not assume CI, package scripts, or automated tests exist; they do not.
+- Do not assume repo-wide CI exists. The audio workspace has no formal suite, but
+  `roblox/web/` has package scripts and automated tests.
 - Do not rely on checked-in local environments; `audio/Heavens_Edge/.venv/` is noise, not the intended contributor setup.
 
 ## UNIQUE STYLES
@@ -78,5 +81,7 @@ python audio/Heavens_Edge/beats_dump.py "audio/Heavens_Edge/Heaven's Edge (Vocal
 
 ## NOTES
 - No `AGENTS.md` existed before this pass.
-- No repo CI, no `pyproject.toml`, no `package.json`, no `Makefile`, and no formal test suite were found.
+- No repo-wide CI, root `pyproject.toml`, or `Makefile` exists. The audio
+  workspace remains script-oriented; `roblox/web/` now has its own
+  `package.json`, Bun/Vite scripts, and automated test suite.
 - For most logic changes, the main working area is `audio/Heavens_Edge/stems/`; use its child AGENTS.md for local rules.

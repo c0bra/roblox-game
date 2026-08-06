@@ -22,6 +22,7 @@ import {
   resolveSustain,
   scoreForGrade,
 } from "./judgement";
+import { type GameModeController, LifecycleScope } from "./lifecycle";
 import type { SelectionControls } from "./selection-controls";
 
 const laneFrom = (value: string | undefined): Lane | undefined => {
@@ -31,7 +32,8 @@ const laneFrom = (value: string | undefined): Lane | undefined => {
   return undefined;
 };
 
-export class GameController {
+export class GameController implements GameModeController {
+  private readonly lifecycle = new LifecycleScope();
   private chart: LevelChart | undefined;
   private readonly highway: HighwayRenderer;
   private boss:
@@ -39,6 +41,7 @@ export class GameController {
         load(): Promise<void>;
         resize(): void;
         setMood(mood: "hit" | "attack" | "defeated", duration?: number): void;
+        dispose(): void;
       }
     | undefined;
   private judged = new Set<number>();
@@ -70,18 +73,29 @@ export class GameController {
     const { BossScene } = await import("../render/boss");
     this.boss = new BossScene(this.bossCanvas);
     await this.boss.load();
-    window.addEventListener("resize", () => {
+    this.lifecycle.own(() => this.boss?.dispose());
+    this.lifecycle.own(() => cancelAnimationFrame(this.frame));
+    this.lifecycle.own(() => this.audio.dispose());
+    this.lifecycle.listen(window, "resize", () => {
       this.boss?.resize();
       this.highway.resize();
     });
   }
 
+  dispose(): void {
+    this.running = false;
+    this.releaseAllLanes();
+    this.lifecycle.dispose();
+  }
+
   private bindControls(): void {
     this.selection.mount();
+    this.lifecycle.own(() => this.selection.dispose());
     document
       .querySelectorAll<HTMLButtonElement>("[data-lane]")
       .forEach((button) => {
-        button.addEventListener("pointerdown", (event) => {
+        this.lifecycle.listen(button, "pointerdown", (rawEvent) => {
+          const event = rawEvent as PointerEvent;
           event.preventDefault();
           const lane = laneFrom(button.dataset.lane);
           if (lane === undefined) return;
@@ -92,37 +106,37 @@ export class GameController {
           const lane = laneFrom(button.dataset.lane);
           if (lane !== undefined) this.releaseLane(lane, button);
         };
-        button.addEventListener("pointerup", release);
-        button.addEventListener("pointercancel", release);
-        button.addEventListener("lostpointercapture", release);
+        this.lifecycle.listen(button, "pointerup", release);
+        this.lifecycle.listen(button, "pointercancel", release);
+        this.lifecycle.listen(button, "lostpointercapture", release);
       });
-    element("start-button").addEventListener("click", () => void this.start());
-    element("pause-button").addEventListener("click", () => this.pause());
-    element("resume-button").addEventListener("click", () => this.resume());
-    element("quit-button").addEventListener("click", () =>
-      this.resetToSelect(),
-    );
-    element("replay-button").addEventListener("click", () => void this.start());
-    element("change-button").addEventListener("click", () =>
-      this.resetToSelect(),
-    );
-    element("retry-button").addEventListener("click", () => void this.start());
-    element("error-back-button").addEventListener("click", () =>
-      this.resetToSelect(),
-    );
-    document.addEventListener("visibilitychange", () => {
+    this.listen("start-button", () => void this.start());
+    this.listen("pause-button", () => this.pause());
+    this.listen("resume-button", () => this.resume());
+    this.listen("quit-button", () => this.resetToSelect());
+    this.listen("replay-button", () => void this.start());
+    this.listen("change-button", () => this.resetToSelect());
+    this.listen("retry-button", () => void this.start());
+    this.listen("error-back-button", () => this.resetToSelect());
+    this.lifecycle.listen(document, "visibilitychange", () => {
       if (document.hidden && this.running) this.pause();
     });
-    window.addEventListener("keydown", (event) => {
+    this.lifecycle.listen(window, "keydown", (rawEvent) => {
+      const event = rawEvent as KeyboardEvent;
       const lane = this.laneForKey(event.key);
       if (lane !== undefined && !event.repeat) this.pressLane(lane);
       if (event.key === "Escape" && this.running) this.pause();
     });
-    window.addEventListener("keyup", (event) => {
+    this.lifecycle.listen(window, "keyup", (rawEvent) => {
+      const event = rawEvent as KeyboardEvent;
       const lane = this.laneForKey(event.key);
       if (lane !== undefined) this.releaseLane(lane);
     });
-    window.addEventListener("blur", () => this.releaseAllLanes());
+    this.lifecycle.listen(window, "blur", () => this.releaseAllLanes());
+  }
+
+  private listen(id: string, handler: () => void): void {
+    this.lifecycle.listen(element(id), "click", handler);
   }
 
   private laneForKey(key: string): Lane | undefined {
@@ -158,7 +172,7 @@ export class GameController {
     let count = 3;
     const callout = element("battle-callout");
     callout.textContent = String(count);
-    const timer = window.setInterval(() => {
+    const timer = this.lifecycle.interval(() => {
       count -= 1;
       callout.textContent = count > 0 ? String(count) : "FIGHT";
       if (count > 0) return;
@@ -166,7 +180,7 @@ export class GameController {
       this.audio.start();
       this.running = true;
       this.frame = requestAnimationFrame(() => this.update());
-      window.setTimeout(() => callout.replaceChildren(), 500);
+      this.lifecycle.timeout(() => callout.replaceChildren(), 500);
     }, 650);
   }
 

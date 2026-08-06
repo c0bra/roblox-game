@@ -1,0 +1,603 @@
+.arena-battle {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 760px);
+  height: 100%;
+  margin-inline: auto;
+  padding: max(var(--space-3), env(safe-area-inset-top)) var(--space-3)
+    max(var(--space-2), env(safe-area-inset-bottom));
+}
+
+.arena-battle[hidden],
+.arena-overlay[hidden],
+.attack-banner[hidden],
+.phrase-constellation[hidden] {
+  display: none;
+}
+
+.arena-hud {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 54px 48px;
+  gap: var(--space-2);
+  align-items: start;
+}
+
+.arena-meter {
+  min-width: 0;
+}
+
+.arena-meter > span {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-1);
+  font: 650 var(--type-micro) / 1 var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.arena-meter output {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.arena-meter > div {
+  height: 8px;
+  padding: 1px;
+  border: 1px solid var(--line);
+  background: var(--void);
+  clip-path: polygon(4px 0, 100% 0, 100% 100%, 0 100%, 0 4px);
+}
+
+.arena-meter i,
+.arena-load-track i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--violet);
+  box-shadow: 0 0 10px var(--violet);
+  transform: scaleX(1);
+  transform-origin: left center;
+  transition: transform 180ms ease-out;
+}
+
+.arena-meter.is-ward {
+  grid-column: 1 / 3;
+}
+
+.arena-meter.is-ward i {
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+}
+
+.arena-phase {
+  display: grid;
+  justify-items: center;
+  min-height: 42px;
+  padding: var(--space-1);
+  border-inline: 1px solid var(--line);
+  font-family: var(--font-display);
+}
+
+.arena-phase span {
+  color: var(--gold);
+  font-size: var(--type-hud);
+  line-height: 1;
+}
+
+.arena-phase small {
+  color: var(--muted);
+  font-size: var(--type-micro);
+  text-transform: uppercase;
+}
+
+.arena-pause {
+  display: flex;
+  gap: var(--space-1);
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--line);
+  background: var(--arena-panel);
+  cursor: pointer;
+}
+
+.arena-pause span {
+  width: 3px;
+  height: 15px;
+  background: var(--text);
+}
+
+.arena-score {
+  display: grid;
+  grid-column: 3;
+  grid-row: 2;
+  justify-items: end;
+  font-family: var(--font-display);
+}
+
+.arena-score output {
+  font-size: var(--type-label);
+  letter-spacing: 0.08em;
+}
+
+.arena-score small {
+  color: var(--muted);
+  font-size: var(--type-micro);
+}
+
+.arena-callout {
+  position: absolute;
+  z-index: 7;
+  top: 30%;
+  left: 50%;
+  width: min(92%, 460px);
+  color: var(--text);
+  font: 760 var(--type-callout) / 1.1 var(--font-display);
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-shadow: 0 3px 18px var(--void);
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.arena-callout[data-grade="perfect"] {
+  color: var(--gold);
+}
+
+.arena-callout[data-grade="great"] {
+  color: var(--cyan);
+}
+
+.arena-callout[data-grade="miss"] {
+  color: var(--danger);
+}
+
+.attack-banner {
+  position: absolute;
+  z-index: 6;
+  top: 16%;
+  left: 50%;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: center;
+  width: min(calc(100% - var(--space-8)), 430px);
+  padding: var(--space-3);
+  overflow: hidden;
+  border: 1px solid var(--violet);
+  background: var(--arena-panel);
+  box-shadow: var(--elevation-panel);
+  transform: translateX(-50%);
+}
+
+.attack-banner .arena-glyph {
+  color: var(--violet);
+}
+
+.attack-banner span b,
+.attack-banner span small {
+  display: block;
+}
+
+.attack-banner span b {
+  font: 730 var(--type-label) / 1 var(--font-display);
+  text-transform: uppercase;
+}
+
+.attack-banner span small {
+  margin-top: var(--space-1);
+  color: var(--muted);
+  font-size: var(--type-micro);
+}
+
+.attack-banner > i {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: var(--violet);
+  box-shadow: 0 0 12px var(--violet);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.phrase-constellation {
+  position: absolute;
+  z-index: 8;
+  bottom: 280px;
+  left: 50%;
+  width: min(calc(100% - var(--space-8)), 430px);
+  padding: var(--space-3);
+  border: 1px solid var(--line);
+  background: var(--arena-panel);
+  box-shadow: var(--elevation-panel);
+  transform: translateX(-50%);
+}
+
+.phrase-heading {
+  display: flex;
+  justify-content: space-between;
+  color: var(--cyan);
+  font: 650 var(--type-micro) / 1 var(--font-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.phrase-heading small {
+  color: var(--muted);
+}
+
+.phrase-steps {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: center;
+  margin-top: var(--space-2);
+}
+
+.phrase-step {
+  position: relative;
+  display: grid;
+  flex: 0 1 56px;
+  place-items: center;
+  min-width: 42px;
+  min-height: 48px;
+  border: 1px solid var(--line);
+  background: var(--arena-panel-soft);
+  color: var(--muted);
+}
+
+.phrase-step .arena-glyph {
+  width: 25px;
+  height: 25px;
+}
+
+.phrase-step b {
+  position: absolute;
+  right: var(--space-1);
+  bottom: var(--space-1);
+  font: 600 var(--type-compact) / 1 var(--font-display);
+  text-transform: uppercase;
+}
+
+.phrase-step.is-current {
+  border-color: var(--gold);
+  color: var(--gold);
+  box-shadow: inset 0 0 14px color-mix(in srgb, var(--gold) 18%, transparent);
+}
+
+.phrase-step.is-next,
+.phrase-step.is-perfect {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+.phrase-step.is-miss,
+.phrase-step.is-late {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.phrase-step.is-bonus {
+  border-style: dashed;
+  color: var(--gold);
+}
+
+.phrase-step.is-disabled {
+  opacity: 0.38;
+}
+
+.phrase-timing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 58px;
+  height: 58px;
+  border: 1px solid var(--cyan);
+  border-radius: 50%;
+  opacity: 0.7;
+  transform: translate(-50%, -50%) scale(calc(1.45 - var(--timing, 0) * 0.45));
+  pointer-events: none;
+}
+
+.phrase-timing i {
+  position: absolute;
+  inset: 5px;
+  border: 1px solid var(--gold);
+  border-radius: inherit;
+}
+
+.anchor-labels {
+  position: absolute;
+  bottom: 96px;
+  left: 50%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  width: min(calc(100% - var(--space-6)), 360px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.anchor-labels > span,
+.showcase-anchors > span {
+  display: grid;
+  justify-items: center;
+  min-width: 0;
+  color: var(--muted);
+  text-align: center;
+}
+
+.anchor-labels .arena-glyph,
+.showcase-anchors .arena-glyph {
+  width: 24px;
+  height: 24px;
+}
+
+.anchor-labels b,
+.anchor-labels small,
+.showcase-anchors b,
+.showcase-anchors small {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.anchor-labels b,
+.showcase-anchors b {
+  font: 650 var(--type-micro) / 1 var(--font-display);
+  text-transform: uppercase;
+}
+
+.anchor-labels small,
+.showcase-anchors small {
+  margin-top: var(--space-1);
+  font-size: var(--type-micro);
+}
+
+.anchor-labels .is-current,
+.showcase-anchors .is-current,
+.showcase-anchors .is-safe {
+  color: var(--cyan);
+}
+
+.anchor-labels .is-danger,
+.showcase-anchors .is-danger {
+  color: var(--danger);
+}
+
+.arena-controls {
+  position: absolute;
+  z-index: 9;
+  right: var(--space-3);
+  bottom: max(var(--space-2), env(safe-area-inset-bottom));
+  left: var(--space-3);
+  display: grid;
+  grid-template-columns: 1fr 1.22fr 1fr;
+  gap: var(--space-2);
+}
+
+.arena-controls button {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: var(--space-1);
+  align-items: center;
+  min-height: 66px;
+  padding: var(--space-2);
+  border: 1px solid var(--line);
+  background: var(--arena-panel);
+  color: var(--text);
+  cursor: pointer;
+  touch-action: manipulation;
+  clip-path: polygon(
+    8px 0,
+    100% 0,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    0 100%,
+    0 8px
+  );
+  transition:
+    transform 90ms ease-out,
+    border-color var(--motion-state),
+    filter var(--motion-state);
+}
+
+.arena-controls .perform-control {
+  border-color: var(--cyan);
+  background: color-mix(in srgb, var(--panel-strong) 86%, var(--cyan));
+}
+
+.arena-controls button:active,
+.arena-controls button.is-pressed {
+  filter: brightness(1.3);
+  transform: scale(0.97);
+}
+
+.arena-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.arena-controls .arena-glyph {
+  width: 28px;
+  height: 28px;
+  color: var(--cyan);
+}
+
+.arena-controls span,
+.arena-controls b,
+.arena-controls kbd {
+  display: block;
+  min-width: 0;
+}
+
+.arena-controls b {
+  overflow: hidden;
+  font: 680 var(--type-compact) / 1 var(--font-display);
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.arena-controls kbd {
+  margin-top: var(--space-1);
+  color: var(--muted);
+  font: 500 var(--type-compact) / 1 var(--font-display);
+}
+
+.arena-glyph {
+  width: 32px;
+  height: 32px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.arena-overlay {
+  position: absolute;
+  z-index: 20;
+  top: 50%;
+  left: 50%;
+  width: min(calc(100% - var(--space-8)), 420px);
+  padding: var(--space-6) var(--space-5) var(--space-4);
+  border: 1px solid var(--line);
+  background: var(--arena-panel);
+  box-shadow: var(--elevation-dialog);
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.arena-overlay::before {
+  position: fixed;
+  z-index: -1;
+  inset: -100vh -100vw;
+  background: color-mix(in srgb, var(--void) 80%, transparent);
+  content: "";
+}
+
+.arena-overlay h2 {
+  margin-top: var(--space-2);
+  font-size: var(--type-overlay);
+}
+
+.arena-overlay > p:not(.arena-kicker) {
+  color: var(--muted);
+}
+
+.arena-load-track {
+  height: 8px;
+  margin: var(--space-4) 0 var(--space-2);
+  padding: 1px;
+  border: 1px solid var(--line);
+  background: var(--void);
+}
+
+.arena-load-track i {
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+  transform: scaleX(0);
+}
+
+.arena-results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin: var(--space-4) 0;
+  background: var(--line);
+}
+
+.arena-results-grid span {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-1);
+  background: var(--panel-strong);
+}
+
+.arena-results-grid output {
+  font: 700 var(--type-body) / 1 var(--font-display);
+}
+
+.arena-results-grid small {
+  color: var(--muted);
+  font-size: var(--type-micro);
+  text-transform: uppercase;
+}
+
+.fallback-silhouette {
+  position: relative;
+  width: 180px;
+  height: 96px;
+  margin: 0 auto var(--space-3);
+  border-bottom: 1px solid var(--line);
+}
+
+.fallback-silhouette i,
+.fallback-silhouette span,
+.fallback-silhouette b {
+  position: absolute;
+  bottom: 0;
+  display: block;
+  background: var(--violet);
+  content: "";
+  filter: drop-shadow(0 0 10px var(--violet));
+}
+
+.fallback-silhouette i {
+  left: 62px;
+  width: 58px;
+  height: 82px;
+  clip-path: polygon(30% 0, 70% 0, 100% 38%, 82% 100%, 18% 100%, 0 38%);
+}
+
+.fallback-silhouette span {
+  left: 18px;
+  width: 24px;
+  height: 46px;
+  background: var(--cyan);
+}
+
+.fallback-silhouette b {
+  right: 0;
+  left: 0;
+  height: 5px;
+  background: var(--line);
+}
+
+@media (max-height: 700px) {
+  .phrase-constellation {
+    bottom: 250px;
+  }
+  .anchor-labels {
+    bottom: 88px;
+  }
+  .arena-controls button {
+    min-height: 58px;
+  }
+}
+
+@media (max-width: 420px) {
+  .anchor-labels {
+    z-index: 10;
+    bottom: 76px;
+    gap: var(--space-1);
+    padding: var(--space-1) 0 var(--space-1);
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--void) 76%, transparent),
+      color-mix(in srgb, var(--void) 96%, transparent) 34%
+    );
+    box-shadow: 0 -1px 0 var(--line);
+  }
+
+  .anchor-labels > span {
+    padding-inline: var(--space-1);
+  }
+}

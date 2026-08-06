@@ -20,10 +20,12 @@ Read these first:
 1. `README.md`, this file, for repo structure and the current workflow.
 2. `GAME_DESIGN.md`, synthesized game/product brief from `trello_notes.md` and
    `chatgpt_chat.md`.
-3. `audio/Heavens_Edge/stems/spec.md`, lane-chart pipeline spec.
-4. `audio/Heavens_Edge/stems/sonic-annotator.md`, command cookbook for BeatRoot,
+3. `ART_DIRECTION.md`, canonical look and feel for characters, environments, UI,
+   materials, lighting, VFX, and visual production.
+4. `audio/Heavens_Edge/stems/spec.md`, lane-chart pipeline spec.
+5. `audio/Heavens_Edge/stems/sonic-annotator.md`, command cookbook for BeatRoot,
    pYIN, Aubio, and CREPE experiments.
-5. `audio/Heavens_Edge/stems/AGENTS.md`, local notes for the main audio workflow
+6. `audio/Heavens_Edge/stems/AGENTS.md`, local notes for the main audio workflow
    subtree.
 
 If you are here to build the Roblox game layer, start with `GAME_DESIGN.md` and
@@ -39,6 +41,7 @@ roblox-bands-battle/
 |-- chart                         # repository-root chart pipeline command
 |-- tools/chart-pipeline/         # platform-neutral compiler and bundle format
 |-- GAME_DESIGN.md
+|-- ART_DIRECTION.md              # canonical visual style and asset guidance
 |-- trello_notes.md                 # raw brainstorming notes
 |-- chatgpt_chat.md                 # raw core-loop discussion
 |-- cool-dangerous-electric-guitar-roblox-game-asset.png
@@ -99,22 +102,32 @@ The design notes define a Roblox rhythm/boss-battle game:
 
 See `GAME_DESIGN.md` for the full synthesized brief.
 
-## What does not exist yet
+## Implementation status
 
-No Roblox implementation was found in this repo:
+The repository now includes two separate gameplay tracks:
+
+- `roblox/web/` contains the playable browser demo, including the preserved
+  Classic rhythm-highway mode and the opt-in Arena V2 boss-battle vertical slice.
+- The native Roblox implementation still has not been started.
+
+The browser demo has its own Bun/Vite package, TypeScript runtime, automated
+tests, responsive UI, encounter data, and browser-ready Arena assets. See
+`roblox/web/README.md` and run it from that directory.
+
+The following native Roblox pieces do not exist yet:
 
 - no `.lua` or `.luau` scripts
 - no Rojo project file
 - no Roblox place file
-- no UI implementation
+- no native Roblox UI implementation
 - no server/client networking layer
 - no DataStore persistence
-- no boss battle runtime
+- no native Roblox boss battle runtime
 - no chart loader in Roblox
 
-That matters because new developers should not assume the audio pipeline is wired
-into a playable Roblox game. It is not. The next big milestone is a minimal Roblox
-prototype that can load one exported chart and play one 60 to 90 second battle.
+The audio pipeline is wired into a playable web prototype, but not into a Roblox
+place. The next native-platform milestone is a minimal Roblox prototype that can
+load one exported chart and play one 60 to 90 second battle.
 
 ## Recommended first Roblox milestone
 
@@ -560,8 +573,9 @@ ffmpeg -y -i "1_Blackened Crown(1)_(Drums).mp3" \
 - `pyin_to_lanes.py` should become a real CLI instead of using hardcoded filenames.
 - BeatRoot output should be normalized to one float per line if Sonic Annotator
   writes a richer CSV on a given machine.
-- There is no formal test suite or package structure.
-- There is no Roblox game code yet.
+- There is no repo-wide Python package or CI suite; `roblox/web/` has its own
+  package scripts and automated tests.
+- There is no native Roblox game code yet; the implemented gameplay demo is web-only.
 
 ## Asset and model notes
 
@@ -588,3 +602,9 @@ Sound effect sources:
 - https://pixabay.com/sound-effects/search
 - https://elevenlabs.io/sound-effects
 - https://directory.audio/
+
+# Resources
+
+## Assets
+
+- https://www.cgtrader.com/free-3d-models/textures/miscellaneous/the-stylized-vault-375-stylized-pbr-mega-pack-texture-library

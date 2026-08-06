@@ -1,0 +1,29 @@
+{
+  "manifestVersion": 1,
+  "assetId": "replace-me",
+  "kind": "model",
+  "title": "Replace me",
+  "creator": "Replace me",
+  "sourceUrl": "https://example.com",
+  "license": "Replace me",
+  "licenseUrl": "https://example.com/license",
+  "originalWork": false,
+  "storage": {
+    "source": "replace-me",
+    "runtime": "replace-me",
+    "publicRepositoryAllowed": false,
+    "browserDeliveryAllowed": false
+  },
+  "export": {
+    "tool": "Replace me",
+    "axes": "Replace me",
+    "scaleMeters": 1,
+    "clips": [],
+    "triangles": 0,
+    "textureDimensions": [],
+    "runtimeBytes": 0,
+    "sha256": "replace-me"
+  },
+  "previews": [],
+  "notes": []
+}

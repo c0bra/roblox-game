@@ -51,6 +51,10 @@ export const appShell = (catalog: LevelCatalog): string => `
       <div class="eyebrow"><span></span> one night · one fate <span></span></div>
       <h1 id="game-title" tabindex="-1">Bands <em>Battle</em></h1>
       <p class="premise">Choose a song, then wield its drums, voice, guitar, or bass against the Fallen Choir.</p>
+      <div class="classic-mode-switch" role="radiogroup" aria-label="Gameplay mode">
+        <button class="is-selected" type="button" role="radio" aria-checked="true"><b>Classic Highway</b><small>Continuous lane chart</small></button>
+        <button id="arena-mode-button" type="button" role="radio" aria-checked="false"><b>Arena Battle</b><small>Static phrases · tactical anchors</small></button>
+      </div>
       <fieldset class="level-field">
         <legend>Choose song</legend>
         <div class="level-grid" role="radiogroup" aria-label="Choose song">

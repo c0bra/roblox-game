@@ -1,0 +1,21 @@
+import { arenaGlyphs } from "./arena-glyphs";
+
+const step = (state: string, label: string): string =>
+  `<span class="phrase-step is-${state}">${arenaGlyphs.perform}<b>${label}</b></span>`;
+
+export const arenaShowcase = (): string => `
+  <main class="arena-showcase">
+    <header><p class="arena-kicker">Arena V2 design system</p><h1>Combat <em>primitives</em></h1><p>Responsive state harness · 375 / 768 / 1280</p></header>
+    <section data-showcase="mode-selector"><h2>Mode selector</h2><div class="mode-selector"><button data-mode="classic"><span class="mode-index">01</span><b>Classic Highway</b><small>Continuous chart</small></button><button class="is-selected" data-mode="arena"><span class="mode-index">02</span><b>Arena Battle</b><small>Static phrases</small></button></div></section>
+    <section data-showcase="unsupported"><h2>Unsupported combination</h2><div class="arena-unsupported"><b>Arena is not authored for Void Bass · Hard.</b><p>Current selection preserved.</p><button>Use Arena demo setup</button></div></section>
+    <section data-showcase="phrase-preview"><h2>Static phrase · preview</h2><div class="phrase-constellation is-showcase"><div class="phrase-heading"><span>2 beats early</span><small>Complete phrase</small></div><div class="phrase-steps">${step("preview", "1")}${step("preview", "2")}${step("preview", "3")}${step("bonus", "+")}</div><div class="phrase-timing"><i></i></div></div></section>
+    <section data-showcase="phrase-current-next"><h2>Current, next, and results</h2><div class="phrase-steps showcase-row">${step("perfect", "Perfect")}${step("current", "Now")}${step("next", "Next")}${step("early", "Early")}${step("late", "Late")}${step("miss", "Miss")}${step("disabled", "Off")}</div></section>
+    <section data-showcase="positions"><h2>Position states</h2><div class="showcase-anchors"><span class="is-safe">${arenaGlyphs.shelter}<b>Shelter</b><small>Safe</small></span><span class="is-current">${arenaGlyphs.midline}<b>Midline</b><small>Current</small></span><span class="is-danger">${arenaGlyphs.spotlight}<b>Spotlight</b><small>Targeted</small></span></div></section>
+    <section data-showcase="reposition"><h2>Reposition choice</h2><div class="showcase-controls"><button>${arenaGlyphs.retreat}<b>Retreat</b></button><button class="is-held">${arenaGlyphs.midline}<b>Hold</b></button><button>${arenaGlyphs.advance}<b>Advance</b></button><button disabled>${arenaGlyphs.advance}<b>Boundary</b></button></div></section>
+    <section data-showcase="sweep-telegraph"><h2>Rift Sweep</h2><div class="attack-banner is-showcase is-sweep">${arenaGlyphs.sweep}<span><b>Rift Sweep</b><small>Broad path · move to Shelter</small></span><i></i></div></section>
+    <section data-showcase="burst-telegraph"><h2>Void Burst</h2><div class="attack-banner is-showcase is-burst">${arenaGlyphs.burst}<span><b>Void Burst</b><small>Radial zone · advance</small></span><i></i></div></section>
+    <section data-showcase="meters"><h2>Meters</h2><div class="showcase-meters"><div class="arena-meter is-resolve"><span><b>Boss Resolve</b><output>42</output></span><div><i style="transform:scaleX(.42)"></i></div></div><div class="arena-meter is-ward"><span><b>Performer Ward</b><output>68</output></span><div><i style="transform:scaleX(.68)"></i></div></div></div></section>
+    <section data-showcase="loading"><h2>Loading</h2><div class="showcase-overlay"><p class="arena-kicker">Opening the threshold</p><b>Importing the demon…</b><div class="arena-load-track"><i style="transform:scaleX(.64)"></i></div></div></section>
+    <section data-showcase="fallback"><h2>Fallback and recovery</h2><div class="showcase-overlay"><div class="fallback-silhouette"><i></i><span></span><b></b></div><strong>Arena unavailable</strong><p>Retry Arena or play this setup in Classic.</p><button>Retry Arena</button></div></section>
+    <section data-showcase="results"><h2>Results</h2><div class="showcase-overlay"><p class="arena-kicker">Threshold sealed</p><strong>Victory</strong><div class="arena-results-grid"><span><output>48,200</output><small>Score</small></span><span><output>84%</output><small>Accuracy</small></span><span><output>7×</output><small>Best streak</small></span></div></div></section>
+  </main>`;

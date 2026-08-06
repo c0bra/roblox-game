@@ -1,0 +1,40 @@
+{
+  "manifestVersion": 1,
+  "assetId": "replace-me",
+  "tier": "P0",
+  "semanticId": "replace-me",
+  "variationGroup": "replace-me",
+  "prompt": "Replace me",
+  "generator": {
+    "provider": "ElevenLabs Sound Effects",
+    "model": "replace-me",
+    "durationSeconds": 0.5,
+    "loop": false,
+    "promptInfluence": 0.3,
+    "generationReference": "replace-me"
+  },
+  "source": {
+    "path": "replace-me.wav",
+    "sampleRateHz": 48000,
+    "bitDepth": 24,
+    "channels": 1,
+    "originalWork": true,
+    "license": "project-original"
+  },
+  "markersSeconds": {
+    "start": 0,
+    "contact": 0,
+    "loopStart": null,
+    "loopEnd": null,
+    "release": null
+  },
+  "masterPeakDbtp": -1,
+  "runtime": {
+    "path": "replace-me.webm",
+    "codec": "opus",
+    "bytes": 0,
+    "sha256": "replace-me"
+  },
+  "mixIntent": "Replace me",
+  "editNotes": []
+}
