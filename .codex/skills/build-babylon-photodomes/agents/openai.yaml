@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build Babylon PhotoDomes"
+  short_description: "Create seamless high-resolution 360° arenas"
+  default_prompt: "Use $build-babylon-photodomes to generate, upscale, implement, and validate a seamless Babylon.js 360° arena backdrop."
