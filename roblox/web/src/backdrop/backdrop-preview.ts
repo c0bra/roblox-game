@@ -3,14 +3,50 @@ export type BackdropViewState = "loading" | "ready" | "error";
 
 export const iceArenaLayout = {
   cameraPosition: { x: 0, y: 0, z: 0 },
+  cameraFov: 1.3,
   floorCenter: { x: 0, y: -1.78, z: 0 },
   floorColorToken: "--ice-floor",
   floorDiameter: 24,
   floorHeight: 0.36,
+  surfaceDiameter: 116,
+  textureWorldSize: 8,
+  hazeColorToken: "--ice-haze",
+  fogStart: 18,
+  fogEnd: 54,
+  albedoLift: 1.12,
+  emissiveStrength: 0.2,
+  opacityFadeStart: 0.68,
+  opacityFadeEnd: 0.98,
 } as const;
 
-export const icePanoramaUrl =
-  "/assets/backdrops/ice-mountains-equirectangular-v4.webp" as const;
+export const icePanoramaUrls = {
+  standard: "/assets/backdrops/ice-mountains-equirectangular-v5-4k.webp",
+  highDetail: "/assets/backdrops/ice-mountains-equirectangular-v5-8k.webp",
+} as const;
+
+type BackdropRenderProfile = {
+  readonly devicePixelRatio: number;
+  readonly maxTextureSize: number;
+  readonly viewportWidth: number;
+};
+
+export function backdropRenderScaleForDevicePixelRatio(
+  devicePixelRatio: number,
+): number {
+  return Math.min(2, Math.max(1, devicePixelRatio));
+}
+
+export function icePanoramaUrlForProfile(
+  profile: BackdropRenderProfile,
+): (typeof icePanoramaUrls)[keyof typeof icePanoramaUrls] {
+  const supportsHighDetail =
+    profile.devicePixelRatio > 1 &&
+    profile.viewportWidth >= 1_024 &&
+    profile.maxTextureSize >= 8_192;
+  return supportsHighDetail
+    ? icePanoramaUrls.highDetail
+    : icePanoramaUrls.standard;
+}
 
 export const iceFloorTextureUrls = {
   albedo: "/assets/backdrops/ice-floor-albedo-v1.webp",

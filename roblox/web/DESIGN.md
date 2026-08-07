@@ -53,6 +53,7 @@ do not count as decorative accents.
 | Edge | `--line` | `rgb(176 215 255 / 0.24)` | Dividers and resting outlines |
 | Neutral 3D fill | `--arena-fill` | `#b7c2d9` | Arena hemispheric light only |
 | Ice floor | `--ice-floor` | `#78aeb9` | Centered ice-backdrop arena floor and dominant environment hue |
+| Ice haze | `--ice-haze` | `#afd8eb` | Far-field floor fade sampled from the panorama foreground ice |
 | Selected surface | `--surface-selected` | `rgb(12 33 49 / 0.96)` | Selected Classic cards |
 | Meter surface | `--surface-meter` | `rgb(0 0 0 / 0.72)` | Classic meter tracks |
 | Tap surface | `--surface-pad` | `rgb(5 9 18 / 0.9)` | Classic lane controls |
@@ -71,6 +72,11 @@ Rules:
 - The centered ice arena multiplies `--ice-floor` through a low-contrast tiled
   albedo and pairs it with subtle normal and roughness maps. Surface detail must
   stay subordinate to the surrounding rock ring and distant mountain silhouette.
+- The 24-unit playable ice disc continues as an unmarked visual ground skirt
+  beneath the panorama. Beyond the playable radius, linear `--ice-haze` distance
+  fog removes texture contrast and a broad radial opacity feather reveals the
+  panorama ground before the mesh reaches the panorama wall; no exposed rim or
+  hard color arc may identify the skirt boundary.
 
 ## 3. Typography
 
@@ -300,9 +306,19 @@ Strategy: mixed tonal depth with energy rims.
 - Radius system: 8px utility, 16px cards, 24px major panels, pill only for compact meters.
 - Z layers: background 0, boss 10, highway 20, HUD 30, controls 40, modal 60.
 - The ice-backdrop test places the viewer at the horizontal center of a real 3D
-  `--ice-floor` disc. Nearby dark rock and crystalline ice form the outer depth
-  ring; distant mountain layers lose contrast and detail into the same glacier-blue
-  color family. The panorama never bakes in a second platform.
+  `--ice-floor` gameplay disc whose matching visual ground continues beyond the
+  playable radius and dissolves through `--ice-haze` into the panorama. Nearby
+  dark rock and crystalline ice form the outer depth ring; distant mountain layers
+  lose contrast and detail into the same glacier-blue color family. The panorama
+  never bakes in a second platform, and the visual ground never exposes a hard rim.
+- The panorama camera uses a moderately wide 74.5-degree vertical field of view so
+  the surrounding rock ring reads spatially without fisheye stretching at the edges.
+- Panorama masters remain strict 2:1 equirectangular images with a repaired longitude
+  seam and smooth poles; no second dome warp is applied at runtime. The browser uses
+  the 4096 × 2048 asset by default and reserves 8192 × 4096 for high-density desktop
+  viewports with an 8K-capable WebGL texture limit.
+- Babylon renders the backdrop at the device pixel ratio capped at 2×. This preserves
+  Retina detail without allowing high-DPI mobile screens to create an unbounded canvas.
 
 ## 8. Accessibility Constraints & Accepted Debt
 
