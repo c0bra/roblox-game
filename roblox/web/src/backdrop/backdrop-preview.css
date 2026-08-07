@@ -31,6 +31,11 @@
   transition: opacity var(--motion-state);
 }
 
+#backdrop-canvas:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: -3px;
+}
+
 .backdrop-poster {
   filter: blur(6px);
   object-fit: cover;
@@ -95,9 +100,9 @@
 .backdrop-copy h1 {
   max-width: 10ch;
   margin: 0;
-  font-size: clamp(2.5rem, 8vw, 5.5rem);
-  font-weight: 650;
-  line-height: 0.92;
+  font-size: var(--type-title);
+  font-weight: 600;
+  line-height: 0.94;
   letter-spacing: -0.04em;
 }
 
@@ -110,9 +115,13 @@
 .backdrop-copy > p:last-child {
   max-width: 34rem;
   margin: calc(var(--space-2) * 2) 0 0;
-  color: var(--text-secondary, var(--muted));
-  font-size: 1rem;
+  color: var(--text);
+  font-size: var(--type-body);
+  font-weight: 400;
   line-height: 1.5;
+  text-shadow:
+    0 2px 5px var(--void),
+    0 0 20px var(--void);
 }
 
 .backdrop-controls {
@@ -220,10 +229,6 @@
     top: max(calc(var(--space-2) * 2), env(safe-area-inset-top));
     left: max(calc(var(--space-2) * 2), env(safe-area-inset-left));
     width: calc(100% - var(--space-2) * 4);
-  }
-
-  .backdrop-copy h1 {
-    font-size: clamp(2.5rem, 16vw, 4.2rem);
   }
 
   .backdrop-copy > p:last-child {

@@ -1,18 +1,28 @@
 # Backdrop textures
 
-`ice-mountains-equirectangular-v5-source.png` is the project-local
-image-generation source for the centered Babylon arena preview. It preserves the
-open basin from v4, reconstructs sharper rock, ice, snow, mountain, and cloud
-detail, and uses a strict 2:1 equirectangular layout. The longitude seam was
-rotated into the center for an image-generation repair pass, rotated back, then
-given a narrow symmetric edge feather before export.
+`ice-mountains-equirectangular-v6-source.png` is the current project-local
+image-generation source for the centered Babylon arena preview. It keeps the
+strict 2:1 projection and mountain palette from v5, but moves the first rock ring
+into the middle distance and reserves the lower 46% of the image for low-contrast
+ice. That ground reserve gives the separate Babylon floor room to fade before a
+dark silhouette can reach the junction.
 
-The runtime uses `ice-mountains-equirectangular-v5-4k.webp` by default and
-selects `ice-mountains-equirectangular-v5-8k.webp` only on high-density desktop
+The floor-to-panorama band is derived from the scene geometry rather than an
+eyeballed crop. With a 1.6-unit camera height, a 70-unit visual floor radius, and
+opacity-fade radii of 56–68.6 units, a downward ray maps through
+`v = 0.5 + atan2(height, radius) / pi`. The exact fade occupies normalized
+latitude `v = 0.50742–0.50909`. The v6 art reserve starts at `v = 0.54`, leaving
+a normalized 0.03091 safety band: about 63 runtime rows at 4K or 127 at 8K before
+the first rock base.
+
+The runtime uses `ice-mountains-equirectangular-v6-4k.webp` by default and
+selects `ice-mountains-equirectangular-v6-8k.webp` only on high-density desktop
 viewports whose WebGL texture limit supports it. The source was reconstructed 4x
-with the official Real-ESRGAN `realesrgan-x4plus` model before the exact 4K and
-8K exports were encoded. The real 3D floor is not baked into this image; Babylon
-renders it separately with the shared `--ice-floor` design token.
+with the official Real-ESRGAN `realesrgan-x4plus` model, given a 64px symmetric
+longitude-edge feather, then encoded at exact 4K and 8K dimensions. The real 3D
+floor is not baked into this image; Babylon renders it separately with the shared
+`--ice-floor` design token. The v5 files remain as the accepted pre-clearance
+baseline.
 
 `ice-floor-albedo-v1.png`, `ice-floor-normal-v1.png`, and
 `ice-floor-roughness-v1.png` are the project-local generated sources for that 3D
@@ -27,6 +37,17 @@ stays within the environment palette without exposing a platform edge.
 
 Generation prompt set:
 
+- Panorama v6 transition edit: preserve sky, clouds, horizon, mountains, palette,
+  and lighting; remove foreground objects; keep every rock/crystal base at or
+  above 54% image height; reserve the bottom 46% as uninterrupted low-contrast
+  glacier ice; maintain strict 2:1 equirectangular geometry and wrap continuity.
+- Panorama v6 ring pass: strengthen only spaced middle-distance dark rock and
+  translucent ice clusters along the horizon while keeping the complete lower
+  46% object-free; prohibit a continuous barricade, platform, rim, or cliff.
+- Panorama seam repair: repair only the narrow vertical discontinuity introduced
+  by the generator while preserving the open-ground reserve and all established
+  silhouettes outside the repair band.
+
 - Albedo: seamless top-down square frosted ice, cloudy frozen layers,
   wind-brushed frost, fine branching hairline cracks, sparse snow dusting,
   neutral grayscale, flat shadowless albedo, no focal point or baked lighting.
@@ -38,21 +59,21 @@ Generation prompt set:
 ```bash
 # Real-ESRGAN v0.2.5.0 portable build, run from its extracted directory.
 ./realesrgan-ncnn-vulkan \
-  -i ice-mountains-equirectangular-v5-source.png \
-  -o ice-mountains-equirectangular-v5-reconstructed.png \
+  -i ice-mountains-equirectangular-v6-source.png \
+  -o ice-mountains-equirectangular-v6-reconstructed.png \
   -n realesrgan-x4plus -s 4 -t 256 -f png
 
 # Apply the documented 64px symmetric longitude-edge feather to the
 # reconstructed intermediate before these exports.
-ffmpeg -i ice-mountains-equirectangular-v5-seam-safe.png \
+ffmpeg -i ice-mountains-equirectangular-v6-seam-safe.png \
   -vf scale=4096:2048:flags=lanczos+accurate_rnd+full_chroma_int \
   -c:v libwebp -preset picture -quality 92 -compression_level 6 \
-  ice-mountains-equirectangular-v5-4k.webp
+  ice-mountains-equirectangular-v6-4k.webp
 
-ffmpeg -i ice-mountains-equirectangular-v5-seam-safe.png \
+ffmpeg -i ice-mountains-equirectangular-v6-seam-safe.png \
   -vf scale=8192:4096:flags=lanczos+accurate_rnd+full_chroma_int \
   -c:v libwebp -preset picture -quality 90 -compression_level 6 \
-  ice-mountains-equirectangular-v5-8k.webp
+  ice-mountains-equirectangular-v6-8k.webp
 
 ffmpeg -i ice-floor-albedo-v1.png -vf scale=1024:1024 \
   -c:v libwebp -quality 88 -compression_level 6 ice-floor-albedo-v1.webp
@@ -64,9 +85,9 @@ ffmpeg -i ice-floor-roughness-v1.png -vf scale=1024:1024 \
 
 SHA-256:
 
-- Panorama v5 source PNG: `dac8b356a8f788bca7811da3bfb46f7bdffafa3b7627a08669ba48f96f223daa`
-- Panorama v5 4K WebP: `dca5d537394c7f989dc64e5582512fdbf7a612e858615639d2533ca3b0515ee4`
-- Panorama v5 8K WebP: `c71cc8fe3ac26bcf2207ded8019b7300ccd63eb485549985a1f5ff46bb51273c`
+- Panorama v6 source PNG: `8d30af3e4debda3b07b2c8a393636705b4d39129aac620d7feff91da1068cb48`
+- Panorama v6 4K WebP: `95aa98c9ebc7fb71f9072ac34b184ca3c0e62f39ffdadf56c89102c720eaf6a7`
+- Panorama v6 8K WebP: `20fda61844c3ecb0d873706aa85a4625e1b4253361cfbe0d1c2f4c669d4dee34`
 - Floor albedo PNG: `206655d122075d482fe44110f895cf368f971d6048eb11d8ae24eb4c3819e2c9`
 - Floor albedo WebP: `cd5e709ce7b711846228f6fdc0d73e3d6065ab90841a7281b2fbc9b8de1a7d05`
 - Floor normal PNG: `eee8522bb254a2b6b5a77f730b2fcfb05dea99e4efa06512320b9e76275febd5`

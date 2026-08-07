@@ -25,13 +25,13 @@ const meter = (
 const controls = (): string => `
   <div class="arena-controls" aria-label="Arena combat controls">
     <button type="button" data-arena-action="retreat" aria-label="Retreat toward Shelter">
-      ${arenaGlyphs.retreat}<span><b>Retreat</b><kbd>D · ←</kbd></span>
+      ${arenaGlyphs.retreat}<span><b>Retreat</b><kbd>W · ←</kbd></span>
     </button>
-    <button class="perform-control" type="button" data-arena-action="perform" aria-label="Perform on the active beat">
-      ${arenaGlyphs.perform}<span><b>Perform</b><kbd>Space · F</kbd></span>
+    <button class="perform-control" type="button" data-arena-action="perform" aria-label="Hit the current note when the timing ring closes">
+      ${arenaGlyphs.perform}<span><b>Hit note</b><kbd>Space · F</kbd></span>
     </button>
     <button type="button" data-arena-action="advance" aria-label="Advance toward Spotlight">
-      ${arenaGlyphs.advance}<span><b>Advance</b><kbd>K · →</kbd></span>
+      ${arenaGlyphs.advance}<span><b>Advance</b><kbd>D · →</kbd></span>
     </button>
   </div>`;
 
@@ -43,7 +43,7 @@ export const arenaShell = (): string => `
     <section class="arena-setup" id="arena-setup" aria-labelledby="arena-title">
       <p class="arena-kicker">Experimental performance combat</p>
       <h1 id="arena-title" tabindex="-1">Face the <em>Rift</em></h1>
-      <p class="arena-lede">Read the boss, choose your distance, and perform short phrases on the beat. The battle stays in view.</p>
+      <p class="arena-lede">Move left or right to dodge. Hit each note when its timing ring closes.</p>
       <div class="arena-setup-preview" aria-hidden="true">
         <span class="setup-preview-boss">${arenaGlyphs.burst}</span>
         <i class="setup-preview-axis"></i>
@@ -66,7 +66,7 @@ export const arenaShell = (): string => `
         <button id="arena-use-demo" type="button">Use Arena demo setup</button>
       </div>
       <button class="arena-primary" id="arena-start" type="button">
-        <span>Enter the threshold</span><small>Rehearsal begins first</small>
+        <span>Enter the threshold</span><small>Music and controls start together</small>
       </button>
       <a class="arena-text-link" id="arena-classic-setup" href="?mode=classic">Return to Classic Highway</a>
     </section>
@@ -86,7 +86,7 @@ export const arenaShell = (): string => `
         <i id="arena-attack-time"></i>
       </div>
       <div class="phrase-constellation" id="arena-phrase" aria-label="Performance phrase" hidden>
-        <div class="phrase-heading"><span id="arena-phrase-status">Preview</span><small>Complete phrase</small></div>
+        <div class="phrase-heading"><span id="arena-phrase-status">Preview</span><small>Hit when the ring closes</small></div>
         <div class="phrase-steps" id="arena-phrase-steps"></div>
         <div class="phrase-timing" id="arena-phrase-timing" aria-hidden="true"><i></i></div>
       </div>

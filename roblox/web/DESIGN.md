@@ -53,7 +53,7 @@ do not count as decorative accents.
 | Edge | `--line` | `rgb(176 215 255 / 0.24)` | Dividers and resting outlines |
 | Neutral 3D fill | `--arena-fill` | `#b7c2d9` | Arena hemispheric light only |
 | Ice floor | `--ice-floor` | `#78aeb9` | Centered ice-backdrop arena floor and dominant environment hue |
-| Ice haze | `--ice-haze` | `#afd8eb` | Far-field floor fade sampled from the panorama foreground ice |
+| Ice haze | `--ice-haze` | `#afc9d9` | Far-field floor fade sampled from the panorama foreground ice |
 | Selected surface | `--surface-selected` | `rgb(12 33 49 / 0.96)` | Selected Classic cards |
 | Meter surface | `--surface-meter` | `rgb(0 0 0 / 0.72)` | Classic meter tracks |
 | Tap surface | `--surface-pad` | `rgb(5 9 18 / 0.9)` | Classic lane controls |
@@ -72,11 +72,12 @@ Rules:
 - The centered ice arena multiplies `--ice-floor` through a low-contrast tiled
   albedo and pairs it with subtle normal and roughness maps. Surface detail must
   stay subordinate to the surrounding rock ring and distant mountain silhouette.
-- The 24-unit playable ice disc continues as an unmarked visual ground skirt
-  beneath the panorama. Beyond the playable radius, linear `--ice-haze` distance
-  fog removes texture contrast and a broad radial opacity feather reveals the
+- The 24-unit playable ice disc continues as an unmarked 140-unit visual ground
+  skirt beneath the hybrid environment. The camera may travel at most 10 units
+  from the arena origin. Beyond that bound, linear `--ice-haze` distance fog
+  removes texture contrast and a broad radial opacity feather reveals the
   panorama ground before the mesh reaches the panorama wall; no exposed rim or
-  hard color arc may identify the skirt boundary.
+  hard color arc may identify the skirt boundary from any legal camera position.
 
 ## 3. Typography
 
@@ -246,17 +247,17 @@ Arena composition replaces the Classic highway geometry only while Arena is acti
 
 ### Phrase Constellation
 
-- Structure: one complete ordered group of three to five stationary Perform symbols, optional Spotlight bonus symbols on a second compact row, and one stationary timing focus.
+- Structure: one complete ordered group of three to five stationary note symbols, optional Spotlight bonus symbols on a second compact row, and one stationary timing focus.
 - Preview begins at least two authored beats early. All steps are visible together; only current and next receive emphasis.
 - States: hidden, preview, ready, current, next, early, Perfect, Great, Good, Miss, complete, interrupted, and clear.
 - Timing uses a contracting ring at a fixed location. Symbols never translate toward a strike line, so the component cannot become a miniature highway.
 
 ### Arena Combat Controls
 
-- Three native buttons keep stable meanings: Retreat, Perform, Advance. Keyboard defaults are `D`/Left Arrow, `Space`/`F`, and `K`/Right Arrow.
+- Three native buttons keep stable meanings: Retreat, Hit note, Advance. Keyboard defaults are `W`/Left Arrow, `Space`/`F`, and `D`/Right Arrow.
 - Each button contains a semantic SVG glyph, text label, and key hint. Touch size remains at least 48px with 8px gaps.
 - States: ready, pressed, successful, flub, disabled boundary, unavailable outside a movement window, and focus-visible.
-- Movement buttons confirm the choice immediately, then the character visibly completes travel before the authored impact. Perform acknowledges input immediately and may schedule contact to the authored beat.
+- Movement buttons confirm the choice immediately, then the character visibly completes travel before the authored impact. Hit note acknowledges input immediately and may schedule contact to the authored beat; the fixed timing ring tells the player when to press it.
 
 ### Boss Telegraph
 
@@ -270,6 +271,23 @@ Arena composition replaces the Classic highway geometry only while Arena is acti
 - Static authored silhouette poster with boss, performer, and all three anchor shapes.
 - Copy names the failed subsystem without raw diagnostics and offers Retry Arena, Play this selection in Classic, and Return to setup.
 - The countdown and audio cannot start while the fallback is visible.
+
+### Hybrid Ice Environment
+
+- Structure: real textured ice ground, an irregular ring of lit Babylon rock and
+  crystal clusters, distant equirectangular mountains, and a sky hemisphere.
+- Movement: desktop keyboard and gamepad translation stays inside a 10-unit
+  radius; pointer and touch retain free look. Reset returns both position and
+  orientation to the authored center view.
+- Spatial layers: the first real clusters begin beyond 18 units, larger silhouette
+  groups remain inside 38 units, and fog removes their contrast before the
+  panorama. The ring keeps broad sightline gaps and never becomes a continuous wall.
+- Parallax contract: scenery that should read nearer than the distant mountain
+  horizon is real geometry. The panorama recenters horizontally with the camera
+  and therefore represents only effectively infinite terrain and sky.
+- Accessibility: the canvas names its movement and look controls; persistent
+  guidance lists `WASD` and drag without relying on iconography alone. Keyboard
+  focus draws the shared 3px cyan ring inside the full-screen canvas boundary.
 
 ## 6. Motion & Interaction
 
@@ -305,16 +323,25 @@ Strategy: mixed tonal depth with energy rims.
 - Gameplay chrome remains nearly flat so notes, attacks, and the boss own the depth.
 - Radius system: 8px utility, 16px cards, 24px major panels, pill only for compact meters.
 - Z layers: background 0, boss 10, highway 20, HUD 30, controls 40, modal 60.
-- The ice-backdrop test places the viewer at the horizontal center of a real 3D
-  `--ice-floor` gameplay disc whose matching visual ground continues beyond the
-  playable radius and dissolves through `--ice-haze` into the panorama. Nearby
-  dark rock and crystalline ice form the outer depth ring; distant mountain layers
-  lose contrast and detail into the same glacier-blue color family. The panorama
-  never bakes in a second platform, and the visual ground never exposes a hard rim.
+- The ice-backdrop test uses a real 3D `--ice-floor` gameplay disc whose matching
+  visual ground continues at least one fog distance beyond every legal camera
+  position and dissolves through `--ice-haze`. Nearby dark rock and crystalline
+  ice are real lit meshes so walking produces positional parallax; distant
+  mountain layers lose contrast and detail into the same glacier-blue panorama.
+  The panorama never bakes in a second platform, and the visual ground never
+  exposes a hard rim.
+- Panorama ground clearance is projection-aware. For camera height `h` and floor
+  fade radius `r`, the below-horizon equirectangular coordinate is
+  `v = 0.5 + atan2(h, r) / pi`. The panorama keeps a low-contrast ground reserve
+  below its distant horizon while the real perimeter supplies the missing nearby
+  silhouettes. This reserve is a blend surface, not the perceived playable scale.
 - The panorama camera uses a moderately wide 74.5-degree vertical field of view so
   the surrounding rock ring reads spatially without fisheye stretching at the edges.
 - Panorama masters remain strict 2:1 equirectangular images with a repaired longitude
-  seam and smooth poles; no second dome warp is applied at runtime. The browser uses
+  seam and smooth poles. They map over a complete sphere (`slice: 1`) so the image
+  equator remains the geometric horizon; partial sphere slices are forbidden because
+  they compress latitude and bow the ground transition. No second dome warp is applied
+  at runtime. The browser uses
   the 4096 × 2048 asset by default and reserves 8192 × 4096 for high-density desktop
   viewports with an 8K-capable WebGL texture limit.
 - Babylon renders the backdrop at the device pixel ratio capped at 2×. This preserves
@@ -356,7 +383,7 @@ Strategy: mixed tonal depth with energy rims.
 - Song: Heaven's Edge.
 - Instrument and difficulty: Drums, Easy.
 - Scored segment: audio seconds 0 through 42, containing the authored 14.64–22.68 and 34.31–42.14 combat windows.
-- Rehearsal: eight nonfatal seconds before scored audio. It teaches one three-step static Perform phrase and one Midline-to-Shelter reposition choice; rehearsal values reset before scoring.
+- Start contract: after encounter, music, and scene loading succeed, the scored run begins at audio second 0. Music playback and Arena input become active in the same transition, with no rehearsal pass or automatic rehearsal judgments. Authored rehearsal metadata remains schema-compatible but is not consumed by the runtime.
 - Direct deterministic route: `?mode=arena&qa=1`. Classic remains the default until every attention gate passes.
 
 ### Selected boss and animation semantics

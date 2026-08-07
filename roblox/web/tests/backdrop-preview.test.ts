@@ -6,6 +6,8 @@ import {
   backdropShell,
   iceArenaLayout,
   iceFloorTextureUrls,
+  icePanoramaComposition,
+  icePanoramaFloorTransition,
   icePanoramaUrlForProfile,
   icePanoramaUrls,
 } from "../src/backdrop/backdrop-preview";
@@ -42,6 +44,10 @@ describe("backdrop preview", () => {
     expect(iceArenaLayout.cameraFov).toBeLessThan(1.4);
   });
 
+  test("Given a full equirectangular panorama, when mapped to the backdrop sphere, then its equator remains on the geometric horizon", () => {
+    expect(iceArenaLayout.panoramaSphereSlice).toBe(1);
+  });
+
   test("Given the playable ice disc, when it meets the panorama, then its visual surface fades beyond the arena instead of ending at a hard edge", () => {
     const playableRadius = iceArenaLayout.floorDiameter / 2;
     const surfaceRadius = iceArenaLayout.surfaceDiameter / 2;
@@ -51,6 +57,7 @@ describe("backdrop preview", () => {
     );
     expect(iceArenaLayout.fogStart).toBeGreaterThan(playableRadius);
     expect(iceArenaLayout.fogEnd).toBeLessThan(surfaceRadius);
+    expect(iceArenaLayout.cameraTravelRadius).toBe(10);
     expect(iceArenaLayout.fogEnd - iceArenaLayout.fogStart).toBeGreaterThan(
       playableRadius,
     );
@@ -63,6 +70,23 @@ describe("backdrop preview", () => {
     expect(iceArenaLayout.opacityFadeEnd).toBeGreaterThan(
       iceArenaLayout.opacityFadeStart,
     );
+  });
+
+  test("Given the floor fade geometry, when projected into equirectangular latitude, then its exact transition band remains below the horizon", () => {
+    expect(icePanoramaFloorTransition.cameraHeight).toBeCloseTo(1.6);
+    expect(icePanoramaFloorTransition.fadeStartRadius).toBeCloseTo(56);
+    expect(icePanoramaFloorTransition.fadeEndRadius).toBeCloseTo(68.6);
+    expect(icePanoramaFloorTransition.fadeEndV).toBeGreaterThan(0.5);
+    expect(icePanoramaFloorTransition.fadeStartV).toBeGreaterThan(
+      icePanoramaFloorTransition.fadeEndV,
+    );
+    expect(icePanoramaFloorTransition.fadeStartV).toBeLessThan(0.52);
+  });
+
+  test("Given the panorama composition, when the floor transition is projected, then the empty ground reserve leaves a visible safety band before the rocks", () => {
+    expect(icePanoramaComposition.groundReserveFraction).toBe(0.46);
+    expect(icePanoramaComposition.groundReserveStartV).toBeCloseTo(0.54);
+    expect(icePanoramaComposition.transitionClearanceV).toBeGreaterThan(0.02);
   });
 
   test("Given the ice arena floor, when its material loads, then it uses the complete tileable texture set", () => {
@@ -81,6 +105,13 @@ describe("backdrop preview", () => {
     });
 
     expect(result).toBe(icePanoramaUrls.highDetail);
+  });
+
+  test("Given the ice panorama assets, when selected for runtime, then the projection-aware v6 variants are used", () => {
+    expect(icePanoramaUrls).toEqual({
+      standard: "/assets/backdrops/ice-mountains-equirectangular-v6-4k.webp",
+      highDetail: "/assets/backdrops/ice-mountains-equirectangular-v6-8k.webp",
+    });
   });
 
   test("Given a mobile viewport, when the panorama is selected, then the memory-safe 4K asset is used", () => {
@@ -103,8 +134,9 @@ describe("backdrop preview", () => {
     const html = backdropShell();
 
     expect(html).toContain('id="backdrop-canvas"');
+    expect(html).toContain('tabindex="0"');
     expect(html).toContain(
-      'aria-label="Interactive 360-degree ice mountain backdrop"',
+      'aria-label="Walkable 360-degree ice arena. Use WASD to move and drag to look around."',
     );
     expect(html).toContain('id="backdrop-reset"');
     expect(html).toContain('id="backdrop-status"');
@@ -122,7 +154,7 @@ describe("backdrop preview", () => {
 
     expect(result).toEqual({
       rootState: "ready",
-      status: "Drag across the scene to look around.",
+      status: "WASD to walk. Drag to look around.",
     });
   });
 

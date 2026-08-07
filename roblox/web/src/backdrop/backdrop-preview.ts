@@ -4,24 +4,51 @@ export type BackdropViewState = "loading" | "ready" | "error";
 export const iceArenaLayout = {
   cameraPosition: { x: 0, y: 0, z: 0 },
   cameraFov: 1.3,
+  panoramaSphereSlice: 1,
+  cameraSpeed: 0.16,
+  cameraTravelRadius: 10,
   floorCenter: { x: 0, y: -1.78, z: 0 },
   floorColorToken: "--ice-floor",
   floorDiameter: 24,
   floorHeight: 0.36,
-  surfaceDiameter: 116,
+  surfaceDiameter: 140,
   textureWorldSize: 8,
   hazeColorToken: "--ice-haze",
-  fogStart: 18,
-  fogEnd: 54,
+  fogStart: 30,
+  fogEnd: 58,
   albedoLift: 1.12,
   emissiveStrength: 0.2,
-  opacityFadeStart: 0.68,
+  opacityFadeStart: 0.8,
   opacityFadeEnd: 0.98,
 } as const;
 
+const floorTop = iceArenaLayout.floorCenter.y + iceArenaLayout.floorHeight / 2;
+const cameraHeight = iceArenaLayout.cameraPosition.y - floorTop;
+const surfaceRadius = iceArenaLayout.surfaceDiameter / 2;
+const fadeStartRadius = surfaceRadius * iceArenaLayout.opacityFadeStart;
+const fadeEndRadius = surfaceRadius * iceArenaLayout.opacityFadeEnd;
+
+export const icePanoramaFloorTransition = {
+  cameraHeight,
+  fadeStartRadius,
+  fadeEndRadius,
+  fadeStartV: 0.5 + Math.atan2(cameraHeight, fadeStartRadius) / Math.PI,
+  fadeEndV: 0.5 + Math.atan2(cameraHeight, fadeEndRadius) / Math.PI,
+} as const;
+
+const groundReserveFraction = 0.46;
+const groundReserveStartV = 1 - groundReserveFraction;
+
+export const icePanoramaComposition = {
+  groundReserveFraction,
+  groundReserveStartV,
+  transitionClearanceV:
+    groundReserveStartV - icePanoramaFloorTransition.fadeStartV,
+} as const;
+
 export const icePanoramaUrls = {
-  standard: "/assets/backdrops/ice-mountains-equirectangular-v5-4k.webp",
-  highDetail: "/assets/backdrops/ice-mountains-equirectangular-v5-8k.webp",
+  standard: "/assets/backdrops/ice-mountains-equirectangular-v6-4k.webp",
+  highDetail: "/assets/backdrops/ice-mountains-equirectangular-v6-8k.webp",
 } as const;
 
 type BackdropRenderProfile = {
@@ -77,7 +104,7 @@ export function backdropPresentationForState(
     case "ready":
       return {
         rootState: state,
-        status: "Drag across the scene to look around.",
+        status: "WASD to walk. Drag to look around.",
       };
     case "error":
       return {
@@ -100,24 +127,25 @@ export function backdropShell(): string {
       />
       <canvas
         id="backdrop-canvas"
-        aria-label="Interactive 360-degree ice mountain backdrop"
+        tabindex="0"
+        aria-label="Walkable 360-degree ice arena. Use WASD to move and drag to look around."
       ></canvas>
       <div class="backdrop-vignette" aria-hidden="true"></div>
       <header class="backdrop-copy">
         <p class="backdrop-kicker"><span></span>Environment test</p>
         <h1 id="backdrop-title">Ice Mountain <em>Backdrop</em></h1>
-        <p>Stand at the center of the ice floor. Drag to inspect the near rock ring and distant mountain layers.</p>
+        <p>Walk the ice. Nearby rocks and crystals shift with your movement while the mountains stay distant.</p>
       </header>
       <section class="backdrop-controls" aria-label="Backdrop controls">
         <div class="backdrop-spec">
-          <span>Projection</span>
-          <strong>Centered 360° arena</strong>
+          <span>Movement</span>
+          <strong>WASD · drag to look</strong>
         </div>
         <button id="backdrop-reset" type="button">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M4 8V4m0 0h4M4 4l3.4 3.4A7 7 0 1 1 5 15" />
           </svg>
-          Reset view
+          Reset position
         </button>
       </section>
       <div class="backdrop-reticle" aria-hidden="true"></div>
