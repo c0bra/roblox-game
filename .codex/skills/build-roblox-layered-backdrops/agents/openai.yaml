@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build Roblox Layered Backdrops"
+  short_description: "Build convincing layered Roblox skybox arenas"
+  default_prompt: "Use $build-roblox-layered-backdrops to create a walkable Roblox arena with convincing foreground, midground, and skybox depth."
