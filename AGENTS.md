@@ -26,6 +26,7 @@ roblox-bands-battle/
 |------|----------|-------|
 | Environment setup | `README.md` | Python version, venv, pinned deps, madmom install |
 | Repo-wide workflow | `README.md` | Demucs/audio-separator, BeatRoot, pYIN steps |
+| Game design | [`GAME_DESIGN.md`](GAME_DESIGN.md) | Product pillars, gameplay systems, progression, and Roblox implementation guidance |
 | Beat grid inspection | `audio/Heavens_Edge/beats_dump.py` | madmom beat/downbeat dump + optional click track |
 | Single-stem transcription | `audio/Heavens_Edge/stem2midi.py` | Basic Pitch + madmom + quantization |
 | Stems pipeline details | `audio/Heavens_Edge/stems/` | Main code-heavy subtree; check child AGENTS.md |
