@@ -5,7 +5,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TweenService = game:GetService("TweenService")
 
 local OrangeImpact = require(ReplicatedStorage.BandsBattle.OrangeImpact)
-local RadialRhythmUI = require(script.Parent.RadialRhythmUI)
+local RadialRhythmUI = require(script.Parent:WaitForChild("RadialRhythmUI"))
 
 type Lane = "Z" | "X" | "C"
 type Grade = "Perfect" | "Great" | "Good" | "Miss"
@@ -33,7 +33,7 @@ local function ringBurst(view: View, lane: Lane, color: Color3)
 	burst.Name = "HitRing"
 	burst.AnchorPoint = Vector2.new(0.5, 0.5)
 	burst.Position = target.Position
-	burst.Size = UDim2.fromOffset(52, 52)
+	burst.Size = UDim2.fromOffset(32, 32)
 	burst.BackgroundTransparency = 1
 	burst.ZIndex = 18
 	burst.Parent = view.staff
@@ -42,13 +42,13 @@ local function ringBurst(view: View, lane: Lane, color: Color3)
 	corner.Parent = burst
 	local stroke = Instance.new("UIStroke")
 	stroke.Color = color
-	stroke.Thickness = 6
+	stroke.Thickness = 3
 	stroke.Parent = burst
 
 	TweenService:Create(
 		burst,
 		TweenInfo.new(0.32, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
-		{ Size = UDim2.fromOffset(148, 148), Rotation = 45 }
+		{ Size = UDim2.fromOffset(78, 78), Rotation = 45 }
 	):Play()
 	local fade = TweenService:Create(
 		stroke,
@@ -60,22 +60,22 @@ local function ringBurst(view: View, lane: Lane, color: Color3)
 		burst:Destroy()
 	end)
 
-	for index = 1, 10 do
-		local angle = ((index - 1) / 10) * math.pi * 2
+	for index = 1, 8 do
+		local angle = ((index - 1) / 8) * math.pi * 2
 		local shard = Instance.new("Frame")
 		shard.Name = "EnergyShard"
 		shard.AnchorPoint = Vector2.new(0.5, 0.5)
 		shard.Position = target.Position
-		shard.Size = UDim2.fromOffset(4, 18)
+		shard.Size = UDim2.fromOffset(3, 9)
 		shard.BackgroundColor3 = color:Lerp(Color3.new(1, 1, 1), 0.45)
 		shard.Rotation = math.deg(angle) + 90
 		shard.ZIndex = 17
 		shard.Parent = view.staff
 		local destination = UDim2.new(
 			target.Position.X.Scale,
-			math.cos(angle) * 68,
+			math.cos(angle) * 34,
 			target.Position.Y.Scale,
-			math.sin(angle) * 68
+			math.sin(angle) * 34
 		)
 		local shardTween = TweenService:Create(
 			shard,

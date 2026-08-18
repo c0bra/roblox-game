@@ -1,6 +1,6 @@
 # Bands Battle Game Vision
 
-- **Status:** Vision v1 baseline
+- **Status:** Vision v1 baseline; design amendments recorded through 2026-08-17
 - **Purpose:** Product-level instructions for development decisions
 
 ## 1. Role of this document
@@ -95,23 +95,39 @@ Rhythm is the player's means of acting, not a separate minigame placed over the
 battle. Timing and musical performance should drive attacks, defenses, healing,
 movement, group abilities, and other combat consequences.
 
-### No scrolling note highway
+### No permanent song-wide note highway
 
-The intended game does not include a permanent scrolling note highway as a boss,
-rehearsal, or song-mastery mode. Rhythm cues should preserve attention for the
-boss, performers, positions, and arena. The retired browser prototypes,
-including the Classic Highway, may remain temporarily as implementation history
-but are not development or validation targets.
+The intended game does not include a permanent, song-wide scrolling note highway
+as a boss, rehearsal, or song-mastery mode. Active performance passages may use
+a compact moving staff near the bottom of the screen: notes travel right to left
+toward a fixed strike line while the input targets remain stationary. The staff
+may continue across several chained phrases, but it recedes when there are no
+playable notes or a meaningful encounter event calls for full attention.
+
+This bounded staff is a timing instrument inside the battle, not the primary
+visual world of the game. Rhythm cues must preserve attention for the boss,
+performers, positions, and arena. The retired browser prototypes, including the
+Classic Highway, may remain temporarily as implementation history but are not
+development or validation targets.
 
 ### Rhythm cues bridge interface and world
 
-Rhythm timing should be communicated through a blend of compact on-screen phrase
-symbols and cues inside the battle. Symbols provide precise, quickly readable
-timing without scrolling continuously. Boss poses, attack paths, performer
-animation, position states, environment responses, and sound communicate what
-the phrase means and what will happen. Neither layer should carry required
+Rhythm timing should be communicated through a blend of a compact phrase-bounded
+moving staff and cues inside the battle. The staff provides precise, familiar
+time-to-impact information. Boss poses, attack paths, performer animation,
+position states, environment responses, and sound communicate what the
+performance means and what will happen. Neither layer should carry required
 information alone. The interface supports attention to the battle instead of
 becoming the battle.
+
+Phrases group notes for readability, judgments, combat contribution, and clean
+intent boundaries; they do not grant arbitrary permission to perform. When a
+player is settled at a valid position and the selected instrument has authored
+notes available, those notes should generally be playable. Multiple phrases may
+chain into a sustained performance passage without forced downtime. Breaks
+should follow the actual arrangement, player movement, boss knockback, a phase
+transition, recovery, repositioning, or another meaningful song-authored event
+rather than occurring automatically at every phrase boundary.
 
 ### The song authors the encounter
 
@@ -164,12 +180,13 @@ should not secretly override the band's earned victory or defeat.
 ### Mobile performance is fixed and glanceable
 
 The primary mobile direction is landscape play with three large, fixed rhythm
-pads. Short static phrases communicate taps and holds without scrolling, and
-their input locations do not move. Difficulty should come primarily from phrase
-rhythm, density, duration, boss pressure, and coordination rather than from
-hunting for controls. The exact visual treatment can evolve, but touch targets
-must remain generous and the battle must retain most of the screen and the
-player's attention.
+pads. A compact staff may move notes right to left toward a fixed strike line,
+but the three touch locations themselves do not move. Notes and pads must share
+shape, label, and color reinforcement so the mapping remains quickly readable.
+Difficulty should come primarily from phrase rhythm, density, duration, boss
+pressure, and coordination rather than from hunting for controls. The exact
+visual treatment can evolve, but touch targets must remain generous and the
+battle must retain most of the screen and the player's attention.
 
 ### Combat intent is separate from rhythm execution
 
@@ -295,20 +312,21 @@ players. Cooperative play should be the more exciting and expressive form of the
 game.
 
 Solo keeps the same arena geometry and tactical positions used for a band rather
-than rebuilding or shrinking encounters by player count.
-Order acolyte NPCs occupy otherwise unused combat positions so the arena and
-the musical-warrior fantasy do not feel empty. They are lightweight support
-characters, not simulated rhythm players: they receive no instrument phrases or
-timing judgments, while the full song mix continues normally. Their contribution
-comes from predictable passive pressure and authored support abilities. Their
-passive contribution may help but cannot break resistance layers without the
-player's successful performance.
+than rebuilding or shrinking encounters by player count. Order acolyte NPCs use
+formation offsets within those tactical locations so the arena and the
+musical-warrior fantasy do not feel empty. A player and one or more acolytes may
+share the same gameplay location; the acolytes automatically arrange around the
+human performer, do not consume position capacity, and never block a player's
+movement or risk/reward choice. Everyone sharing a location remains subject to
+that location's attack geometry and danger.
 
-The human player always has priority over an acolyte's position. Selecting an
-occupied location causes the acolyte to swap, move to the player's previous
-location, or take another valid open position. An NPC must never block the
-player from claiming the risk/reward position they want. Exact acolyte abilities,
-damage values, and timing are downstream tuning decisions.
+Acolytes are lightweight support characters, not simulated rhythm players: they
+receive no instrument phrases or timing judgments, while the full song mix
+continues normally. Their contribution comes from predictable passive pressure
+and authored support abilities. Their passive contribution may help but cannot
+break resistance layers without the player's successful performance. Exact
+acolyte abilities, damage values, formation offsets, and timing are downstream
+tuning decisions.
 
 For the MVP, acolytes cannot be permanently downed and do not require inventory,
 individual builds, rhythm simulation, or detailed commands. Boss attacks may
@@ -335,18 +353,22 @@ begin. New players do not join an active run. This keeps musical timing, group
 abilities, difficulty, and rewards coherent; phase-break drop-in can be
 reconsidered after the core co-op experience is proven.
 
-For the initial multiplayer version, the song chart is the sole source of phrase
-assignment. The game does not need separate systems that invent personal and
-group phrase schedules. At each authored part of the song, a player's selected
-instrument determines the phrase that player receives. Two or more players who
-choose the same instrument receive the same instrument phrase, and there is no
-restriction on duplicate instruments. A band made entirely of drummers is valid.
+For the initial multiplayer version, the song chart is the sole source of
+playable instrument notes and phrase grouping. The game does not need separate
+systems that invent personal and group schedules or arbitrarily suppress
+available notes. At each authored part of the song, a player's selected
+instrument determines the material that player receives. Two or more players
+who choose the same instrument receive the same instrument chart, and there is
+no restriction on duplicate instruments. A band made entirely of drummers is
+valid.
 
-Phrase availability must respect the actual arrangement. A player does not
-receive a drum phrase during a drum dropout simply because the combat system
-wants an action. That space becomes natural breathing room for that performer.
-Different instruments may receive different phrases during the same song
-section, but all phrases remain aligned to the same musical clock.
+Availability must respect the actual arrangement. A player does not receive a
+drum part during a drum dropout simply because the combat system wants an
+action. That space becomes natural breathing room for that performer. When the
+drum chart does contain notes and the player is settled at a valid position,
+those notes should generally remain playable even across several phrase
+boundaries. Different instruments may receive different material during the
+same song section, but all players remain aligned to the same musical clock.
 
 During an instrument dropout, the player may still receive isolated universal
 beat actions derived directly from the song's BPM and beat grid. "Universal"
@@ -366,12 +388,12 @@ Choosing to move instead of joining is not a miss. Dropouts provide breathing
 room because these actions are sparse and do not form a complex phrase, not
 because each beat action is less meaningful or judged by a weaker standard.
 
-Authored instrument phrases do not require the player to press **Join In**. The
-game automatically enrolls the player shortly before their selected
-instrument's next phrase and provides an advance preview so the transition from
-movement or observation into performance is expected. The working warning is
-about two seconds, expressed at a readable beat or measure boundary for the
-specific song rather than as an arbitrary off-beat timer.
+Authored instrument performance passages do not require the player to press
+**Join In**. The game automatically enrolls the player shortly before their
+selected instrument's next passage and provides an advance preview so the
+transition from movement or observation into performance is expected. The
+working warning is about two seconds, expressed at a readable beat or measure
+boundary for the specific song rather than as an arbitrary off-beat timer.
 
 If a phrase begins while the player is still moving, movement does not generate
 miss judgments, direct damage, or another explicit failure penalty. The song and
@@ -391,8 +413,10 @@ player simply misses that opportunity without an added penalty.
 
 Independent and coordinated play emerge from this shared chart:
 
-- **Instrument performance:** each player performs the phrase authored for their
-  chosen instrument while handling positioning, survival, and combat intent.
+- **Instrument performance:** each player performs the available chart material
+  authored for their chosen instrument while handling positioning, survival,
+  and combat intent. Phrases group that material without forcing silence between
+  consecutive groups.
 - **Band coordination:** sections in which the song's full authored ensemble is
   playing create natural candidate windows for group attacks, group defenses,
   shields, or recovery actions. Participating players remain on their own
@@ -407,14 +431,16 @@ result of a group ability is primarily additive: each player's performance
 determines that player's contribution, so weak execution reduces that share
 without erasing the successful work of the rest of the band.
 
-A bounded group-cohesion penalty may also reduce the combined result when one or
-more performers struggle. Its percentage range can scale with the selected
-difficulty and the power or tier of the boss. Easier encounters should be highly
-forgiving; harder encounters may make the band more sensitive to uneven
-performance. No ordinary mistake, or even one player's failed phrase, should by
-itself cause the entire group ability to fail. Complete failure should reflect a
-poor collective performance, not a single weak link. Exact contribution weights,
-penalty ranges, and failure thresholds should be established through playtesting.
+Broad successful participation may earn a capped positive **Cohesion Bonus**.
+Weak or absent performance supplies less positive contribution and may leave
+some of this bonus unearned, but it never subtracts value already earned by
+stronger players. Eligibility thresholds may become stricter with difficulty,
+while the initial bonus cap remains around 15%. Group-event tiers scale against
+the eligible roster, so one expert can create meaningful value without standing
+in for an otherwise inactive six-player band. No ordinary mistake, or even one
+player's failed phrase, should by itself cause the entire group ability to fail.
+Exact contribution weights, bonus thresholds, and collective tier requirements
+should be established through playtesting.
 
 ## 7. Instruments, roles, and builds
 
@@ -751,7 +777,8 @@ outcomes:
 Avoid decisions that:
 
 - reduce the boss and player characters to background decoration;
-- add a scrolling note highway as a product mode;
+- turn the compact phrase staff into a permanent song-wide highway or make it
+  the battle's dominant visual surface;
 - require uninterrupted dense note entry through an entire encounter;
 - lock necessary combat roles to specific instrument categories;
 - allow one isolated mistake to erase an otherwise good performance;

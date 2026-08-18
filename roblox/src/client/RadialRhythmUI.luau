@@ -9,10 +9,17 @@ local RhythmStaffUI = {}
 
 local STRIKE_X = 0.2
 local SPAWN_X = 1.04
+local HUD_WIDTH = 0.66
+local HEADER_HEIGHT = 46
+local STAFF_HEIGHT = 104
+local HEADER_TRANSPARENCY = 0.24
+local STAFF_TRANSPARENCY = 0.34
+local TARGET_SIZE = Vector2.new(38, 24)
+local NOTE_SIZE = Vector2.new(26, 18)
 local LANE_Y: { [Lane]: number } = {
-	Z = 0.22,
+	Z = 0.26,
 	X = 0.5,
-	C = 0.78,
+	C = 0.74,
 }
 local COLORS: { [Lane]: Color3 } = {
 	Z = Color3.fromRGB(61, 221, 255),
@@ -71,13 +78,13 @@ local function makeTarget(staff: Frame, lane: Lane): Frame
 	target.Name = `{lane}Target`
 	target.AnchorPoint = Vector2.new(0.5, 0.5)
 	target.Position = UDim2.fromScale(STRIKE_X, LANE_Y[lane])
-	target.Size = UDim2.fromOffset(58, 42)
+	target.Size = UDim2.fromOffset(TARGET_SIZE.X, TARGET_SIZE.Y)
 	target.BackgroundColor3 = Color3.fromRGB(7, 18, 32)
-	target.BackgroundTransparency = 0.02
+	target.BackgroundTransparency = 0.16
 	target.ZIndex = 12
 	target.Parent = staff
-	addCorner(target, UDim.new(0, 10))
-	addStroke(target, COLORS[lane], 3, 0.04)
+	addCorner(target, UDim.new(0, 7))
+	addStroke(target, COLORS[lane], 2, 0.04)
 
 	local scale = Instance.new("UIScale")
 	scale.Name = "TargetScale"
@@ -110,12 +117,12 @@ function RhythmStaffUI.create(playerGui: PlayerGui): View
 	local header = Instance.new("Frame")
 	header.Name = "Header"
 	header.AnchorPoint = Vector2.new(0.5, 0)
-	header.Position = UDim2.fromScale(0.5, 0.025)
-	header.Size = UDim2.new(0.88, 0, 0, 62)
+	header.Position = UDim2.fromScale(0.5, 0.018)
+	header.Size = UDim2.new(HUD_WIDTH, 0, 0, HEADER_HEIGHT)
 	header.BackgroundColor3 = Color3.fromRGB(4, 13, 27)
-	header.BackgroundTransparency = 0.14
+	header.BackgroundTransparency = HEADER_TRANSPARENCY
 	header.Parent = screenGui
-	addCorner(header, UDim.new(0, 16))
+	addCorner(header, UDim.new(0, 12))
 	addStroke(header, Color3.fromRGB(78, 198, 240), 1.5, 0.62)
 
 	local title = textLabel(header, "Track", string.upper(RhythmChart.trackTitle), UDim2.fromScale(0.37, 0.44), UDim2.fromScale(0.035, 0.12))
@@ -150,14 +157,14 @@ function RhythmStaffUI.create(playerGui: PlayerGui): View
 	local staff = Instance.new("Frame")
 	staff.Name = "NoteHighway"
 	staff.AnchorPoint = Vector2.new(0.5, 1)
-	staff.Position = UDim2.fromScale(0.5, 0.91)
-	staff.Size = UDim2.new(0.88, 0, 0, 224)
+	staff.Position = UDim2.fromScale(0.5, 0.935)
+	staff.Size = UDim2.new(HUD_WIDTH, 0, 0, STAFF_HEIGHT)
 	staff.BackgroundColor3 = Color3.fromRGB(3, 11, 23)
-	staff.BackgroundTransparency = 0.08
+	staff.BackgroundTransparency = STAFF_TRANSPARENCY
 	staff.ClipsDescendants = true
 	staff.Parent = screenGui
-	addCorner(staff, UDim.new(0, 20))
-	addStroke(staff, Color3.fromRGB(78, 198, 240), 2, 0.36)
+	addCorner(staff, UDim.new(0, 12))
+	addStroke(staff, Color3.fromRGB(78, 198, 240), 1.5, 0.48)
 
 	local staffGradient = Instance.new("UIGradient")
 	staffGradient.Color = ColorSequence.new({
@@ -171,10 +178,10 @@ function RhythmStaffUI.create(playerGui: PlayerGui): View
 	local staffScale = Instance.new("UIScale")
 	staffScale.Parent = staff
 
-	local clef = textLabel(staff, "Clef", "♫", UDim2.fromOffset(62, 142), UDim2.fromScale(0.015, 0.18))
+	local clef = textLabel(staff, "Clef", "♫", UDim2.fromOffset(34, 64), UDim2.fromScale(0.014, 0.2))
 	clef.Font = Enum.Font.GothamBlack
 	clef.TextColor3 = Color3.fromRGB(88, 185, 224)
-	clef.TextTransparency = 0.28
+	clef.TextTransparency = 0.38
 	clef.ZIndex = 3
 
 	for _, lane in RhythmChart.lanes do
@@ -194,9 +201,9 @@ function RhythmStaffUI.create(playerGui: PlayerGui): View
 	finishGlow.Name = "FinishGlow"
 	finishGlow.AnchorPoint = Vector2.new(0.5, 0.5)
 	finishGlow.Position = UDim2.fromScale(STRIKE_X, 0.5)
-	finishGlow.Size = UDim2.new(0, 18, 0.88, 0)
+	finishGlow.Size = UDim2.new(0, 10, 0.86, 0)
 	finishGlow.BackgroundColor3 = Color3.fromRGB(78, 226, 255)
-	finishGlow.BackgroundTransparency = 0.82
+	finishGlow.BackgroundTransparency = 0.88
 	finishGlow.ZIndex = 5
 	finishGlow.Parent = staff
 	addCorner(finishGlow, UDim.new(1, 0))
@@ -205,13 +212,13 @@ function RhythmStaffUI.create(playerGui: PlayerGui): View
 	finishLine.Name = "FinishLine"
 	finishLine.AnchorPoint = Vector2.new(0.5, 0.5)
 	finishLine.Position = UDim2.fromScale(STRIKE_X, 0.5)
-	finishLine.Size = UDim2.new(0, 4, 0.88, 0)
+	finishLine.Size = UDim2.new(0, 3, 0.88, 0)
 	finishLine.BackgroundColor3 = Color3.fromRGB(221, 252, 255)
 	finishLine.ZIndex = 6
 	finishLine.Parent = staff
 	addCorner(finishLine, UDim.new(1, 0))
 
-	local finishCaption = textLabel(staff, "FinishCaption", "PLAY", UDim2.fromOffset(74, 18), UDim2.new(STRIKE_X, -37, 0, 3))
+	local finishCaption = textLabel(staff, "FinishCaption", "PLAY", UDim2.fromOffset(48, 11), UDim2.new(STRIKE_X, -24, 0, 1))
 	finishCaption.Font = Enum.Font.GothamBlack
 	finishCaption.TextColor3 = Color3.fromRGB(178, 238, 255)
 	finishCaption.ZIndex = 8
@@ -221,13 +228,13 @@ function RhythmStaffUI.create(playerGui: PlayerGui): View
 		targets[lane] = makeTarget(staff, lane)
 	end
 
-	local feedback = textLabel(screenGui, "Feedback", "READY", UDim2.new(0.4, 0, 0, 52), UDim2.fromScale(0.3, 0.575))
+	local feedback = textLabel(screenGui, "Feedback", "READY", UDim2.new(0.24, 0, 0, 30), UDim2.fromScale(0.38, 0.74))
 	feedback.Font = Enum.Font.GothamBlack
 	feedback.TextColor3 = Color3.fromRGB(226, 250, 255)
 	feedback.TextStrokeTransparency = 0.45
 	feedback.ZIndex = 20
 
-	local status = textLabel(screenGui, "Status", "Loading chart audio…", UDim2.new(0.74, 0, 0, 28), UDim2.fromScale(0.13, 0.93))
+	local status = textLabel(screenGui, "Status", "Loading chart audio…", UDim2.new(0.58, 0, 0, 20), UDim2.fromScale(0.21, 0.945))
 	status.TextColor3 = Color3.fromRGB(216, 239, 255)
 	status.Font = Enum.Font.GothamMedium
 	status.TextStrokeColor3 = Color3.fromRGB(3, 11, 23)
@@ -237,15 +244,15 @@ function RhythmStaffUI.create(playerGui: PlayerGui): View
 	replay.Name = "Replay"
 	replay.AnchorPoint = Vector2.new(0.5, 0.5)
 	replay.Position = UDim2.fromScale(0.5, 0.55)
-	replay.Size = UDim2.fromOffset(190, 52)
+	replay.Size = UDim2.fromOffset(158, 42)
 	replay.BackgroundColor3 = Color3.fromRGB(83, 219, 255)
 	replay.Text = "PLAY AGAIN"
 	replay.TextColor3 = Color3.fromRGB(2, 14, 24)
-	replay.TextSize = 18
+	replay.TextSize = 16
 	replay.Font = Enum.Font.GothamBlack
 	replay.Visible = false
 	replay.Parent = screenGui
-	addCorner(replay, UDim.new(0, 14))
+	addCorner(replay, UDim.new(0, 11))
 	addStroke(replay, Color3.fromRGB(220, 252, 255), 2, 0.15)
 
 	return {
@@ -269,12 +276,12 @@ function RhythmStaffUI.createNote(view: View, lane: Lane): Frame
 	note.Name = `{lane}Note`
 	note.AnchorPoint = Vector2.new(0.5, 0.5)
 	note.Position = UDim2.fromScale(SPAWN_X, LANE_Y[lane])
-	note.Size = UDim2.fromOffset(38, 30)
+	note.Size = UDim2.fromOffset(NOTE_SIZE.X, NOTE_SIZE.Y)
 	note.BackgroundColor3 = COLORS[lane]
 	note.ZIndex = 10
 	note.Parent = view.staff
-	addCorner(note, UDim.new(0, 9))
-	addStroke(note, Color3.fromRGB(235, 253, 255), 2, 0.08)
+	addCorner(note, UDim.new(0, 6))
+	addStroke(note, Color3.fromRGB(235, 253, 255), 1.5, 0.08)
 	local gradient = Instance.new("UIGradient")
 	gradient.Color = ColorSequence.new(COLORS[lane]:Lerp(Color3.new(1, 1, 1), 0.58), COLORS[lane])
 	gradient.Rotation = 90
@@ -287,7 +294,7 @@ function RhythmStaffUI.positionNote(note: Frame, lane: Lane, progress: number)
 	local x = SPAWN_X + (STRIKE_X - SPAWN_X) * travel
 	note.Position = UDim2.fromScale(x, LANE_Y[lane])
 	local focus = 1 - math.min(math.abs(x - STRIKE_X) / 0.18, 1)
-	note.Size = UDim2.fromOffset(38 + 8 * focus, 30 + 6 * focus)
+	note.Size = UDim2.fromOffset(NOTE_SIZE.X + 5 * focus, NOTE_SIZE.Y + 3 * focus)
 end
 
 function RhythmStaffUI.color(lane: Lane): Color3

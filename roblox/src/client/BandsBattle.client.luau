@@ -9,9 +9,9 @@ local UserInputService = game:GetService("UserInputService")
 
 local RhythmChart = require(ReplicatedStorage.BandsBattle.RhythmChart)
 local RhythmJudge = require(ReplicatedStorage.BandsBattle.RhythmJudge)
-local RhythmInput = require(script.Parent.RadialRhythmInput)
-local RhythmStaffUI = require(script.Parent.RadialRhythmUI)
-local RhythmVFX = require(script.Parent.RadialRhythmVFX)
+local RhythmInput = require(script.Parent:WaitForChild("RadialRhythmInput"))
+local RhythmStaffUI = require(script.Parent:WaitForChild("RadialRhythmUI"))
+local RhythmVFX = require(script.Parent:WaitForChild("RadialRhythmVFX"))
 
 type Lane = RhythmChart.Lane
 type Grade = RhythmJudge.Grade

@@ -62,7 +62,8 @@ rationale in the change log at the end of this file.
   approachable play through moderately hard mastery.
 - [x] **GV-03: Where should player attention live during combat?** On the boss,
   performers, arena, and compact rhythm cues. The intended product has no
-  permanent scrolling note highway.
+  permanent song-wide note highway, but active performance passages may use a
+  compact right-to-left moving staff with a fixed strike line.
 - [x] **GV-04: What authors encounter timing?** The song is the master clock and
   structure for phrases, boss behavior, movement windows, breathing room, and
   cooperative moments.
@@ -70,21 +71,24 @@ rationale in the change log at the end of this file.
   among distinct performance positions. Closer positions are more dangerous and
   more rewarding; cover and active defense answer major attacks.
 - [x] **GV-06: How are rhythm phrases assigned in the initial multiplayer
-  version?** The song chart and selected instrument determine them. Duplicate
-  instruments are unrestricted, and dropouts do not generate fake instrument
-  parts.
+  version?** The song chart and selected instrument determine all available
+  playable notes and their phrase grouping. Phrases organize performance rather
+  than grant isolated permission to play. Duplicate instruments are
+  unrestricted, and dropouts do not generate fake instrument parts.
 - [x] **GV-07: How does rhythm play work during instrument dropouts?** Stationary
   players may press **Join In** for sparse BPM-derived beat actions. Moving exits
-  that state. Normal instrument phrases enroll players automatically with about
-  two seconds of advance warning.
+  that state. Normal instrument performance passages enroll players
+  automatically with about two seconds of advance warning, and consecutive
+  phrases may chain without forced downtime.
 - [x] **GV-08: What is the high-level co-op model?** Solo and co-op are both core,
   with co-op as the fullest expression. Bands are approximately three to six
   players, support friends or public matchmaking, allow duplicate instruments,
   and lock the roster when an encounter begins.
 - [x] **GV-09: How forgiving are group performances?** Each player's execution
-  primarily changes that player's contribution. A bounded difficulty-scaled
-  cohesion penalty may affect the total, but one player cannot invalidate the
-  whole band's otherwise strong performance.
+  primarily changes that player's contribution. Broad successful participation
+  may earn a capped, difficulty-adjusted positive Cohesion Bonus, while weak or
+  absent play never subtracts another player's earned value. One expert cannot
+  supply a full-band top tier for an otherwise inactive roster.
 - [x] **GV-10: How do avatars, instruments, and roles relate?** Players keep their
   Roblox avatar and layer Order clothing, instruments, equipment, and effects on
   it. Instruments do not lock roles; equipment and skill trees create flexible
@@ -117,9 +121,10 @@ rationale in the change log at the end of this file.
   beyond the MVP.
 
 - [x] **GV-15: What makes solo play structurally complete?** Solo uses the same
-  arena geometry and positions as co-op. Order acolytes occupy unused positions,
-  provide predictable passive pressure and authored support, and automatically
-  move or swap whenever the player claims their location. They do not play
+  arena geometry and positions as co-op. Order acolytes share tactical locations
+  through formation offsets, automatically arrange around the human, consume no
+  gameplay capacity, and never block the player's movement or risk/reward choice.
+  They provide predictable passive pressure and authored support but do not play
   rhythm phrases, receive timing judgments, or break resistance without the
   player's performance. For MVP they cannot be permanently downed, though boss
   attacks may knock them away or temporarily disable support. The player alone
@@ -305,8 +310,8 @@ Move them into the named design surface when work begins.
   multipliers, resource gain, cooldowns, and boss scaling.
 - [ ] **DES-04, positioning:** final position count, travel duration, range,
   risk/reward multipliers, cover geometry, and collision rules.
-- [ ] **DES-05, group resolution:** exact contribution weights, cohesion penalty
-  ranges, collective thresholds, and difficulty curves.
+- [ ] **DES-05, group resolution:** exact contribution weights, Cohesion Bonus
+  cap and eligibility thresholds, collective tiers, and difficulty curves.
 - [ ] **DES-06, progression economy:** item tiers, stat ranges, skill-tree nodes,
   crafting recipes, currencies, respec costs, and drop rates.
 - [ ] **DES-07, recovery tuning:** revive timing, last-chance inputs, random
@@ -324,8 +329,21 @@ Move them into the named design surface when work begins.
   hero's exact spiritual nature, and detailed campaign scenes. The novice's fate
   remains intentionally unanswered unless the owner reverses that decision.
 
-## Change log for newly admitted vision questions
+## Vision interview change log
 
-No questions have been added beyond the 2026-08-14 baseline. Add future entries
-here with the identifier, date, and why the existing checklist could not contain
-the decision.
+- **2026-08-15:** The GD-05 owner interview amended GV-03, GV-06, and GV-07 to
+  authorize a compact phrase-bounded moving staff and sustained access to
+  available instrument notes. This preserves the existing boundary against a
+  permanent song-wide highway; no new vision question was required.
+- **2026-08-16:** The GD-15 owner interview amended GV-15 so acolytes and humans
+  may share formation-enabled tactical locations. Acolytes no longer swap away
+  from a claimed location and never consume gameplay capacity; no new vision
+  question was required.
+- **2026-08-17:** The GD-21 owner interview amended GV-09 by replacing the
+  provisional negative cohesion modifier with a capped positive Cohesion Bonus.
+  Weak performance can leave potential bonus unearned but never subtracts
+  another player's contribution; no new vision question was required.
+
+No questions have been added beyond the 2026-08-14 baseline. Future additions
+must include the identifier, date, and why the existing checklist could not
+contain the decision.

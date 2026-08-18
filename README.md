@@ -608,3 +608,11 @@ Sound effect sources:
 ## Assets
 
 - https://www.cgtrader.com/free-3d-models/textures/miscellaneous/the-stylized-vault-375-stylized-pbr-mega-pack-texture-library
+
+## Textures
+
+- https://www.textures.com/free
+
+## Animation
+
+- https://mesh2motion.org/
