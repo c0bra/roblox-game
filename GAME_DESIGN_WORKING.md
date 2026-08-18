@@ -1,22 +1,21 @@
 # Bands Battle Game Design Working Record
 
-- **Status:** Owner interview in progress; 31 of 34 questions resolved
+- **Status:** Interview complete; archived decision record; 34 of 34 resolved
 - **Started:** 2026-08-14
 - **Vision baseline:** [`GAME_VISION.md`](GAME_VISION.md)
 - **Interview plan:** [`GAME_DESIGN_QUESTIONS.md`](GAME_DESIGN_QUESTIONS.md)
-- **Planned final destination:** [`GAME_DESIGN.md`](GAME_DESIGN.md)
+- **Canonical result:** [`GAME_DESIGN.md`](GAME_DESIGN.md)
 
 ## 1. Role of this document
 
-This document is the live decision record for the Bands Battle game-design
-interview. It will be updated after material owner answers so the reasoning and
-consequences are not lost between questions.
+This document is the archived decision record for the completed Bands Battle
+game-design interview. It preserves owner answers, reasoning, consequences,
+deferred work, and change history.
 
-This is not yet the canonical game-design specification. Until the interview is
-complete and the decisions are reconciled, `GAME_VISION.md` remains the product
-authority and this file remains a working draft. The existing `GAME_DESIGN.md`
-is older source material; it must not override the vision baseline or a newer
-decision recorded here.
+[`GAME_DESIGN.md`](GAME_DESIGN.md) is now the canonical game-design
+specification. [`GAME_VISION.md`](GAME_VISION.md) remains its product-level
+parent. This historical record explains how the specification was reached but
+does not override either canonical document.
 
 ## 2. Fixed vision constraints
 
@@ -123,9 +122,8 @@ consistent with the vision and the interview decisions.
   the audio timeline. The finishing phrase must be telegraphed before the final
   cadence, and persistent combat resources must remain legible throughout the
   encounter.
-- **Deferred:** Exact layer counts, phase-specific attacks, resource values, and
-  finishing thresholds remain for GD-13, GD-14, and encounter-specific content
-  design.
+- **Deferred:** Encounter-specific attack placement, resource values, and final
+  numeric thresholds require content design and balance testing.
 
 ### GD-03: Main battle surface
 
@@ -238,7 +236,7 @@ consistent with the vision and the interview decisions.
   Free movement is useful in the hub, while boss combat should use dashes from
   position to position; continuous free combat movement does not add a clear
   benefit.
-- **Settled constraint:** Reserve the entire WASD cluster exclusively for
+- **Design decision:** Reserve the entire WASD cluster exclusively for
   movement. In the Order hub, WASD provides ordinary continuous movement. In a
   boss encounter, `W` dashes to an available position closer to the boss, `S`
   retreats to an available safer position, and `A` or `D` moves to a neighboring
@@ -518,7 +516,7 @@ consistent with the vision and the interview decisions.
   reward upside against survival risk.
 - **Deferred:** Ward values, damage amounts, restoration rates, dangerous-position
   multipliers, reward-bonus banking, revive strength, and solo last-chance
-  recovery remain for GD-15, GD-16, and numeric tuning.
+  recovery require numeric tuning and encounter testing.
 
 ### GD-12: Attack, Defend, and Special intent
 
@@ -551,7 +549,7 @@ consistent with the vision and the interview decisions.
   without moving the controls. Scoring must split contribution at the exact
   beat-boundary where intent changes.
 - **Deferred:** Exact conversion ratios, Ward reinforcement, ability charge,
-  activation units, and build modifiers remain for GD-17 and numeric tuning.
+  activation units, and build modifiers require numeric tuning.
 
 ### GD-13: Boss Resolve, Momentum, and finishing cadence
 
@@ -1167,8 +1165,8 @@ consistent with the vision and the interview decisions.
   possible without turning the initial inventory into a wall of modifiers.
 - **Deferred:** Stat names and ranges, item tiers, trait catalog, consumable
   charges, advanced slots, socket or set systems, power budgets, presets, and the
-  schedule for post-launch complexity require GD-25, GD-26, and progression
-  testing.
+  schedule for post-launch complexity require specialization, economy, and
+  progression testing.
 
 ### GD-25: Role specialization and long-term builds
 
@@ -1498,11 +1496,11 @@ consistent with the vision and the interview decisions.
 
 ### GD-31: First three bosses and songs
 
-- **Owner direction:** Heaven's Edge and Blackened Crown are processing fixtures
+- **Owner answer:** Heaven's Edge and Blackened Crown are processing fixtures
   or substantial-revision candidates, not presumed launch songs. Their current
   versions lack the required intensity and dynamic movement, and new song
   candidates can be generated readily.
-- **Approved production process:** Define all three encounter and musical briefs
+- **Design decision:** Define all three encounter and musical briefs
   before selecting songs. Generate at least two or three new full-stem candidates
   per brief, score them against the brief, and design the final boss, arena,
   chart, and event placement around the selected song's actual structure.
@@ -1620,28 +1618,205 @@ consistent with the vision and the interview decisions.
   pipeline implementation, and production approval remain downstream content
   and technical work.
 
-## 5. Current interview prompt
-
 ### GD-32: Results, rewards, retry, and post-battle flow
 
-What information hierarchy and actions should the post-battle experience present
-after victory or defeat?
+- **Owner answer:** The proposed immediate-summary plus optional-detail results
+  model is approved as presented.
+- **Design decision:** After a brief, skippable victory or defeat presentation,
+  a phone-first immediate summary shows:
+  - **Outcome:** Victory or Defeat;
+  - **exact reason:** fragment recovered, all humans down, Ward broken, Resolve
+    remaining at the ending, or Finishing Cadence missed;
+  - a **personal performance rating** distinct from the binary outcome;
+  - the most important already-granted rewards and unlocks; and
+  - one large, obvious next action.
 
-Helpful dimensions, if needed:
+  The primary action adapts to context. A first victory prioritizes **Continue
+  Story**. A repeat victory prioritizes **Retry Same Shard** or **Stay with
+  Band**. Defeat prioritizes **Retry Same Shard**. **Loadout and Upgrades** and
+  **Return to Hub** remain visible secondary choices. Public rematch decisions
+  remain individual and never become a binding vote.
 
-- show the encounter outcome and exact victory or defeat reason before detailed
-  statistics;
-- grant rewards immediately and separate the fast summary from optional
-  Performance, Combat, Band, and Progress details;
-- explain timing distribution, intent contribution, Ward and attack responses,
-  positional risk, group actions, mastery, deterministic crafting progress, and
-  new unlocks without creating a shaming public leaderboard;
-- provide at most two private, evidence-based improvement suggestions such as a
-  consistent timing trend or a missed telegraph pattern;
-- keep Retry Same Shard, Continue Story or Stay with Band, Loadout and Upgrades,
-  and Return to Hub visible without a binding group vote; and
-- preserve GD-28 by excluding store prompts from victory, defeat, rewards, and
-  immediate retry.
+  Optional phone-friendly tabs or expanding sections provide deeper evidence:
+  1. **Performance:** Perfect, Great, Good, and Miss distribution; early-versus-
+     late tendency; hold completion; participation coverage, including
+     connection absence; and personal-best comparison by instrument and
+     difficulty.
+  2. **Combat:** Attack, Defend, and Special contribution; Resolve damage and
+     Momentum; Ward loss, reinforcement, and restoration; attacks avoided,
+     defended, or absorbed; position use; dangerous-position performance; and
+     banked Risk Bonus.
+  3. **Band:** Band Call and Crescendo participation, revival help, personal
+     group contribution, earned Cohesion Bonus, and the collective result without
+     ranking public players. Solo acolyte output is identified as fixed NPC
+     support rather than performance.
+  4. **Progress:** General and boss-specific resources, item drops, unlocked
+     appearances, boss mastery, campaign restoration, deterministic crafting
+     progress, and newly available builds, recipes, difficulties, story, or hub
+     tiers.
+
+  The system offers at most two private, evidence-based improvement suggestions,
+  such as a consistent late timing trend, one repeatedly missed telegraph, or
+  unbanked risk lost through frequent movement. It compares the player with their
+  own previous results rather than strangers. It never shames misses, publishes a
+  damage leaderboard, or labels one performer as the cause of defeat.
+
+  Rewards are granted without requiring a separate claim for each item. Reward
+  and progress animations are skippable and cannot delay Retry. No store offer,
+  Robux button, paid-equipment comparison, or monetized rescue appears anywhere
+  in victory, defeat, rewards, or immediate retry.
+- **Consequences:** The first screen answers what happened, what was earned, and
+  what to do next without overwhelming the player. Optional evidence supports
+  learning and build decisions while avoiding public comparison systems that
+  encourage blame.
+- **Deferred:** Presentation duration, performance-rating formula, tab layout,
+  exact statistics, reason priority, suggestion rules, personal-best comparison,
+  animation timing, action ordering, rematch status, and data instrumentation
+  require mobile usability and multiplayer testing.
+
+### GD-33: Accessibility, comfort, and age-appropriate safety
+
+- **Owner answer:** The proposed launch accessibility and safety baseline is
+  approved as presented.
+- **Design decision:** Required input and rhythm access includes:
+  - guided and manual audio/visual calibration saved per device profile;
+  - keyboard and gamepad remapping where the platform supports it;
+  - touch handedness plus pad size, spacing, position, and opacity controls;
+  - adjustable staff, note, and interface scale;
+  - adjustable visual scroll speed without changing musical timestamps;
+  - a persistent device-specific control reference and replayable practice; and
+  - **Hold Assist**, which still judges the authored initial press but removes
+    the need to physically maintain the control until the endpoint.
+
+  Visual access and comfort requires every note, intent, attack, position, and
+  state to use shape, label, placement, or motion in addition to color. UI-scale,
+  high-contrast, and color-vision options preserve semantic distinctions.
+  Flashing, bloom, particles, camera shake, camera motion, impact zoom, and
+  haptics reduce independently, and no essential cue disappears when they do.
+  Default presentation is already restrained against rapid full-screen flashing
+  and excessive motion rather than depending on players to discover a safety
+  option.
+
+  Audio and language access includes independent levels for master, song, local
+  instrument, timing and boss cues, voices, combat effects, crowd, and ambience;
+  dynamic-range presets including a quieter compressed mode; mono-compatible
+  critical cues; captions and subtitles with speaker or sound-source identity;
+  adjustable text size and background; and clear age-appropriate language.
+  Critical information always combines audio with visual or haptic reinforcement.
+
+  Tutorials and contextual help remain replayable. Prompt duration outside fixed
+  musical timing may be adjusted. Calibration and improvement suggestions are
+  private. Solo pause freezes the encounter and song, then resumes with a visible
+  and audible beat countdown. Cooperative play cannot pause the shared song and
+  explains that limitation before entry. Accessibility settings are available
+  before onboarding and from every safe menu.
+
+  Core social play requires neither voice nor unrestricted text. Safe preset
+  pings remain the default coordination tool, with obvious individual mute,
+  block, and report access. Any platform communication uses the platform's
+  filtering and age controls. The game publishes no accessibility label, public
+  damage rank, or defeat blame.
+
+  Bosses and story presentation avoid gore, realistic suffering, profanity,
+  sexual content, nightmare-oriented horror, and direct real-world religious
+  preaching. Existing low-pressure purchase safeguards remain binding.
+
+  Accessibility assists are independent of Easy, Normal, and Hard. Players may
+  combine them freely without reduced rewards, mastery, campaign credit,
+  matchmaking access, or public identification.
+- **Consequences:** Players can adapt input, sensory intensity, audio, language,
+  and teaching without being pushed into an easier encounter or penalized for
+  access needs. Safe defaults protect players who never open settings, while
+  multimodal cues preserve gameplay when individual effects are reduced.
+- **Deferred:** Final option names, control ranges, Hold Assist scoring detail,
+  supported remapping surface, calibration persistence, contrast palettes,
+  flash and motion budgets, caption format, audio mix ranges, pause networking,
+  localization, platform-policy compliance, and accessibility testing require
+  dedicated specifications and representative user testing.
+
+### GD-34: Observable playtest readiness gates
+
+- **Owner answer:** The proposed implementation-commitment, content-complete
+  release, and structural-redesign gates are approved as presented.
+- **Design decision:** Before committing to full native production, the smallest
+  complete encounter prototype passes at least two rounds of new target-age
+  testing. Each round initially contains roughly 8–12 players ages 10–14, with
+  most play occurring on representative phones and tablets. Evidence must show:
+  - at least 80% complete or deliberately skip onboarding without coaching;
+  - at least 80% can explain and use the three rhythm inputs, Attack, Defend, and
+    positional movement;
+  - at least 75% correctly identify a major boss telegraph and choose a viable
+    response;
+  - players look away from the staff often enough to describe boss behavior;
+  - players understand that musical performance produces combat outcomes;
+  - at least half voluntarily retry, continue, change difficulty, or experiment
+    with a build; and
+  - no observed attack is impossible because of chart activity, movement
+    recovery, position state, or unreadable targeting.
+
+  Failure at this stage changes the core design before larger content production.
+  These percentages are initial evidence thresholds subject to formal research
+  planning, not substitutes for observing why players succeed or fail.
+
+  Content-complete release testing includes at least 30 new target-age players
+  plus returning players, segmented across phone, tablet, desktop, gamepad, Easy,
+  Normal, Hard, every launch instrument, solo, and two-, three-, and six-human
+  groups. Initial design-release gates require:
+  - at least 85% identify outcome, exact reason, important reward, and next action
+    within ten seconds of results appearing;
+  - at least 80% recognize their instrument's responsive audio and critical boss
+    cues on ordinary phone speakers or headphones;
+  - at least 80% respond correctly to established major telegraphs after seeing
+    each pattern once;
+  - zero validated impossible attack combinations;
+  - no launch instrument lacks required playable activity or event windows;
+  - Easy is observably easier without reducing maximum combat contribution;
+  - solo and similarly skilled co-op completion rates remain within roughly 15
+    percentage points;
+  - at least 75% of invited players understand how to accept or decline group
+    actions without voice chat;
+  - at least half voluntarily choose another meaningful action after an encounter;
+    and
+  - accessibility combinations preserve every essential cue and never alter
+    rewards or public status.
+
+  Evidence combines direct observation, a player's short explanation, input and
+  event telemetry, and voluntary next actions rather than survey satisfaction
+  alone. Results remain segmented by device, difficulty, instrument, solo or
+  co-op, and population so an overall average cannot hide a failing surface.
+
+  The following patterns mandate structural redesign rather than small numeric
+  tuning:
+  - players watch only the staff and cannot describe the boss;
+  - damage repeatedly feels unavoidable or unexplained;
+  - movement recovery surprises players instead of creating deliberate choice;
+  - Defend is ignored because its value is unclear;
+  - quiet passages feel empty;
+  - Easy feels weaker because it has fewer notes;
+  - any instrument repeatedly lacks meaningful activity;
+  - weak players feel blamed or stronger players feel punished by teammates;
+  - group invitations are routinely missed;
+  - players cannot explain why they won or lost; or
+  - the third encounter requires numerous one-off pipeline exceptions.
+
+  A material design change must pass two consecutive testing rounds before its
+  evidence is considered stable. Technical performance, networking, persistence,
+  security, anti-cheat, data safety, and platform-compliance gates remain
+  separately required before release.
+- **Consequences:** Readiness depends on observed comprehension, fairness,
+  attention, coordination, and voluntary behavior rather than a green build or a
+  favorable average score. Structural problems return to design, while numeric
+  tuning remains appropriate only when players understand the system and its
+  outcomes.
+- **Deferred:** Formal research protocol, recruitment, consent and safeguarding,
+  device matrix, instrumentation, statistical confidence, exact thresholds,
+  technical release gates, issue severity, and sign-off ownership require a
+  dedicated playtest and release-readiness plan.
+
+## 5. Interview completion
+
+All 34 bounded questions are resolved. No interview prompt remains. The approved
+record has been reconciled into [`GAME_DESIGN.md`](GAME_DESIGN.md).
 
 ## 6. Deferred decisions and parking lot
 
@@ -1772,3 +1947,15 @@ Helpful dimensions, if needed:
 - **2026-08-17:** Approved the third encounter's full-system music, transforming
   arena, complete combat grammar, conspiracy evidence, rewards, production gate,
   and rejection rules. Resolved GD-31 and opened GD-32.
+- **2026-08-18:** Recorded the approved immediate summary, optional Performance,
+  Combat, Band, and Progress detail, private coaching, adaptive actions, and
+  no-store post-battle flow, resolved GD-32, and opened GD-33.
+- **2026-08-18:** Recorded the approved input, visual, audio, cognitive, social,
+  content, comfort, pause, and difficulty-independent accessibility baseline,
+  resolved GD-33, and opened GD-34.
+- **2026-08-18:** Recorded the approved implementation-commitment,
+  content-complete release, and structural-redesign evidence gates, resolved
+  GD-34, and completed the 34-question interview.
+- **2026-08-18:** Reconciled the completed decision record into the canonical
+  [`GAME_DESIGN.md`](GAME_DESIGN.md) specification and archived this working
+  record as design history.
