@@ -4,6 +4,11 @@ This root-owned TypeScript tool turns either one mixed song or a directory of st
 into a platform-neutral rhythm-game bundle. It is independent of the web game, so the
 same output can be adapted for Roblox, native mobile, or another renderer.
 
+The [`SYSTEMS_MAP.md`](../../SYSTEMS_MAP.md#81-song-chart--encounter-authoring)
+Content Authoring entry defines this toolchain's design responsibility and the
+required follow-on specification. This package is the existing foundation for that
+offline production system, not a Roblox runtime subsystem.
+
 ## Commands
 
 Run these from the repository root:

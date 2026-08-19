@@ -1,62 +1,25 @@
-# Bands Battle Game Design
+# Bands Battle Game Design Working Record
 
-- **Status:** Approved game-design baseline
-- **Approved:** 2026-08-18
-- **Parent vision:** [`GAME_VISION.md`](GAME_VISION.md)
-- **Visual authority:** [`ART_DIRECTION.md`](ART_DIRECTION.md)
-- **System ownership:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md)
-- **Decision source:** [`GAME_DESIGN_WORKING.md`](GAME_DESIGN_WORKING.md)
+- **Status:** Interview complete; archived decision record; 34 of 34 resolved
+- **Started:** 2026-08-14
+- **Vision baseline:** [`GAME_VISION.md`](GAME_VISION.md)
 - **Interview plan:** [`GAME_DESIGN_QUESTIONS.md`](GAME_DESIGN_QUESTIONS.md)
+- **Canonical result:** [`GAME_DESIGN.md`](GAME_DESIGN.md)
 
-## 1. Role and authority
+## 1. Role of this document
 
-This document is the canonical player-facing game-design specification for Bands
-Battle. It translates the product vision into encounter, rhythm, combat,
-multiplayer, progression, content, accessibility, and validation rules.
+This document is the archived decision record for the completed Bands Battle
+game-design interview. It preserves owner answers, reasoning, consequences,
+deferred work, and change history.
 
-`GAME_VISION.md` remains authoritative for product purpose, world foundation,
-audience, platform, tone, and scope. `ART_DIRECTION.md` remains authoritative
-for visual language. This document governs how those constraints become a game.
-`SYSTEMS_MAP.md` is the downstream authority for system responsibilities,
-dependencies, and required detailed specifications; it does not override the
-player-facing behavior defined here. The working record and question plan
-preserve interview history but do not override this approved specification.
+[`GAME_DESIGN.md`](GAME_DESIGN.md) is now the canonical game-design
+specification. [`GAME_VISION.md`](GAME_VISION.md) remains its product-level
+parent. This historical record explains how the specification was reached but
+does not override either canonical document.
 
-Numeric values labeled as starting points, hypotheses, targets, or approximate
-values require playtesting. Changing a settled behavioral rule requires an
-explicit design amendment, not silent implementation drift.
+## 2. Fixed vision constraints
 
-## 2. Product definition
-
-Bands Battle is a native Roblox, touch-first rhythm boss-combat game for a
-primary audience around ages 10 to 14. Players perform instrument parts from
-full-length, high-intensity songs, route accurate musical play into combat
-intent, reposition among authored tactical locations, survive readable boss
-attacks, recover fragments of the Shattered Song, and develop flexible builds
-alone or with a band.
-
-### Product pillars
-
-1. **Music is combat:** rhythm performance directly creates damage, protection,
-   support, recovery, resource generation, and group effects.
-2. **The boss remains the focus:** the compact staff supports performance without
-   turning the encounter into a permanent note highway.
-3. **The whole song shapes the encounter:** authored musical dynamics govern
-   phases, attacks, breathing room, climaxes, and the finishing cadence.
-4. **Touch-first clarity:** three fixed rhythm inputs, stable controls, readable
-   telegraphs, and phone-scale information hierarchy define the baseline.
-5. **Tactical commitment:** intent, position, dash recovery, Ward, and group
-   opportunities create choices beyond note accuracy.
-6. **Solo is complete and co-op is expressive:** Order acolytes support solo
-   without simulated scores; human bands add revival and coordinated spectacle.
-7. **Skill and builds both matter:** equipment and specialization change combat
-   consequences and strategy without changing musical judgments.
-8. **Progress respects the player:** deterministic earning paths, useful failure
-   progress, accessible options, and low-pressure monetization avoid coercion.
-
-## 3. Fixed vision constraints
-
-These product-level constraints are settled:
+The interview begins from these settled constraints rather than reopening them:
 
 - Bands Battle is a native Roblox, touch-first supernatural rhythm-combat game
   for a primary audience around ages 10 to 14.
@@ -84,18 +47,32 @@ These product-level constraints are settled:
 - PvP, user-authored songs, free-roaming worlds, deep crafting, paid recovery,
   paid randomness, and multi-song raids are outside the first release.
 
-## 4. Detailed game design
+## 3. Reconciliation required
+
+The final rewrite must remove or replace pre-vision directions in the current
+`GAME_DESIGN.md`, including:
+
+- the permanent three- or four-lane scrolling highway;
+- the 75-to-90-second target round structure;
+- the suggestion that multiplayer should be deferred until after the first
+  shipped product; and
+- the older open questions that Vision v1 has already answered.
+
+Useful source ideas from the older brief may survive only when they remain
+consistent with the vision and the interview decisions.
+
+## 4. Decision record
 
 ### GD-01: Complete repeatable game loop
 
-- **Approved direction:** The proposed hub-centered loop is accepted with one major
+- **Owner answer:** The proposed hub-centered loop is accepted with one major
   presentation change: encounter selection is not a mission board. A stylized
   area in the hub contains phasing shards that poke through into existence. The
   shards have labels, and activating a shard leads into its boss encounter flow.
   Solo, public matchmaking, or current-party play is selected after activating
   the shard. The hub can contain item shopping and, when crafting is eventually
   added, crafting.
-- **Specification:** Players begin in the Order hub. First-time players are
+- **Design decision:** Players begin in the Order hub. First-time players are
   guided into onboarding, while returning players have a fast route back to
   play. Boss selection happens through labeled, phasing shards in a dedicated
   in-world encounter area. After activating a shard, the player chooses solo,
@@ -116,9 +93,9 @@ These product-level constraints are settled:
 
 ### GD-02: Normal encounter phases
 
-- **Approved direction:** The proposed five-phase, song-shaped encounter structure is
+- **Owner answer:** The proposed five-phase, song-shaped encounter structure is
   approved as presented.
-- **Specification:** A normal encounter has five flexible functions rather
+- **Design decision:** A normal encounter has five flexible functions rather
   than five equal-duration blocks:
   1. **Arrival:** transport into the arena, boss reveal, an approachable opening
      phrase, and time to read the available positions.
@@ -150,9 +127,9 @@ These product-level constraints are settled:
 
 ### GD-03: Main battle surface
 
-- **Approved direction:** The proposed director-assisted third-person battle surface
+- **Owner answer:** The proposed director-assisted third-person battle surface
   is approved as presented.
-- **Specification:** The battle camera sits behind and slightly above the
+- **Design decision:** The battle camera sits behind and slightly above the
   player's avatar. The performer and instrument occupy the lower foreground,
   while the boss commands the upper center of the frame. Tactical positions
   form a readable arc facing the boss. The player directly controls rhythm,
@@ -184,9 +161,9 @@ These product-level constraints are settled:
 
 ### GD-04: Playable phrase grammar
 
-- **Approved direction:** The proposed small first-release phrase grammar and the
+- **Owner answer:** The proposed small first-release phrase grammar and the
   exclusions are approved as presented.
-- **Specification:** Playable phrases use five elements:
+- **Design decision:** Playable phrases use five elements:
   - **Tap:** press one indicated pad on its beat.
   - **Hold:** press on the starting beat and maintain through the shown
     duration. The initial press and continued hold are judged; precise release
@@ -214,7 +191,7 @@ These product-level constraints are settled:
 
 ### GD-05: Phrase preview and performance cues
 
-- **Approved direction:** The game should not arbitrarily decide that a player
+- **Owner answer:** The game should not arbitrarily decide that a player
   may perform only a small selection of isolated phrases. When a player is
   settled at a playable position and their selected instrument has notes in the
   arrangement, the player should generally be able to perform those available
@@ -224,7 +201,7 @@ These product-level constraints are settled:
   a full three-to-seven-minute song, but the opposite extreme of two measures of
   play followed repeatedly by inactivity is also unacceptable. The encounter
   needs a deliberate mix with a substantial amount of action.
-- **Specification:** The selected instrument's authored chart is
+- **Design decision:** The selected instrument's authored chart is
   the source of playable material. A **phrase** groups notes for readability,
   judgments, combat contribution, and intent boundaries; it is not an arbitrary
   permission window. Multiple one- or two-measure phrases may chain without a
@@ -254,12 +231,12 @@ These product-level constraints are settled:
 
 ### GD-06: Cross-device input actions
 
-- **Approved direction:** On keyboard, `W`, `A`, `S`, and `D` are always
+- **Owner answer:** On keyboard, `W`, `A`, `S`, and `D` are always
   movement keys. Assigning `A`, `S`, or `D` to combat intent is unacceptable.
   Free movement is useful in the hub, while boss combat should use dashes from
   position to position; continuous free combat movement does not add a clear
   benefit.
-- **Specification:** Reserve the entire WASD cluster exclusively for
+- **Design decision:** Reserve the entire WASD cluster exclusively for
   movement. In the Order hub, WASD provides ordinary continuous movement. In a
   boss encounter, `W` dashes to an available position closer to the boss, `S`
   retreats to an available safer position, and `A` or `D` moves to a neighboring
@@ -294,9 +271,9 @@ These product-level constraints are settled:
 
 ### GD-07: Timing accuracy, latency, and feedback
 
-- **Approved direction:** The proposed timing judgments, feedback hierarchy, hold
+- **Owner answer:** The proposed timing judgments, feedback hierarchy, hold
   treatment, and calibration flow are approved as presented.
-- **Specification:** Each timed input receives one of four judgments:
+- **Design decision:** Each timed input receives one of four judgments:
 
   | Judgment | Initial Normal test window |
   |---|---:|
@@ -342,10 +319,10 @@ These product-level constraints are settled:
 
 ### GD-08: Difficulty transformation
 
-- **Approved direction:** The proposed Easy, Normal, and Hard model is approved after
+- **Owner answer:** The proposed Easy, Normal, and Hard model is approved after
   making explicit that reducing note count on Easy cannot reduce the player's
   available combat output.
-- **Specification:** The first release uses three difficulties:
+- **Design decision:** The first release uses three difficulties:
 
   | Area | Easy | Normal | Hard |
   |---|---|---|---|
@@ -390,9 +367,9 @@ These product-level constraints are settled:
 
 ### GD-09: Performance-responsive audio
 
-- **Approved direction:** The proposed personal instrument response, local-versus-shared
+- **Owner answer:** The proposed personal instrument response, local-versus-shared
   co-op mix, and audio-priority model are approved as presented.
-- **Specification:** Every player hears the complete song at a stable backing
+- **Design decision:** Every player hears the complete song at a stable backing
   level. The selected instrument receives additional local emphasis based on
   performance:
   - **Perfect:** crisp attack accent, brief clarity or level lift, and the
@@ -435,9 +412,9 @@ These product-level constraints are settled:
 
 ### GD-10: Song and encounter authoring workflow
 
-- **Approved direction:** The proposed human-directed, automation-assisted authoring
+- **Owner answer:** The proposed human-directed, automation-assisted authoring
   and approval workflow is approved as presented.
-- **Specification:** Each song and encounter passes through seven stages:
+- **Design decision:** Each song and encounter passes through seven stages:
   1. **Ingest:** collect the final master, instrument stems, rights and generation
      provenance, lyrics, duration, intended difficulty, and available arrangement
      notes.
@@ -496,11 +473,11 @@ These product-level constraints are settled:
 
 ### GD-11: Player survival resources
 
-- **Approved direction:** Ward as the single survival resource is approved. Dangerous
+- **Owner answer:** Ward as the single survival resource is approved. Dangerous
   positions must increase outgoing damage and potential rewards in exchange for
   greater danger. The design must not introduce an unexplained separate
   “defense passage.”
-- **Specification:** Ward is the only player-survival bar in the first release;
+- **Design decision:** Ward is the only player-survival bar in the first release;
   there is no separate conventional health resource. Every player begins an
   encounter with full Ward. Direct boss impacts, hazards, and failed defensive
   responses reduce it. An ordinary missed instrument input does not directly
@@ -543,9 +520,9 @@ These product-level constraints are settled:
 
 ### GD-12: Attack, Defend, and Special intent
 
-- **Approved direction:** The proposed three-intent routing and beat-boundary switching
+- **Owner answer:** The proposed three-intent routing and beat-boundary switching
   model are approved as presented.
-- **Specification:** Attack, Defend, and Special route the same available
+- **Design decision:** Attack, Defend, and Special route the same available
   instrument performance into different combat outcomes. They never substitute
   a separate note chart.
   - **Attack** is the default. Successful performance damages the active boss
@@ -576,10 +553,10 @@ These product-level constraints are settled:
 
 ### GD-13: Boss Resolve, Momentum, and finishing cadence
 
-- **Approved direction:** The proposed three-layer Resolve model, capped Momentum,
+- **Owner answer:** The proposed three-layer Resolve model, capped Momentum,
   world-visible breaks, and two-condition finishing cadence are approved as
   presented.
-- **Specification:** **Resolve** is the working name for the boss resistance
+- **Design decision:** **Resolve** is the working name for the boss resistance
   system. A normal encounter contains three sequential layers associated with
   First Clash, Escalation, and Climax. Easy, Normal, and Hard retain three layers
   while changing the normalized contribution required to break them.
@@ -621,9 +598,9 @@ These product-level constraints are settled:
 
 ### GD-14: Boss attack grammar and timing
 
-- **Approved direction:** The proposed attack families, four-stage timing structure,
+- **Owner answer:** The proposed attack families, four-stage timing structure,
   and fairness constraints are approved as presented.
-- **Specification:** Every boss attack follows four authored stages:
+- **Design decision:** Every boss attack follows four authored stages:
   1. **Telegraph:** boss pose, sound motif, arena geometry, and compact warning
      identify the threat and likely response.
   2. **Commit:** targeted players, positions, and unsafe areas lock. The attack
@@ -664,12 +641,12 @@ These product-level constraints are settled:
 
 ### GD-15: Arena positions and movement
 
-- **Approved direction:** Nine tactical locations are a good arena baseline, but boss
+- **Owner answer:** Nine tactical locations are a good arena baseline, but boss
   and arena mechanics may justify more or fewer. Players and acolytes may share a
   location using formation offsets; if sharing works for multiple humans, there
   is no reason to force an acolyte to vacate. The remaining proposed movement,
   risk, reward, and cover rules are approved.
-- **Specification:** A baseline arena uses nine tactical locations: Near,
+- **Design decision:** A baseline arena uses nine tactical locations: Near,
   Middle, and Rear risk tiers, each with left, center, and right locations. This
   is an authoring default rather than a universal grid. An encounter may use
   more, fewer, or an irregular location graph when its boss mechanics justify
@@ -741,13 +718,13 @@ These product-level constraints are settled:
 
 ### GD-16: Downing, revival, and solo recovery
 
-- **Approved direction:** The proposed downing, cooperative revival, and solo
+- **Owner answer:** The proposed downing, cooperative revival, and solo
   last-chance behavior is approved together with a generated, instrument-aware
   Activity Map and automatic runtime window selector. Different instruments may
   peak, solo, rest, or become quiet at different times; an event cannot create a
   difficulty spike at an unsuitable boundary merely because that boundary is
   mathematically convenient.
-- **Specification:** Empty Ward downs the player at their
+- **Design decision:** Empty Ward downs the player at their
   current location, pauses their chart and combat contribution, and removes them
   from ordinary targeting. All humans down simultaneously ends a co-op attempt.
   A downed player may still share in a later victory according to prior
@@ -787,9 +764,9 @@ These product-level constraints are settled:
 
 ### GD-17: Personal specials and resources
 
-- **Approved direction:** The proposed one-slot Hype and Signature Special model is
+- **Owner answer:** The proposed one-slot Hype and Signature Special model is
   approved as presented.
-- **Specification:** Each player equips one personal **Signature Special**
+- **Design decision:** Each player equips one personal **Signature Special**
   before entering a shard. This slot is separate from the equipped Band Call.
   Signature Specials may emphasize offense, Ward, support, or positional
   utility, and any instrument can equip any special unless a later ability has a
@@ -824,9 +801,9 @@ These product-level constraints are settled:
 
 ### GD-18: Player-initiated Band Calls
 
-- **Approved direction:** The proposed earned, once-per-player Band Call model is
+- **Owner answer:** The proposed earned, once-per-player Band Call model is
   approved as presented.
-- **Specification:** Each player equips one Band Call before entering a shard,
+- **Design decision:** Each player equips one Band Call before entering a shard,
   separate from their Signature Special. Meaningful successful performance fills
   readiness on the Band Call control itself rather than adding another
   persistent HUD meter. Each player may earn and initiate at most one Call per
@@ -870,9 +847,9 @@ These product-level constraints are settled:
 
 ### GD-19: Song-authored Crescendos
 
-- **Approved direction:** The proposed candidate-window and three-tier Crescendo model
+- **Owner answer:** The proposed candidate-window and three-tier Crescendo model
   is approved as presented.
-- **Specification:** A standard encounter contains two to four authored,
+- **Design decision:** A standard encounter contains two to four authored,
   validated Crescendo candidate windows and guarantees exactly one activation on
   Easy, Normal, and Hard. The runtime may choose among candidates for musical
   fit and encounter variation. Easy may activate at most one additional unused
@@ -921,9 +898,9 @@ These product-level constraints are settled:
 
 ### GD-20: Solo Order acolytes
 
-- **Approved direction:** The proposed Vanguard, Warden, and Herald solo-support model
+- **Owner answer:** The proposed Vanguard, Warden, and Herald solo-support model
   is approved as presented.
-- **Specification:** Solo uses a fixed squad of three mechanically simple,
+- **Design decision:** Solo uses a fixed squad of three mechanically simple,
   visually distinct Order acolytes:
   - **Vanguard** adds a small amount of Resolve pressure after each successfully
     completed player scoring group. Its contribution stops short of breaking a
@@ -963,10 +940,10 @@ These product-level constraints are settled:
 
 ### GD-21: Scaling from one to six humans
 
-- **Approved direction:** The proposed scaling model is approved after restating
+- **Owner answer:** The proposed scaling model is approved after restating
   “sublinear Resolve” in plain language: each additional human adds about 75% of
   the solo Resolve requirement rather than another full 100%.
-- **Specification:** Initial Resolve targets by active human count are:
+- **Design decision:** Initial Resolve targets by active human count are:
 
   | Humans | Resolve target in solo-player equivalents |
   |---:|---:|
@@ -1026,9 +1003,9 @@ These product-level constraints are settled:
 
 ### GD-22: Cooperative session flow
 
-- **Approved direction:** The proposed shard-to-staging-to-results cooperative flow is
+- **Owner answer:** The proposed shard-to-staging-to-results cooperative flow is
   approved as presented.
-- **Specification:** Activating a labeled phasing shard opens its encounter
+- **Design decision:** Activating a labeled phasing shard opens its encounter
   card with boss identity, shared encounter difficulty choices, reward preview,
   and **Solo**, **Current Party**, and **Public Band** options. Boss and
   difficulty are chosen before public matchmaking so nobody is placed into an
@@ -1079,9 +1056,9 @@ These product-level constraints are settled:
 
 ### GD-23: Communication and multiplayer failure cases
 
-- **Approved direction:** The proposed ping, rejoin-grace, AFK, and structural
+- **Owner answer:** The proposed ping, rejoin-grace, AFK, and structural
   anti-grief model is approved as presented.
-- **Specification:** Core coordination never depends on free-form text or
+- **Design decision:** Core coordination never depends on free-form text or
   voice chat. Automatic visual, audio, text, and shape cues communicate boss
   attacks, targeting, movement, downing, revival progress, Band Calls,
   Crescendos, and phase changes. Players also receive rate-limited preset pings
@@ -1137,10 +1114,10 @@ These product-level constraints are settled:
 
 ### GD-24: Pre-battle loadout and combat stats
 
-- **Approved direction:** The proposed first-release loadout is approved as a good
+- **Owner answer:** The proposed first-release loadout is approved as a good
   starting point, with the explicit expectation that later progression can offer
   more build complexity.
-- **Specification:** The first-release power-bearing loadout contains three
+- **Design decision:** The first-release power-bearing loadout contains three
   readable gear slots:
   - **Instrument** establishes the performed instrument and provides a modest
     primary combat emphasis plus one distinctive trait. Every instrument
@@ -1193,10 +1170,10 @@ These product-level constraints are settled:
 
 ### GD-25: Role specialization and long-term builds
 
-- **Approved direction:** The underlying build structure sounds good, but the proposed
+- **Owner answer:** The underlying build structure sounds good, but the proposed
   Build Core and Technique names are unacceptable and must be replaced with
   substantially stronger, cooler player-facing names in a dedicated later pass.
-- **Specification:** Every instrument draws from the same four universal
+- **Design decision:** Every instrument draws from the same four universal
   functional categories:
   - offense, Momentum, and dangerous-position play;
   - Ward, Defend, mitigation, and revival support;
@@ -1238,9 +1215,9 @@ These product-level constraints are settled:
 
 ### GD-26: Reward, item, upgrade, and crafting economy
 
-- **Approved direction:** The proposed two-resource, fixed-item,
+- **Owner answer:** The proposed two-resource, fixed-item,
   random-drop-plus-deterministic-crafting economy is approved as presented.
-- **Specification:** The economy contains only two broad earned resource types:
+- **Design decision:** The economy contains only two broad earned resource types:
   - one general resource used for ordinary upgrades, basic crafting,
     consumables, and normal shop purchases; and
   - boss-specific materials used for that boss's Instruments, Ward Cores,
@@ -1291,9 +1268,9 @@ These product-level constraints are settled:
 
 ### GD-27: Mastery, power progression, campaign access, and replay
 
-- **Approved direction:** The proposed campaign, general progression, and shared
+- **Owner answer:** The proposed campaign, general progression, and shared
   boss-mastery model is approved as presented.
-- **Specification:** Long-term progress uses three distinct tracks whose final
+- **Design decision:** Long-term progress uses three distinct tracks whose final
   player-facing names remain open:
 
   1. **Campaign progression:** A player's first victory against a boss on any
@@ -1344,9 +1321,9 @@ These product-level constraints are settled:
 
 ### GD-28: Store surfaces and paid-item safeguards
 
-- **Approved direction:** The proposed exact-equivalent, voluntary-store,
+- **Owner answer:** The proposed exact-equivalent, voluntary-store,
   no-rescue-purchases model is approved as presented.
-- **Specification:** Purchases appear only through a clearly identified
+- **Design decision:** Purchases appear only through a clearly identified
   physical shop in the Order hub or a store menu the player voluntarily opens.
   The store becomes available only after onboarding and at least one completed
   encounter. It never presents purchase prompts during combat, downing,
@@ -1398,9 +1375,9 @@ These product-level constraints are settled:
 
 ### GD-29: First-time onboarding
 
-- **Approved direction:** The proposed short practice followed by contextual first-boss
+- **Owner answer:** The proposed short practice followed by contextual first-boss
   teaching is approved as presented.
-- **Specification:** Before the first full encounter, the player receives a
+- **Design decision:** Before the first full encounter, the player receives a
   four-to-six-minute, checkpointed, replayable Order practice:
   1. **Setup:** choose an unlocked starter instrument, show device-specific
      controls and comfort settings, and offer guided but skippable calibration.
@@ -1447,12 +1424,12 @@ These product-level constraints are settled:
 
 ### GD-30: Order hub functions and navigation
 
-- **Approved direction:** The proposed physical anchors and optional fast menus are
+- **Owner answer:** The proposed physical anchors and optional fast menus are
   approved, but the shard area is not a flat circular selection ring. It should
   be a tiered, stair-stepped environment whose locked campaign levels are visible
   but blocked. Glowing broken pieces of glass pierce swirling portals in varied
   orientations, colors, and effects, forming a kind of beautiful chaos.
-- **Specification:** The phasing-shard structure is the Order hub's dominant
+- **Design decision:** The phasing-shard structure is the Order hub's dominant
   physical landmark. A broad staircase, terraces, broken ascents, or a comparable
   vertical progression language arranges shards by campaign tier. Higher levels
   remain dramatically visible from below but are physically blocked until the
@@ -1519,11 +1496,11 @@ These product-level constraints are settled:
 
 ### GD-31: First three bosses and songs
 
-- **Approved direction:** Heaven's Edge and Blackened Crown are processing fixtures
+- **Owner answer:** Heaven's Edge and Blackened Crown are processing fixtures
   or substantial-revision candidates, not presumed launch songs. Their current
   versions lack the required intensity and dynamic movement, and new song
   candidates can be generated readily.
-- **Specification:** Define all three encounter and musical briefs
+- **Design decision:** Define all three encounter and musical briefs
   before selecting songs. Generate at least two or three new full-stem candidates
   per brief, score them against the brief, and design the final boss, arena,
   chart, and event placement around the selected song's actual structure.
@@ -1643,9 +1620,9 @@ These product-level constraints are settled:
 
 ### GD-32: Results, rewards, retry, and post-battle flow
 
-- **Approved direction:** The proposed immediate-summary plus optional-detail results
+- **Owner answer:** The proposed immediate-summary plus optional-detail results
   model is approved as presented.
-- **Specification:** After a brief, skippable victory or defeat presentation,
+- **Design decision:** After a brief, skippable victory or defeat presentation,
   a phone-first immediate summary shows:
   - **Outcome:** Victory or Defeat;
   - **exact reason:** fragment recovered, all humans down, Ward broken, Resolve
@@ -1699,9 +1676,9 @@ These product-level constraints are settled:
 
 ### GD-33: Accessibility, comfort, and age-appropriate safety
 
-- **Approved direction:** The proposed launch accessibility and safety baseline is
+- **Owner answer:** The proposed launch accessibility and safety baseline is
   approved as presented.
-- **Specification:** Required input and rhythm access includes:
+- **Design decision:** Required input and rhythm access includes:
   - guided and manual audio/visual calibration saved per device profile;
   - keyboard and gamepad remapping where the platform supports it;
   - touch handedness plus pad size, spacing, position, and opacity controls;
@@ -1759,9 +1736,9 @@ These product-level constraints are settled:
 
 ### GD-34: Observable playtest readiness gates
 
-- **Approved direction:** The proposed implementation-commitment, content-complete
+- **Owner answer:** The proposed implementation-commitment, content-complete
   release, and structural-redesign gates are approved as presented.
-- **Specification:** Before committing to full native production, the smallest
+- **Design decision:** Before committing to full native production, the smallest
   complete encounter prototype passes at least two rounds of new target-age
   testing. Each round initially contains roughly 8–12 players ages 10–14, with
   most play occurring on representative phones and tablets. Evidence must show:
@@ -1836,9 +1813,12 @@ These product-level constraints are settled:
   technical release gates, issue severity, and sign-off ownership require a
   dedicated playtest and release-readiness plan.
 
-## 5. Required follow-up and deferred specifications
+## 5. Interview completion
 
-### Required product follow-up
+All 34 bounded questions are resolved. No interview prompt remains. The approved
+record has been reconciled into [`GAME_DESIGN.md`](GAME_DESIGN.md).
+
+## 6. Deferred decisions and parking lot
 
 - **Required naming and tone pass:** Replace the working Discipline, Build Core,
   and Technique terminology and every individual option name with a coherent,
@@ -1851,31 +1831,131 @@ These product-level constraints are settled:
   and validation metadata. This is a flagged future technical task; the owner
   explicitly does not want it implemented during this interview turn.
 
-### Deferred technical specifications
+## 7. Interview change log
 
-- Rhythm chart schema, authoring-tool architecture, validators, and export format.
-- Roblox client/server authority, networking, anti-cheat, persistence, and
-  analytics event schema.
-- UI component specification, responsive layouts, safe-area measurements, and
-  input maps.
-- Economy tables, item catalogs, numeric balance sheets, and drop-rate tables.
-- Final boss/song production specifications, narrative bible, production
-  schedule, and asset manifests.
-
-## 6. Approval, validation, and change control
-
-The bounded owner interview resolved GD-01 through GD-34 on 2026-08-18. The
-question plan is finite and complete. Deferred technical documents may refine
-schemas, values, implementation, production, and test procedures, but they do
-not reopen settled player-facing behavior by themselves.
-
-Every implementation handoff must distinguish:
-
-- approved behavioral rules in this document;
-- numeric hypotheses that require tuning;
-- explicitly deferred systems or technical specifications; and
-- working terminology that still requires the mandated naming and tone pass.
-
-A material change to rhythm interaction, combat fairness, player-count scaling,
-accessibility treatment, progression integrity, monetization safeguards, or
-content readiness must update this document and cite the superseded decision.
+- **2026-08-14:** Initialized the working record and opened GD-01.
+- **2026-08-14:** Recorded the shard-centered hub loop, resolved GD-01, and
+  opened GD-02.
+- **2026-08-14:** Recorded the approved five-phase encounter structure, resolved
+  GD-02, and opened GD-03.
+- **2026-08-15:** Recorded the approved director-assisted battle surface,
+  resolved GD-03, and opened GD-04.
+- **2026-08-15:** Recorded the approved first-release phrase grammar, resolved
+  GD-04, and opened GD-05.
+- **2026-08-15:** Captured the owner's correction that phrases organize
+  sustained available instrument play rather than grant isolated permission to
+  perform. GD-05 remains open pending approval of the refined passage model and
+  its cue behavior.
+- **2026-08-15:** Finalized the phrase-bounded moving staff and chained
+  performance-passage model, reconciled its explicit Vision v1 amendment,
+  resolved GD-05, and opened GD-06.
+- **2026-08-15:** Corrected the GD-06 proposal by reserving WASD exclusively for
+  movement. GD-06 remains open pending the arena movement model and remaining
+  device mappings.
+- **2026-08-15:** Settled free WASD movement in the Order hub and directional
+  WASD dashes among authored positions during boss encounters. GD-06 remains
+  open for the remaining device mappings.
+- **2026-08-15:** Recorded the approved keyboard, touch, and gamepad mappings,
+  resolved GD-06, and opened GD-07.
+- **2026-08-15:** Recorded the approved timing, feedback, hold, and calibration
+  model, resolved GD-07, and opened GD-08.
+- **2026-08-15:** Recorded the approved three-difficulty model with normalized
+  per-passage combat contribution, resolved GD-08, and opened GD-09.
+- **2026-08-15:** Recorded the approved performance-responsive audio model,
+  resolved GD-09, and opened GD-10.
+- **2026-08-15:** Recorded the approved song and encounter authoring workflow,
+  resolved GD-10, and opened GD-11.
+- **2026-08-16:** Recorded Ward as the single survival resource, clarified that
+  Defend uses the ordinary instrument chart, added the dangerous-position damage
+  and reward rule, resolved GD-11, and opened GD-12.
+- **2026-08-16:** Recorded the approved intent-routing and beat-boundary switching
+  model, resolved GD-12, and opened GD-13.
+- **2026-08-16:** Recorded the approved Resolve, Momentum, and finishing-cadence
+  model, resolved GD-13, and opened GD-14.
+- **2026-08-16:** Recorded the approved boss-attack grammar and fairness model,
+  resolved GD-14, and opened GD-15.
+- **2026-08-16:** Recorded nine locations as a flexible arena baseline, approved
+  the movement and risk/reward rules, replaced acolyte swapping with shared
+  formation offsets, resolved GD-15, and opened GD-16.
+- **2026-08-16:** Provisionally accepted the GD-16 recovery behavior and kept the
+  question open to resolve programmatic, instrument-aware musical-window
+  selection for recovery and other dynamic encounter events.
+- **2026-08-16:** Approved generated Activity Maps and event-specific runtime
+  window selection, added them to the authoring workflow, resolved GD-16, and
+  opened GD-17.
+- **2026-08-16:** Recorded the approved one-slot Hype and Signature Special
+  model, reconciled explicit arming with the Special intent, resolved GD-17, and
+  opened GD-18.
+- **2026-08-16:** Recorded the approved earned, once-per-player Band Call model,
+  including invitation, scheduling, additive scoring, shared lockout, and solo
+  acolyte behavior, resolved GD-18, and opened GD-19.
+- **2026-08-16:** Recorded the approved authored-candidate, guaranteed-window,
+  optional-participation, and three-tier Crescendo model, resolved GD-19, and
+  opened GD-20.
+- **2026-08-16:** Recorded the approved Vanguard, Warden, and Herald acolyte
+  functions, including formation, suppression, group-event, and solo-recovery
+  rules, resolved GD-20, and opened GD-21.
+- **2026-08-17:** Recorded the approved one-through-six-human Resolve curve,
+  targeting, duplicate-instrument, reward, and positive Cohesion Bonus rules,
+  reconciled earlier penalty language, resolved GD-21, and opened GD-22.
+- **2026-08-17:** Recorded the approved shard, matchmaking, staging, locking,
+  results, and individually chosen rematch flow, resolved GD-22, and opened
+  GD-23.
+- **2026-08-17:** Recorded the approved communication, disconnect, rejoin, AFK,
+  host-departure, and structural anti-grief rules, resolved GD-23, and opened
+  GD-24.
+- **2026-08-17:** Recorded the approved Instrument, Ward Core, Resonator,
+  ability, consumable, cosmetic, and stat-boundary model as an intentionally
+  expandable first-release foundation, resolved GD-24, and opened GD-25.
+- **2026-08-17:** Recorded the approved universal-category, one-major-rule,
+  three-supporting-rule specialization structure, explicitly rejected all
+  current player-facing names, added a required naming pass, resolved GD-25, and
+  opened GD-26.
+- **2026-08-17:** Recorded the approved two-resource economy, fixed items,
+  guaranteed upgrades, random drops with deterministic crafting, failure
+  rewards, sinks, and first-release trading exclusion, resolved GD-26, and opened
+  GD-27.
+- **2026-08-17:** Recorded the approved campaign, general progression, shared
+  boss mastery, difficulty unlock, failure-practice, old-item tier-raising, and
+  replay rules, resolved GD-27, and opened GD-28.
+- **2026-08-17:** Recorded the approved voluntary store, exact earnable
+  equivalents, purchase presentation, launch prohibitions, and publishing
+  safeguards, resolved GD-28, and opened GD-29.
+- **2026-08-17:** Recorded the approved short onboarding practice and contextual
+  first-boss teaching, resolved GD-29, and paused before GD-30 to review the
+  owner's proposed dash-cooldown amendment to GD-15.
+- **2026-08-17:** Approved the beat-based movement-charge amendment, added its
+  boss-attack fairness rules to GD-14 and GD-15, and opened GD-30.
+- **2026-08-17:** Recorded the approved tiered, stair-stepped, portal-fractured
+  shard hub and its physical and menu functions, resolved GD-30, and opened
+  GD-31.
+- **2026-08-17:** Rejected the assumption that Heaven's Edge and Blackened Crown
+  should anchor the launch lineup because their current versions lack sufficient
+  intensity and dynamics. Kept GD-31 open around new brief-driven song
+  generation and flagged, without implementing, the missing pipeline metadata
+  work for sections, Crescendos, Activity Maps, and encounter validation.
+- **2026-08-17:** Approved the encounter-brief-first workflow and multi-candidate
+  song scorecard. Kept GD-31 open and advanced within it to the first encounter
+  brief rather than assigning a song prematurely.
+- **2026-08-17:** Approved the first encounter's music, core teaching, regular
+  arena, monster, restoration, reward, and candidate-rejection brief. Kept GD-31
+  open and advanced within it to the second encounter brief.
+- **2026-08-17:** Approved the second encounter's volatile music, tactical
+  commitment, temporary corruption, two-part attack, control-themed fragment
+  holder, reward, and rejection brief. Kept GD-31 open and advanced within it to
+  the third encounter brief.
+- **2026-08-17:** Approved the third encounter's full-system music, transforming
+  arena, complete combat grammar, conspiracy evidence, rewards, production gate,
+  and rejection rules. Resolved GD-31 and opened GD-32.
+- **2026-08-18:** Recorded the approved immediate summary, optional Performance,
+  Combat, Band, and Progress detail, private coaching, adaptive actions, and
+  no-store post-battle flow, resolved GD-32, and opened GD-33.
+- **2026-08-18:** Recorded the approved input, visual, audio, cognitive, social,
+  content, comfort, pause, and difficulty-independent accessibility baseline,
+  resolved GD-33, and opened GD-34.
+- **2026-08-18:** Recorded the approved implementation-commitment,
+  content-complete release, and structural-redesign evidence gates, resolved
+  GD-34, and completed the 34-question interview.
+- **2026-08-18:** Reconciled the completed decision record into the canonical
+  [`GAME_DESIGN.md`](GAME_DESIGN.md) specification and archived this working
+  record as design history.

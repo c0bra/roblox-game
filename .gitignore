@@ -9,3 +9,6 @@ node_modules/
 .playwright-cli/
 /output/
 /roblox/web/public/levels/song-id/
+# Rojo generated files
+roblox/build/
+roblox/sourcemap.json

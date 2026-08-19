@@ -10,6 +10,7 @@ This document defines how Bands Battle should look and feel across every visual 
 Related documents have narrower responsibilities:
 
 - [`GAME_DESIGN.md`](GAME_DESIGN.md) defines the product fantasy, mechanics, and world scenarios.
+- [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md) assigns design ownership and dependencies for presentation systems without overriding this document's aesthetic rules.
 - [`roblox/web/DESIGN.md`](roblox/web/DESIGN.md) defines implementation-ready UI tokens, components, interaction states, accessibility, and Arena production constraints.
 - [`openspec/changes/add-arena-gameplay-mode/design.md`](openspec/changes/add-arena-gameplay-mode/design.md) defines the scoped technical and production contract for the Arena vertical slice.
 - [`prompts/nano_banana_character_image.md`](prompts/nano_banana_character_image.md) applies this direction to isolated character-reference generation.
@@ -332,4 +333,3 @@ An asset or visual feature is ready for integration only when the applicable che
 | Use painterly PBR materials | Use flat 2D shading or noisy realistic micro-texture |
 | Earn spectacle on beats and outcomes | Keep every surface glowing and every moment explosive |
 | Design for phone readability first | Approve assets only from close-up desktop renders |
-

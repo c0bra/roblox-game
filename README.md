@@ -18,18 +18,21 @@ place files.
 Read these first:
 
 1. `README.md`, this file, for repo structure and the current workflow.
-2. `GAME_DESIGN.md`, synthesized game/product brief from `trello_notes.md` and
-   `chatgpt_chat.md`.
-3. `ART_DIRECTION.md`, canonical look and feel for characters, environments, UI,
+2. `GAME_VISION.md`, the product north star, audience, tone, and scope.
+3. `GAME_DESIGN.md`, the canonical player-facing mechanics and behavior.
+4. `SYSTEMS_MAP.md`, canonical system ownership, dependencies, boundaries, and
+   detailed-spec sequence.
+5. `ART_DIRECTION.md`, canonical look and feel for characters, environments, UI,
    materials, lighting, VFX, and visual production.
-4. `audio/Heavens_Edge/stems/spec.md`, lane-chart pipeline spec.
-5. `audio/Heavens_Edge/stems/sonic-annotator.md`, command cookbook for BeatRoot,
+6. `audio/Heavens_Edge/stems/spec.md`, lane-chart pipeline spec.
+7. `audio/Heavens_Edge/stems/sonic-annotator.md`, command cookbook for BeatRoot,
    pYIN, Aubio, and CREPE experiments.
-6. `audio/Heavens_Edge/stems/AGENTS.md`, local notes for the main audio workflow
+8. `audio/Heavens_Edge/stems/AGENTS.md`, local notes for the main audio workflow
    subtree.
 
 If you are here to build the Roblox game layer, start with `GAME_DESIGN.md` and
-the `What does not exist yet` section below.
+`SYSTEMS_MAP.md`, then follow the map's detailed-spec sequence before defining
+technical architecture.
 
 If you are here to generate charts from songs, start with `Current audio pipeline`.
 
@@ -40,7 +43,9 @@ roblox-bands-battle/
 |-- README.md
 |-- chart                         # repository-root chart pipeline command
 |-- tools/chart-pipeline/         # platform-neutral compiler and bundle format
+|-- GAME_VISION.md               # product north star and scope authority
 |-- GAME_DESIGN.md
+|-- SYSTEMS_MAP.md                # system ownership and spec sequence
 |-- ART_DIRECTION.md              # canonical visual style and asset guidance
 |-- trello_notes.md                 # raw brainstorming notes
 |-- chatgpt_chat.md                 # raw core-loop discussion
@@ -100,7 +105,8 @@ The design notes define a Roblox rhythm/boss-battle game:
 - Players earn item drops after boss battles and upgrade instruments or gear.
 - Timed bosses and dangling story clues can support retention.
 
-See `GAME_DESIGN.md` for the full synthesized brief.
+See `GAME_DESIGN.md` for the approved player-facing rules and `SYSTEMS_MAP.md`
+for the systems that own and implement those rules.
 
 ## Implementation status
 
@@ -608,3 +614,11 @@ Sound effect sources:
 ## Assets
 
 - https://www.cgtrader.com/free-3d-models/textures/miscellaneous/the-stylized-vault-375-stylized-pbr-mega-pack-texture-library
+
+## Textures
+
+- https://www.textures.com/free
+
+## Animation
+
+- https://mesh2motion.org/
