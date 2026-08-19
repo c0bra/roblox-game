@@ -15,6 +15,8 @@ Related documents have narrower responsibilities:
 - [`GAME_VISION_QUESTIONS.md`](GAME_VISION_QUESTIONS.md) records the completed
   bounded owner interview and governs any future vision questions.
 - [`GAME_DESIGN.md`](GAME_DESIGN.md) develops specific mechanics and systems.
+- [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md) assigns ownership, dependencies, and
+  specification needs for the approved systems without changing their behavior.
 - [`ART_DIRECTION.md`](ART_DIRECTION.md) owns the visual language and aesthetic
   standards.
 - Files under `roblox/web/` document a retired browser prototype. They may serve

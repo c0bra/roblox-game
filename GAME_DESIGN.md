@@ -4,6 +4,7 @@
 - **Approved:** 2026-08-18
 - **Parent vision:** [`GAME_VISION.md`](GAME_VISION.md)
 - **Visual authority:** [`ART_DIRECTION.md`](ART_DIRECTION.md)
+- **System ownership:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md)
 - **Decision source:** [`GAME_DESIGN_WORKING.md`](GAME_DESIGN_WORKING.md)
 - **Interview plan:** [`GAME_DESIGN_QUESTIONS.md`](GAME_DESIGN_QUESTIONS.md)
 
@@ -16,8 +17,10 @@ multiplayer, progression, content, accessibility, and validation rules.
 `GAME_VISION.md` remains authoritative for product purpose, world foundation,
 audience, platform, tone, and scope. `ART_DIRECTION.md` remains authoritative
 for visual language. This document governs how those constraints become a game.
-The working record and question plan preserve interview history but do not
-override this approved specification.
+`SYSTEMS_MAP.md` is the downstream authority for system responsibilities,
+dependencies, and required detailed specifications; it does not override the
+player-facing behavior defined here. The working record and question plan
+preserve interview history but do not override this approved specification.
 
 Numeric values labeled as starting points, hypotheses, targets, or approximate
 values require playtesting. Changing a settled behavioral rule requires an
