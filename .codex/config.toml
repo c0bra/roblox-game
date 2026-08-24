@@ -1,0 +1,11 @@
+model = "gpt-5.6-sol"
+model_context_window = 372000
+[mcp_servers.comfy_cloud]
+url = "https://cloud.comfy.org/mcp"
+
+[mcp_servers.comfy_local]
+command = "/Users/brianh/.local/bin/comfy-mcp"
+env = { COMFY_BIN = "/Users/brianh/.local/share/uv/tools/comfy-mcp/bin/comfy" }
+
+[features.multi_agent_v2]
+max_concurrent_threads_per_session = 16
