@@ -277,10 +277,11 @@ channel are incompatible unless an owning spec deliberately permits and
 validates the overlap.
 
 The Finishing Cadence preview/performance rejects competing major attacks,
-recovery/revival performances, Band Call invitations, and Crescendos. Band Calls
-and Crescendos do not compete with one another. Ordinary rhythm and boss
-telegraphs may overlap only when timing, control, visual, audio, and device
-readability evidence passes.
+recovery/revival performances, Band Call invitations, and Crescendos. Band Call
+invitation/performance windows and Crescendo preview/performance windows are
+mutually exclusive; the guaranteed Crescendo has higher reservation priority.
+Ordinary rhythm and boss telegraphs may overlap only when timing, control,
+visual, audio, and device readability evidence passes.
 
 An incompatible candidate defers, uses an approved urgent fallback, or is
 skipped when optional. Incompatible fixed events block validation and cannot be

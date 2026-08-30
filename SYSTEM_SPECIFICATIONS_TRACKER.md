@@ -1,9 +1,9 @@
 # Bands Battle System Specifications Tracker
 
-- **Status:** In progress; 6 of 13 canonical specifications complete
+- **Status:** In progress; 10 of 13 canonical specifications complete
 - **Started:** 2026-08-19
 - **Authority:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md)
-- **Current specification:** `ABILITIES_AND_COOPERATIVE_ACTIONS.md`
+- **Current specification:** `UI_UX.md`
 
 ## Purpose
 
@@ -30,11 +30,11 @@ Each specification proceeds through four persisted states:
 | 4 | [`BOSS_ENCOUNTERS.md`](BOSS_ENCOUNTERS.md) | Approved | 12 of 12 | Includes Tactical Positioning & Movement |
 | 5 | [`PROGRESSION.md`](PROGRESSION.md) | Approved | 12 of 12 | Three tracks plus full spec presets |
 | 6 | [`ITEMS_AND_EQUIPMENT.md`](ITEMS_AND_EQUIPMENT.md) | Approved | 12 of 12 | Includes inventory, presets, consumables, cosmetics |
-| 7 | `ABILITIES_AND_COOPERATIVE_ACTIONS.md` | Interview in progress | 0 of 12 | Includes Solo Support |
-| 8 | `MULTIPLAYER.md` | Not started | — | Includes Communication & Safety |
-| 9 | `REWARDS_AND_ECONOMY.md` | Not started | — | Includes Commerce |
-| 10 | `BUILDS_AND_SPECIALIZATION.md` | Not started | — | Working names require later naming pass |
-| 11 | `UI_UX.md` | Not started | — | Includes hub, onboarding, results, input, and accessibility |
+| 7 | [`ABILITIES_AND_COOPERATIVE_ACTIONS.md`](ABILITIES_AND_COOPERATIVE_ACTIONS.md) | Approved | 12 of 12 | Includes Solo Support |
+| 8 | [`MULTIPLAYER.md`](MULTIPLAYER.md) | Approved | 12 of 12 | Includes Communication & Safety |
+| 9 | [`REWARDS_AND_ECONOMY.md`](REWARDS_AND_ECONOMY.md) | Approved | 12 of 12 | Includes Commerce |
+| 10 | [`BUILDS_AND_SPECIALIZATION.md`](BUILDS_AND_SPECIALIZATION.md) | Approved | 12 of 12 | Working names require later naming pass |
+| 11 | `UI_UX.md` | Interview in progress | 0 of 12 | Includes hub, onboarding, results, input, and accessibility |
 | 12 | `AUDIO_PRESENTATION.md` | Not started | — | Runtime musical and semantic audio presentation |
 | 13 | `PLAYER_DATA.md` | Not started | — | Final architecture-critical platform contract |
 
@@ -150,3 +150,59 @@ inputs. They are tracked separately from the thirteen canonical system specs.
   Abilities & Cooperative Actions is next.
 - **2026-08-24:** Created the 12-question Abilities/Cooperative Actions/Solo
   Support interview and working record. Progress is 0 of 12.
+- **2026-08-24:** Approved AC-01 through AC-03, completing Abilities checkpoint
+  A. Overall progress remains 6 of 13 specifications complete and 3 of 12
+  Abilities questions.
+- **2026-08-24:** Approved AC-04 through AC-06, completing Abilities checkpoint
+  B. Overall progress remains 6 of 13 specifications complete and 6 of 12
+  Abilities questions.
+- **2026-08-24:** Approved AC-07 through AC-09, completing Abilities checkpoint
+  C. Overall progress remains 6 of 13 specifications complete and 9 of 12
+  Abilities questions.
+- **2026-08-25:** Approved AC-10 through AC-12 and published canonical
+  `ABILITIES_AND_COOPERATIVE_ACTIONS.md` with Solo Support. Overall progress is
+  7 of 13 specifications complete; Multiplayer is next.
+- **2026-08-25:** Created the 12-question Multiplayer/Communication & Safety
+  interview and working record. Multiplayer progress is 0 of 12.
+- **2026-08-25:** Approved MP-01 through MP-03, completing Multiplayer checkpoint
+  A. Overall progress remains 7 of 13 specifications complete and 3 of 12
+  Multiplayer questions.
+- **2026-08-25:** Approved MP-04 through MP-06, completing Multiplayer checkpoint
+  B. Overall progress remains 7 of 13 specifications complete and 6 of 12
+  Multiplayer questions.
+- **2026-08-25:** Approved MP-07 through MP-09, completing Multiplayer checkpoint
+  C. Overall progress remains 7 of 13 specifications complete and 9 of 12
+  Multiplayer questions.
+- **2026-08-25:** Approved MP-10 through MP-12 and published canonical
+  `MULTIPLAYER.md` with Communication & Safety. Overall progress is 8 of 13
+  specifications complete; Rewards & Economy is next.
+- **2026-08-25:** Created the 12-question Rewards/Economy/Commerce interview and
+  working record. Rewards & Economy progress is 0 of 12.
+- **2026-08-26:** Approved RE-01 through RE-03, completing Rewards & Economy
+  checkpoint A. Overall progress remains 8 of 13 specifications complete and
+  3 of 12 Rewards & Economy questions.
+- **2026-08-26:** Approved RE-04 through RE-06, completing Rewards & Economy
+  checkpoint B. Overall progress remains 8 of 13 specifications complete and
+  6 of 12 Rewards & Economy questions.
+- **2026-08-26:** Approved RE-07 through RE-09, completing Rewards & Economy
+  checkpoint C. Overall progress remains 8 of 13 specifications complete and
+  9 of 12 Rewards & Economy questions.
+- **2026-08-26:** Approved RE-10 through RE-12 and published canonical
+  `REWARDS_AND_ECONOMY.md` with Commerce. Overall progress is 9 of 13
+  specifications complete; Builds & Specialization is next.
+- **2026-08-26:** Created the 12-question Builds & Specialization interview and
+  working record. Builds & Specialization progress is 0 of 12.
+- **2026-08-26:** Approved BS-01 through BS-03, completing Builds & Specialization
+  checkpoint A. Overall progress remains 9 of 13 specifications complete and
+  3 of 12 Builds & Specialization questions.
+- **2026-08-27:** Approved BS-04 through BS-06, completing Builds & Specialization
+  checkpoint B. Overall progress remains 9 of 13 specifications complete and
+  6 of 12 Builds & Specialization questions.
+- **2026-08-30:** Approved BS-07 through BS-09, completing Builds & Specialization
+  checkpoint C. Overall progress remains 9 of 13 specifications complete and
+  9 of 12 Builds & Specialization questions.
+- **2026-08-30:** Approved BS-10 through BS-12 and published canonical
+  `BUILDS_AND_SPECIALIZATION.md`. Overall progress is 10 of 13 specifications
+  complete; UI/UX is next.
+- **2026-08-30:** Created the 12-question UI/UX interview and working record.
+  UI/UX progress is 0 of 12.

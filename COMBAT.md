@@ -20,8 +20,9 @@ Combat owns:
 - Attack/Defend/Special selection, queuing, and automatic intent return;
 - one-time routing of normalized Rhythm contribution;
 - versioned conversion and modifier order;
-- Attack-pressure, mitigation, reinforcement, restoration, Hype, and effect
-  request calculations;
+- Attack-pressure, mitigation, reinforcement, restoration, and effect-request
+  calculations;
+- identified slow/fast Hype-eligible contribution facts;
 - multi-target distribution and source/target attribution; and
 - semantic combat-effect output.
 
@@ -274,10 +275,11 @@ Player survival states are:
   previewed re-entry note.
 - **Attempt ended:** the player cannot return within the current attempt.
 
-Downing preserves confirmed performance/combat history, Hype, unspent prepared
-resources, spent-resource state, and the previous location when still legal.
-Temporary reinforcement clears. A return may use the nearest legal Middle
-location when the prior one is invalid.
+Downing preserves confirmed performance/combat history and does not request that
+Abilities clear Hype. It also preserves unspent prepared resources,
+spent-resource state, and the previous location when still legal. Temporary
+reinforcement clears. A return may use the nearest legal Middle location when
+the prior one is invalid.
 
 Boss Encounters owns all-humans-down and solo-attempt-ended defeat. Survival
 publishes authoritative player states after each musical boundary.
@@ -319,10 +321,11 @@ equipment, and consumables cannot add, purchase, or bypass another attempt.
 
 ## 13. Hype and Signature Special lifecycle
 
-Successful ordinary Attack or Defend performance also earns separately budgeted
-slow passive Hype. Selecting Special before full Hype stores the previous Attack
-or Defend intent and routes subsequent contribution exclusively to faster Hype
-gain.
+Successful ordinary Attack or Defend performance creates an identified
+slow-Hype-eligible contribution fact. Selecting Special before full Hype stores
+the previous Attack or Defend intent and routes subsequent contribution
+exclusively into identified fast-Hype-eligible facts. Abilities applies the
+revisioned gain values and owns the resulting resource state.
 
 At full Hype:
 
@@ -339,13 +342,17 @@ committed. The effect's guaranteed base resolves at the following valid musical
 boundary even if execution is poor or participation ends mid-group. Normalized
 performance scales only additional strength, duration, or utility.
 
-Resolution consumes all Hype and restores the prior intent. Hype persists
-through ordinary downing/revival, resets between encounters, stores no second
-charge, and has no separate cooldown.
+Abilities consumes Hype when the committed effect enters guaranteed resolution
+and signals Combat to restore the prior intent. Hype persists through ordinary
+downing/revival, resets between encounters, stores no second charge, and has no
+separate cooldown.
 
-Abilities & Cooperative Actions owns the equipped Signature definition,
-recipient/effect behavior, legal resolution boundary, and numeric values. Combat
-owns Hype state and the routing/commitment contract.
+Abilities & Cooperative Actions owns Hype amount and lifecycle state, the
+equipped Signature definition, activation commitment/consumption, recipient and
+effect behavior, legal resolution boundary, and numeric values. Combat owns
+Special intent/input routing, eligible slow/fast contribution facts, normalized
+effect conversion, and automatic return to the stored intent. This ownership
+split does not change the approved player behavior above.
 
 ## 14. Modifier and build contract
 
@@ -466,7 +473,8 @@ Combat/Survival exposes causally linked facts for:
 - contribution accepted/routed/split/capped/expired/rejected;
 - Attack pressure and received Resolve/Momentum disposition;
 - Defend focus, mitigation fill/use/expiry, and reinforcement;
-- Hype gain/Ready/arm/commit/cancel/effect request/consumption;
+- Special routing/automatic return and identified slow/fast Hype-eligible
+  contribution facts; Abilities emits Hype state and Signature transitions;
 - incoming effect gates, reductions, final damage, and avoidance;
 - current/max/reinforced Ward changes and threshold crossings;
 - downing, revival target/progress/completion, solo recovery use/outcome,
@@ -512,7 +520,8 @@ authored targets, tags, candidates, and boundaries.
 Behavior is complete; these values and representations remain deliberately open
 for playtesting or architecture:
 
-- intent conversion and passive/accelerated Hype rates;
+- intent conversion and eligible Hype-input classification; Abilities owns
+  passive/accelerated gain rates and the charge threshold;
 - modifier category caps, shared power budget, and fixed-precision scale;
 - Resolve-pressure, Defend-mitigation, and reinforcement conversion rates;
 - Ward maximums, damage, reinforcement cap, restoration, and recovery amounts;

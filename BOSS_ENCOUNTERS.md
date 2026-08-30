@@ -88,9 +88,10 @@ The attempt states are:
 Solo pause is an overlay on Running and freezes song/encounter time exactly under
 `RHYTHM_GAMEPLAY.md`. Cooperative menus never freeze Running.
 
-All-humans-down or exhausted solo recovery may move from Running to Resolving
-early. Nonterminal attacks, breaks, movement, story beats, recovery, group events,
-and player departures do not retime the song.
+All-humans-down, exhausted solo recovery, or Multiplayer's terminal all-humans-
+departed/inactive fact may move from Running to Resolving early. Nonterminal
+attacks, breaks, movement, story beats, recovery, group events, and nonterminal
+player absence do not retime the song.
 
 ## 5. Song functions
 
@@ -150,11 +151,21 @@ solo attempt ends after failed emergency recovery or a later down. At a shared
 final boundary, `COMBAT.md` first resolves player effects, committed impacts,
 Ward, and downing; Boss Encounters then evaluates the atomic result.
 
+Multiplayer may also publish a terminal fact at a safe boundary when no Active
+or grace-eligible human remains and no inactive human retains a resume. If all
+members are Departed, the reason is **all humans departed**. If the terminal set
+contains permanently Inactive and/or Departed members, the reason is **all
+humans inactive/departed**. These are explicit session/gameplay Defeats, not
+system-failure No Contest. A player still in grace or eligible to resume prevents
+this terminal transition.
+
 Defeat reason priority is:
 
 1. all humans down;
-2. Resolve remaining at song end; then
-3. finishing threshold missed.
+2. all humans departed;
+3. all humans inactive/departed;
+4. Resolve remaining at song end; then
+5. finishing threshold missed.
 
 Other true failure conditions remain supporting facts. Random effects, late
 packets, reward rolls, and presentation cannot reverse or reroll the outcome.

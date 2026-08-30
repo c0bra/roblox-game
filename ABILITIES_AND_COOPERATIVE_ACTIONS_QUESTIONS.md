@@ -1,6 +1,6 @@
 # Bands Battle Abilities and Cooperative Actions Specification Questions
 
-- **Status:** Interview in progress; 0 of 12 questions resolved
+- **Status:** Completed; 12 of 12 questions resolved
 - **Started:** 2026-08-24
 - **Parent system map:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#46-abilities--cooperative-actions)
 - **Included system:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#47-solo-support)
@@ -65,6 +65,8 @@ reconciled with `COMBAT.md` without changing approved player behavior.
 
 #### AC-01 — Signature definition and effect contract
 
+- **Status:** Resolved 2026-08-24.
+
 - **Decision needed:** What must every Signature definition declare so different
   offense, Ward, support, and positional abilities remain deterministic?
 - **Must resolve:** Stable identity, family/tags, base/bonus, target/distribution,
@@ -73,6 +75,8 @@ reconciled with `COMBAT.md` without changing approved player behavior.
 
 #### AC-02 — Hype ownership and lifecycle integration
 
+- **Status:** Resolved 2026-08-24.
+
 - **Decision needed:** Which system owns Hype state while Combat continues to
   route normalized performance exactly as approved?
 - **Must resolve:** Authority, slow/fast gain requests, cap/overflow, previous
@@ -80,6 +84,8 @@ reconciled with `COMBAT.md` without changing approved player behavior.
   reset, idempotency, and cross-spec reconciliation.
 
 #### AC-03 — Activation scheduling, invalidation, and guaranteed base
+
+- **Status:** Resolved 2026-08-24.
 
 - **Decision needed:** How does an armed Signature select its group/resolution
   boundary and remain reliable through target/state/event changes?
@@ -91,6 +97,8 @@ reconciled with `COMBAT.md` without changing approved player behavior.
 
 #### AC-04 — Band Call readiness, ownership, and lockout
 
+- **Status:** Resolved 2026-08-24.
+
 - **Decision needed:** How is one personal Call earned/used while a shared
   lockout prevents chaining?
 - **Must resolve:** Readiness input, threshold/cap, one-per-encounter, item/build
@@ -99,6 +107,8 @@ reconciled with `COMBAT.md` without changing approved player behavior.
 
 #### AC-05 — Request, candidate scheduling, and invitation
 
+- **Status:** Resolved 2026-08-24.
+
 - **Decision needed:** How does a ready initiator request a Call and invite
   teammates without interrupting ordinary play?
 - **Must resolve:** Eligibility, candidate filter/max delay, queue identity,
@@ -106,6 +116,8 @@ reconciled with `COMBAT.md` without changing approved player behavior.
   invalid initiator, charge retention, conflict priority, and no universal beat.
 
 #### AC-06 — Commit, participant performance, and effect resolution
+
+- **Status:** Resolved 2026-08-24.
 
 - **Decision needed:** What locks at the boundary and how are base/participant
   shares combined/applied?
@@ -117,6 +129,8 @@ reconciled with `COMBAT.md` without changing approved player behavior.
 
 #### AC-07 — Candidate budget, selection, and guarantee
 
+- **Status:** Resolved 2026-08-24.
+
 - **Decision needed:** How does the encounter choose exactly one viable authored
   Crescendo while preserving required-event fairness?
 - **Must resolve:** Two-to-four candidates, guarantee, deterministic selection,
@@ -125,6 +139,8 @@ reconciled with `COMBAT.md` without changing approved player behavior.
 
 #### AC-08 — Preview, opt-in, performance, and tiers
 
+- **Status:** Resolved 2026-08-24.
+
 - **Decision needed:** How do players understand/accept the event and how do
   independent normalized shares create the three outcome tiers?
 - **Must resolve:** Two-measure preview, effect disclosure, Join In, decline,
@@ -132,6 +148,8 @@ reconciled with `COMBAT.md` without changing approved player behavior.
   Echo/Crescendo/Full thresholds, near-zero result, and no player cancellation.
 
 #### AC-09 — Crescendo effects and Easy recovery activation
+
+- **Status:** Resolved 2026-08-24.
 
 - **Decision needed:** Which effect contracts are legal and when may Easy use a
   second candidate as recovery?
@@ -144,6 +162,8 @@ reconciled with `COMBAT.md` without changing approved player behavior.
 
 #### AC-10 — Vanguard, Warden, and Herald cadences
 
+- **Status:** Resolved 2026-08-25.
+
 - **Decision needed:** What exact event sources and limits make each acolyte
   predictable without simulating performance?
 - **Must resolve:** Vanguard successful-group trigger/cap/no break, Warden
@@ -151,6 +171,8 @@ reconciled with `COMBAT.md` without changing approved player behavior.
   difficulty scaling, player build interaction, fixed attribution, and no score.
 
 #### AC-11 — Suppression, positioning, and solo group participation
+
+- **Status:** Resolved 2026-08-25.
 
 - **Decision needed:** How do acolytes occupy the arena, become suppressed/
   recover, and join Band Calls/Crescendos without becoming manageable party
@@ -161,6 +183,8 @@ reconciled with `COMBAT.md` without changing approved player behavior.
   and feedback.
 
 #### AC-12 — Semantic outputs and content completeness
+
+- **Status:** Resolved 2026-08-25.
 
 - **Decision needed:** Which ability/group/solo facts must be emitted and which
   authoring fields/validators are required?
@@ -187,3 +211,12 @@ reconciled with `COMBAT.md` without changing approved player behavior.
 
 - **2026-08-24:** Created the concise 12-question plan from the approved GDD,
   Systems Map, Combat, Boss Encounter, and Items contracts.
+- **2026-08-24:** Approved AC-01 through AC-03, completing Signature Specials
+  and Hype checkpoint A. Progress is 3 of 12 questions.
+- **2026-08-24:** Approved AC-04 through AC-06, completing Band Call checkpoint
+  B. Progress is 6 of 12 questions.
+- **2026-08-24:** Approved AC-07 through AC-09, completing Crescendo checkpoint
+  C. Progress is 9 of 12 questions.
+- **2026-08-25:** Approved AC-10 through AC-12, completing Solo Support and
+  outputs checkpoint D. All 12 questions are resolved and the canonical
+  specification was published.
