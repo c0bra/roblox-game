@@ -28,6 +28,7 @@ roblox-bands-battle/
 | Repo-wide workflow | `README.md` | Demucs/audio-separator, BeatRoot, pYIN steps |
 | Game design | [`GAME_DESIGN.md`](GAME_DESIGN.md) | Product pillars, gameplay systems, progression, and Roblox implementation guidance |
 | Systems map | [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md) | System ownership, dependencies, first-release classifications, and detailed-spec order |
+| System specifications | [`SYSTEM_SPECIFICATIONS_TRACKER.md`](SYSTEM_SPECIFICATIONS_TRACKER.md) | Links and completion state for all 13 approved detailed design specifications |
 | Beat grid inspection | `audio/Heavens_Edge/beats_dump.py` | madmom beat/downbeat dump + optional click track |
 | Single-stem transcription | `audio/Heavens_Edge/stem2midi.py` | Basic Pitch + madmom + quantization |
 | Stems pipeline details | `audio/Heavens_Edge/stems/` | Main code-heavy subtree; check child AGENTS.md |

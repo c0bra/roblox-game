@@ -1,6 +1,7 @@
 # Bands Battle Content Authoring Working Record
 
-- **Status:** Interview complete; archived decision record; 24 of 24 resolved
+- **Status:** Interview complete; archived decision record; 24 of 24 resolved;
+  final reconciliation completed 2026-09-02
 - **Started:** 2026-08-19
 - **Parent system map:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#81-song-chart--encounter-authoring)
 - **Interview plan:** [`CONTENT_AUTHORING_QUESTIONS.md`](CONTENT_AUTHORING_QUESTIONS.md)
@@ -637,8 +638,9 @@ future authoring source of truth.
 - The version-1 `attacks` array is retained only as legacy input. The canonical
   package uses the broader encounter-timeline and candidate contracts defined in
   the approved baseline.
-- Later specs 2–12 will add authored-data and validation requirements, so the
-  canonical document requires its mandatory final reconciliation.
+- Later specs 2–12 added authored-data and validation requirements. Their
+  mandatory final reconciliation was completed in canonical
+  `CONTENT_AUTHORING.md` on 2026-09-02.
 
 ## 6. Change log
 
@@ -677,3 +679,7 @@ future authoring source of truth.
   first-release production and reconciliation policies, resolved CA-22 through
   CA-24, and reconciled the interview into canonical `CONTENT_AUTHORING.md`.
   Progress is 24 of 24.
+- **2026-09-02:** Recorded completion of the mandatory reconciliation against
+  specifications 2 through 12. Canonical `CONTENT_AUTHORING.md` now consolidates
+  every registered runtime field, owner, consumer, compatibility impact,
+  validator, fallback, export-equivalence, and human-review requirement.

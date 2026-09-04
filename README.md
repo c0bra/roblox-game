@@ -22,17 +22,19 @@ Read these first:
 3. `GAME_DESIGN.md`, the canonical player-facing mechanics and behavior.
 4. `SYSTEMS_MAP.md`, canonical system ownership, dependencies, boundaries, and
    detailed-spec sequence.
-5. `ART_DIRECTION.md`, canonical look and feel for characters, environments, UI,
+5. `SYSTEM_SPECIFICATIONS_TRACKER.md`, links and completion status for all 13
+   approved detailed design specifications.
+6. `ART_DIRECTION.md`, canonical look and feel for characters, environments, UI,
    materials, lighting, VFX, and visual production.
-6. `audio/Heavens_Edge/stems/spec.md`, lane-chart pipeline spec.
-7. `audio/Heavens_Edge/stems/sonic-annotator.md`, command cookbook for BeatRoot,
+7. `audio/Heavens_Edge/stems/spec.md`, lane-chart pipeline spec.
+8. `audio/Heavens_Edge/stems/sonic-annotator.md`, command cookbook for BeatRoot,
    pYIN, Aubio, and CREPE experiments.
-8. `audio/Heavens_Edge/stems/AGENTS.md`, local notes for the main audio workflow
+9. `audio/Heavens_Edge/stems/AGENTS.md`, local notes for the main audio workflow
    subtree.
 
 If you are here to build the Roblox game layer, start with `GAME_DESIGN.md` and
-`SYSTEMS_MAP.md`, then follow the map's detailed-spec sequence before defining
-technical architecture.
+`SYSTEMS_MAP.md`, then use `SYSTEM_SPECIFICATIONS_TRACKER.md` to enter the
+completed detailed-spec set before defining technical architecture.
 
 If you are here to generate charts from songs, start with `Current audio pipeline`.
 
@@ -46,6 +48,9 @@ roblox-bands-battle/
 |-- GAME_VISION.md               # product north star and scope authority
 |-- GAME_DESIGN.md
 |-- SYSTEMS_MAP.md                # system ownership and spec sequence
+|-- SYSTEM_SPECIFICATIONS_TRACKER.md # links to all 13 approved system specs
+|-- CONTENT_AUTHORING.md          # reconciled offline content contract
+|-- PLAYER_DATA.md                # durable profile and transaction contract
 |-- ART_DIRECTION.md              # canonical visual style and asset guidance
 |-- trello_notes.md                 # raw brainstorming notes
 |-- chatgpt_chat.md                 # raw core-loop discussion

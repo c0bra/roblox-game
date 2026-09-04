@@ -358,6 +358,10 @@ Analytics consume without owning the semantics.
 
 ## 17. Content Authoring reconciliation register
 
+The following requirements were reconciled into
+[`CONTENT_AUTHORING.md`](CONTENT_AUTHORING.md#14-cross-specification-handoffs-and-reconciliation)
+on 2026-09-02:
+
 - Content revisions need stable record-compatibility identity and explicit
   compatible/incompatible relationship to the preceding revision for every
   personal-best category affected by chart/scoring changes.

@@ -329,10 +329,12 @@ gameplay domains roster/eligibility, Results/Rewards participation evidence,
 Player Data required durable facts, and Analytics privacy-reviewed semantics.
 
 Pre-start failure rolls back safely. Player-local runtime failure uses grace or
-local Rhythm suspension. Global authoritative session/roster/clock corruption
-that prevents fair outcome evaluation sends an exact critical-failure fact to
-Boss Encounters for No Contest. Noncritical communication/presentation failure
-cannot fabricate consent or gameplay.
+local Rhythm suspension. Loss of the only usable input profile during cooperative
+play uses UI/UX's identified input-unavailable Rhythm suspension; it does not
+pause the shared song or change active-roster membership. Global authoritative
+session/roster/clock corruption that prevents fair outcome evaluation sends an
+exact critical-failure fact to Boss Encounters for No Contest. Noncritical
+communication/presentation failure cannot fabricate consent or gameplay.
 
 ## 17. Operational configuration and verification
 

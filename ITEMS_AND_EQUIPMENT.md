@@ -336,6 +336,10 @@ recommendations, incomplete presets, or migration findings.
 
 ## 16. Content Authoring reconciliation register
 
+The following requirements were reconciled into
+[`CONTENT_AUTHORING.md`](CONTENT_AUTHORING.md#14-cross-specification-handoffs-and-reconciliation)
+on 2026-09-02:
+
 - Song packages must reference stable global role identities and explicitly
   declare playable/unavailable roles with compatible chart/audio mappings.
 - Validation rejects unknown/retired role identities and never infers support

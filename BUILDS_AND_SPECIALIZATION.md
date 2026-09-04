@@ -338,7 +338,9 @@ duration/cooldown, and acolyte exclusion.
 
 Builds are global catalog data. Song packages declare normal roles/hooks and may
 not hide build behavior, overrides, multipliers, bans, or player substitutions.
-`CONTENT_AUTHORING.md` must preserve that boundary during final reconciliation.
+The completed 2026-09-02
+[`CONTENT_AUTHORING.md`](CONTENT_AUTHORING.md#14-cross-specification-handoffs-and-reconciliation)
+reconciliation preserves that boundary.
 
 ## 17. Deferred tuning and technical work
 

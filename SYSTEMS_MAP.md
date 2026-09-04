@@ -2,6 +2,7 @@
 
 - **Status:** Approved systems-map baseline
 - **Approved:** 2026-08-18
+- **Specification sequence completed:** 2026-09-02
 - **Parent design:** [`GAME_DESIGN.md`](GAME_DESIGN.md)
 - **Higher authorities:** [`GAME_VISION.md`](GAME_VISION.md) and
   [`ART_DIRECTION.md`](ART_DIRECTION.md)
@@ -82,6 +83,13 @@ behavior and policy layered on those capabilities.
 | Content and Platform | Song, Chart & Encounter Authoring | First-Release-Supporting Production System | `CONTENT_AUTHORING.md` |
 | Content and Platform | Player Data | First-Release Runtime Platform System | `PLAYER_DATA.md` |
 | Content and Platform | Analytics & Playtest Evidence | First-Release-Supporting Production System | `PLAYTEST_AND_ANALYTICS.md` |
+
+The **Major unresolved decisions** fields below preserve the decomposition
+questions that existed when this map was approved. For entries backed by one of
+the thirteen canonical specifications, those questions are now resolved in the
+linked specification. Numeric balance, final content/assets, naming, platform
+policy, playtest research, and technical implementation remain in their
+explicitly named downstream documents.
 
 ## 4. Core Battle
 
@@ -592,8 +600,9 @@ behavior and policy layered on those capabilities.
 This system is an offline, platform-neutral extension of the maintained
 [`tools/chart-pipeline/`](tools/chart-pipeline/README.md), not a Roblox runtime
 feature. Its first pass establishes canonical song data before gameplay specs.
-It receives a mandatory reconciliation after specifications 2 through 12 and
-before technical architecture is finalized.
+Its mandatory reconciliation against specifications 2 through 12 completed on
+2026-09-02 and now gates technical architecture through the consolidated
+publication contract in `CONTENT_AUTHORING.md` section 14.
 
 ### 8.2 Player Data
 
@@ -744,12 +753,18 @@ The approved order is:
 12. `AUDIO_PRESENTATION.md`
 13. `PLAYER_DATA.md`
 
+All thirteen canonical specifications are approved. The sequence and mandatory
+Content Authoring reconciliation completed on 2026-09-02. This satisfies the
+system-specification prerequisite for technical architecture; the separately
+tracked `BALANCE_FRAMEWORK.md`, `PLAYTEST_AND_ANALYTICS.md`, and naming/tone work
+remain required supporting design inputs.
+
 `CONTENT_AUTHORING.md` first establishes the offline song-data and exported
-bundle contract. After specifications 2 through 12 identify their complete
-authored-data and validation needs, it receives a mandatory reconciliation pass.
-Only after that reconciliation and the other architecture-critical
-specifications are sufficiently settled may `TECHNICAL_ARCHITECTURE.md` become
-canonical.
+bundle contract. Specifications 2 through 12 then identify their complete
+authored-data and validation needs, which the mandatory reconciliation folds
+back into that contract. Only after that reconciliation and the other
+architecture-critical specifications are sufficiently settled may
+`TECHNICAL_ARCHITECTURE.md` become canonical.
 
 `BALANCE_FRAMEWORK.md` and `PLAYTEST_AND_ANALYTICS.md` are supporting documents
 developed alongside later specifications. The required naming-and-tone pass is

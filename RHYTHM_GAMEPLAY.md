@@ -97,7 +97,7 @@ A player's ordinary chart has these semantic participation states:
 - **Participating:** actions may claim notes and earn contribution.
 - **Suspended:** ordinary chart events produce neither judgments nor output for
   a known cause such as movement, downing, authored inactivity, disconnect, AFK,
-  recovery, or synchronization loss.
+  recovery, input-device unavailability, or synchronization loss.
 - **Paused:** solo-only exact-time freeze of the song and encounter.
 - **Complete:** no further ordinary material exists for this player.
 
@@ -315,6 +315,12 @@ Re-entry first confirms exact content revision and clock confidence, then uses a
 safe note with adequate preview. Absence earns no contribution, prior accepted
 history remains, and a player who left while downed returns downed.
 
+If a cooperative player has no usable input profile after active-device loss,
+UI/UX requests an identified input-unavailable suspension. It creates no Misses
+or contribution, does not pause shared song time, records lost participation
+coverage, and returns only after a usable profile exists and this section's fair
+preview rule succeeds. Solo instead uses the exact pause/resume contract.
+
 ## 13. Solo pause and resume
 
 Solo pause freezes immediately:
@@ -399,17 +405,20 @@ hands control to Multiplayer rather than inventing results.
 
 ## 17. Content Authoring reconciliation register
 
-These entries must be reconciled into the final Content Authoring contract after
-specifications 2 through 12 are complete.
+These entries were reconciled into
+[`CONTENT_AUTHORING.md`](CONTENT_AUTHORING.md#14-cross-specification-handoffs-and-reconciliation)
+on 2026-09-02. The table remains the Rhythm-owned source for implementation and
+publication evidence; its support-status column describes work still required,
+not an unresolved design boundary.
 
 | Rhythm requirement | Semantic data | Required validation | Consumers | Compatibility/support status |
 |---|---|---|---|---|
-| Stable runtime identities | Immutable revision plus event, phrase, passage, role, and difficulty identity | Uniqueness, lineage, and no cross-revision collisions | Rhythm, Multiplayer, Combat, Results | Existing identity model; runtime granularity must be confirmed |
-| Legal first-release patterns | Lane/action type, hold spans, repeat timing | Reject overlapping holds, events on a held lane, and physically infeasible release/repress density | Rhythm, authoring UI | New explicit validators required |
-| Equal passage budget | Per-event normalized weights for every playable role/difficulty | Weights sum to the common budget; no density or difficulty changes the ceiling | Rhythm, Combat, Results | New export field/validator requirement |
-| Boundary-crossing holds | Exact musical/exact-time span, phrase lineage, onset/duration allocation | Deterministic phrase closure and intent split at any effective beat boundary | Rhythm, Combat | Crossing marker exists; scoring fields require reconciliation |
-| Fair suspension re-entry | Eligible-note lookahead and minimum-preview evaluation facts | Every supported transition can find fair material without fake notes or arbitrary gaps | Rhythm, UI, encounters | Activity Map supports candidates; runtime field set must be confirmed |
-| Dynamic recovery | Candidate identity, supported role/difficulty/roster, conflicts, maximum delay, challenge kind | Required recovery candidate coverage for all supported configurations | Rhythm, Survival, Cooperative Actions | Existing baseline; no fixed revival timestamp permitted |
+| Stable runtime identities | Immutable revision plus event, phrase, passage, role, and difficulty identity | Uniqueness, lineage, and no cross-revision collisions | Rhythm, Multiplayer, Combat, Results | Reconciled; implementation must preserve runtime granularity |
+| Legal first-release patterns | Lane/action type, hold spans, repeat timing | Reject overlapping holds, events on a held lane, and physically infeasible release/repress density | Rhythm, authoring UI | Reconciled; explicit validators required |
+| Equal passage budget | Per-event normalized weights for every playable role/difficulty | Weights sum to the common budget; no density or difficulty changes the ceiling | Rhythm, Combat, Results | Reconciled; export field and validator required |
+| Boundary-crossing holds | Exact musical/exact-time span, phrase lineage, onset/duration allocation | Deterministic phrase closure and intent split at any effective beat boundary | Rhythm, Combat | Reconciled; scoring-field implementation required |
+| Fair suspension re-entry | Eligible-note lookahead and minimum-preview evaluation facts | Every supported transition can find fair material without fake notes or arbitrary gaps | Rhythm, UI, encounters | Reconciled; runtime lookahead fields required |
+| Dynamic recovery | Candidate identity, supported role/difficulty/roster, conflicts, maximum delay, challenge kind | Required recovery candidate coverage for all supported configurations | Rhythm, Survival, Cooperative Actions | Reconciled; no fixed revival timestamp permitted |
 
 Global Early Miss association range, release grace, grade factors, hold allocation,
 minimum preview lead, calibration bounds, drift thresholds, and resync limits are

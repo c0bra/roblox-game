@@ -1,6 +1,6 @@
 # Bands Battle UI/UX Specification Questions
 
-- **Status:** In progress; 0 of 12 questions resolved
+- **Status:** Interview complete; 12 of 12 questions resolved and reconciled
 - **Started:** 2026-08-30
 - **Parent systems:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#7-experience-shell)
 - **Player-facing authority:** [`GAME_DESIGN.md`](GAME_DESIGN.md)
@@ -9,7 +9,7 @@
 - **Multiplayer dependency:** [`MULTIPLAYER.md`](MULTIPLAYER.md)
 - **Items/preset dependency:** [`ITEMS_AND_EQUIPMENT.md`](ITEMS_AND_EQUIPMENT.md)
 - **Working record:** [`UI_UX_WORKING.md`](UI_UX_WORKING.md)
-- **Planned canonical result:** `UI_UX.md`
+- **Canonical result:** [`UI_UX.md`](UI_UX.md)
 
 ## 1. Interview method
 
@@ -75,7 +75,7 @@ unless a value is necessary to protect usability or gameplay fairness.
 
 #### UX-01 - Player jobs, experience modes, and navigation hierarchy
 
-- **Status:** Open.
+- **Status:** Resolved 2026-08-30.
 - **Decision needed:** What are the primary jobs players must accomplish, and
   how should the experience shell keep their current mode and next action clear?
 - **Must resolve:** First-time, returning, queued, staging, encounter, results,
@@ -85,7 +85,7 @@ unless a value is necessary to protect usability or gameplay fairness.
 
 #### UX-02 - Physical hub wayfinding and fast-access routes
 
-- **Status:** Open.
+- **Status:** Resolved 2026-08-30.
 - **Decision needed:** How do world navigation and menus cooperate so the hub is
   memorable without making repeat play or preparation slow?
 - **Must resolve:** Spawn/return placement, shard/anchor readability, locked and
@@ -95,7 +95,7 @@ unless a value is necessary to protect usability or gameplay fairness.
 
 #### UX-03 - Responsive shell, safe areas, and device navigation
 
-- **Status:** Open.
+- **Status:** Resolved 2026-08-30.
 - **Decision needed:** Which navigation and layout model should adapt across
   phone, tablet, desktop, and gamepad while preserving the same task structure?
 - **Must resolve:** Primary destinations, compact menu, tabs/drawers/panels,
@@ -107,7 +107,7 @@ unless a value is necessary to protect usability or gameplay fairness.
 
 #### UX-04 - Persistent encounter hierarchy and contextual surfaces
 
-- **Status:** Open.
+- **Status:** Resolved 2026-08-31.
 - **Decision needed:** What stays visible during battle, what appears only at the
   point of need, and how is attention divided between staff, boss, and team?
 - **Must resolve:** Persistent HUD regions, phrase staff/pads, survival/intent/
@@ -117,7 +117,7 @@ unless a value is necessary to protect usability or gameplay fairness.
 
 #### UX-05 - Semantic controls, remapping, and active-device transitions
 
-- **Status:** Open.
+- **Status:** Resolved 2026-08-31.
 - **Decision needed:** How do physical inputs map to semantic actions and remain
   safe when focus, device, context, or bindings change?
 - **Must resolve:** GD-06 mappings, fixed rhythm controls, context precedence,
@@ -127,7 +127,7 @@ unless a value is necessary to protect usability or gameplay fairness.
 
 #### UX-06 - Telegraphs, camera, position, and cue arbitration
 
-- **Status:** Open.
+- **Status:** Resolved 2026-08-31.
 - **Decision needed:** How do arena and interface cues reinforce one another
   without hiding the boss or creating contradictory instructions?
 - **Must resolve:** Attack geometry, targets/safe areas, position graph and
@@ -139,7 +139,7 @@ unless a value is necessary to protect usability or gameplay fairness.
 
 #### UX-07 - Onboarding, practice, and contextual teaching
 
-- **Status:** Open.
+- **Status:** Resolved 2026-08-31.
 - **Decision needed:** How does the approved practice sequence deliver first
   value quickly and then hand off to nonintrusive first-boss teaching?
 - **Must resolve:** Entry and accessibility setup, starter instrument, six
@@ -149,7 +149,7 @@ unless a value is necessary to protect usability or gameplay fairness.
 
 #### UX-08 - Staging, loadout, inventory, builds, upgrades, and store surfaces
 
-- **Status:** Open.
+- **Status:** Resolved 2026-08-31.
 - **Decision needed:** How should dense preparation and collection tasks remain
   understandable on phones without hiding exact consequences?
 - **Must resolve:** Task-based information architecture, current versus saved
@@ -159,7 +159,7 @@ unless a value is necessary to protect usability or gameplay fairness.
 
 #### UX-09 - Results summary, evidence, and next actions
 
-- **Status:** Open.
+- **Status:** Resolved 2026-08-31.
 - **Decision needed:** How does Results explain the attempt within seconds while
   making deeper evidence and the right follow-up easy to reach?
 - **Must resolve:** Brief presentation/skip, immediate hierarchy, exact-reason
@@ -171,7 +171,7 @@ unless a value is necessary to protect usability or gameplay fairness.
 
 #### UX-10 - Settings, calibration, accessibility, and saved profiles
 
-- **Status:** Open.
+- **Status:** Resolved 2026-08-31.
 - **Decision needed:** Which settings exist, where they are available, and how
   do players preview, save, reset, and understand their effects?
 - **Must resolve:** Calibration, remapping, touch layout, Hold Assist, scale/
@@ -181,7 +181,7 @@ unless a value is necessary to protect usability or gameplay fairness.
 
 #### UX-11 - Feedback, focus, loading, failure, and recovery states
 
-- **Status:** Open.
+- **Status:** Resolved 2026-08-31.
 - **Decision needed:** How does every surface remain truthful and recoverable
   during waiting, partial failure, network change, invalid state, or save risk?
 - **Must resolve:** Default/focus/active/disabled/loading/success/error states;
@@ -192,7 +192,7 @@ unless a value is necessary to protect usability or gameplay fairness.
 
 #### UX-12 - Design system, semantic outputs, localization, and acceptance
 
-- **Status:** Open.
+- **Status:** Resolved 2026-08-31.
 - **Decision needed:** Which component, content, semantic-event, and test
   contracts make the UI implementable without an agent inventing behavior?
 - **Must resolve:** Tokens and component catalog, complete state matrix, domain
@@ -227,3 +227,15 @@ unless a value is necessary to protect usability or gameplay fairness.
 
 - **2026-08-30:** Created the concise 12-question UI/UX interview from the
   approved GDD, Systems Map, canonical dependencies, and task-first UX review.
+- **2026-08-30:** Approved UX-01 through UX-03, completing experience
+  architecture, physical/fast hub navigation, and the responsive device shell.
+  Progress is 3 of 12 questions.
+- **2026-08-31:** Approved UX-04 through UX-06, completing the encounter HUD,
+  semantic controls/device transitions, and telegraph/camera/cue checkpoint.
+  Progress is 6 of 12 questions.
+- **2026-08-31:** Approved UX-07 through UX-09, completing onboarding/practice,
+  preparation/collection, and Results/post-battle checkpoint C. Progress is 9
+  of 12 questions.
+- **2026-08-31:** Approved UX-10 through UX-12, completing settings/accessibility,
+  system-state/recovery, and implementation-contract checkpoint D. All twelve
+  questions were reconciled into canonical `UI_UX.md`.

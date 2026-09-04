@@ -497,18 +497,21 @@ guidance. It never changes combat resolution or attribution.
 
 ## 19. Content Authoring reconciliation register
 
-These entries must be reconciled into Content Authoring after specifications 2
-through 12 are complete.
+These entries were reconciled into
+[`CONTENT_AUTHORING.md`](CONTENT_AUTHORING.md#14-cross-specification-handoffs-and-reconciliation)
+on 2026-09-02. The table remains the Combat-owned source for implementation and
+publication evidence; its support-status column describes work still required,
+not an unresolved design boundary.
 
 | Combat requirement | Semantic data | Required validation | Consumers | Compatibility/support status |
 |---|---|---|---|---|
-| Threat-focused Defend | Stable threat identity; affected-player eligibility; Telegraph/Commit/Impact/Recovery; mitigation-cap reference; cancellation | Targets lock at Commit; ties have stable order; mitigation cannot bind an impossible target | Combat, UI, Boss Encounters | Encounter baseline exists; runtime field set requires reconciliation |
-| Attack destination | Resolve layer/Momentum opportunity identity and eligibility at scoring boundaries | No pressure reaches locked/future layers; overflow disposition is deterministic | Combat, Boss Encounters, Results | New explicit consumer contract |
-| Incoming effects | Stable effect/target/geometry identity; damage/effect tags; cover interaction; difficulty reference; order | Gate order is complete; cover/avoidance and simultaneous impacts are reproducible | Combat, Survival, Positioning | Attack stages exist; effect tags/order need confirmation |
-| Dynamic return | Recovery candidate/challenge identity, valid roster/role/difficulty, maximum delay, conflicts | Required co-op/solo return remains possible for supported configurations without a fixed trigger timestamp | Survival, Rhythm, Boss Encounters | Activity Map baseline exists |
-| Signature/group boundaries | Stable activation/action identity, valid start/end/resolution boundaries, conflicts | Committed group resolves once; invalid pre-start request retains its resource when required | Combat, Abilities, Rhythm | Candidate model exists; effect boundary fields need reconciliation |
-| Multi-target authored effect | Eligibility, distribution form, roster-aware cap reference, invalid-recipient fallback | Total application cannot multiply unintentionally with roster size | Combat, Abilities, Results | New explicit validator/contract |
-| Same-time order | Stable global event order and exact logical time | Ties reproduce across export/runtime and never use receipt order | Combat, Boss Encounters, Multiplayer | Clock exists; global tie-order support must be confirmed |
+| Threat-focused Defend | Stable threat identity; affected-player eligibility; Telegraph/Commit/Impact/Recovery; mitigation-cap reference; cancellation | Targets lock at Commit; ties have stable order; mitigation cannot bind an impossible target | Combat, UI, Boss Encounters | Reconciled; runtime fields and validators required |
+| Attack destination | Resolve layer/Momentum opportunity identity and eligibility at scoring boundaries | No pressure reaches locked/future layers; overflow disposition is deterministic | Combat, Boss Encounters, Results | Reconciled; explicit consumer implementation required |
+| Incoming effects | Stable effect/target/geometry identity; damage/effect tags; cover interaction; difficulty reference; order | Gate order is complete; cover/avoidance and simultaneous impacts are reproducible | Combat, Survival, Positioning | Reconciled; effect-tag/order implementation required |
+| Dynamic return | Recovery candidate/challenge identity, valid roster/role/difficulty, maximum delay, conflicts | Required co-op/solo return remains possible for supported configurations without a fixed trigger timestamp | Survival, Rhythm, Boss Encounters | Reconciled through Activity Map candidate contract |
+| Signature/group boundaries | Stable activation/action identity, valid start/end/resolution boundaries, conflicts | Committed group resolves once; invalid pre-start request retains its resource when required | Combat, Abilities, Rhythm | Reconciled; boundary-field implementation required |
+| Multi-target authored effect | Eligibility, distribution form, roster-aware cap reference, invalid-recipient fallback | Total application cannot multiply unintentionally with roster size | Combat, Abilities, Results | Reconciled; explicit validator required |
+| Same-time order | Stable global event order and exact logical time | Ties reproduce across export/runtime and never use receipt order | Combat, Boss Encounters, Multiplayer | Reconciled; global tie-order implementation required |
 
 Combat formulae, item/build definitions, Ward numbers, and balance tables remain
 versioned system data rather than private values embedded in individual chart

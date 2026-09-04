@@ -430,20 +430,23 @@ a required cue or change timing, targeting, geometry, state, or outcome.
 
 ## 19. Content Authoring reconciliation register
 
-These entries must be reconciled into Content Authoring after specifications 2
-through 12 are complete.
+These entries were reconciled into
+[`CONTENT_AUTHORING.md`](CONTENT_AUTHORING.md#14-cross-specification-handoffs-and-reconciliation)
+on 2026-09-02. The table remains the Encounter-owned source for implementation
+and publication evidence; its support-status column describes work still
+required, not an unresolved design boundary.
 
 | Encounter requirement | Semantic data | Required validation | Consumers | Compatibility/support status |
 |---|---|---|---|---|
-| Song-shaped lifecycle | Ordered function regions, Resolve openings, finishing identity/boundary, shared tie order | Regions cover intended song; three openings/finisher valid; ties deterministic | Encounter, UI, Audio, Results | Baseline exists; explicit global order requires confirmation |
-| Momentum/post-break ranges | Eligibility boundaries and bank kind | No overlap/confusion; neither substitutes finishing | Encounter, Combat, Rewards | New explicit runtime distinction |
-| Reproducible candidates | Family, seed weight, cooldown/repeat group, intensity cost, variants, preview/duration, priority, delay, fallback, future-capacity effect | Filter/selection reproducible; required future events remain feasible | Encounter, Abilities, Analytics | Candidate model exists; metadata expansion required |
-| Attack contract | Stage times, target/geometry/effect/hazard identity, cue requirements, Commit locks, cancellation, Recovery advantage | Lead/response fair; targets/geometry stable; hazards fully bounded | Encounter, Combat, Positioning, UI/Audio | Stage baseline exists; runtime fields need reconciliation |
-| Conflict coverage | Reservations, priority, max delay, required/optional classification | Full matrix passes for every role/difficulty/roster; only recovery has universal fallback | Encounter, Rhythm, Abilities | New comprehensive validator |
-| Arena graph | Location/edge identity, geometry, anchors, starts/fallbacks, risk/cover/hazard tags, transformations | Reachability and readable response survive every authored graph state | Positioning, Encounter, UI | Baseline concept exists; schema required |
-| Travel and displacement | Route geometry/duration, multi-edge boundaries, mutation constraints, fallback | Committed route stays legal; no trap/teleport/body-block; timings consistent | Positioning, Rhythm, Combat | New explicit runtime contract |
-| Scaling variants | Difficulty and one-to-six-human Resolve/target/geometry envelopes | Open-layer snapshots deterministic; cue/response clarity retained | Encounter, Combat, Multiplayer | GDD values exist; authored variant coverage required |
-| Critical validity | Critical cue/data classification and safe degradation/cancellation | Outcome-critical data survives export/load; failure produces No Contest | Encounter, UI/Audio, Results | New release/operational gate |
+| Song-shaped lifecycle | Ordered function regions, Resolve openings, finishing identity/boundary, shared tie order | Regions cover intended song; three openings/finisher valid; ties deterministic | Encounter, UI, Audio, Results | Reconciled; global-order implementation required |
+| Momentum/post-break ranges | Eligibility boundaries and bank kind | No overlap/confusion; neither substitutes finishing | Encounter, Combat, Rewards | Reconciled; explicit runtime distinction required |
+| Reproducible candidates | Family, seed weight, cooldown/repeat group, intensity cost, variants, preview/duration, priority, delay, fallback, future-capacity effect | Filter/selection reproducible; required future events remain feasible | Encounter, Abilities, Analytics | Reconciled; expanded metadata implementation required |
+| Attack contract | Stage times, target/geometry/effect/hazard identity, cue requirements, Commit locks, cancellation, Recovery advantage | Lead/response fair; targets/geometry stable; hazards fully bounded | Encounter, Combat, Positioning, UI/Audio | Reconciled; runtime fields and validators required |
+| Conflict coverage | Reservations, priority, max delay, required/optional classification | Full matrix passes for every role/difficulty/roster; only recovery has universal fallback | Encounter, Rhythm, Abilities | Reconciled; comprehensive validator required |
+| Arena graph | Location/edge identity, geometry, anchors, starts/fallbacks, risk/cover/hazard tags, transformations | Reachability and readable response survive every authored graph state | Positioning, Encounter, UI | Reconciled; runtime schema implementation required |
+| Travel and displacement | Route geometry/duration, multi-edge boundaries, mutation constraints, fallback | Committed route stays legal; no trap/teleport/body-block; timings consistent | Positioning, Rhythm, Combat | Reconciled; explicit runtime contract required |
+| Scaling variants | Difficulty and one-to-six-human Resolve/target/geometry envelopes | Open-layer snapshots deterministic; cue/response clarity retained | Encounter, Combat, Multiplayer | Reconciled; authored variant coverage required |
+| Critical validity | Critical cue/data classification and safe degradation/cancellation | Outcome-critical data survives export/load; failure produces No Contest | Encounter, UI/Audio, Results | Reconciled; release/operational gate required |
 
 Formulae, difficulty numbers, movement constants, and reward caps remain versioned
 balance/system configuration rather than private chart-note fields. Packages

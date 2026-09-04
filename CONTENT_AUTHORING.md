@@ -1,7 +1,8 @@
 # Bands Battle Content Authoring
 
-- **Status:** Approved foundational baseline; mandatory reconciliation pending
+- **Status:** Approved and reconciled
 - **Approved:** 2026-08-21
+- **Reconciled:** 2026-09-02
 - **Parent system map:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#81-song-chart--encounter-authoring)
 - **Player-facing authority:** [`GAME_DESIGN.md`](GAME_DESIGN.md)
 - **Decision source:** [`CONTENT_AUTHORING_WORKING.md`](CONTENT_AUTHORING_WORKING.md)
@@ -21,9 +22,9 @@ runtime execution, prescribe client/server architecture, or create an in-game or
 public song editor. A system boundary here is a semantic and workflow boundary,
 not a required TypeScript module, web framework, Roblox service, or file layout.
 
-This is the first-pass contract required before gameplay specifications. Specs 2
-through 12 must register new authored-data needs, after which this document
-receives a mandatory reconciliation before technical architecture is finalized.
+This was the first-pass contract required before gameplay specifications. Specs
+2 through 12 registered their authored-data needs, and the completed mandatory
+reconciliation in section 14 now governs technical-architecture handoff.
 
 ## 2. Governing principles
 
@@ -434,41 +435,216 @@ fairness workarounds are generalized immediately.
 
 ## 14. Cross-specification handoffs and reconciliation
 
-Known handoffs include:
+The mandatory reconciliation against canonical specifications 2 through 12 was
+completed on 2026-09-02. This section is now the authoritative consolidation of
+their song-, chart-, encounter-, audio-, cue-, and validation-data needs.
 
-- `RHYTHM_GAMEPLAY.md`: runtime clock/judgment semantics, complexity envelopes,
-  candidate timing requirements, and crossing-hold behavior.
-- `COMBAT.md`: intent/contribution attribution and recovery/revival requirements.
-- `BOSS_ENCOUNTERS.md`: event definitions, attack/movement conflicts, phase and
-  finishing requirements.
-- `ITEMS_AND_EQUIPMENT.md`: extensible global role/instrument catalog.
-- `ABILITIES_AND_COOPERATIVE_ACTIONS.md`: Band Call/Crescendo candidate rules.
-- `MULTIPLAYER.md`: allowed rosters and song-specific role selection.
-- `UI_UX.md`: unavailable-role presentation, accessibility, and authoring review
-  handoffs where applicable.
-- `AUDIO_PRESENTATION.md`: controllable-layer quality and runtime mix needs.
+### Ownership boundary
 
-Every spec 2–12 must register new authoring needs with owning system, semantic
-data, validator, consumer, compatibility impact, and current support status.
-After spec 12, this document is reconciled against the complete register.
+The platform-neutral content package owns authored music, timing, mapping,
+candidate, encounter, arena, cue-reference, and review evidence. Runtime systems
+own gameplay meaning and mutable state. Global system catalogs own formulae,
+balance values, item/build/ability definitions, reward pools, Progression rules,
+settings, and persistence behavior.
 
-The final audit must prove:
+Content may reference exact compatible catalog and balance revisions. It may not
+copy private system values into chart notes, hide build behavior or bans, define
+paid/economy outcomes, store player state, or create a competing runtime schema.
 
-- every downstream need has one authoritative representation;
-- no private competing song-data contract exists;
-- no package field is orphaned;
-- gameplay semantics remain with their owning systems;
-- consumers approve the reconciled contract; and
-- the first three packages can pass validation and Roblox review.
+Every runtime field declares:
+
+- stable identity and owning domain;
+- exact units, clock/reference frame, and content/schema revision;
+- required or optional status plus legal fallback/degradation behavior;
+- permitted consumers and privacy/access class;
+- compatibility and migration impact; and
+- the validator/review evidence required for publication.
+
+### Identity, compatibility, and global ordering
+
+The package preserves stable identities for song, encounter, content revision,
+role, difficulty, canonical event, derived event, phrase, passage, candidate,
+timeline event, attack, arena node/edge/state, cue, audio asset/layer, and
+practice/teaching trigger. Identities never collide across revisions.
+
+Every exact-time or musical-boundary event carries a stable global tie order.
+Runtime replay and export never use file, network, or receipt order to resolve
+ties.
+
+Each revision declares compatible/incompatible relationships to prior revisions,
+including personal-record categories affected by chart, scoring, duration,
+phrase, passage, role, or encounter changes. Campaign, mastery, reward, build,
+item, and recommendation catalogs remain system data referenced through stable
+boss/encounter and catalog identities.
+
+### Rhythm and contribution data
+
+For every playable role and difficulty, the runtime package includes:
+
+- legal lane/action type, exact musical/time position, hold span, repeat or
+  alternate grouping, phrase/passage lineage, and canonical-event lineage;
+- per-event normalized weight whose passage sum equals the shared maximum
+  contribution budget regardless of difficulty or note density;
+- deterministic onset/duration allocation and intent segmentation for holds
+  crossing phrase, passage, or effective scoring boundaries;
+- Activity Map lookahead required to evaluate fair suspension/re-entry; and
+- dynamic recovery candidate identity, challenge kind, role/difficulty/roster
+  support, conflict data, earliest legal start, and maximum delay.
+
+Release grace, judgment windows/factors, global Early Miss association,
+calibration bounds, drift/resync thresholds, and other runtime tuning remain
+versioned Rhythm/operational configuration rather than song-authored values.
+
+Publication rejects overlapping holds, another event on a held lane, physically
+infeasible release/repress density, fabricated musical material, unequal passage
+budgets, ambiguous crossing allocation, or supported transitions without fair
+re-entry/recovery material.
+
+### Encounter, combat, and arena data
+
+The encounter contract includes:
+
+- ordered Arrival, First Clash, Escalation, Climax, and Finishing Cadence regions;
+- three ordered Resolve openings, finishing identity/boundary, and explicit
+  Momentum/post-break eligibility ranges and bank kinds;
+- reproducible candidate family, seed weight, cooldown/repeat group, intensity
+  cost, variants, preview/duration, priority, maximum delay, fallback, and
+  future-capacity effect;
+- attack Telegraph/Commit/Impact/Recovery/cancellation boundaries, target and
+  geometry eligibility, effect/hazard tags, cover interaction, difficulty
+  reference, mitigation-cap reference, cues, and earned Recovery advantage;
+- Resolve-layer or Momentum destination eligibility and deterministic overflow;
+- multi-target distribution form, roster-aware cap reference, and invalid-target
+  fallback;
+- arena locations, edges, geometry/anchors, starts/fallbacks, cover/hazard/risk
+  tags, graph transformations, routes, travel/multi-edge timing, displacement,
+  and mutation constraints; and
+- difficulty and one-to-six-human Resolve, target, geometry, and coverage
+  variants without roster-created cue ambiguity.
+
+The compatibility/reservation matrix covers every fixed event and candidate.
+It proves required future events remain feasible, targets lock at Commit,
+committed routes remain legal, graph states stay reachable, lead/reaction time is
+fair, simultaneous effects reproduce, and critical data has an approved
+cancel/No Contest path when it cannot survive runtime/export.
+
+Combat formulae, Ward values, modifier caps, movement constants, candidate
+selection algorithms, and reward values remain versioned system/balance data.
+
+### Abilities, cooperative actions, and solo support
+
+Song/encounter packages reference exact compatible Ability definitions and
+provide authentic musical opportunity data for:
+
+- Signature legal boundary, target/fallback, typed effect reference, and cues;
+- Band Call readiness opportunities, maximum delay, lead, duration, conflict,
+  role/difficulty/roster coverage, effect/fallback reference, and cues;
+- two to four valid Crescendo candidates or an approved short-song exception,
+  including selection inputs, conflicts, preview/performance boundaries, tier/
+  effect references, Easy recovery evaluation, and one-normal-use proof; and
+- solo formations/locations, Vanguard clamp opportunities, Warden cadence/pulse,
+  Herald opportunity references, suppression/recovery, and cue mappings.
+
+Global Hype gain/thresholds, ability power, group caps, cooldowns, acolyte fixed
+contribution, and typed effect behavior remain Ability/balance catalogs. Packages
+do not grant acolytes charts, human judgments, performance credit, risk rewards,
+Resolve breaks, revival help, or player substitutions.
+
+Band Call invitation/performance and Crescendo preview/performance are mutually
+exclusive; the required Crescendo has priority. Dynamic recovery remains a live
+request matched to a fair candidate, never a fixed authored revival time.
+
+### Roles, multiplayer, and configuration
+
+Each package declares its supported subset of stable global role identities,
+with explicit playable/unavailable state, chart/audio/equivalent mappings, and
+compatibility for solo and every allowed two-to-six-human roster. Validation
+includes unrestricted duplicate and all-same-role cases. It never infers a role
+from item names or assumes drums, vocals, guitar, and bass must exist.
+
+Builds, Items, loadouts, three full spec presets, matchmaking, Ready, active
+roster, disconnect, AFK, rejoin, and Player Data remain runtime/system state.
+The package declares only stable compatible role/hook/capability references and
+cannot hide modifiers, composition locks, substitutions, or player-specific data.
+
+### Audio, UI, accessibility, and teaching data
+
+The runtime audio map includes:
+
+- one approved full-mix reference and, for every playable role, its backing plus
+  authentic controllable layer(s) or approved equivalent;
+- asset/layer identities, alignment, duration, channel layout, neutral level,
+  response capabilities, routes, preload/cache/fallback class, and exact revision;
+- neutral and maximum-response reconstruction evidence;
+- role-appropriate response definitions for judgment, hold, suspension, down,
+  return, pause/resume, and rejoin;
+- versioned buses/routes and dynamic-range, loudness, peak/headroom, ducking,
+  device, mono, spatial, and concurrency/eviction constraints; and
+- stable semantic audio definitions and lifecycle/cancel/idempotency behavior.
+
+Authored encounter/world mappings identify cue family, stage, priority,
+source/target/direction, timing, cancellation, coalescing, ducking, caption/source
+metadata, alternative modalities, and bounded optional haptic request for attacks,
+positions, graph changes, group/recovery windows, story/function transitions,
+landmarks, outcomes, dialogue/subtitles, crowd, ambience, and restoration state.
+
+Practice packages provide real safe content for the six approved onboarding
+modules and starter roles, plus calibration and first-boss teaching trigger/cue
+coverage. They contain content and stable cue identities, never hidden tutorial,
+UI layout, input, settings, or progression logic.
+
+Every required semantic cue survives export/load for all applicable roles,
+difficulties, rosters, and device/accessibility profiles. Critical meaning has
+visual/caption/optional-haptic alternatives and does not rely on color, stereo,
+sub-bass, extreme treble, loudness alone, or an image containing the only text.
+
+### Reconciled publication and review gates
+
+Deterministic publication validation now includes:
+
+- schema, identity, reference, lineage, global-order, and compatibility checks;
+- chart legality, physical feasibility, equal normalization, crossing holds,
+  Activity Maps, and re-entry/recovery coverage;
+- five-function lifecycle, Resolve/finishing, candidate reproducibility,
+  reservations/conflicts, attacks, graph/travel, scaling, and critical validity;
+- role availability and every allowed solo/two-to-six-human roster, including
+  duplicates and dropout-sensitive cases;
+- Signature, Band Call, Crescendo, solo-support, and semantic-cue coverage;
+- neutral/maximum audio reconstruction, phase/alignment, loudness/headroom/mono,
+  concurrency, cache/preload/degradation, captions, and alternatives;
+- phone-scale warning/target/geometry/countdown overlap and control/attention
+  conflict evidence; and
+- Roblox-export equivalence for every required identity, mapping, timing,
+  fallback, alternative, and integrity fact.
+
+Human review retains musical, encounter, phone Roblox, device/input,
+accessibility, audio A/B, solo/co-op, and independent-review evidence. The first
+three boss packages cannot publish until the complete reconciled matrix passes.
+
+### Reconciliation outcome
+
+The final design audit confirms:
+
+- every registered downstream need has one authoritative representation or an
+  explicit exact system-catalog reference;
+- no private competing chart, encounter, audio, gameplay, or player-data schema
+  is permitted;
+- every runtime field has an owner, consumer, fallback, compatibility impact,
+  and validator/review path, so no intentionally orphaned package field remains;
+- gameplay and persistence semantics remain with their owning systems; and
+- the platform-neutral package plus equivalence report is the only content
+  authority consumed by Roblox runtime.
 
 ## 15. Approval and change control
 
-The owner interview resolved CA-01 through CA-24 on 2026-08-21. This document is
-the canonical foundational Content Authoring design specification.
+The owner interview resolved CA-01 through CA-24 on 2026-08-21. The mandatory
+reconciliation against specifications 2 through 12 completed on 2026-09-02.
+This document is the canonical reconciled Content Authoring design specification.
 
-A later spec may refine a consumer requirement without silently changing this
-contract. New authoring requirements enter the reconciliation register. A
+A later design may refine a consumer requirement without silently changing this
+contract. New authoring requirements must identify their owner, representation,
+consumer, compatibility impact, and validation path before publication. A
 material change to system ownership, human approval authority, arrangement
 authenticity, platform-neutral authority, immutable revision semantics, or the
-mandatory reconciliation gate requires an explicit amendment citing the
+reconciled publication gates requires an explicit amendment citing the
 superseded decision.

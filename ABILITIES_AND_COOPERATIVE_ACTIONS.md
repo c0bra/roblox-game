@@ -352,6 +352,10 @@ guaranteed base, and fixed support; public results do not rank players.
 
 ## 16. Content Authoring reconciliation register
 
+The following requirements were reconciled into
+[`CONTENT_AUTHORING.md`](CONTENT_AUTHORING.md#14-cross-specification-handoffs-and-reconciliation)
+on 2026-09-02. This table remains the Ability-owned publication contract.
+
 | Contract | Required authored/configured data | Publication gate |
 |---|---|---|
 | Signature | Identity/revision, family, legal states/targets, base/bonus, boundary, typed effect, fallback, cues | No prohibited Rhythm/movement/recovery/reward/control effect; all targets/fallbacks valid |
