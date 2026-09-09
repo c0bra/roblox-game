@@ -5,9 +5,10 @@ This directory is the Roblox Studio game project. Gameplay code lives in `src/` 
 Before implementing gameplay, use [`GAME_DESIGN.md`](../GAME_DESIGN.md) for
 player-facing behavior and [`SYSTEMS_MAP.md`](../SYSTEMS_MAP.md) for system
 ownership and dependencies, then follow the approved documents linked from
-[`SYSTEM_SPECIFICATIONS_TRACKER.md`](../SYSTEM_SPECIFICATIONS_TRACKER.md). The
-systems map defines design boundaries, not a one-to-one Roblox service or module
-layout.
+[`SYSTEM_SPECIFICATIONS_TRACKER.md`](../SYSTEM_SPECIFICATIONS_TRACKER.md) and the
+shared numeric contract in
+[`BALANCE_FRAMEWORK.md`](../BALANCE_FRAMEWORK.md). The systems map defines design
+boundaries, not a one-to-one Roblox service or module layout.
 
 ## One-time setup
 

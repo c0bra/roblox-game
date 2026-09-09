@@ -6,6 +6,7 @@
 - **Completed:** 2026-09-02
 - **Authority:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md)
 - **Current specification:** Complete; supporting documents remain separate
+- **Current supporting document:** `PLAYTEST_AND_ANALYTICS.md` is next
 
 ## Purpose
 
@@ -56,6 +57,13 @@ to balance, content, naming, playtest, policy, or technical architecture.
 `BALANCE_FRAMEWORK.md` and `PLAYTEST_AND_ANALYTICS.md` remain required supporting
 documents and will be developed alongside the specifications that supply their
 inputs. They are tracked separately from the thirteen canonical system specs.
+
+### Supporting-document progress
+
+| Supporting document | State | Interview progress | Notes |
+|---|---|---:|---|
+| [`BALANCE_FRAMEWORK.md`](BALANCE_FRAMEWORK.md) | Approved | 15 of 15 | Canonical supporting specification published 2026-09-08 |
+| `PLAYTEST_AND_ANALYTICS.md` | Not started | 0 | Follows the Balance Framework evidence contract |
 
 ## Final audit coverage
 
@@ -282,3 +290,25 @@ The 2026-09-02 audit verified:
   through 12, closed their reconciliation registers, aligned receipt status
   vocabulary, validated local design links and document structure, and completed
   the final cross-specification ownership/consistency audit.
+- **2026-09-04:** Created the 15-question Balance Framework interview and working
+  record. Supporting-document progress is 0 of 15 questions.
+- **2026-09-04:** Resolved Balance Framework BF-01 through BF-03: priorities,
+  cohort outcome hypotheses, parameter governance, and difficulty/population
+  scaling. Supporting-document progress is 3 of 15 questions.
+- **2026-09-04:** Resolved Balance Framework BF-04 through BF-06: Rhythm
+  contribution/timing, Combat conversion/caps, and Ward/downing/recovery tuning.
+  Supporting-document progress is 6 of 15 questions.
+- **2026-09-04:** Resolved Balance Framework BF-07 through BF-09: boss pacing,
+  attack/position pressure, Hype/Signature/group-action timing, and bounded solo
+  support. Supporting-document progress is 9 of 15 questions.
+- **2026-09-08:** Resolved Balance Framework BF-10 through BF-12: item/build
+  power, rank/uplift relationships, campaign/General/Mastery pacing, resources,
+  drops, recipes, personal reward caps, and Commerce parity. Supporting-document
+  progress is 12 of 15 questions.
+- **2026-09-08:** Resolved Balance Framework BF-13 through BF-15: simulations,
+  target-age evidence, structural findings, tuning lifecycle/approval, rollout/
+  rollback, canonical artifacts, machine-readable catalog handoff, and system
+  boundaries. Interview progress is 15 of 15; canonical drafting began.
+- **2026-09-08:** Published and audited canonical `BALANCE_FRAMEWORK.md`.
+  Supporting-document progress is complete at 15 of 15; Playtest & Analytics is
+  next.

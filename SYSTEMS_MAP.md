@@ -265,9 +265,11 @@ explicitly named downstream documents.
   Solo Support, Multiplayer, Authoring, Rewards, Progression, Results, and
   Analytics.
 - **Needs detailed spec?:** No standalone system spec. Every affected spec
-  contains a scaling section; `BALANCE_FRAMEWORK.md` holds shared values.
-- **Major unresolved decisions:** Exact matrices, curves, thresholds, caps,
-  reward modifiers, and acceptable solo/co-op variance.
+  contains a scaling section;
+  [`BALANCE_FRAMEWORK.md`](BALANCE_FRAMEWORK.md) holds shared values.
+- **Major unresolved decisions:** Resolved by `BALANCE_FRAMEWORK.md`; individual
+  song/boss values remain explicit hypotheses until their required evidence
+  promotes an exact profile revision.
 - **GDD sources:** GD-07, GD-08, GD-13 through GD-21, GD-24 through GD-28,
   GD-31, GD-33, and GD-34.
 
@@ -766,9 +768,9 @@ back into that contract. Only after that reconciliation and the other
 architecture-critical specifications are sufficiently settled may
 `TECHNICAL_ARCHITECTURE.md` become canonical.
 
-`BALANCE_FRAMEWORK.md` and `PLAYTEST_AND_ANALYTICS.md` are supporting documents
-developed alongside later specifications. The required naming-and-tone pass is
-a separate product task.
+`BALANCE_FRAMEWORK.md` was approved on 2026-09-08.
+`PLAYTEST_AND_ANALYTICS.md` remains the next supporting document. The required
+naming-and-tone pass is a separate product task.
 
 No standalone specification is initially required for Player Survival &
 Recovery, Tactical Positioning & Movement, Solo Support, Difficulty & Scaling,

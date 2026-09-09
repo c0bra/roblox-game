@@ -24,17 +24,20 @@ Read these first:
    detailed-spec sequence.
 5. `SYSTEM_SPECIFICATIONS_TRACKER.md`, links and completion status for all 13
    approved detailed design specifications.
-6. `ART_DIRECTION.md`, canonical look and feel for characters, environments, UI,
+6. `BALANCE_FRAMEWORK.md`, shared balance units, starting hypotheses, scaling,
+   evidence requirements, and tuning change control.
+7. `ART_DIRECTION.md`, canonical look and feel for characters, environments, UI,
    materials, lighting, VFX, and visual production.
-7. `audio/Heavens_Edge/stems/spec.md`, lane-chart pipeline spec.
-8. `audio/Heavens_Edge/stems/sonic-annotator.md`, command cookbook for BeatRoot,
+8. `audio/Heavens_Edge/stems/spec.md`, lane-chart pipeline spec.
+9. `audio/Heavens_Edge/stems/sonic-annotator.md`, command cookbook for BeatRoot,
    pYIN, Aubio, and CREPE experiments.
-9. `audio/Heavens_Edge/stems/AGENTS.md`, local notes for the main audio workflow
+10. `audio/Heavens_Edge/stems/AGENTS.md`, local notes for the main audio workflow
    subtree.
 
 If you are here to build the Roblox game layer, start with `GAME_DESIGN.md` and
 `SYSTEMS_MAP.md`, then use `SYSTEM_SPECIFICATIONS_TRACKER.md` to enter the
-completed detailed-spec set before defining technical architecture.
+completed detailed-spec set and `BALANCE_FRAMEWORK.md` for shared numeric
+relationships before defining technical architecture.
 
 If you are here to generate charts from songs, start with `Current audio pipeline`.
 
@@ -49,6 +52,7 @@ roblox-bands-battle/
 |-- GAME_DESIGN.md
 |-- SYSTEMS_MAP.md                # system ownership and spec sequence
 |-- SYSTEM_SPECIFICATIONS_TRACKER.md # links to all 13 approved system specs
+|-- BALANCE_FRAMEWORK.md          # shared balance and tuning contract
 |-- CONTENT_AUTHORING.md          # reconciled offline content contract
 |-- PLAYER_DATA.md                # durable profile and transaction contract
 |-- ART_DIRECTION.md              # canonical visual style and asset guidance
