@@ -82,7 +82,7 @@ behavior and policy layered on those capabilities.
 | Experience Shell | Audio Presentation | First-Release Runtime System | `AUDIO_PRESENTATION.md` |
 | Content and Platform | Song, Chart & Encounter Authoring | First-Release-Supporting Production System | `CONTENT_AUTHORING.md` |
 | Content and Platform | Player Data | First-Release Runtime Platform System | `PLAYER_DATA.md` |
-| Content and Platform | Analytics & Playtest Evidence | First-Release-Supporting Production System | `PLAYTEST_AND_ANALYTICS.md` |
+| Content and Platform | Analytics & Playtest Evidence | First-Release-Supporting Production System | [`PLAYTEST_AND_ANALYTICS.md`](PLAYTEST_AND_ANALYTICS.md) |
 
 The **Major unresolved decisions** fields below preserve the decomposition
 questions that existed when this map was approved. For entries backed by one of
@@ -645,11 +645,11 @@ publication contract in `CONTENT_AUTHORING.md` section 14.
 - **Used by:** Design review, Authoring validation, Difficulty & Scaling,
   `BALANCE_FRAMEWORK.md`, spec validation plans, Results where privately
   approved, and release-readiness decisions.
-- **Needs detailed spec?:** Yes—`PLAYTEST_AND_ANALYTICS.md` as a supporting
-  document.
-- **Major unresolved decisions:** Event meanings/payloads, identifiers,
-  retention/consent, study protocol, segmentation, confidence, and operational
-  sign-off.
+- **Needs detailed spec?:** Yes—[`PLAYTEST_AND_ANALYTICS.md`](PLAYTEST_AND_ANALYTICS.md)
+  as an approved supporting document.
+- **Major unresolved decisions:** Resolved by `PLAYTEST_AND_ANALYTICS.md` for the
+  design boundary; exact schemas, transport, storage, security, platform-policy
+  integration, and operational tools remain Technical Architecture/policy work.
 - **GDD sources:** GD-07 through GD-10, GD-21 through GD-23, GD-28, GD-29,
   GD-32 through GD-34.
 
@@ -757,9 +757,9 @@ The approved order is:
 
 All thirteen canonical specifications are approved. The sequence and mandatory
 Content Authoring reconciliation completed on 2026-09-02. This satisfies the
-system-specification prerequisite for technical architecture; the separately
-tracked `BALANCE_FRAMEWORK.md`, `PLAYTEST_AND_ANALYTICS.md`, and naming/tone work
-remain required supporting design inputs.
+system-specification prerequisite for technical architecture. The separately
+tracked Balance Framework and Playtest & Analytics supporting specifications are
+also approved; the naming-and-tone pass remains a required product input.
 
 `CONTENT_AUTHORING.md` first establishes the offline song-data and exported
 bundle contract. Specifications 2 through 12 then identify their complete
@@ -769,8 +769,8 @@ architecture-critical specifications are sufficiently settled may
 `TECHNICAL_ARCHITECTURE.md` become canonical.
 
 `BALANCE_FRAMEWORK.md` was approved on 2026-09-08.
-`PLAYTEST_AND_ANALYTICS.md` remains the next supporting document. The required
-naming-and-tone pass is a separate product task.
+`PLAYTEST_AND_ANALYTICS.md` was approved on 2026-09-09. The required naming-and-
+tone pass is the next product task.
 
 No standalone specification is initially required for Player Survival &
 Recovery, Tactical Positioning & Movement, Solo Support, Difficulty & Scaling,

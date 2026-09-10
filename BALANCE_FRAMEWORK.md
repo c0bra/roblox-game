@@ -695,9 +695,10 @@ evidence identifies a parameter relationship inside its approved range.
 Outliers require predefined data-quality reasons for exclusion, with count and
 reason retained. Aggregates cannot hide a materially failing segment.
 
-`PLAYTEST_AND_ANALYTICS.md` will operationalize recruitment, consent,
-safeguarding, instrumentation, sample/confidence interpretation, data quality,
-retention/access, reports, and sign-off without weakening these gates.
+[`PLAYTEST_AND_ANALYTICS.md`](PLAYTEST_AND_ANALYTICS.md) operationalizes practical
+participant sessions, minimum safeguards, instrumentation, simple sample
+interpretation, data quality, retention/access, reports, and sign-off without
+weakening these gates.
 
 ## 16. Tuning approval, rollout, and rollback
 
@@ -819,7 +820,7 @@ still includes:
 - complete item, ability, build, progression, milestone, reward, and economy
   catalogs inside these budgets;
 - simulation/reference-player implementation and generated reports/diffs;
-- target-age playtest execution and formal Playtest/Analytics procedures;
+- target-age playtest execution under `PLAYTEST_AND_ANALYTICS.md`;
 - final player-facing names, copy, and localized terminology;
 - storage, transport, security, authority, experiment, rollout, rollback, and
   operational implementation; and

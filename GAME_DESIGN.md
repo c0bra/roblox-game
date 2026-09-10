@@ -1831,10 +1831,11 @@ These product-level constraints are settled:
   favorable average score. Structural problems return to design, while numeric
   tuning remains appropriate only when players understand the system and its
   outcomes.
-- **Deferred:** Formal research protocol, recruitment, consent and safeguarding,
-  device matrix, instrumentation, statistical confidence, exact thresholds,
-  technical release gates, issue severity, and sign-off ownership require a
-  dedicated playtest and release-readiness plan.
+- **Follow-up:** [`PLAYTEST_AND_ANALYTICS.md`](PLAYTEST_AND_ANALYTICS.md) now
+  defines the lightweight participant/session process, minimum safeguards,
+  coverage, instrumentation meanings, simple sample interpretation, issue
+  severity, and sign-off ownership. Technical release gates and current
+  platform/privacy compliance remain Technical Architecture and policy work.
 
 ## 5. Required follow-up and deferred specifications
 

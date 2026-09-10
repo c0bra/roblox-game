@@ -26,18 +26,21 @@ Read these first:
    approved detailed design specifications.
 6. `BALANCE_FRAMEWORK.md`, shared balance units, starting hypotheses, scaling,
    evidence requirements, and tuning change control.
-7. `ART_DIRECTION.md`, canonical look and feel for characters, environments, UI,
+7. `PLAYTEST_AND_ANALYTICS.md`, lightweight session procedure, semantic evidence,
+   readiness gates, basic analytics, and release review.
+8. `ART_DIRECTION.md`, canonical look and feel for characters, environments, UI,
    materials, lighting, VFX, and visual production.
-8. `audio/Heavens_Edge/stems/spec.md`, lane-chart pipeline spec.
-9. `audio/Heavens_Edge/stems/sonic-annotator.md`, command cookbook for BeatRoot,
+9. `audio/Heavens_Edge/stems/spec.md`, lane-chart pipeline spec.
+10. `audio/Heavens_Edge/stems/sonic-annotator.md`, command cookbook for BeatRoot,
    pYIN, Aubio, and CREPE experiments.
-10. `audio/Heavens_Edge/stems/AGENTS.md`, local notes for the main audio workflow
+11. `audio/Heavens_Edge/stems/AGENTS.md`, local notes for the main audio workflow
    subtree.
 
 If you are here to build the Roblox game layer, start with `GAME_DESIGN.md` and
 `SYSTEMS_MAP.md`, then use `SYSTEM_SPECIFICATIONS_TRACKER.md` to enter the
 completed detailed-spec set and `BALANCE_FRAMEWORK.md` for shared numeric
-relationships before defining technical architecture.
+relationships. Use `PLAYTEST_AND_ANALYTICS.md` for the evidence contract before
+defining technical architecture.
 
 If you are here to generate charts from songs, start with `Current audio pipeline`.
 
@@ -53,6 +56,7 @@ roblox-bands-battle/
 |-- SYSTEMS_MAP.md                # system ownership and spec sequence
 |-- SYSTEM_SPECIFICATIONS_TRACKER.md # links to all 13 approved system specs
 |-- BALANCE_FRAMEWORK.md          # shared balance and tuning contract
+|-- PLAYTEST_AND_ANALYTICS.md     # lightweight evidence and readiness contract
 |-- CONTENT_AUTHORING.md          # reconciled offline content contract
 |-- PLAYER_DATA.md                # durable profile and transaction contract
 |-- ART_DIRECTION.md              # canonical visual style and asset guidance
