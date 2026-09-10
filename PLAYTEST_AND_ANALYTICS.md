@@ -4,6 +4,7 @@
 - **Approved:** 2026-09-09
 - **Parent system:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#83-analytics--playtest-evidence)
 - **Player-facing authority:** [`GAME_DESIGN.md`](GAME_DESIGN.md)
+- **Player-language contract:** [`NAMING_AND_TONE.md`](NAMING_AND_TONE.md)
 - **Evidence authority:** [`BALANCE_FRAMEWORK.md`](BALANCE_FRAMEWORK.md)
 - **Content contract:** [`CONTENT_AUTHORING.md`](CONTENT_AUTHORING.md)
 - **Player-data contract:** [`PLAYER_DATA.md`](PLAYER_DATA.md)
@@ -308,9 +309,9 @@ explicitly unavailable.
 | Party/matching/staging | Multiplayer | Invitation/proposal presented, accepted/declined, Ready/lock, roster, queue, disconnect/grace/rejoin/AFK, follow-up choice |
 | Attempt lifecycle | Boss Encounters | Preparing/Running/pause/Resolving/Complete/Invalid, exact roster snapshot, Victory/Defeat/No Contest and frozen reason |
 | Rhythm | Rhythm Gameplay | Eligible opportunity, input attempt, unmatched early attempt, judgment/hold result, available/earned weight, suspension/resume, calibration/sync health |
-| Combat/survival | Combat | Intent accepted/rejected, settled contribution/effect/cap, Ward change, down, revival help/completion, solo recovery, finish evidence |
+| Combat/survival | Combat | Intent accepted/rejected, settled contribution/effect/cap, Ward change, down, Revive help/completion, Last Stand, finish evidence |
 | Boss/position | Boss Encounters and Positioning | Telegraph/Commit/Impact/Recovery, source/target/geometry/response, position/movement/cover/hazard state, cancellation/invalidation |
-| Abilities/cooperation | Abilities & Cooperative Actions | Hype/Signature readiness/use, Band Call/Crescendo invitation/response/result, effect/cap, acolyte action clearly separated from human action |
+| Abilities/cooperation | Abilities & Cooperative Actions | Hype/Signature readiness/use, Band Call/Crescendo invitation/response/result, effect/cap, Order Ally action clearly separated from human action |
 | Audio/presentation/accessibility | Audio Presentation and UI/UX | Required cue/layer/request, locally presented/recognized health, caption/haptic/fallback, degradation/failure, output/control profile application |
 | Results/value/next action | Results, Rewards, Progression, Items/Builds | Results shown/interactive, confirmed outcome/reason/reward/progress, private breakdown/suggestion presented, qualifying next action or explicit exit |
 | Validity/technical health | Owning runtime/platform system | Critical data/cue/service validity, mismatch, cancellation, No Contest, event/data loss or correction needed to qualify evidence |

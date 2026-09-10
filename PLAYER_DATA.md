@@ -4,6 +4,7 @@
 - **Approved:** 2026-09-02
 - **Parent system:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#82-player-data)
 - **Player-facing authority:** [`GAME_DESIGN.md`](GAME_DESIGN.md)
+- **Player-language contract:** [`NAMING_AND_TONE.md`](NAMING_AND_TONE.md)
 - **Progression dependency:** [`PROGRESSION.md`](PROGRESSION.md)
 - **Items dependency:** [`ITEMS_AND_EQUIPMENT.md`](ITEMS_AND_EQUIPMENT.md)
 - **Rewards/Commerce dependency:** [`REWARDS_AND_ECONOMY.md`](REWARDS_AND_ECONOMY.md)
@@ -69,7 +70,7 @@ player-visible behavior.
     owned items, unlocks, entitlements, receipts, or correction history are not
     dropped, clamped, substituted, or rewritten.
 13. **Explicit choice survives:** migration and repair never invent a replacement
-    loadout, build, preset, item, or accessibility preference for the player.
+    Loadout, Battle Style, item, or accessibility preference for the player.
 14. **Active attempts are immutable:** catalog/schema work never mutates an
     encounter's locked snapshot or creates a second permanent encounter model.
 15. **Verified receipts only:** client or quote state never authorizes a paid
@@ -100,11 +101,11 @@ The logical record includes the following durable categories.
 
 ### Progression
 
-- campaign nodes, fragments, first-clear and difficulty-access facts;
-- General Progression, unlocks, mastery, milestones, and non-expiring advancement;
+- Song Restoration nodes, Song Fragments, first-clear and difficulty-access facts;
+- Order Rank, unlocks, Boss Mastery, milestones, and non-expiring advancement;
 - personal-best source facts and compatible historical categories;
 - hub restoration and practice/public-access state; and
-- migration, uplift, recommendation-source, or grandfathering evidence required
+- migration, Reforge, recommendation-source, or grandfathering evidence required
   to preserve earned value.
 
 Progression owns these semantics. Player Data stores its exact mutation results.
@@ -112,21 +113,21 @@ Progression owns these semantics. Player Data stores its exact mutation results.
 ### Items, configuration, and appearance
 
 - unique item instances, stable lineage, tier, rank, and owned traits;
-- consumable stack quantities and durable reservations, spends, and refunds;
+- Battle Supply stack quantities and durable reservations, spends, and refunds;
 - cosmetic entitlements and selected appearance;
-- current loadout and its validation or missing-reference state;
-- exactly three complete spec presets, including their item, role, ability, and
-  build references;
-- build drafts and applied configurations with option/catalog/balance revisions;
+- Current Loadout and its validation or missing-reference state;
+- exactly three complete saved Loadouts, including their item, role, ability, and
+  Battle Style references;
+- Battle Style drafts and applied configurations with option/catalog/balance revisions;
   and
 - locked references and migration/replacement evidence required for recovery.
 
-Builds do not create a second preset store. Applied builds and full spec presets
+Builds do not create a second Loadout store. Applied Battle Styles and saved Loadouts
 remain part of the same durable configuration truth.
 
 ### Rewards, economy, and Commerce
 
-- general and boss-resource balances;
+- Resonance plus a separate Boss Echoes balance for each boss;
 - pinned goals, frozen rolls, guarantee state, and deterministic-path evidence;
 - immutable earned-transaction journal and causal pre/post state;
 - Pending, committed, rollback, refund, and compensation outcomes;
@@ -167,7 +168,7 @@ The permanent profile does not store a competing copy of:
 - other players' private gameplay, profile, settings, or transaction data.
 
 Live systems own those facts. Only commitments required to preserve durable
-value cross the boundary: consumable reservations/spends/refunds, immutable
+value cross the boundary: Battle Supply reservations/spends/refunds, immutable
 locked references, final frozen outcomes, and transaction/recovery identities.
 
 ## 5. Identity, revisions, source facts, and limits
@@ -205,7 +206,8 @@ validation.
 
 Only an authoritative Not Found result creates a new record. First creation
 builds one deterministic, complete starter transaction containing valid starter
-Progression, balances, inventory, loadout, three spec presets, settings intent,
+Progression, balances, inventory, one Current Loadout, three saved Loadouts,
+settings intent,
 and onboarding state. The whole starter snapshot is validated and committed
 together.
 
@@ -229,13 +231,13 @@ Before Ready, the load screen may expose the minimum local accessibility/device
 controls required to use that screen. Those choices are clearly temporary and
 unsaved until a valid authoritative profile accepts them.
 
-Normal hub, queue, staging, encounter, inventory, build, progression, reward,
+Normal hub, queue, staging, encounter, inventory, Battle Style, progression, reward,
 and store actions require Ready. A client cannot replace a section, claim a
 revision, or infer saved state from a local animation or response timeout.
 
 ## 8. Semantic mutation contract
 
-Clients submit meaningful intents such as equip an item, apply a build, save a
+Clients submit meaningful intents such as equip an item, apply a Battle Style, save a
 preference, claim an eligible action, or begin an approved purchase flow. The
 owning domain authorizes the action and produces an immutable exact mutation
 plan.
@@ -279,7 +281,7 @@ One transaction plan includes every related:
 - balance delta;
 - item instance, entitlement, or stack change;
 - Progression fact, unlock, milestone, or personal record;
-- consumable reservation, spend, or refund;
+- Battle Supply reservation, spend, or refund;
 - purchase/reward lineage and exact grant; and
 - required downstream committed handoff.
 
@@ -294,7 +296,7 @@ show Pending and allow another gameplay Retry without waiting.
 
 Rollback reverses only uncommitted reversible work. After a fact is durably
 committed or externally acknowledged, correction uses an immutable causally
-linked compensation entry. No Contest refunds are limited to consumables
+linked compensation entry. No Contest refunds are limited to Battle Supplies
 causally reserved or spent for that attempt.
 
 ## 10. Idempotency, ordering, and exclusive authority
@@ -328,7 +330,8 @@ uses last-write-wins or unknown-state merging.
 ## 11. Save cadence, dirty state, and lifecycle flush
 
 Purchases, receipts, currencies, Rewards, Progression, Items, entitlements,
-consumable commitments, applied builds, loadouts, spec presets, and other
+Battle Supply commitments, applied Battle Styles, Current Loadout, saved
+Loadouts, and other
 gameplay-affecting choices require durable commit before their surface reports
 Saved, Applied, Granted, or complete.
 
@@ -339,7 +342,7 @@ retry state, and last confirmed version. Coalescing preserves the latest explici
 intent and never absorbs independently auditable transactions.
 
 Periodic checkpoints provide defense in depth. They do not replace immediate
-value transactions. Encounter entry commits required consumable reservations and
+value transactions. Encounter entry commits required Battle Supply reservations and
 locked references before relying on them; encounter end submits the frozen final
 transaction.
 
@@ -352,7 +355,7 @@ Under storage pressure, priority is:
 
 1. receipts and Commerce recovery;
 2. economic/value transactions;
-3. consumable commitments;
+3. Battle Supply commitments;
 4. Progression and Items;
 5. gameplay configuration; then
 6. low-risk preferences.
@@ -370,7 +373,7 @@ confirmed versions, permitted actions, and recovery status.
 
 An active encounter may continue from its immutable locked snapshot only while
 the live game remains authoritative and continuation creates no new
-unrecoverable commitment. Existing consumable reservations retain their original
+unrecoverable commitment. Existing Battle Supply reservations retain their original
 identities. The frozen final outcome stays Pending until commit or recovery
 establishes its result.
 
@@ -378,8 +381,8 @@ While mutation safety is unavailable, the player cannot:
 
 - Ready or enter another queue/encounter;
 - purchase, claim, or initiate another durable transaction;
-- alter balances, inventory, entitlements, or consumable commitments; or
-- apply loadouts, builds, presets, or other gameplay configuration.
+- alter balances, inventory, entitlements, or Battle Supply commitments; or
+- apply Loadouts, Battle Styles, or other gameplay configuration.
 
 Necessary accessibility, input, caption, audio, and presentation changes may
 remain temporary local drafts and are clearly unsaved.

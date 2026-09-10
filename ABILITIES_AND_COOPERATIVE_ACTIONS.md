@@ -5,6 +5,7 @@
 - **Parent systems:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#46-abilities--cooperative-actions)
   and [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#47-solo-support)
 - **Player-facing authority:** [`GAME_DESIGN.md`](GAME_DESIGN.md)
+- **Player-language contract:** [`NAMING_AND_TONE.md`](NAMING_AND_TONE.md)
 - **Rhythm dependency:** [`RHYTHM_GAMEPLAY.md`](RHYTHM_GAMEPLAY.md)
 - **Combat dependency:** [`COMBAT.md`](COMBAT.md)
 - **Encounter dependency:** [`BOSS_ENCOUNTERS.md`](BOSS_ENCOUNTERS.md)
@@ -26,7 +27,7 @@ solo group contributions.
 
 This document does not own Special intent/input routing, raw Rhythm judgments,
 Activity Map candidate selection authority, Resolve/Ward/position application,
-revival or solo recovery, multiplayer membership, item/build ownership, durable
+Revive or Last Stand, multiplayer membership, item/Battle Style ownership, durable
 unlocks, or presentation implementation. Owning domains receive typed requests
 or provide identified versioned facts.
 
@@ -35,7 +36,7 @@ or provide identified versioned facts.
 1. **Authentic play only:** human performance comes from the player's approved
    chart and is normalized by Rhythm/Combat, never simulated by Abilities.
 2. **One primary route:** group-action material cannot also become ordinary
-   Attack, Defend, Special, revival, recovery, or another group action.
+  Attack, Defend, Special, Revive, Last Stand, or another group action.
 3. **One Hype charge:** no overflow, automatic firing, second charge, or separate
    cooldown.
 4. **Committed Signatures are reliable:** the base effect survives weak play,
@@ -50,10 +51,10 @@ or provide identified versioned facts.
    Easy, Normal, and Hard without a synthetic fallback.
 9. **Easy help remains bounded:** at most one additional recovery Crescendo can
    help but never guarantee victory or add recovery attempts.
-10. **Solo support is fixed and visible:** acolytes have no charts, judgments,
+10. **Solo support is fixed and visible:** Order Allies have no charts, judgments,
     score, player-performance credit, rewards, or risk multiplier.
 11. **The human remains decisive:** Vanguard cannot break a Resolve layer and
-    acolytes cannot help the solo emergency recovery challenge.
+    Order Allies cannot help the Last Stand challenge.
 12. **Definitions and effects are exact:** every transition, target, fallback,
     revision, contribution, and application is deterministic and idempotent.
 
@@ -62,7 +63,7 @@ or provide identified versioned facts.
 The encounter snapshot supplies exact content/schema/balance revisions, attempt
 and musical-clock identities, roster/difficulty, validated player loadouts,
 Signature and Band Call choices, legal item/build modifiers, Activity Map and
-Crescendo candidates, encounter phase, charts, targets, and solo acolyte data.
+Crescendo candidates, encounter phase, charts, targets, and solo Order Ally data.
 Active state never silently adopts a later definition or balance revision.
 
 Every Signature, Band Call, and Crescendo effect definition declares:
@@ -73,13 +74,13 @@ Every Signature, Band Call, and Crescendo effect definition declares:
 - deterministic target, distribution, and invalid-target fallback;
 - typed Combat, Survival, or Positioning effect requests;
 - legal musical scheduling and resolution boundaries;
-- permitted item/build hooks and global budget/cap categories; and
+- permitted item/Battle Style hooks and global budget/cap categories; and
 - presentation-neutral semantic and multimodal cue keys.
 
 Any role or instrument may equip any Signature or Call unless an explicit
 thematic restriction leaves equivalent valid choices and never requires a party
 composition. Definitions cannot alter charts, Rhythm timing/judgments, movement
-timing, recovery/revival counts, encounter rewards, or core control semantics.
+timing, Revive/Last Stand counts, encounter rewards, or core control semantics.
 
 ## 4. Hype ownership and gain lifecycle
 
@@ -97,7 +98,7 @@ Abilities validates the source identity and applies revisioned rates. Reaching
 the one-charge threshold enters Ready, discards overflow, prevents more gain,
 and tells Combat to restore the stored intent. Ready never auto-fires.
 
-Partial, Ready, and Armed Hype persist through downing/revival and
+Partial, Ready, and Armed Hype persist through downing/Revive and
 same-encounter reconnection. Hype resets between encounters. State transitions
 carry attempt, player, definition/balance revision, source, and activation
 identities so repeated delivery cannot duplicate gain or consumption.
@@ -130,14 +131,14 @@ the encounter-wide pending-Call reservation, and the shared Call lockout.
 
 Any accepted successful human-played chart performance may feed one separately
 budgeted readiness observer regardless of its primary route. Misses, absent
-material, fixed effects, and acolyte output provide no readiness. The equipped
+material, fixed effects, and Order Ally output provide no readiness. The equipped
 Call control itself displays progress; no additional persistent meter is added.
 
 Readiness caps at Ready and discards overflow. Partial/Ready state persists
 through downing and same-encounter reconnection, then resets between encounters.
 Committed use sets Used and prevents recharge or a second use.
 
-Item/build hooks may adjust readiness rate or Call potency only within approved
+Item/Battle Style hooks may adjust readiness rate or Call potency only within approved
 budgets/caps. They cannot add a use, fabricate performance, bypass a pending
 reservation, or shorten the shared lockout below its global floor.
 
@@ -242,7 +243,7 @@ Boss-authored alternatives may use clearly previewed typed offense, defense,
 recovery, or positional effects. Each definition supplies capped values for all
 three tiers plus deterministic target/distribution/fallback and cue contracts.
 
-Effects cannot add revival/solo-recovery attempts, directly complete victory,
+Effects cannot add Revive/Last Stand attempts, directly complete victory,
 bypass the Finishing Cadence, or guarantee success. Recovery effects are bounded
 help that leaves later human performance necessary.
 
@@ -257,17 +258,17 @@ and no-fallback rules. Its candidate is consumed at resolution regardless of
 tier. It provides no separate reward, does not alter difficulty/reward
 eligibility, and cannot occur on Normal or Hard.
 
-## 12. Solo acolyte functions
+## 12. Solo Order Ally functions
 
-Solo deploys visually distinct Vanguard, Warden, and Herald acolytes. Their
+Solo deploys visually distinct Vanguard, Warden, and Herald Order Allies. Their
 effects are fixed by encounter/difficulty revision. First-release player items
-and builds do not modify them.
+and Battle Styles do not modify them.
 
 ### Vanguard
 
 After each successfully completed ordinary human scoring group, regardless of
 intent, Vanguard requests a small fixed Resolve packet after the associated
-human effect. Recovery, revival, Band Call, and Crescendo material cannot trigger
+human effect. Recovery, Revive, Band Call, and Crescendo material cannot trigger
 it. The packet belongs only to the layer current for that group, never spills
 forward, and clamps before the decisive break. A successful human Attack must
 finish the layer.
@@ -287,17 +288,17 @@ support. When active at solo Band Call/Crescendo commitment, Herald supplies one
 small capped fixed squad share. Vanguard/Warden may join presentation but add no
 other group share.
 
-Acolytes never receive charts, judgments, combos, score, player-performance or
+Order Allies never receive charts, judgments, combos, score, player-performance or
 reward credit, or positional risk multipliers.
 
-## 13. Acolyte positioning, suppression, and recovery
+## 13. Order Ally positioning, suppression, and recovery
 
-Each acolyte has an authored preferred tactical location. Positioning places and
+Each Order Ally has an authored preferred tactical location. Positioning places and
 repositions it automatically at clean phase/musical boundaries. Formation
 offsets handle player co-location without swapping, blocking, reserving gameplay
 capacity, or changing tactical state.
 
-A committed clearly telegraphed attack affecting an active acolyte's location
+A committed clearly telegraphed attack affecting an active Order Ally's location
 suppresses it at impact for a configured duration initially around four
 measures. Suppression does not stack, refresh, or extend. It pauses future
 support, identifies the unavailable function, and displays a beat countdown.
@@ -308,7 +309,7 @@ adds no readiness bonus. No catch-up occurs. Herald's fixed group eligibility
 snapshots at commitment: later suppression cannot remove an accepted fixed
 share, while suppression at commitment supplies none.
 
-During solo emergency recovery all acolytes provide presentation only. They
+During Last Stand all Order Allies provide presentation only. They
 cannot score, shorten, complete, or rescue it. They cannot be permanently downed,
 revived, equipped, commanded, or made into escort objectives.
 
@@ -327,7 +328,7 @@ Encounter order. Network arrival does not reinterpret musical order.
 Gain, arm, request, invitation response, commit, contribution, resolution,
 spend/refund, suppression, and recovery commands/facts are idempotent. Duplicate
 or stale identities cannot create extra resources, effects, contributions,
-shares, acolyte pulses, or consumption.
+shares, Order Ally pulses, or consumption.
 
 ## 15. Semantic outputs and accessibility
 
@@ -339,7 +340,7 @@ Authoritative facts include:
   withdrawal/removal, cancel, commit, lockout, contribution, and result;
 - Crescendo ranking/reservation/invalidation, preview, participation, commit,
   tier, typed effect, Easy evaluation, and content-integrity failure; and
-- acolyte placement, pulse/trigger/share, suppression/recovery, omitted support,
+- Order Ally placement, pulse/trigger/share, suppression/recovery, omitted support,
   and fixed attribution.
 
 Facts carry the applicable attempt, source, player/group, definition/balance
@@ -378,14 +379,14 @@ work:
 - Call lead/duration/maximum delay and shared-lockout length;
 - Crescendo candidate weights, exact lead/duration, thresholds, tier values, and
   Easy behind-state thresholds;
-- acolyte values, cadence, suppression duration, choreography, portraits, and
+- Order Ally values, cadence, suppression duration, choreography, portraits, and
   effects; and
 - authoritative transport, persistence/rejoin, telemetry, and critical-failure
   alert implementation.
 
 Tuning may not add a Hype charge, second Call use, synthetic event passage,
-negative participant share, required composition, fake acolyte performance,
-Vanguard layer break, acolyte recovery help, paid gameplay resource, or direct
+negative participant share, required composition, fake Order Ally performance,
+Vanguard layer break, Order Ally recovery help, paid gameplay resource, or direct
 victory guarantee.
 
 ## 18. Approval and change control
@@ -396,6 +397,6 @@ specification.
 
 A material change to Hype ownership/lifecycle, Signature reliability, Call use
 or lockout, group routing/shares, Crescendo guarantee/tiers/Easy recovery,
-acolyte functions/suppression, or fixed-support attribution requires an explicit
+Order Ally functions/suppression, or fixed-support attribution requires an explicit
 amendment citing the superseded rule. Numeric tuning inside these boundaries
 creates a new definition/balance revision and never changes an active attempt.

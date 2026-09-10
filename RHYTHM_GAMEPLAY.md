@@ -4,6 +4,7 @@
 - **Approved:** 2026-08-21
 - **Parent system map:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#41-rhythm-gameplay)
 - **Player-facing authority:** [`GAME_DESIGN.md`](GAME_DESIGN.md)
+- **Player-language contract:** [`NAMING_AND_TONE.md`](NAMING_AND_TONE.md)
 - **Authoring dependency:** [`CONTENT_AUTHORING.md`](CONTENT_AUTHORING.md)
 - **Decision source:** [`RHYTHM_GAMEPLAY_WORKING.md`](RHYTHM_GAMEPLAY_WORKING.md)
 - **Interview plan:** [`RHYTHM_GAMEPLAY_QUESTIONS.md`](RHYTHM_GAMEPLAY_QUESTIONS.md)
@@ -294,12 +295,12 @@ separate consequences such as losing an unbanked positional Risk Bonus.
 Downing immediately suspends the ordinary chart, ends an active hold, and clears
 unresolved/incoming ordinary notes without Misses. Resolved history remains.
 
-Cooperative revival and solo emergency recovery are triggered by live state.
+Cooperative Revive and **Last Stand** are triggered by live state.
 The Activity Map selector chooses the earliest candidate valid for the current
 song position, role, difficulty, roster, phase, and conflicts; revival is not a
 fixed event timestamp authored in advance.
 
-A solo recovery or universal-beat challenge is an explicitly identified
+A Last Stand or universal-beat challenge is an explicitly identified
 temporary scoring stream. Its output goes only to the recovery consumer and does
 not appear as ordinary passage accuracy or contribution. A teammate performing
 for cooperative revival continues using authentic ordinary chart material;
@@ -366,8 +367,8 @@ timeline. Final bounds and calibration statistics require device playtesting.
 Each player performs against a synchronized local representation of the shared
 encounter clock and receives immediate local judgment feedback. Stable content,
 event, encounter, player, and result identities let the server validate, order,
-and deduplicate shared consequences. The later technical architecture defines
-the authority and transport implementation.
+and deduplicate shared consequences. [`TECHNICAL_ARCHITECTURE.md`](TECHNICAL_ARCHITECTURE.md)
+defines the authority and transport implementation.
 
 Ordinary round-trip delay does not alter or visibly roll back an already shown
 grade. Duplicate or late copies cannot apply a combat effect twice. Every

@@ -31,6 +31,8 @@ roblox-bands-battle/
 | System specifications | [`SYSTEM_SPECIFICATIONS_TRACKER.md`](SYSTEM_SPECIFICATIONS_TRACKER.md) | Links and completion state for all 13 approved detailed design specifications |
 | Balance framework | [`BALANCE_FRAMEWORK.md`](BALANCE_FRAMEWORK.md) | Shared units, difficulty/population scaling, gameplay/economy hypotheses, evidence, and tuning change control |
 | Playtest and analytics | [`PLAYTEST_AND_ANALYTICS.md`](PLAYTEST_AND_ANALYTICS.md) | Lightweight sessions, semantic evidence, readiness gates, data quality, and release review |
+| Naming and tone | [`NAMING_AND_TONE.md`](NAMING_AND_TONE.md) | Approved player vocabulary, voice pillars, glossary, UI labels, and future catalog naming rules |
+| Technical architecture | [`TECHNICAL_ARCHITECTURE.md`](TECHNICAL_ARCHITECTURE.md) | Approved runtime, content/export, data, deployment, verification, and release architecture; question and working records preserve interview history |
 | Beat grid inspection | `audio/Heavens_Edge/beats_dump.py` | madmom beat/downbeat dump + optional click track |
 | Single-stem transcription | `audio/Heavens_Edge/stem2midi.py` | Basic Pitch + madmom + quantization |
 | Stems pipeline details | `audio/Heavens_Edge/stems/` | Main code-heavy subtree; check child AGENTS.md |

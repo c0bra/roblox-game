@@ -6,6 +6,7 @@
 - **Parent design:** [`GAME_DESIGN.md`](GAME_DESIGN.md)
 - **Higher authorities:** [`GAME_VISION.md`](GAME_VISION.md) and
   [`ART_DIRECTION.md`](ART_DIRECTION.md)
+- **Player-language contract:** [`NAMING_AND_TONE.md`](NAMING_AND_TONE.md)
 - **Decision source:** [`SYSTEMS_MAP_WORKING.md`](SYSTEMS_MAP_WORKING.md)
 - **Interview plan:** [`SYSTEMS_MAP_QUESTIONS.md`](SYSTEMS_MAP_QUESTIONS.md)
 
@@ -18,7 +19,8 @@ defines which detailed design documents must exist before technical architecture
 or implementation is allowed to fill in the remaining details.
 
 `GAME_DESIGN.md` remains authoritative for player behavior. `GAME_VISION.md`
-remains authoritative for product purpose, audience, tone, and scope.
+remains authoritative for product purpose, audience, themes, and scope.
+`NAMING_AND_TONE.md` remains authoritative for player vocabulary and voice.
 `ART_DIRECTION.md` remains authoritative for visual language. This map assigns
 responsibility for those approved decisions; it does not silently change them.
 
@@ -87,9 +89,9 @@ behavior and policy layered on those capabilities.
 The **Major unresolved decisions** fields below preserve the decomposition
 questions that existed when this map was approved. For entries backed by one of
 the thirteen canonical specifications, those questions are now resolved in the
-linked specification. Numeric balance, final content/assets, naming, platform
-policy, playtest research, and technical implementation remain in their
-explicitly named downstream documents.
+linked specification. Numeric balance, final content/assets, future catalog
+names and the final public title, platform policy, playtest research, and
+technical implementation remain in their explicitly named downstream documents.
 
 ## 4. Core Battle
 
@@ -123,7 +125,7 @@ explicitly named downstream documents.
 
 ### 4.2 Combat
 
-- **Purpose:** Convert rhythm performance, intent, position, equipment, and build
+- **Purpose:** Convert rhythm performance, intent, position, equipment, and Battle Style
   effects into combat consequences.
 - **Owns:** Attack/Defend/Special intent and queuing; routing normalized
   performance; calculation of Resolve pressure, mitigation, Ward reinforcement,
@@ -148,17 +150,17 @@ explicitly named downstream documents.
   returns to play.
 - **Owns:** Ward and its thresholds; application of post-mitigation damage,
   restoration, and reinforcement; downed/target-ineligible state; cooperative
-  revival state; the one-use solo emergency recovery opportunity; revived Ward;
+  Revive state; the one-use Last Stand opportunity; revived Ward;
   and re-entry protection.
 - **Does not own:** Boss attack timing, Defend performance, recovery-chart
-  judgments, encounter defeat, consumable definitions, or presentation.
+  judgments, encounter defeat, Battle Supply definitions, or presentation.
 - **Depends on:** Combat effects, Rhythm Gameplay, Boss Encounters and Activity
-  Maps, Multiplayer roster state, Abilities, consumable effects, and Difficulty
+  Maps, Multiplayer roster state, Abilities, Battle Supply effects, and Difficulty
   & Scaling.
 - **Used by:** Boss Encounters, Combat, Multiplayer, Solo Support, Abilities,
   Results, Audio, UI, and Analytics.
 - **Needs detailed spec?:** Yes—as a separate major section of `COMBAT.md`.
-- **Major unresolved decisions:** Ward/damage/restoration values, revival
+- **Major unresolved decisions:** Ward/damage/restoration values, Revive
   contribution rules, recovery-window semantics, and re-entry edge cases.
 - **GDD sources:** GD-11, GD-12, GD-14 through GD-17, GD-20 through GD-23,
   GD-29, GD-32, and GD-34.
@@ -211,12 +213,12 @@ explicitly named downstream documents.
 
 - **Purpose:** Manage music-aligned personal powers and coordinated band
   performances after Rhythm and Combat determine contribution.
-- **Owns:** Signature Special, Band Call, and Crescendo definitions; Hype;
+- **Owns:** Signature, Band Call, and Crescendo definitions; Hype;
   readiness/arming/consumption; Call initiation and lockout; invitations,
   Join In, eligibility, cancellation, musical-boundary scheduling, contribution
   combination, group tiers, and effect resolution through owning domains.
-- **Does not own:** Special intent, authored opportunity selection, revival
-  state, loadout ownership, build rules, rhythm judgments, Resolve, Ward, or
+- **Does not own:** Special intent, authored opportunity selection, Revive
+  state, Loadout ownership, Battle Style rules, rhythm judgments, Resolve, Ward, or
   presentation.
 - **Depends on:** Authoring/Activity Maps, Rhythm, Combat, Boss Encounters,
   Survival, Multiplayer, Items/Loadouts, Builds, Input, and Difficulty & Scaling.
@@ -224,7 +226,7 @@ explicitly named downstream documents.
   Results, Audio, UI, and Analytics.
 - **Needs detailed spec?:** Yes—`ABILITIES_AND_COOPERATIVE_ACTIONS.md`.
 - **Major unresolved decisions:** Ability catalog, scheduling/cancellation edge
-  cases, Hype/Call rates, contribution/tier rules, permitted build hooks, and
+  cases, Hype/Call rates, contribution/tier rules, permitted Battle Style hooks, and
   effect contracts.
 - **GDD sources:** GD-12, GD-16 through GD-21, GD-24 through GD-26, GD-29,
   GD-31, GD-32, and GD-34.
@@ -237,7 +239,7 @@ explicitly named downstream documents.
   cadences; suppression/recovery; formation requests; capped fixed group
   contributions; and prohibitions on fake charts, judgments, performance credit,
   or independent Resolve breaks.
-- **Does not own:** Solo emergency recovery, general scaling, tactical-location
+- **Does not own:** Last Stand, general scaling, tactical-location
   state, judgments, or applied combat effects.
 - **Depends on:** Rhythm, Combat, Boss Encounters, Positioning, Survival,
   Abilities, Activity Maps, and Difficulty & Scaling.
@@ -256,7 +258,7 @@ explicitly named downstream documents.
   available contribution.
 - **Owns:** Easy/Normal/Hard profiles; normalized-contribution invariants;
   one-to-six-human relationships; duplicate neutrality; allowed scaling
-  dimensions; solo/co-op equivalence goals; Cohesion principles; accessibility
+  dimensions; solo/co-op equivalence goals; Band Harmony principles; accessibility
   reward neutrality; and positional risk/reward constraints.
 - **Does not own:** Mutable runtime state, difficulty unlocks, current roster,
   positions, or domain-specific application.
@@ -285,7 +287,7 @@ explicitly named downstream documents.
   rematch/refill/leave; leader transfer; and ping delivery/rate/muting.
 - **Does not own:** Loadout contents, boss outcome, gameplay-domain state,
   reward/progression calculation, or durable progression.
-- **Depends on:** Hub entry, valid loadouts, Boss Encounters, Rhythm, Survival,
+- **Depends on:** Hub entry, valid Loadouts, Boss Encounters, Rhythm, Survival,
   Abilities, Difficulty & Scaling, Communication & Safety, Results, Player Data
   where durable facts are needed, and external Roblox services.
 - **Used by:** Boss Encounters, Survival, Abilities, Difficulty consumers,
@@ -321,9 +323,9 @@ explicitly named downstream documents.
 ### 6.1 Items, Equipment & Loadouts
 
 - **Purpose:** Represent what a player owns and brings into an encounter,
-  producing one validated loadout.
-- **Owns:** Item/consumable/cosmetic definitions and owned collections; fixed
-  stats, traits, tier/rank; power/action-reference/consumable/appearance slots;
+  producing one validated Loadout.
+- **Owns:** Item/Battle Supply/Cosmetic definitions and owned collections; fixed
+  stats, Traits, Tier/Rank; power/action-reference/Battle-Supply/appearance slots;
   equip/validation; staging and encounter locks; combat inventory restriction;
   quantities and consumption authorization; resolved equipment modifiers; and
   prohibited-modifier enforcement.
@@ -337,30 +339,31 @@ explicitly named downstream documents.
   Analytics.
 - **Needs detailed spec?:** Yes—`ITEMS_AND_EQUIPMENT.md`.
 - **Major unresolved decisions:** Definition-versus-instance identity, mutation
-  contracts, slot validation, consumable lifecycle, modifier allowlist/order,
+  contracts, slot validation, Battle Supply lifecycle, modifier allowlist/order,
   cosmetics, and extension points.
 - **GDD sources:** GD-01, GD-17, GD-18, GD-24 through GD-30, GD-32, and GD-34.
 
 ### 6.2 Builds & Specialization
 
-- **Purpose:** Turn unlocked options into behavior-changing builds without
+- **Purpose:** Turn unlocked options into behavior-changing Battle Styles without
   changing rhythm fairness, instrument freedom, or the control set.
 - **Owns:** Universal functional categories; major/supporting slots; mixing;
-  beginner presets and advanced-editor gate; saved build presets; free
+  beginner Loadouts and advanced-editor gate; saved Loadouts; free
   out-of-combat respec and encounter lock; compatibility, stacking, power
-  budgets, synergy caps; build modifiers; resolved modifier output; and fairness
+  budgets, synergy caps; Battle Style modifiers; resolved modifier output; and fairness
   prohibitions.
 - **Does not own:** Gear, base abilities, progression awards, persistence,
   presentation, or direct mutation of consumer state.
 - **Depends on:** Progression unlocks, Items, Abilities and permitted hooks,
   Combat/Survival/Positioning hooks, Difficulty & Scaling, Player Data, and UI.
-- **Used by:** Items/loadout resolution, Combat, Survival, Positioning,
+- **Used by:** Items/Loadout resolution, Combat, Survival, Positioning,
   Abilities, Solo Support where permitted, Multiplayer staging, Results, UI, and
   Analytics.
 - **Needs detailed spec?:** Yes—`BUILDS_AND_SPECIALIZATION.md`.
-- **Major unresolved decisions:** Final terminology, option catalog, hook
-  contracts, stacking/incompatibility, caps, budgets, preset versioning, and
-  retired-option behavior.
+- **Major unresolved decisions:** Terminology is resolved by
+  `NAMING_AND_TONE.md`; the option catalog, hook contracts,
+  stacking/incompatibility, caps, budgets, Loadout versioning, and retired-option
+  behavior remain downstream content or technical work.
 - **GDD sources:** GD-17, GD-18, GD-24 through GD-29, GD-32, and GD-34.
 
 ### 6.3 Rewards, Loot & Economy
@@ -368,10 +371,10 @@ explicitly named downstream documents.
 - **Purpose:** Turn outcomes and participation into fair, durable earned rewards
   and deterministic resource transactions.
 - **Owns:** Canonical meaningful-participation eligibility; reward
-  calculation; banked/unbanked Risk Bonus; Cohesion reward effect; currencies
-  and boss materials; loot pools and deterministic paths; earned fixed-item
+  calculation; banked/unbanked Risk Bonus; Band Harmony reward effect; Resonance
+  and Boss Echoes; loot pools and deterministic paths; earned fixed-item
   drops; guaranteed/first-clear/signature rules; salvage; bounded first-release
-  crafting/upgrades; consumable costs; transaction orchestration; and economy
+  Crafting/Upgrades; Battle Supply costs; transaction orchestration; and economy
   prohibitions.
 - **Does not own:** Boss outcome, raw evidence, item/progression semantics, paid
   offers, presentation, or persistence implementation.
@@ -382,7 +385,7 @@ explicitly named downstream documents.
   surfaces, UI, Player Data, and Analytics.
 - **Needs detailed spec?:** Yes—`REWARDS_AND_ECONOMY.md`.
 - **Major unresolved decisions:** Quantities, chances, costs, deterministic path,
-  catalogs, transaction edge cases, and Risk/Cohesion caps.
+  catalogs, transaction edge cases, and Risk/Band Harmony caps.
 - **GDD sources:** GD-11, GD-13, GD-15, GD-21, GD-24, GD-26 through GD-28,
   GD-31, GD-32, and GD-34.
 
@@ -409,9 +412,9 @@ explicitly named downstream documents.
 
 - **Purpose:** Preserve advancement and determine which content, options, and
   world states have been earned.
-- **Owns:** General progression and system unlocks; campaign destinations,
-  first clears, fragments, and tiers; per-boss difficulty unlocks; boss mastery;
-  personal bests; unlock eligibility; recommended power; old-item uplift
+- **Owns:** Order Rank and system unlocks; Song Restoration destinations,
+  first clears, Song Fragments, and Tiers; per-boss difficulty unlocks; Boss Mastery;
+  personal bests; unlock eligibility; recommended power; old-item Reforge
   eligibility; victory/failure progress; hub restoration; and non-expiring
   progression policy.
 - **Does not own:** Raw evidence, canonical participation eligibility, item
@@ -424,8 +427,8 @@ explicitly named downstream documents.
   Hub, Onboarding, Results, UI, Player Data, and Analytics.
 - **Needs detailed spec?:** Yes—`PROGRESSION.md`.
 - **Major unresolved decisions:** Track transitions, first-clear idempotency,
-  progression amounts, mastery/personal-best rules, unlock catalog,
-  recommended-power semantics, uplift, and hub output.
+  progression amounts, Boss Mastery/personal-best rules, unlock catalog,
+  recommended-power semantics, Reforge, and hub output.
 - **GDD sources:** GD-01, GD-08, GD-13, GD-21, GD-24 through GD-32, and GD-34.
 
 ## 7. Experience Shell
@@ -437,7 +440,7 @@ explicitly named downstream documents.
 - **Owns:** Spatial/navigation composition; shard and functional-anchor
   interactions; fast access; application of visible restoration state; and
   optional activity/landmark rules.
-- **Does not own:** Campaign, matchmaking, items, economy, Commerce eligibility,
+- **Does not own:** Song Restoration, matchmaking, items, economy, Commerce eligibility,
   or platform social behavior.
 - **Depends on:** Progression, Multiplayer, Items, Builds, Rewards, Commerce,
   Onboarding, UI, Audio, and authored world content.
@@ -478,7 +481,7 @@ explicitly named downstream documents.
   private suggestions; adaptive next action; follow-up routes; and no-claim,
   no-ranking, no-blame, no-paid-prompt rules.
 - **Does not own:** Outcome, rewards/grants, progression mutation, personal-best
-  state, rematch membership, loadout state, or Commerce.
+  state, rematch membership, Loadout state, or Commerce.
 - **Depends on:** Boss, Rhythm, Combat, Survival, Positioning, Abilities, Solo
   Support, Multiplayer, Rewards, Progression, Items, UI, Audio, and approved
   Analytics-derived inputs.
@@ -756,26 +759,34 @@ The approved order is:
 13. `PLAYER_DATA.md`
 
 All thirteen canonical specifications are approved. The sequence and mandatory
-Content Authoring reconciliation completed on 2026-09-02. This satisfies the
-system-specification prerequisite for technical architecture. The separately
-tracked Balance Framework and Playtest & Analytics supporting specifications are
-also approved; the naming-and-tone pass remains a required product input.
+Content Authoring reconciliation completed on 2026-09-02. The separately tracked
+Balance Framework, Playtest & Analytics, and
+[`NAMING_AND_TONE.md`](NAMING_AND_TONE.md) product-language contract are also
+approved. Together they satisfy the design prerequisite for Technical
+Architecture.
 
 `CONTENT_AUTHORING.md` first establishes the offline song-data and exported
 bundle contract. Specifications 2 through 12 then identify their complete
 authored-data and validation needs, which the mandatory reconciliation folds
-back into that contract. Only after that reconciliation and the other
-architecture-critical specifications are sufficiently settled may
-`TECHNICAL_ARCHITECTURE.md` become canonical.
+back into that contract. Completion of that reconciliation and the other
+architecture-critical specifications allowed `TECHNICAL_ARCHITECTURE.md` to
+become canonical.
 
 `BALANCE_FRAMEWORK.md` was approved on 2026-09-08.
-`PLAYTEST_AND_ANALYTICS.md` was approved on 2026-09-09. The required naming-and-
-tone pass is the next product task.
+`PLAYTEST_AND_ANALYTICS.md` and `NAMING_AND_TONE.md` were approved on 2026-09-09.
+[`TECHNICAL_ARCHITECTURE.md`](TECHNICAL_ARCHITECTURE.md) was approved on
+2026-09-10 after the 24-question
+[`question plan`](TECHNICAL_ARCHITECTURE_QUESTIONS.md) and
+[`working record`](TECHNICAL_ARCHITECTURE_WORKING.md). It is the canonical
+implementation, deployment, data, verification, and release boundary for this
+map. Final public game-title selection remains a separate future publication gate
+and does not block implementation.
 
 No standalone specification is initially required for Player Survival &
 Recovery, Tactical Positioning & Movement, Solo Support, Difficulty & Scaling,
-Communication & Safety, Commerce, Inventory, consumables, Order Hub, Onboarding,
-Results, Input, or Accessibility because each has an explicit parent document.
+Communication & Safety, Commerce, Inventory, Battle Supplies, Order Hub,
+Onboarding, Results, Input, or Accessibility because each has an explicit parent
+document.
 
 ## 11. Exclusions and routed work
 
@@ -801,7 +812,8 @@ narrative beats, and asset packages are content or surfaces unless a later
 approved reusable ruleset gives them an independent lifecycle.
 
 Content catalogs, narrative and boss/song briefs, world layouts, asset
-production, final names, balance values, research procedure, technical
+production, future catalog names, the final public title, balance values,
+research procedure, technical
 authority/networking/security, and file/data schemas are routed to their named
 content, naming, balance, playtest, system-specification, or technical-
 architecture documents.

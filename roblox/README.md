@@ -9,8 +9,17 @@ ownership and dependencies, then follow the approved documents linked from
 shared numeric contract in
 [`BALANCE_FRAMEWORK.md`](../BALANCE_FRAMEWORK.md) and the lightweight evidence
 contract in
-[`PLAYTEST_AND_ANALYTICS.md`](../PLAYTEST_AND_ANALYTICS.md). The systems map
-defines design boundaries, not a one-to-one Roblox service or module layout.
+[`PLAYTEST_AND_ANALYTICS.md`](../PLAYTEST_AND_ANALYTICS.md). Player-facing strings
+follow [`NAMING_AND_TONE.md`](../NAMING_AND_TONE.md); `Bands Battle` remains a
+working project title. The systems map defines design boundaries, not a one-to-
+one Roblox service or module layout.
+
+Use [`TECHNICAL_ARCHITECTURE.md`](../TECHNICAL_ARCHITECTURE.md) for runtime
+authority, source ownership, content/export contracts, deployment, persistence,
+testing, and release boundaries. Its
+[`question plan`](../TECHNICAL_ARCHITECTURE_QUESTIONS.md) and
+[`working record`](../TECHNICAL_ARCHITECTURE_WORKING.md) preserve interview
+history but do not override the canonical architecture.
 
 ## One-time setup
 

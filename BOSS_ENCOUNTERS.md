@@ -5,6 +5,7 @@
 - **Parent systems:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#44-boss-encounters) and
   [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#45-tactical-positioning--movement)
 - **Player-facing authority:** [`GAME_DESIGN.md`](GAME_DESIGN.md)
+- **Player-language contract:** [`NAMING_AND_TONE.md`](NAMING_AND_TONE.md)
 - **Rhythm dependency:** [`RHYTHM_GAMEPLAY.md`](RHYTHM_GAMEPLAY.md)
 - **Combat dependency:** [`COMBAT.md`](COMBAT.md)
 - **Authoring dependency:** [`CONTENT_AUTHORING.md`](CONTENT_AUTHORING.md)
@@ -45,7 +46,7 @@ the semantic facts defined here.
    validated difficulty/roster envelopes.
 7. **Required fairness is validated:** runtime never repairs bad content by
    shortening warnings, inventing notes, or forcing impossible overlaps.
-8. **Locations are shared, not scarce:** players and acolytes never body-block or
+8. **Locations are shared, not scarce:** players and Order Allies never body-block or
    reserve exclusive tactical capacity.
 9. **Movement is commitment, not immunity:** travel consumes opportunity and
    remains exposed to actual attack geometry.
@@ -88,7 +89,7 @@ The attempt states are:
 Solo pause is an overlay on Running and freezes song/encounter time exactly under
 `RHYTHM_GAMEPLAY.md`. Cooperative menus never freeze Running.
 
-All-humans-down, exhausted solo recovery, or Multiplayer's terminal all-humans-
+All-humans-down, exhausted Last Stand, or Multiplayer's terminal all-humans-
 departed/inactive fact may move from Running to Resolving early. Nonterminal
 attacks, breaks, movement, story beats, recovery, group events, and nonterminal
 player absence do not retime the song.
@@ -229,7 +230,7 @@ ambient damage.
 Scheduling priority is:
 
 1. immutable song/Finishing boundaries and already-committed windows;
-2. urgent cooperative or solo recovery;
+2. urgent Revive or Last Stand;
 3. guaranteed authored events, including the required Crescendo and required
    story/encounter attacks;
 4. accepted player requests such as Band Calls; and
@@ -260,7 +261,7 @@ the baseline, not a universal requirement. An irregular graph is legal only when
 validation and phone-scale review prove readable reachability and responses.
 
 An encounter declares safe starting locations, ordinarily Middle. Assignment is
-deterministic for readability but creates no exclusive slot. Humans and acolytes
+deterministic for readability but creates no exclusive slot. Humans and Order Allies
 share locations through formation offsets, cannot collide/body-block, and remain
 subject to the same geometry, hazards, cover, and risk.
 
@@ -277,7 +278,7 @@ occupied location follows an authored fallback, normally nearest reachable valid
 Middle with stable tie-breaking. It never traps, overlaps, drops, or damages a
 player merely because state changed.
 
-Acolytes use the same valid graph/fallback facts at authored boundaries without
+Order Allies use the same valid graph/fallback facts at authored boundaries without
 blocking human choices.
 
 ## 13. Voluntary movement
@@ -304,7 +305,7 @@ invalid, it stops at the last legal landing with an explanation and never
 silently reroutes.
 
 An input while unavailable is rejected with restrained feedback and never
-queues. Equipment, builds, abilities, consumables, and difficulty do not alter
+queues. Equipment, Battle Styles, abilities, Battle Supplies, and difficulty do not alter
 travel duration, charge count/recovery, settling, route cost, or invulnerability.
 
 ## 14. Cover, hazards, and displacement
@@ -366,7 +367,7 @@ grace. If grace expires, only still-unopened layers use the smaller roster at
 their opening. A successful rejoin before opening remains included.
 
 Departure never changes an open layer, banked Momentum, or prior attribution.
-Acolytes/NPCs never count. Rejoin restores a deployment member; ordinary
+Order Allies/NPCs never count. Rejoin restores a deployment member; ordinary
 join-in-progress is unavailable.
 
 Difficulty/roster may select validated target-count, timing, geometry,

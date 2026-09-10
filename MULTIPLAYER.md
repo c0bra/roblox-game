@@ -5,6 +5,7 @@
 - **Parent system:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#51-multiplayer-sessions-parties--matchmaking)
 - **Included requirement:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#52-communication--safety)
 - **Player-facing authority:** [`GAME_DESIGN.md`](GAME_DESIGN.md)
+- **Player-language contract:** [`NAMING_AND_TONE.md`](NAMING_AND_TONE.md)
 - **Encounter dependency:** [`BOSS_ENCOUNTERS.md`](BOSS_ENCOUNTERS.md)
 - **Items dependency:** [`ITEMS_AND_EQUIPMENT.md`](ITEMS_AND_EQUIPMENT.md)
 - **Abilities dependency:** [`ABILITIES_AND_COOPERATIVE_ACTIONS.md`](ABILITIES_AND_COOPERATIVE_ACTIONS.md)
@@ -128,8 +129,8 @@ remains queued. Failure preserves valid selection and consumes nothing.
 ## 7. Staging, validation, and final lock
 
 Boss, difficulty, and compatible content revision are locked before staging.
-Each player may change role/instrument, equipment or full spec preset, Signature,
-Band Call, prepared consumables, and appearance. Duplicate roles remain valid.
+Each player may change role/instrument, equipment or saved Loadout, Signature,
+Band Call, prepared Battle Supplies, and appearance. Duplicate roles remain valid.
 
 Ready requires complete server-side Items validation for the selected encounter.
 All issues display together. Any edit or mutation that changes the eventual
@@ -145,12 +146,12 @@ replacement.
 
 When everyone is Ready, a final countdown initially around three seconds locks
 the exact roster/loadout snapshots. Items atomically reserves prepared
-consumables then. Leaving before lock has no penalty.
+Battle Supplies then. Leaving before lock has no penalty.
 
 ## 8. Atomic deployment and start
 
 Final lock creates a unique deployment identity with exact player, content,
-schema, balance, loadout, consumable-reservation, and initial population-scaling
+schema, balance, Loadout, Battle-Supply-reservation, and initial population-scaling
 snapshots.
 
 Every member acknowledges successful load and exact-revision readiness before
@@ -181,7 +182,7 @@ or result evidence.
 ## 10. Disconnect snapshot and cumulative grace
 
 Connection loss records the last confirmed Ward, location, survival/downed
-state, Hype, Band Call state, consumable charges, loadout, contribution, and
+state, Hype, Band Call state, Battle Supply charges, Loadout, contribution, and
 participation identities without taking ownership of them.
 
 Already committed boss impacts, resource spends, Signature/group effects, and
@@ -298,7 +299,7 @@ defaults, and platform protections apply to every player including minors.
 After immutable outcome, each player's Reward transaction finalizes before
 follow-up. Choices cannot delay, pool, divide, revoke, or condition that reward.
 
-Each player chooses Retry Same Shard, Stay with Band, or Return to Hub. Timeout
+Each player chooses Retry, Stay with Band, or Return to Hub. Timeout
 defaults only that player to Hub. No leader/majority binds another.
 
 Public Retry/Stay players form a voluntary temporary rematch group. Retry records
@@ -307,7 +308,7 @@ acceptance of the next proposal. Only mutually accepted eligible members stage;
 public matching may then refill empty seats.
 
 Current Parties persist unless members leave. Every retry/new selection repeats
-proposal, validation, staging Ready, lock, consumable reservation, and deployment.
+proposal, validation, staging Ready, lock, Battle Supply reservation, and deployment.
 Failure preserves granted rewards and returns players to hub/group state.
 
 ## 16. Semantic outputs and service failure

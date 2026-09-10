@@ -4,10 +4,11 @@
 - **Approved:** 2026-08-31
 - **Parent systems:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#7-experience-shell)
 - **Player-facing authority:** [`GAME_DESIGN.md`](GAME_DESIGN.md)
+- **Player-language contract:** [`NAMING_AND_TONE.md`](NAMING_AND_TONE.md)
 - **Rhythm dependency:** [`RHYTHM_GAMEPLAY.md`](RHYTHM_GAMEPLAY.md)
 - **Encounter dependency:** [`BOSS_ENCOUNTERS.md`](BOSS_ENCOUNTERS.md)
 - **Multiplayer dependency:** [`MULTIPLAYER.md`](MULTIPLAYER.md)
-- **Items/preset dependency:** [`ITEMS_AND_EQUIPMENT.md`](ITEMS_AND_EQUIPMENT.md)
+- **Items/Loadout dependency:** [`ITEMS_AND_EQUIPMENT.md`](ITEMS_AND_EQUIPMENT.md)
 - **Decision source:** [`UI_UX_WORKING.md`](UI_UX_WORKING.md)
 - **Interview plan:** [`UI_UX_QUESTIONS.md`](UI_UX_QUESTIONS.md)
 
@@ -31,7 +32,7 @@ UI/UX owns:
 - complete ideal, loading, failure, recovery, and content-scale states.
 
 UI/UX does not own gameplay state or legality, charts/timing/judgments, encounter
-selection, loadout/inventory mutation, rewards/progression, multiplayer consent,
+selection, Loadout/inventory mutation, rewards/progression, multiplayer consent,
 audio mixing, or durable storage. It presents identified semantic facts and
 routes identified requests to their owning systems. It never derives or repairs
 authoritative state from visible totals or animations.
@@ -66,22 +67,22 @@ authoritative state from visible totals or animations.
     accessibility label, defeat culprit, purchase history, or private suggestion.
 13. **No coercive store:** Commerce appears only through a voluntary eligible
     destination and never through combat, Results, rescue, or validation repair.
-14. **Names are governed:** internal keys and placeholder system labels cannot
-    ship before the required naming/tone/localization pass.
+14. **Names are governed:** shipping labels follow `NAMING_AND_TONE.md`; internal
+    keys, retired aliases, and unapproved future catalog names cannot leak into
+    player-facing surfaces.
 15. **Decorative degradation first:** device/performance reduction never drops a
     note, control, threat, position, recovery, group cue, caption, or alternative.
 
 ## 3. Player jobs, modes, and global hierarchy
 
-The safe experience shell has four primary task destinations. Their current
-labels are functional placeholders:
+The safe experience shell has four approved primary task destinations:
 
 - **Play:** Continue Story, unlocked shard discovery/selection, recent/replay,
   mode, difficulty, and encounter-card entry;
-- **Prepare:** current loadout, inventory, upgrades, builds, abilities,
-  consumables, and three full spec presets;
-- **Progress:** campaign, mastery, records, collection, restored fragments,
-  archive, and hub-restoration evidence; and
+- **Prepare:** Current Loadout, inventory, Upgrades, Battle Style, abilities,
+  Battle Supplies, and three saved Loadouts;
+- **Progress:** Song Restoration, Order Rank, Boss Mastery, records, collection,
+  Song Fragments, archive, and hub-restoration evidence; and
 - **Band:** party, matchmaking, safe communication, and compatible social state.
 
 Settings, Controls, Accessibility, and Help are global utilities. The store is
@@ -93,7 +94,7 @@ The shell distinguishes these modes:
 - safe hub exploration/menu;
 - queued-safe hub/menu;
 - encounter card and party/match proposal;
-- unlocked staging and final loadout lock;
+- unlocked staging and final Loadout lock;
 - practice or active encounter;
 - solo pause;
 - immutable Results/follow-up; and
@@ -120,17 +121,17 @@ functions.
 
 The tiered shard ascent remains the dominant physical landmark. Practice,
 workshop/preparation, archive/progress, social commons, and voluntary store use
-stable silhouettes, labels, interaction footing, and landmarks. Campaign
+stable silhouettes, labels, interaction footing, and landmarks. Song Restoration
 restoration may enrich architecture, population, lighting, music, and portals
 but cannot relocate a learned anchor or invalidate route vocabulary.
 
-Every shard communicates boss identity, campaign tier, availability, and exact
+Every shard communicates boss identity, Song Restoration Tier, availability, and exact
 lock reason with label/icon/shape plus color. A newly unlocked shard may receive
 one restrained dismissible emphasis. Locked content never resembles a Robux
 gate. Proximity reveals the action; a deliberate input opens the normal
 encounter card. It never deploys by accidental proximity.
 
-The Play destination offers Fast Play for Continue Story, last played unlocked
+The Play destination offers Quick Play for Continue Story, last played unlocked
 shard, and appropriate recent/replay choices. Each opens the same encounter card
 as the physical shard. An unlocked landing shortcut may move the avatar near a
 shard without making repeat traversal mandatory.
@@ -194,7 +195,7 @@ persistent resource meter.
 A compact band strip exposes only safe necessary state: identity/appearance,
 role, active/downed/recovering/return-protected state, connection availability,
 and required group readiness. Healthy members remain quiet. Relevant target,
-recovery, disconnect, acolyte suppression, or return state receives restrained
+recovery, disconnect, Order Ally suppression, or return state receives restrained
 emphasis. No public performance, damage, accessibility, gear, or blame appears.
 
 The normal one-second-glance target is recognition of:
@@ -209,8 +210,8 @@ sentence reading.
 
 ## 7. Contextual cue priority and rhythm feedback
 
-Phrase previews, position routes, attack response, consumables, Signature
-commitment, group invitations/windows, revival/recovery, pings, and teaching
+Phrase previews, position routes, attack response, Battle Supplies, Signature
+commitment, group invitations/windows, Revive/Last Stand, pings, and teaching
 appear only when actionable or necessary. Each cue identifies its world source,
 target/control, and musical countdown.
 
@@ -238,7 +239,7 @@ Results.
 
 The complete GD-06 action map is binding. Rhythm uses three fixed actions;
 movement uses WASD/left stick or hub joystick/encounter destination; intent,
-Join In, Band Call, and two consumables retain their approved device families.
+Join In, Band Call, and two Battle Supplies retain their approved device families.
 
 Every action presents owner-supplied states such as available, unavailable with
 reason, pressed, queued, effective, committed, cooling/recovering, reserved, or
@@ -323,7 +324,7 @@ and requires explicit confirmation without shame or reward warning.
 
 Setup chooses one unlocked supported starter instrument, previews its identity,
 shows controls, and offers guided calibration. It asks no class questionnaire or
-advanced build choice.
+advanced Battle Style choice.
 
 Practice uses real canonical mechanics in safe authored content and exposes six
 named modules:
@@ -348,7 +349,7 @@ progress. Completion or explicit skip unlocks public matchmaking; store access
 separately also requires a completed encounter.
 
 The first boss teaches Attack, movement/Defend/Ward, Hype/Signature, guaranteed
-Crescendo, first relevant recovery, then Band Call/consumables when genuinely
+Crescendo, first relevant recovery, then Band Call/Battle Supplies when genuinely
 available. Each lesson tracks unseen, presented, action-observed, dismissed, and
 disabled history. It previews in context, anchors to real controls/cues, never
 pauses/rewinds/covers play, and yields to protected cue priority.
@@ -358,13 +359,13 @@ understanding. Missed/dismissed teaching remains in Help/practice/reference.
 Teaching can be disabled globally/by category, but protected automatic cues
 remain. Returning players see only genuinely new/unseen concepts.
 
-## 11. Preparation, inventory, presets, and transactions
+## 11. Preparation, inventory, Loadouts, and transactions
 
 Prepare opens on a Current Setup summary: role, three gear slots, Signature,
-Band Call, build, two consumable types/charges, active full spec preset where
+Band Call, Battle Style, two Battle Supply types/charges, Current Loadout where
 applicable, encounter compatibility, and all validation findings.
 
-The summary exposes Apply/Ready plus three presets when unlocked. A slot opens
+The summary exposes Apply/Ready plus three saved Loadouts when unlocked. A slot opens
 one browser panel/sheet and a focused detail replaces it rather than adding a
 third level.
 
@@ -385,16 +386,16 @@ exact configuration, while failure preserves prior applied state plus draft.
 Nothing is dropped, substituted, weakened, spent, or role-changed silently.
 
 Queued hub edits remain legal until staging. Active staging edits clear Ready
-with explanation; inactive saved-preset edits do not. Final lock makes snapshot
+with explanation; inactive saved Loadout edits do not. Final lock makes snapshot
 controls read-only and names the encounter. Deployment rollback returns to
 unlocked staging without losing legal draft state.
 
-Upgrade/uplift/craft/salvage/purchase review shows exact input/cost, output,
+Upgrade/Reforge/Craft/Salvage/purchase review shows exact input/cost, output,
 pre/post value, compatibility, affected references, and balance. Resource spend,
-referenced salvage, preset overwrite, and Robux purchase use one confirmation.
+referenced salvage, Loadout overwrite, and Robux purchase use one confirmation.
 Reversible navigation does not.
 
-Empty/zero/full states explain cause and legitimate next action. Zero consumable
+Empty/zero/full states explain cause and legitimate next action. Zero Battle Supply
 quantity preserves Empty type. No compatible alternative preserves current
 setup and offers filter reset/route, never substitution. First release has no
 inventory-full, mailbox, or paid-storage state.
@@ -421,7 +422,7 @@ invalidity, not weak player performance.
 
 First eligible Victory favors Continue Story; repeat Victory favors Retry or an
 available Stay with Band; Defeat favors Retry; No Contest favors safe Retry or
-Hub. Loadout and Upgrades plus Return to Hub remain secondary. Stale/unavailable
+Hub. Prepare plus Return to Hub remain secondary. Stale/unavailable
 routes are omitted with reason rather than shown optimistically.
 
 Four optional peer detail sections preserve state:
@@ -429,10 +430,10 @@ Four optional peer detail sections preserve state:
 - **Performance:** judgments, early/late, holds, authentic coverage/absence,
   personal best by instrument/difficulty;
 - **Combat:** personal intent effects, Resolve/Momentum, Ward/survival, threats,
-  position/risk, and consumables;
-- **Band:** personal Call/Crescendo/revival/Cohesion share plus collective result
+  position/risk, and Battle Supplies;
+- **Band:** personal Call/Crescendo/Revive/Band Harmony share plus collective result
   without rank; and
-- **Progress:** exact resources, items, mastery, campaign, unlock/restoration,
+- **Progress:** exact Resonance, Boss Echoes, items, Boss Mastery, Song Restoration,
   and crafting-path results.
 
 Tabs are used when labels fit; an ordered one-open-section pattern adapts under
@@ -449,7 +450,7 @@ Results context; no claim loop exists.
 
 Follow-up choices are individual. UI shows accepted/waiting/declined/expired/
 refill state without binding vote. Results contains no Store/Robux offer, rescue,
-public rank/leaderboard, public suggestion, or blame. Acolytes are fixed NPC
+public rank/leaderboard, public suggestion, or blame. Order Allies are fixed NPC
 support, not human performance.
 
 ## 13. Settings and profile model
@@ -551,7 +552,7 @@ Navigation/failure preserve legal drafts, selection, filters, sort, scroll,
 focus, and last confirmed read-only facts. Stale data is labeled and cannot
 authorize mutation.
 
-UI does not queue purchase, economy, inventory, loadout Apply, Ready, reward,
+UI does not queue purchase, economy, inventory, Loadout Apply, Ready, reward,
 progression, or consent mutations while authority is unavailable. Durable edits
 show Draft/Changes Pending, Saving, Saved, Not Saved with Retry, or Save Unsafe/
 Read-Only. Success requires Player Data/transaction confirmation. Retry reuses
@@ -620,7 +621,7 @@ religious preaching, or coercive spending language.
 
 Privacy allowlists permit others to see only safe identity/appearance, role,
 Ready/availability, survival/group state, and protected cues. Settings,
-accessibility, calibration, inventory/quantities/purchases, exact builds,
+accessibility, calibration, inventory/quantities/purchases, exact Battle Styles,
 performance/history/suggestions, moderation/report state, and transaction/save
 failures remain private.
 
@@ -631,9 +632,9 @@ UI/UX requires identified presentation-neutral semantic facts from every owner:
 - Rhythm supplies chart/judgment/participation/suspension/re-entry facts;
 - Combat/Survival supply intent/effect/Ward/down/recovery facts;
 - Boss/Positioning supply lifecycle/Resolve/attack/geometry/movement/outcome;
-- Abilities supply Hype/Signature/Call/Crescendo/acolyte state;
+- Abilities supply Hype/Signature/Call/Crescendo/Order Ally state;
 - Multiplayer supplies party/queue/staging/connection/ping/follow-up state;
-- Items/Builds supply draft/validation/preset/snapshot/migration facts;
+- Items/Builds supply draft/validation/Loadout/snapshot/migration facts;
 - Rewards/Progression/Commerce supply frozen transactions/unlocks/eligibility;
 - Player Data supplies profile/draft/history/revision/save safety; and
 - Audio Presentation supplies mix/cue and caption/source metadata.
@@ -716,7 +717,7 @@ The owner interview resolved UX-01 through UX-12 on 2026-08-31. This document is
 the canonical UI/UX, Input/Settings/Calibration, Onboarding, Results, Order Hub,
 and Accessibility design specification.
 
-A material change to the four-destination hierarchy, hub/Fast Play relationship,
+A material change to the four-destination hierarchy, hub/Quick Play relationship,
 responsive/device parity, encounter HUD/cue priority, semantic controls,
 telegraph/camera treatment, onboarding/gates, preparation atomicity, Results/
 follow-up, profile scope/apply timing, accessibility neutrality, failure/save

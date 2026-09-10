@@ -5,6 +5,7 @@
 - **Parent systems:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#42-combat) and
   [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#43-player-survival--recovery)
 - **Player-facing authority:** [`GAME_DESIGN.md`](GAME_DESIGN.md)
+- **Player-language contract:** [`NAMING_AND_TONE.md`](NAMING_AND_TONE.md)
 - **Rhythm dependency:** [`RHYTHM_GAMEPLAY.md`](RHYTHM_GAMEPLAY.md)
 - **Decision source:** [`COMBAT_WORKING.md`](COMBAT_WORKING.md)
 - **Interview plan:** [`COMBAT_QUESTIONS.md`](COMBAT_QUESTIONS.md)
@@ -13,7 +14,7 @@
 
 This document defines how identified normalized musical performance becomes
 combat effects and how those effects change a player's single Ward survival
-resource, downed state, revival, and solo recovery opportunity.
+resource, downed state, Revive, and Last Stand opportunity.
 
 Combat owns:
 
@@ -31,13 +32,13 @@ Player Survival & Recovery, specified here as an integrated boundary, owns:
 - maximum/current/reinforced Ward and readable thresholds;
 - application of final incoming, restorative, and protective effects;
 - active, downed, recovering, protected/settling, and returned state;
-- cooperative revival progress state;
-- the one-use solo emergency recovery opportunity; and
+- cooperative Revive progress state;
+- the one-use Last Stand opportunity; and
 - returned Ward and re-entry protection.
 
 These systems do not own Rhythm judgment; charts; boss attacks, Resolve,
 Momentum, finishing, or encounter outcome; arena movement/cover state; item,
-build, ability, or consumable definitions; persistent loadouts; rewards; or
+Battle Style, ability, or Battle Supply definitions; persistent Loadouts; rewards; or
 presentation. Owning systems provide identified facts and consume the semantic
 outputs established here.
 
@@ -49,7 +50,7 @@ outputs established here.
    simultaneously become multiple full-strength effects.
 3. **Monotonic skill:** under identical non-rhythm state, more earned normalized
    contribution cannot produce a weaker result.
-4. **Post-score builds:** equipment and specialization affect consequences only;
+4. **Post-score Battle Styles:** equipment and Battle Styles affect consequences only;
    they never change musical judgment or chart participation.
 5. **Typed, bounded modifiers:** every legal modifier has a stage, category,
    budget, condition, cap, and attribution.
@@ -75,8 +76,8 @@ At encounter staging lock, Combat binds exact versions of:
 - content and schema revision;
 - balance-data revision;
 - selected difficulty and human-roster scaling;
-- each player's validated loadout, build, Signature Special, Band Call, and
-  prepared consumables;
+- each player's validated Loadout, Battle Style, Signature, Band Call, and
+  prepared Battle Supplies;
 - starting/current boss target opportunities;
 - position graph and risk/cover semantics; and
 - ability/effect definitions and category caps.
@@ -89,7 +90,7 @@ During the encounter, Combat consumes:
   cancellation, finishing, and outcome-evaluation facts;
 - Position state, route, risk tier, cover, avoidance, and movement boundaries;
 - Multiplayer active/absent/returned roster identity;
-- legal item/build/ability/consumable modifier sources; and
+- legal item/Battle Style/ability/Battle Supply modifier sources; and
 - current Combat/Survival state snapshots.
 
 A content, balance, encounter, player, source, or target identity mismatch is a
@@ -117,7 +118,7 @@ Every normalized portion receives one primary route:
 - Defend mitigation/reinforcement;
 - accelerated Hype generation;
 - committed Signature activation performance;
-- cooperative revival;
+- cooperative Revive;
 - Band Call;
 - Crescendo; or
 - another explicitly exclusive cooperative/ability route.
@@ -133,7 +134,7 @@ An accepted normalized contribution is converted in this order:
 
 1. normalized earned value from Rhythm;
 2. versioned base rate for the effective intent/effect kind;
-3. applicable equipment and build modifiers;
+3. applicable equipment and Battle Style modifiers;
 4. the position modifier legal for that effect;
 5. explicit encounter, target, or difficulty modifiers; and
 6. the effect-specific cap.
@@ -149,7 +150,7 @@ representation later but must produce reproducible results from the same inputs
 and balance revision.
 
 Ordinary zero performance remains zero regardless of multipliers or procs. The
-reliable base of an already-earned and committed Signature Special is the one
+reliable base of an already-earned and committed Signature is the one
 explicit exception; non-performance-triggered utility defined by another system
 is a separate effect source, not fabricated contribution.
 
@@ -254,11 +255,11 @@ encounter end. It does not become a second down threshold or survival resource.
 
 A mid-combat maximum-Ward increase preserves the current absolute amount unless
 the effect explicitly grants current Ward. A decrease preserves the absolute
-amount where legal, then clamps current Ward to the new maximum. Combat loadouts
+amount where legal, then clamps current Ward to the new maximum. Combat Loadouts
 cannot be swapped during an active encounter.
 
-Downed players cannot receive ordinary restoration or reinforcement. Revival
-and solo recovery have dedicated return effects. Every applied, capped,
+Downed players cannot receive ordinary restoration or reinforcement. Revive
+and Last Stand have dedicated return effects. Every applied, capped,
 discarded, converted, consumed, and expired value retains source and target
 attribution.
 
@@ -268,7 +269,7 @@ Player survival states are:
 
 - **Active:** ordinary target and contribution eligibility apply.
 - **Downed:** Ward is zero; ordinary targeting and performance are suspended.
-- **Recovering:** an identified cooperative or solo recovery process is active.
+- **Recovering:** an identified Revive or Last Stand process is active.
 - **Return protected/settling:** Ward has been restored, but ordinary targeting
   and chart participation remain suspended for the defined interval.
 - **Returned active:** protection/settling ended and Rhythm has found a fair
@@ -284,29 +285,29 @@ the prior one is invalid.
 Boss Encounters owns all-humans-down and solo-attempt-ended defeat. Survival
 publishes authoritative player states after each musical boundary.
 
-## 11. Cooperative revival
+## 11. Cooperative Revive
 
-Co-op revival may begin after any downing while another human remains active.
-There is no arbitrary per-player or band-wide revival count; remaining song time,
+Co-op Revive may begin after any downing while another human remains active.
+There is no arbitrary per-player or band-wide Revive count; remaining song time,
 valid Activity Map candidates, sacrificed output, and all-humans-down are the
 constraints.
 
 At the dynamically selected fair boundary, each participant routes authentic
 ordinary-chart contribution exclusively to one identified downed target. It
 cannot simultaneously become Attack, Defend, Special, Band Call, Crescendo, or
-another revival. Multiple participants add independently normalized progress,
+another Revive. Multiple participants add independently normalized progress,
 accelerating completion. Weak play reduces only that participant's share.
 
 Progress belongs to the downed target and survives contributor changes until
 completion or invalidation by encounter end/all-humans-down. It never advances
-from absence, fabricated notes, or acolyte performance.
+from absence, fabricated notes, or Order Ally performance.
 
 Completion returns a tuned Ward amount, starting around 35% for one competent
 participant and potentially rising toward roughly 60% with stronger/multiple
 help. These are playtest hypotheses. The player receives about two beats of
 protection/settling, then Rhythm resumes at its first fairly previewed note.
 
-## 12. Solo emergency recovery
+## 12. Last Stand
 
 Solo has exactly one emergency recovery opportunity per encounter. Downing
 triggers dynamic Activity Map selection of a clean instrument-aware boundary; an
@@ -314,12 +315,12 @@ urgent universal beat challenge may be used only under the approved authoring
 rules when authentic material is unavailable soon enough.
 
 The challenge is an identified temporary scoring stream, not ordinary Attack,
-Defend, or Special contribution. Acolytes provide presentation only. Success
+Defend, or Special contribution. Order Allies provide presentation only. Success
 returns a tuned Ward amount, initially around 35%, plus return
 protection/settling. Failure or any later down ends the solo attempt. Robux,
-equipment, and consumables cannot add, purchase, or bypass another attempt.
+equipment, and Battle Supplies cannot add, purchase, or bypass another attempt.
 
-## 13. Hype and Signature Special lifecycle
+## 13. Hype and Signature lifecycle
 
 Successful ordinary Attack or Defend performance creates an identified
 slow-Hype-eligible contribution fact. Selecting Special before full Hype stores
@@ -344,7 +345,7 @@ performance scales only additional strength, duration, or utility.
 
 Abilities consumes Hype when the committed effect enters guaranteed resolution
 and signals Combat to restore the prior intent. Hype persists through ordinary
-downing/revival, resets between encounters, stores no second charge, and has no
+downing/Revive, resets between encounters, stores no second charge, and has no
 separate cooldown.
 
 Abilities & Cooperative Actions owns Hype amount and lifecycle state, the
@@ -354,7 +355,7 @@ Special intent/input routing, eligible slow/fast contribution facts, normalized
 effect conversion, and automatic return to the stored intent. This ownership
 split does not change the approved player behavior above.
 
-## 14. Modifier and build contract
+## 14. Modifier and Battle Style contract
 
 Every modifier is immutable/versioned and declares:
 
@@ -366,8 +367,8 @@ Every modifier is immutable/versioned and declares:
 - recipient/distribution policy where applicable; and
 - source/target/causal attribution.
 
-Gear provides most direct power. Build choices emphasize bounded conditions,
-tradeoffs, sidegrades, and hybrids. Category caps and a shared loadout/build
+Gear provides most direct power. Battle Style choices emphasize bounded conditions,
+tradeoffs, sidegrades, and hybrids. Category caps and a shared Loadout/Battle Style
 power budget prevent multiplicative escape and mandatory combinations.
 
 Modifiers cannot change:
@@ -375,13 +376,13 @@ Modifiers cannot change:
 - charts, timing windows, judgments, calibration, note density, or Hold Assist
   value;
 - movement time, charges, settling, telegraph/reaction time, or invulnerability;
-- revival counts or solo recovery attempts;
+- Revive counts or Last Stand attempts;
 - automatic note correction/autoplay;
 - reward eligibility; or
 - the authored baseline positional risk/reward ratios.
 
 Position supplies baseline Attack, incoming-danger, and reward facts at their
-owned stages. A build may trigger a separately budgeted and visible effect while
+owned stages. A Battle Style may trigger a separately budgeted and visible effect while
 the player performs dangerously, but it cannot rewrite the universal position
 multiplier or remove its danger.
 
@@ -389,7 +390,7 @@ The typed budget contract may later support traits, sidegrades, sets, sockets,
 and advanced configuration without granting rhythm authority or adding required
 combat controls.
 
-## 15. Multi-target, group, and acolyte effects
+## 15. Multi-target, group, and Order Ally effects
 
 A multi-target effect declares one of two budget forms:
 
@@ -404,10 +405,10 @@ Group participants keep independently calculated shares. One player's weak play
 never subtracts another's share or cancels an initiator's guaranteed base.
 Duplicate roles do not alter eligibility or conversion.
 
-Acolytes create identified fixed NPC packets with explicit solo caps. They have
+Order Allies create identified fixed NPC packets with explicit solo caps. They have
 no chart, grade, timing distribution, player performance/reward attribution, or
 position risk multiplier. Vanguard support cannot perform the decisive layer
-break; acolytes never progress emergency recovery. Other precise acolyte and
+break; Order Allies never progress Last Stand. Other precise Order Ally and
 group-action behavior belongs to Abilities & Cooperative Actions.
 
 ## 16. Same-boundary ordering
@@ -416,7 +417,7 @@ Combat orders by logical musical timestamp, not network receipt. At one time:
 
 1. apply scheduled intent, participation, and eligibility changes;
 2. accept/finalize valid Rhythm contribution assigned to the boundary;
-3. resolve player, support, revival, and cooperative effects;
+3. resolve player, support, Revive, and cooperative effects;
 4. resolve committed boss impacts/hazards in stable authored order;
 5. apply Ward thresholds and down transitions; and
 6. expose the completed snapshot for Boss Encounter outcome evaluation.
@@ -424,7 +425,7 @@ Combat orders by logical musical timestamp, not network receipt. At one time:
 Each phase publishes one atomic snapshot for the next. Stable event identity is
 the final tie-breaker inside a phase.
 
-This order lets genuinely on-beat defense, restoration, protection, or revival
+This order lets genuinely on-beat defense, restoration, protection, or Revive
 help before impact. A same-beat Resolve break does not cancel an attack that
 already passed Commit unless its authored definition explicitly permits that
 behavior. Boss Encounters evaluates finishing success, all-humans-down,
@@ -452,8 +453,9 @@ rejected, not silently normalized into plausible values. Normal designed caps
 are successful resolution and emit cap evidence.
 
 Server-confirmed combat history is immutable. Local immediate Rhythm feedback is
-not by itself authoritative shared combat application; technical architecture
-must preserve responsiveness while validating shared effects.
+not by itself authoritative shared combat application;
+[`TECHNICAL_ARCHITECTURE.md`](TECHNICAL_ARCHITECTURE.md) preserves responsiveness
+while validating shared effects.
 
 A contribution logically completed before disconnect may be accepted within the
 delivery allowance. The disconnect boundary blocks absent-period output. An
@@ -477,7 +479,7 @@ Combat/Survival exposes causally linked facts for:
   contribution facts; Abilities emits Hype state and Signature transitions;
 - incoming effect gates, reductions, final damage, and avoidance;
 - current/max/reinforced Ward changes and threshold crossings;
-- downing, revival target/progress/completion, solo recovery use/outcome,
+- downing, Revive target/progress/completion, Last Stand use/outcome,
   return protection, settling, and active restoration; and
 - multi-target, group, NPC, source, recipient, and causal attribution.
 
@@ -487,7 +489,7 @@ pre/post value, cap/discard evidence, and final state.
 
 Results can derive personal Attack/Defend/Special contribution,
 Resolve/Momentum disposition, Ward loss/restoration/reinforcement, attacks
-avoided/defended/absorbed, revival help, group share, position modifiers, and
+avoided/defended/absorbed, Revive help, group share, position modifiers, and
 personal history. UI and Audio consume the same semantics at immediate levels;
 Analytics observes without becoming authority. No consumer needs or receives a
 public damage ranking.
@@ -513,7 +515,7 @@ not an unresolved design boundary.
 | Multi-target authored effect | Eligibility, distribution form, roster-aware cap reference, invalid-recipient fallback | Total application cannot multiply unintentionally with roster size | Combat, Abilities, Results | Reconciled; explicit validator required |
 | Same-time order | Stable global event order and exact logical time | Ties reproduce across export/runtime and never use receipt order | Combat, Boss Encounters, Multiplayer | Reconciled; global tie-order implementation required |
 
-Combat formulae, item/build definitions, Ward numbers, and balance tables remain
+Combat formulae, item/Battle Style definitions, Ward numbers, and balance tables remain
 versioned system data rather than private values embedded in individual chart
 notes. Encounter packages reference compatible definitions and expose only their
 authored targets, tags, candidates, and boundaries.
@@ -528,7 +530,7 @@ for playtesting or architecture:
 - modifier category caps, shared power budget, and fixed-precision scale;
 - Resolve-pressure, Defend-mitigation, and reinforcement conversion rates;
 - Ward maximums, damage, reinforcement cap, restoration, and recovery amounts;
-- revival target/scaling and return-protection duration;
+- Revive target/scaling and return-protection duration;
 - Signature base/bonus scaling and group-effect caps;
 - delivery allowance, validation tolerance, and anti-cheat architecture;
 - balance-data storage/versioning and authoritative transport; and
@@ -544,7 +546,7 @@ The owner interview resolved CM-01 through CM-12 on 2026-08-21. This document is
 the canonical Combat and Player Survival & Recovery design specification.
 
 A material change to conversion order, intent routing, Attack/Defend ownership,
-modifier boundaries, Ward semantics, downing/revival/recovery rules,
+modifier boundaries, Ward semantics, downing/Revive/recovery rules,
 same-boundary precedence, or authoritative validation requires an explicit
 design amendment citing the superseded rule. Numeric balance changes inside the
 approved behavior create a new balance revision and begin only with new

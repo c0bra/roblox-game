@@ -2,6 +2,7 @@
 
 - **Status:** Vision v1 baseline; design amendments recorded through 2026-08-17
 - **Purpose:** Product-level instructions for development decisions
+- **Player-language contract:** [`NAMING_AND_TONE.md`](NAMING_AND_TONE.md)
 
 ## 1. Role of this document
 
@@ -35,7 +36,7 @@ Bands Battle is a supernatural boss-combat game controlled through rhythm,
 blended with the progression and player expression of a musical action RPG.
 
 Players join an order of musical warriors in a fully supernatural world. They
-fight enormous bosses, recover fragments of a Shattered Song, grow in power,
+fight enormous bosses, recover Song Fragments from the Shattered Song, grow in power,
 master songs, and develop flexible combat roles. Battles are playable solo but
 reach their fullest expression when a band coordinates its individual parts
 into group attacks and defenses.
@@ -214,7 +215,7 @@ flashing alone.
 
 ### Group abilities have two entry paths
 
-**Band Calls** are player-started specials from a small equipped ability loadout.
+**Band Calls** are player-started specials from a small equipped ability selection.
 Any eligible player may activate one, and it queues to the next clean musical
 boundary. The initiator can produce its base effect alone. Other players receive
 a brief, prominent invitation to join, and each participant adds a stack,
@@ -278,31 +279,31 @@ One missed note should not cause an arbitrary defeat. Repeated poor rhythm,
 failed defenses, and boss damage should accumulate through health, ward, or an
 equivalent survival resource.
 
-In co-op, bandmates may revive a fully downed player by voluntarily diverting
-musical effort into a short revive phrase. One active bandmate can complete the
-revival alone, while additional participants accelerate or strengthen it. A
-revive therefore creates an active cooperative choice without requiring the
+In co-op, bandmates may **Revive** a fully downed player by voluntarily diverting
+musical effort into a short Revive phrase. One active bandmate can complete the
+Revive alone, while additional participants accelerate or strengthen it. A
+Revive therefore creates an active cooperative choice without requiring the
 whole band or letting one nonparticipant cancel the rescue.
 
-Solo play should provide a limited last-chance recovery opportunity before the
-run ends. The player earns recovery through a short emergency rhythm challenge
+Solo play should provide one **Last Stand** opportunity before the run ends. The
+player earns recovery through a short emergency rhythm challenge
 connected to the current song pulse and performed with the same familiar rhythm
 controls used in normal combat, not through a disconnected puzzle or random
 result. It should be brief, frenetic, and meaningfully difficult rather than
 automatic. Success should release the pressure through strong audiovisual
 feedback and give the player a clear feeling of relief before combat resumes.
-Exact revive and solo-recovery inputs, duration, and recovery strength are
+Exact Revive and Last Stand inputs, duration, and recovery strength are
 downstream design and tuning decisions.
 
-Active-encounter recovery must be earned through the solo challenge or a
-bandmate's revive performance. It cannot be purchased or bypassed with Robux or
+Active-encounter recovery must be earned through Last Stand or a bandmate's
+Revive performance. It cannot be purchased or bypassed with Robux or
 another paid currency. Broader monetization boundaries are addressed separately,
 but spending must not replace the recovery play or undo an earned defeat.
 
 A failed encounter should still acknowledge worthwhile practice. Players earn
-modest song and boss mastery progress plus ordinary crafting materials based on
+modest Order Rank and Boss Mastery progress plus ordinary Resonance based on
 their performance, so an unsuccessful attempt is not empty. Story progression,
-recovery of a Shattered Song fragment, and signature boss drops require victory.
+recovery of a Song Fragment, and Signature boss drops require victory.
 Failure rewards should support learning and the desire to retry without making
 intentional failure a better progression strategy than defeating the boss.
 
@@ -314,27 +315,27 @@ players. Cooperative play should be the more exciting and expressive form of the
 game.
 
 Solo keeps the same arena geometry and tactical positions used for a band rather
-than rebuilding or shrinking encounters by player count. Order acolyte NPCs use
+than rebuilding or shrinking encounters by player count. Order Allies use
 formation offsets within those tactical locations so the arena and the
-musical-warrior fantasy do not feel empty. A player and one or more acolytes may
-share the same gameplay location; the acolytes automatically arrange around the
+musical-warrior fantasy do not feel empty. A player and one or more Order Allies may
+share the same gameplay location; the Order Allies automatically arrange around the
 human performer, do not consume position capacity, and never block a player's
 movement or risk/reward choice. Everyone sharing a location remains subject to
 that location's attack geometry and danger.
 
-Acolytes are lightweight support characters, not simulated rhythm players: they
+Order Allies are lightweight support characters, not simulated rhythm players: they
 receive no instrument phrases or timing judgments, while the full song mix
 continues normally. Their contribution comes from predictable passive pressure
 and authored support abilities. Their passive contribution may help but cannot
 break resistance layers without the player's successful performance. Exact
-acolyte abilities, damage values, formation offsets, and timing are downstream
+Order Ally abilities, damage values, formation offsets, and timing are downstream
 tuning decisions.
 
-For the MVP, acolytes cannot be permanently downed and do not require inventory,
-individual builds, rhythm simulation, or detailed commands. Boss attacks may
+For the MVP, Order Allies cannot be permanently downed and do not require inventory,
+individual Battle Styles, rhythm simulation, or detailed commands. Boss attacks may
 knock them away or temporarily disable their support without turning solo play
 into an escort mission. During a solo group ability, the human performs the
-actual rhythm phrase; acolytes join the presentation and supply a predictable
+actual rhythm phrase; Order Allies join the presentation and supply a predictable
 fixed contribution rather than generating artificial performance scores. Solo
 encounter tuning may adjust their support and boss pressure, but the human
 player's rhythm, positioning, and intent choices remain decisive.
@@ -433,7 +434,7 @@ result of a group ability is primarily additive: each player's performance
 determines that player's contribution, so weak execution reduces that share
 without erasing the successful work of the rest of the band.
 
-Broad successful participation may earn a capped positive **Cohesion Bonus**.
+Broad successful participation may earn a capped positive **Band Harmony**.
 Weak or absent performance supplies less positive contribution and may leave
 some of this bonus unearned, but it never subtracts value already earned by
 stronger players. Eligibility thresholds may become stricter with difficulty,
@@ -444,7 +445,7 @@ player's failed phrase, should by itself cause the entire group ability to fail.
 Exact contribution weights, bonus thresholds, and collective tier requirements
 should be established through playtesting.
 
-## 7. Instruments, roles, and builds
+## 7. Instruments, roles, and Battle Styles
 
 The player's own Roblox avatar is their performer and story character. The game
 does not require the player to replace that identity with a named hero or a
@@ -469,13 +470,13 @@ Specialization comes from equipment and character development:
 - Individual instruments and items can lean toward particular roles. For
   example, one drum kit might strengthen wards while another favors damage.
 - Role-oriented skill trees can deepen or combine combat specialties.
-- Different builds should create new strategies and play styles as well as
+- Different Battle Styles should create new strategies and play styles as well as
   meaningful increases in power.
 
-Co-op groups should benefit from complementary builds without requiring one
+Co-op groups should benefit from complementary Battle Styles without requiring one
 specific instrument lineup.
 
-## 8. Progression and mastery
+## 8. Progression and Boss Mastery
 
 Long-term engagement should center on three mutually supporting pursuits:
 
@@ -484,7 +485,7 @@ Long-term engagement should center on three mutually supporting pursuits:
 - mastering songs and boss encounters.
 
 Progression should blend statistical power with new abilities and play styles.
-Stronger builds may make earlier encounters noticeably easier, but rhythm skill,
+Stronger Loadouts may make earlier encounters noticeably easier, but rhythm skill,
 positioning, cooperation, and boss knowledge must remain decisive against
 current-tier challenges. Equipment should help players succeed; it should not
 play the song for them.
@@ -493,7 +494,7 @@ Boss tier determines the base quality of encounter rewards. Selected difficulty
 and stronger performance may increase drop quantity or the chance of improved
 rolls, but bosses appropriate to the player's current progression remain the
 best source of advancement. Older bosses become easier, useful farms for their
-identity-specific rewards and materials without out-rewarding current-tier
+identity-specific rewards and Boss Echoes without out-rewarding current-tier
 challenges.
 
 Gear may strengthen the combat consequences of rhythm performance, including
@@ -503,27 +504,28 @@ difficulty and accessibility settings so musical feedback remains consistent and
 players can understand the skill they are developing.
 
 Players may freely change equipped gear, abilities, instruments, and unlocked
-role-specialization choices outside an active song. Respeccing must not require
-Robux or a punitive grind. When the song begins, those build choices lock for the
-performance so players cannot replace equipment or rebuild their role while the
+Battle Style choices outside an active song. Respeccing must not require
+Robux or a punitive grind. When the song begins, those Battle Style choices lock
+for the performance so players cannot replace equipment or change their Battle Style while the
 battle is underway.
 
-Consumables are the exception for tactical item use, not an exception to the
-locked build. Players prepare a small consumable loadout before the song and may
+Battle Supplies are the exception for tactical item use, not an exception to the
+locked Loadout. Players prepare a small set of Battle Supplies before the song
+and may
 activate those items through quick-access controls during combat. Charges are
 limited, the full inventory cannot be browsed or used to replenish them mid-song,
-and their effects should resolve at a musically clean opportunity. Consumables
+and their effects should resolve at a musically clean opportunity. Battle Supplies
 may restore ward or resources, cleanse an effect, or grant a temporary buff, but
 they cannot bypass defeat or replace the solo and co-op recovery mechanics. Exact
 slot counts, charges, and item effects are downstream design decisions.
 
 Equipment acquisition blends boss drops with lightweight crafting and upgrades.
-Bosses should drop memorable complete items, wardrobe pieces, and materials tied
+Bosses should drop memorable complete items, wardrobe pieces, and Boss Echoes tied
 to their identity. The Order workshop provides straightforward item upgrades,
-combines earned boss materials, and occasionally crafts a known item from a
-short, clear recipe. This gives players a deliberate path toward a build instead
+combines earned Boss Echoes, and occasionally crafts a known item from a
+short, clear Recipe. This gives players a deliberate path toward a Loadout instead
 of leaving progression entirely to random drops. Crafting should support boss
-mastery and role development rather than become a separate resource-survival
+Boss Mastery and role development rather than become a separate resource-survival
 game with a large recipe catalog.
 
 ### Monetization principles
@@ -533,9 +535,9 @@ other durable items with genuine combat value. This is paid permanent
 progression, not permission to sell a temporary rescue at the moment of danger,
 downing, or defeat. Purchase offers should occur outside active encounters.
 
-Paid equipment may accelerate access or offer a distinct build and appearance,
+Paid equipment may accelerate access or offer a distinct Loadout and appearance,
 but it must not exceed the normal item-tier ceiling. Every paid item must have an
-earnable equivalent or a comparably strong non-paid build at the same tier. No
+earnable equivalent or a comparably strong non-paid Loadout at the same tier. No
 paid item should become mandatory for a role, current-tier boss, difficulty, or
 desirable co-op group composition.
 
@@ -643,20 +645,20 @@ The working mythic foundation is the Shattered Song:
 - The mastermind's hubris helped defeat its complete plan. It understood power,
   hierarchy, and control but dismissed the possibility that a low-ranking voice,
   freely offered in resistance, could matter.
-- The Shattering scattered fragments that could be captured and wielded
+- The Shattering scattered Song Fragments that could be captured and wielded
   separately in a way the complete Song could not.
-- The fragments are now held by powerful bosses whose dissonance corrupts the
+- The Song Fragments are now held by powerful bosses whose dissonance corrupts the
   surrounding regions.
 - The bosses must be destroyed rather than redeemed.
-- Destroying a boss releases a fragment and restores part of the Shattered Song
+- Destroying a boss releases a Song Fragment and restores part of the Shattered Song
   and the world.
 
 Most bosses are hostile spiritual beings and demon-like monsters rather than
 former members of the Order. Some major bosses, however, are surviving
-conspirators or beings directly involved in the ancient coup. Wielding a fragment
+conspirators or beings directly involved in the ancient coup. Wielding a Song Fragment
 without the harmony or character required to bear it can corrupt such a wielder,
 amplify its existing discord, and transform it over time into a demon-like form.
-This lets the campaign move from monstrous symptoms of the Shattering toward the
+This lets the story move from monstrous symptoms of the Shattering toward the
 personal agents responsible for it.
 
 Players begin as new recruits in a diminished musical order dedicated to this
@@ -695,19 +697,19 @@ The setting and mythology must remain original. Inspiration should be translated
 into Bands Battle's own characters, cultures, symbols, terminology, conflicts,
 and plot.
 
-## 11. Campaign and encounter structure
+## 11. Song Restoration and encounter structure
 
-The main progression follows a story path through increasingly consequential
-boss encounters. Victories restore fragments, open regions, reveal clues, and
+Song Restoration follows a story path through increasingly consequential boss
+encounters. Victories restore Song Fragments, open regions, reveal clues, and
 unlock new songs, abilities, equipment, and challenges. Some boss victories also
 expose the participants, motives, and consequences of the ancient coup, allowing
-the true history of the Order to emerge over the course of the campaign. Early
+the true history of the Order to emerge over the course of the story. Early
 encounters may emphasize spiritual monsters created or empowered by the
 Shattering. Later encounters can reveal transformed conspirators and culminate in
 the discovery that the mastermind who deliberately engineered it is one of the
 Order's own celebrated ancient heroes.
 
-Defeated bosses remain replayable for mastery and rewards. In addition to the
+Defeated bosses remain replayable for Boss Mastery and rewards. In addition to the
 main path, special encounters may appear on certain days or times or through
 semi-random availability. These events should add surprise and reasons to return
 without making permanent story progress depend entirely on being online at a
@@ -769,7 +771,7 @@ outcomes:
 - Battles alternate pressure, decisions, coordinated spectacle, and breathing
   room.
 - Solo play remains complete while co-op creates superior band moments.
-- Any instrument supports any broad role through builds.
+- Any instrument supports any broad role through Battle Styles.
 - Progress rewards both growing power and growing skill.
 - Boss victories advance restoration of the Shattered Song.
 - The experience remains readable and approachable for ages 10 to 14.

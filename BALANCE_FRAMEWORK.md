@@ -4,6 +4,7 @@
 - **Approved:** 2026-09-08
 - **Parent system:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#48-difficulty--scaling)
 - **Player-facing authority:** [`GAME_DESIGN.md`](GAME_DESIGN.md)
+- **Player-language contract:** [`NAMING_AND_TONE.md`](NAMING_AND_TONE.md)
 - **System specifications:** [`SYSTEM_SPECIFICATIONS_TRACKER.md`](SYSTEM_SPECIFICATIONS_TRACKER.md)
 - **Content contract:** [`CONTENT_AUTHORING.md`](CONTENT_AUTHORING.md)
 - **Player-data contract:** [`PLAYER_DATA.md`](PLAYER_DATA.md)
@@ -58,7 +59,7 @@ simulation and playtesting, not immutable shipping constants.
    omits possible positive contribution but never subtracts another player's.
 8. **Roles and duplicates are neutral:** balance never requires conventional
    instruments, party composition, or duplicate-role penalties.
-9. **Solo remains human-led:** acolytes are fixed support, never fabricated human
+9. **Solo remains human-led:** Order Allies are fixed support, never fabricated human
    performance, decisive layer breaks, recovery help, risk, or rewards.
 10. **One deterministic pipeline:** every value has declared units, owner, order,
     cap, precision, rounding, source, and revision.
@@ -69,13 +70,13 @@ simulation and playtesting, not immutable shipping constants.
 13. **Danger is accumulated and readable:** an ordinary single attack does not
     down a full-Ward player, and a Miss never directly removes Ward.
 14. **Power is bounded and multidimensional:** gear supplies most direct growth;
-    builds emphasize choices/tradeoffs; progression power is finite.
+    Battle Styles emphasize choices/tradeoffs; progression power is finite.
 15. **Rewards remain individual:** party size never divides rewards or improves
     the underlying personal pool, and bonuses are bounded/nonnegative.
 16. **Failure is useful but not optimal:** Defeat may grant modest practice/
-    general progress but cannot outperform Victory or grant victory-owned value.
+    Order Rank progress but cannot outperform Victory or grant victory-owned value.
 17. **Earned and paid function are identical:** paid equipment has one exact
-    earnable equivalent and the same caps, upgrades, uplift, and tests.
+    earnable equivalent and the same caps, upgrades, Reforge, and tests.
 18. **Accessibility is neutral:** accessibility, Hold Assist, calibration, device,
     age, privacy, and spending never reduce value, access, or public treatment.
 19. **Attempts lock revisions:** balance changes never alter active play or
@@ -100,7 +101,7 @@ Balance optimization priority is:
 An acceptable outcome rate does not excuse unexplained damage, unclear victory/
 defeat, unreadable threats, weak choices, empty stretches, or farming exploits.
 Evidence combines outcome with layer pace, downing/recovery, abandonment/retry,
-comprehension, group use, build diversity, and economy/progression behavior.
+comprehension, group use, Battle Style diversity, and economy/progression behavior.
 
 ### Initial outcome hypotheses
 
@@ -170,8 +171,8 @@ Normal is the reference profile. Easy and Hard change explicitly named axes:
 - Resolve requirements and finishing proficiency;
 - attack combinations, warning, target pressure, and damage;
 - survival, recovery, and Easy's conditional extra Crescendo;
-- Cohesion/group thresholds; and
-- bounded reward efficiency or mastery-cosmetic eligibility.
+- Band Harmony/group thresholds; and
+- bounded reward efficiency or Boss Mastery Cosmetic eligibility.
 
 Difficulty does not change the common normalized contribution maximum, song,
 controls, role identity, accessibility rights, Combat pipeline, or essential
@@ -190,7 +191,7 @@ reward pool.
 
 Each Resolve layer combines its difficulty base and active-human relationship
 when it opens, then locks. A disconnected player remains counted during rejoin
-grace. Grace expiry affects only unopened layers. Acolytes never count.
+grace. Grace expiry affects only unopened layers. Order Allies never count.
 
 Additional-human pressure uses validated readable target/geometry coverage. The
 initial simultaneous individually targeted count is about half the eligible
@@ -200,7 +201,7 @@ time, densify an individual's chart, or multiply personal incoming damage.
 Duplicate roles remain neutral. Weak/inactive/downed/disconnected players add
 little or no positive share but never reduce another player's value.
 
-Solo acolytes and population scaling initially target solo and cooperative
+Solo Order Allies and population scaling initially target solo and cooperative
 Victory rates within roughly ten percentage points at comparable measured human
 proficiency. This does not force identical play or permit fabricated solo
 performance. Party size does not change or divide the personal reward table.
@@ -257,13 +258,13 @@ Accepted normalized contribution follows Combat's established order:
 
 1. normalized earned Rhythm value;
 2. versioned base rate for the effective intent/effect;
-3. applicable equipment and build modifiers;
+3. applicable equipment and Battle Style modifiers;
 4. the position modifier legal for that effect;
 5. explicit encounter, target, or difficulty modifiers; then
 6. the effect-specific cap.
 
 The 1,000-unit passage scale is a common input, not a promise that Attack,
-Defend, Hype, revival, and support produce equal typed output. Domain base rates
+Defend, Hype, Revive, and support produce equal typed output. Domain base rates
 convert into their own explicit units.
 
 Values in one declared category add before one category cap. Separately budgeted
@@ -272,7 +273,7 @@ undeclared stages, recurse, or spend the same normalized portion twice.
 
 As an initial guardrail, ordinary Attack from identical Rhythm contribution caps
 near 1.6 times the unmodified Middle-position starter result after equipment,
-build, and position. BF-10's durable power budget must fit inside it.
+Battle Style, and position. BF-10's durable power budget must fit inside it.
 
 Committed Signature bases and group effects have separate explicit budgets
 because they are limited earned resources. They do not raise ordinary Attack's
@@ -310,13 +311,13 @@ Temporary reinforcement initially caps at 25% above normal maximum Ward.
 Restoration caps at normal maximum unless a separately budgeted conversion grants
 reinforcement. No effect creates a second life bar.
 
-One competent co-op revival participant should normally complete recovery in one
+One competent co-op Revive participant should normally complete recovery in one
 short authentic phrase. Additional participants accelerate with diminishing
 returns and a roster-aware cap.
 
-Co-op revival initially returns about 35% Ward for one competent helper and may
-rise toward 60% with stronger/multiple help. Solo emergency recovery starts near
-35%. Consumables cannot add another attempt.
+Co-op Revive initially returns about 35% Ward for one competent helper and may
+rise toward 60% with stronger/multiple help. Last Stand starts near 35%. Battle
+Supplies cannot add another attempt.
 
 Return protection/settling remains about two beats, initially clamped to
 0.75–1.25 seconds, followed by the first event satisfying the 500 ms preview.
@@ -353,7 +354,7 @@ Finishing Cadence or creates early Victory.
 Any valid Victory earns the base result tier. A second private tier begins near
 80% overall eligible performance and a top tier near 90%, including versioned
 positive post-break/finishing evidence. Higher tiers do not require zero downs,
-erase legitimate recovery, publicly rank players, or change campaign credit.
+erase legitimate recovery, publicly rank players, or change Song Restoration credit.
 
 Invalid/No Contest compensation remains at the Rewards failure-equivalent
 ceiling and never implies Victory or ordinary result-tier credit.
@@ -401,7 +402,7 @@ movement time, charge count/recovery, settling, route cost, or invulnerability.
 | Middle | Baseline | Baseline | Baseline |
 | Rear | −20% | −25% | No Risk Bonus |
 
-Gear/builds cannot modify these ratios. Total banked personal Risk Bonus caps
+Gear/Battle Styles cannot modify these ratios. Total banked personal Risk Bonus caps
 initially at +25%. Only successful normalized settled performance earns it; only
 the current phrase's unbanked amount is lost on movement/downing.
 
@@ -447,7 +448,7 @@ resistance exceeds expected remaining eligible output by about 20% and living
 players are under meaningful survival pressure. The exact combined function is
 versioned and cannot activate on Normal/Hard.
 
-### Solo acolyte hypotheses
+### Solo Order Ally hypotheses
 
 - **Vanguard:** about 10% of the triggering competent human Attack packet,
   applied afterward and clamped before a decisive layer break.
@@ -458,21 +459,21 @@ versioned and cannot activate on Normal/Hard.
 - **Suppression:** about four measures, with no stacking, refresh, extension, or
   catch-up.
 
-Acolytes never affect human judgments, records, Risk, rewards, recovery attempts,
-item/build power, or human roster count. Their tuning must remain inside the
+Order Allies never affect human judgments, records, Risk, rewards, recovery attempts,
+item/Battle Style power, or human roster count. Their tuning must remain inside the
 rough ten-point solo/co-op comparison envelope while keeping the human decisive.
 
-## 12. Items, builds, and durable power
+## 12. Items, Battle Styles, and durable power
 
-A complete starter loadout defines a 100-point internal multidimensional power
+A complete starter Loadout defines a 100-point internal multidimensional power
 reference across offense, Ward/defense, and support/utility. It is not a public
 universal gear score.
 
 First-release permanent direct-power growth initially caps near 130 points for a
-complete configuration, including General Progression. Power remains a vector;
+complete configuration, including Order Rank. Power remains a vector;
 different specializations are not flattened into damage.
 
-Gear supplies most durable growth. General Progression contributes at most ten
+Gear supplies most durable growth. Order Rank contributes at most ten
 points. Shared hook/category caps and the section 7 ordinary Attack ceiling still
 apply.
 
@@ -484,21 +485,21 @@ apply.
 - about 70% of an item's budget belongs to its visible primary stat; and
 - about 30% belongs to its fixed trait.
 
-Traits remain typed/capped and never become random hidden affixes. Uplift advances
+Traits remain typed/capped and never become random hidden affixes. Reforge advances
 one tier, preserves identity/trait/appearance/references, and resets to the
 nonlosing target-tier base. Old or paid items never auto-scale.
 
-### Build hypotheses
+### Battle Style hypotheses
 
-The existing 100-unit build envelope remains:
+The existing 100-unit Battle Style envelope remains:
 
 - one major at most 40 units; and
 - three distinct supporting options at most 20 units each.
 
 Unused slot capacity does not transfer. Synergy is charged inside participating
-budgets and caps initially at 15% of total build value.
+budgets and caps initially at 15% of total Battle Style value.
 
-A build's direct-output improvement over equivalent gear should ordinarily remain
+A Battle Style's direct-output improvement over equivalent gear should ordinarily remain
 near 10%. Most value comes from conditions, tradeoffs, redistribution, support,
 timing, or playstyle rather than unconditional stats.
 
@@ -513,40 +514,40 @@ ability/support utility:
 
 It is advice, never an access, matchmaking, social, or reward gate.
 
-A prepared consumable may not exceed roughly one competent passage effect,
+A prepared Battle Supply may not exceed roughly one competent passage effect,
 bypass typed caps, add recovery attempts, become required for baseline Victory,
 or change the two-slot model.
 
-## 13. Campaign, General Progression, and Mastery
+## 13. Song Restoration, Order Rank, and Boss Mastery
 
 One eligible meaningful first Victory on any difficulty completes the boss's
-campaign node, restores its fragment, and unlocks satisfied destinations. A
+Song Restoration node, restores its Song Fragment, and unlocks satisfied destinations. A
 meaningful Normal Victory separately unlocks that boss's Hard difficulty.
 
-### General Progression hypotheses
+### Order Rank hypotheses
 
-| Outcome | General Progress |
+| Outcome | Order Rank Progress |
 |---|---:|
 | Eligible Victory | 100 |
 | Eligible Defeat | 35 |
 | Invalid/No Contest | No ordinary grant; explicit compensation at most 35 |
 
-Advanced build editing and all three full spec-preset slots initially open near
+Advanced Battle Style editing and all three saved Loadout slots initially open near
 200 total progress, roughly two Victories.
 
-Broader option/consumable access and the ten-point permanent-power allowance
+Broader option/Battle Supply access and the ten-point permanent-power allowance
 spread through approximately 1,000 total progress. Power milestones are useful
-and finite; later General rewards emphasize options rather than endless stats.
+and finite; later Order Rank rewards emphasize options rather than endless stats.
 
 Defeat progress remains substantially less efficient than Victory and cannot
-grant campaign credit, boss material, item rolls, Signature items, first-clear
+grant Song Restoration credit, Boss Echoes, item rolls, Signature items, first-clear
 choices, or Hard access.
 
 ### Boss Mastery hypotheses
 
-Each boss has about ten visible ranks across roughly 1,500 total Mastery XP.
+Each boss has about ten visible Ranks across roughly 1,500 total Boss Mastery XP.
 
-| Outcome/difficulty | Mastery treatment |
+| Outcome/difficulty | Boss Mastery treatment |
 |---|---:|
 | Eligible Victory | 100 base XP |
 | Eligible Defeat | 25 base XP |
@@ -570,14 +571,14 @@ Combat, Ward/survival, position/Risk, cooperative help, and overall performance.
 They are not public damage rankings or balance authority.
 
 New catalog prerequisites grant retroactively when already satisfied. Returning
-players retain earned nodes, fragments, ranks, unlocks, records, and equivalent
+players retain earned nodes, Song Fragments, Ranks, unlocks, records, and equivalent
 access without replay or expiry.
 
 ## 14. Rewards and economy
 
 ### Outcome base hypotheses
 
-| Eligible outcome | General resource | Boss material | Boss-pool roll | Complete-item chance |
+| Eligible outcome | Resonance | Boss Echoes | Boss-pool roll | Complete-item chance |
 |---|---:|---:|---:|---:|
 | Easy Victory | 100 | 20 | Exactly one | 15% |
 | Normal Victory | About 110 | About 22 | Exactly one, same pool | 20% |
@@ -593,42 +594,42 @@ Normal/Hard do not change functional pool identity or roll count.
 |---|---:|
 | Normalized personal performance | +15% |
 | Banked personal Risk | +25% |
-| Cohesion or solo breadth | +15% |
+| Band Harmony or solo breadth | +15% |
 | Combined non-difficulty bonus | +40% |
 
 Percentages apply relatively to explicitly permitted quantity, complete-item
 chance, or starting-rank fields, not as undisclosed percentage points. They do
-not change pools, add rolls, alter guarantees, grant campaign/Hard access, or
+not change pools, add rolls, alter guarantees, grant Song Restoration/Hard access, or
 create difficulty-exclusive essential function.
 
 ### Initial costs
 
-| Action | General resource | Boss material |
+| Action | Resonance | Boss Echoes |
 |---|---:|---:|
 | Standard chosen item | 200 | 100 matching boss |
 | Upgrade rank 1 | About 40 | About 5 matching boss |
 | Upgrade rank 2 | About 70 | About 10 matching boss |
 | Upgrade rank 3 | About 100 | About 15 matching boss |
-| One-tier uplift | About 200 | About 60 current-tier boss plus 20 original boss |
-| Ordinary consumable | About 25 | None |
+| One-tier Reforge | About 200 | About 60 current-tier boss plus 20 original boss |
+| Ordinary Battle Supply | About 25 | None |
 
-The standard item's boss-material cost equals five baseline Easy Victories. A
+The standard item's Boss Echoes cost equals five baseline Easy Victories. A
 random item never consumes or resets that path.
 
-Voluntary duplicate power-item salvage initially returns 30% of equivalent boss-
-material crafting cost and remains below recreation. Cosmetic duplicate
+Voluntary duplicate power-item Salvage initially returns 30% of equivalent Boss
+Echoes Crafting cost and remains below recreation. Cosmetic duplicate
 conversion remains separate and power-free.
 
 Signature items may cost more but require a finite visible Victory recipe or
-Mastery/clear milestone. They never require Hard, random success, or Robux.
+Boss Mastery/clear milestone. They never require Hard, random success, or Robux.
 
-An eligible Defeat grants no boss material, roll, deterministic Victory progress,
-campaign credit, or Hard unlock. No Contest uses the Defeat compensation ceiling
-plus exact causal consumable refunds once.
+An eligible Defeat grants no Boss Echoes, roll, deterministic Victory progress,
+Song Restoration credit, or Hard unlock. No Contest uses the Defeat compensation
+ceiling plus exact causal Battle Supply refunds once.
 
 Paid equipment uses the exact same-tier functional definition as its visible
 earnable equivalent. Quote tier freezes at the player's unlocked tier. Rank,
-uplift, caps, tests, and migration are identical; only appearance/source lineage
+Reforge, caps, tests, and migration are identical; only appearance/source lineage
 may differ.
 
 ## 15. Scenario and evidence matrix
@@ -645,7 +646,7 @@ parameters vary independently and together to reveal cliffs, unstable feedback,
 cap saturation, and dominant variables.
 
 Economy simulation covers expected/adverse random streaks, duplicates,
-deterministic paths, resources/sinks, upgrades/uplift/crafting, consumables,
+deterministic paths, resources/sinks, Upgrade/Reforge/Crafting, Battle Supplies,
 failure farming, old/current content, paid equivalence, arbitrage, overflow, and
 long-account projections.
 
@@ -669,8 +670,8 @@ Evidence is segmented by boss/content revision, role, difficulty, device/control
 output, accessibility, progression/power, experience cohort, solo/two/three/six
 humans, duplicates/all-same roles, and uneven skill.
 
-The matrix covers down/revival/all-down; disconnect/grace/rejoin/AFK; movement/
-cover/hazard/displacement; Hype/Signature/Call/Crescendo/acolytes; zero/threshold/
+The matrix covers down/Revive/all-down; disconnect/grace/rejoin/AFK; movement/
+cover/hazard/displacement; Hype/Signature/Call/Crescendo/Order Allies; zero/threshold/
 cap/overflow; economy streaks; invalid data; and snapshot revision boundaries.
 
 ### Structural versus numeric findings
@@ -768,7 +769,7 @@ Each boss-specific profile contains:
 - attack family/weight/intensity/cooldown/target/telegraph/effect ranges;
 - arena, movement, cover, hazard, displacement, position, and Risk values;
 - Ward/downing/recovery, Hype/Signature/group, and solo-support settings;
-- compatible item/build/power, progression, and reward references;
+- compatible item/Battle Style/power, progression, and reward references;
 - parameter ranges, scenario/sensitivity results, and human evidence;
 - lifecycle state, approvals, compatibility, and supersession.
 
@@ -817,11 +818,12 @@ still includes:
 
 - machine-readable registry/catalog schemas and validation tooling;
 - first-three-boss content packages and profile-specific Approved values;
-- complete item, ability, build, progression, milestone, reward, and economy
+- complete item, ability, Battle Style, progression, milestone, reward, and economy
   catalogs inside these budgets;
 - simulation/reference-player implementation and generated reports/diffs;
 - target-age playtest execution under `PLAYTEST_AND_ANALYTICS.md`;
-- final player-facing names, copy, and localized terminology;
+- future catalog names, final-title work, shipping copy, and localization assets
+  under the approved `NAMING_AND_TONE.md` contract;
 - storage, transport, security, authority, experiment, rollout, rollback, and
   operational implementation; and
 - iterative parameter promotion from Hypothesis to Approved evidence.

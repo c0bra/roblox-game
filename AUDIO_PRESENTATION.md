@@ -4,6 +4,7 @@
 - **Approved:** 2026-09-01
 - **Parent system:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#77-audio-presentation)
 - **Player-facing authority:** [`GAME_DESIGN.md`](GAME_DESIGN.md)
+- **Player-language contract:** [`NAMING_AND_TONE.md`](NAMING_AND_TONE.md)
 - **Content dependency:** [`CONTENT_AUTHORING.md`](CONTENT_AUTHORING.md)
 - **Rhythm dependency:** [`RHYTHM_GAMEPLAY.md`](RHYTHM_GAMEPLAY.md)
 - **Encounter dependency:** [`BOSS_ENCOUNTERS.md`](BOSS_ENCOUNTERS.md)
@@ -256,10 +257,10 @@ use source/target-aware cues only when teammates need state. Routine personal
 stats do not create band-wide notifications.
 
 Signature arm/commit/cancel/guaranteed resolution are distinct for owner;
-teammates hear only necessary effect/target. Consumables do not sound committed
+teammates hear only necessary effect/target. Battle Supplies do not sound committed
 before durable spend/effect guarantee.
 
-## 8. Band Calls, Crescendos, and acolytes
+## 8. Band Calls, Crescendos, and Order Allies
 
 Band Call invitation includes initiator, identity/effect, and countdown.
 Commitment widens/strengthens ensemble for the authentic performance window.
@@ -271,7 +272,7 @@ participating ensemble. Echo, Crescendo, and Full Crescendo use clear increasing
 treatments under one headroom cap. A weak share never adds negative sound or
 reduces another player's audible success.
 
-Solo acolytes use non-performance motifs:
+Solo Order Allies use non-performance motifs:
 
 - Vanguard pressure;
 - Warden cadence/reinforcement;
@@ -299,7 +300,7 @@ or anchors.
 
 Menu feedback distinguishes focus/selection, confirm, back/cancel, unavailable,
 pending, success, warning, and failure, but does not sound every focus move when
-fatiguing. Fast Play/physical shard use the same encounter-card confirmation.
+fatiguing. Quick Play/physical shard use the same encounter-card confirmation.
 
 Practice uses clean authored music/layers and real cue language. Calibration
 uses an acoustically simple pulse/tap reference distinct from boss motifs.
@@ -374,7 +375,7 @@ Player Data persists; Audio reports application/unsupported/failure.
 Complete song, local role/judgments, timing/counts, personal targeting/recovery,
 and blocking UI/system feedback remain centered/nonspatial.
 
-Bosses, attacks, positions/routes, portals, acolytes, shared effects, dialogue,
+Bosses, attacks, positions/routes, portals, Order Allies, shared effects, dialogue,
 and environment may use bounded spatial reinforcement. Spatial never solely
 carries target/direction/distance/response.
 
@@ -517,7 +518,7 @@ Automated validation covers:
 - concurrency/headroom simulations.
 
 Human review covers neutral/maximum A/B, all role response states, leakage,
-phone/headphone/mono clarity, critical masking/worst overlaps, group/acolyte/world,
+phone/headphone/mono clarity, critical masking/worst overlaps, group/Order Ally/world,
 dialogue/captions, bus/DR extremes, and nonshaming age tone.
 
 Publication requires automated pass plus named musical/mix/accessibility approval
@@ -604,7 +605,7 @@ Verification crosses:
 - every playable role/difficulty;
 - solo and two/three/six humans including duplicates;
 - every grade/hold/suspension/down/return;
-- every boss/group/recovery/acolyte/world/Results lifecycle;
+- every boss/group/recovery/Order Ally/world/Results lifecycle;
 - every protected overlap/order/cancel/failure and max concurrency;
 - representative low/ordinary phones/tablets, desktop speakers, wired/wireless
   headphones, stereo/mono, low volume;

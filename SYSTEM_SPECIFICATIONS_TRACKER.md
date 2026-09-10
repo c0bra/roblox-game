@@ -6,7 +6,9 @@
 - **Completed:** 2026-09-02
 - **Authority:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md)
 - **Current specification:** Complete; supporting documents remain separate
-- **Current supporting document:** Complete; required naming-and-tone pass is next
+- **Current supporting document:** Complete
+- **Current product task:** Naming & Tone complete
+- **Current technical task:** Technical Architecture complete
 
 ## Purpose
 
@@ -31,12 +33,12 @@ Each specification proceeds through four persisted states:
 | 2 | [`RHYTHM_GAMEPLAY.md`](RHYTHM_GAMEPLAY.md) | Approved | 12 of 12 | Canonical specification published |
 | 3 | [`COMBAT.md`](COMBAT.md) | Approved | 12 of 12 | Includes Player Survival & Recovery |
 | 4 | [`BOSS_ENCOUNTERS.md`](BOSS_ENCOUNTERS.md) | Approved | 12 of 12 | Includes Tactical Positioning & Movement |
-| 5 | [`PROGRESSION.md`](PROGRESSION.md) | Approved | 12 of 12 | Three tracks plus full spec presets |
-| 6 | [`ITEMS_AND_EQUIPMENT.md`](ITEMS_AND_EQUIPMENT.md) | Approved | 12 of 12 | Includes inventory, presets, consumables, cosmetics |
+| 5 | [`PROGRESSION.md`](PROGRESSION.md) | Approved | 12 of 12 | Song Restoration, Order Rank, and Boss Mastery plus Loadouts |
+| 6 | [`ITEMS_AND_EQUIPMENT.md`](ITEMS_AND_EQUIPMENT.md) | Approved | 12 of 12 | Includes inventory, Loadouts, Battle Supplies, cosmetics |
 | 7 | [`ABILITIES_AND_COOPERATIVE_ACTIONS.md`](ABILITIES_AND_COOPERATIVE_ACTIONS.md) | Approved | 12 of 12 | Includes Solo Support |
 | 8 | [`MULTIPLAYER.md`](MULTIPLAYER.md) | Approved | 12 of 12 | Includes Communication & Safety |
 | 9 | [`REWARDS_AND_ECONOMY.md`](REWARDS_AND_ECONOMY.md) | Approved | 12 of 12 | Includes Commerce |
-| 10 | [`BUILDS_AND_SPECIALIZATION.md`](BUILDS_AND_SPECIALIZATION.md) | Approved | 12 of 12 | Working names require later naming pass |
+| 10 | [`BUILDS_AND_SPECIALIZATION.md`](BUILDS_AND_SPECIALIZATION.md) | Approved | 12 of 12 | Battle Style/Focus/Anthem/Riff names reconciled |
 | 11 | [`UI_UX.md`](UI_UX.md) | Approved | 12 of 12 | Includes hub, onboarding, results, input, and accessibility |
 | 12 | [`AUDIO_PRESENTATION.md`](AUDIO_PRESENTATION.md) | Approved | 12 of 12 | Runtime musical and semantic audio presentation |
 | 13 | [`PLAYER_DATA.md`](PLAYER_DATA.md) | Approved | 12 of 12 | Final architecture-critical platform contract |
@@ -65,6 +67,24 @@ tracked separately from the thirteen canonical system specs.
 | [`BALANCE_FRAMEWORK.md`](BALANCE_FRAMEWORK.md) | Approved | 15 of 15 | Canonical supporting specification published 2026-09-08 |
 | [`PLAYTEST_AND_ANALYTICS.md`](PLAYTEST_AND_ANALYTICS.md) | Approved | 15 of 15 | Canonical supporting specification published 2026-09-09 |
 
+### Required product follow-up
+
+| Product document | State | Interview progress | Notes |
+|---|---|---:|---|
+| [`NAMING_AND_TONE.md`](NAMING_AND_TONE.md) | Approved | 9 of 9 | Canonical product-language specification published 2026-09-09 |
+
+## Technical Architecture progress
+
+Technical Architecture is a separate downstream document and does not change
+the completion state of the thirteen design specifications.
+
+- **Question plan:** [`TECHNICAL_ARCHITECTURE_QUESTIONS.md`](TECHNICAL_ARCHITECTURE_QUESTIONS.md)
+- **Working record:** [`TECHNICAL_ARCHITECTURE_WORKING.md`](TECHNICAL_ARCHITECTURE_WORKING.md)
+- **Completed:** 2026-09-10; checkpoints A through H approved, 24 of 24 questions
+  resolved.
+- **Canonical result:** [`TECHNICAL_ARCHITECTURE.md`](TECHNICAL_ARCHITECTURE.md)
+  is approved and published.
+
 ## Final audit coverage
 
 The 2026-09-02 audit verified:
@@ -78,7 +98,7 @@ The 2026-09-02 audit verified:
   Audio, and Player Data facts each retain one semantic owner;
 - content/package revisions, system catalogs, frozen attempt snapshots, and
   durable player revisions remain distinct and explicitly referenced;
-- rewards, purchases, consumables, Progression, Items, presets/builds, and
+- rewards, purchases, Battle Supplies, Progression, Items, Loadouts/Battle Styles, and
   corrections share atomic/idempotent persistence behavior without duplicating
   domain meaning;
 - client, other-player, support, Analytics, authoring, and operational exposure
@@ -161,7 +181,7 @@ The 2026-09-02 audit verified:
   A. Overall progress remains 4 of 13 specifications complete and 3 of 12
   Progression questions.
 - **2026-08-24:** Approved PG-04 through PG-06, completing Progression checkpoint
-  B and defining three full quick-switch combat-configuration presets. Overall
+  B and defining three full quick-switch combat-configuration Loadouts. Overall
   progress remains 4 of 13 specifications complete and 6 of 12 Progression
   questions.
 - **2026-08-24:** Approved PG-07 through PG-09, completing Progression checkpoint
@@ -302,7 +322,8 @@ The 2026-09-02 audit verified:
   attack/position pressure, Hype/Signature/group-action timing, and bounded solo
   support. Supporting-document progress is 9 of 15 questions.
 - **2026-09-08:** Resolved Balance Framework BF-10 through BF-12: item/build
-  power, rank/uplift relationships, campaign/General/Mastery pacing, resources,
+  power, Rank/Reforge relationships, Song Restoration/Order Rank/Boss Mastery
+  pacing, resources,
   drops, recipes, personal reward caps, and Commerce parity. Supporting-document
   progress is 12 of 15 questions.
 - **2026-09-08:** Resolved Balance Framework BF-13 through BF-15: simulations,
@@ -330,3 +351,59 @@ The 2026-09-02 audit verified:
 - **2026-09-09:** Approved PA-13 through PA-15 and published canonical
   `PLAYTEST_AND_ANALYTICS.md`. The supporting-document interview is complete at
   15 of 15; the required naming-and-tone pass is next.
+- **2026-09-09:** Created the nine-question Naming & Tone interview and working
+  record. Required product-follow-up progress is 0 of 9 questions.
+- **2026-09-09:** Approved Naming & Tone NT-01: Mythic, Electric, Heroic, Hopeful,
+  and Clear voice pillars. Required product-follow-up progress is 1 of 9.
+- **2026-09-09:** Approved Naming & Tone NT-02: action-first clarity, restrained
+  flavor/humor, and inherited age/safety language boundaries. Required product-
+  follow-up progress is 2 of 9.
+- **2026-09-09:** Partially resolved Naming & Tone NT-03: rejected `Bands Battle`
+  as the final title, protected the core world anchors, and approved Resolve.
+  Final-title direction remains open; progress remains 2 of 9.
+- **2026-09-09:** Completed Naming & Tone NT-03 by deferring final-title selection
+  to a separate publication task. Checkpoint A is complete; product-follow-up
+  progress is 3 of 9.
+- **2026-09-09:** Approved Naming & Tone NT-04: Battle Style, Focus, Anthem, Riff,
+  and Loadout replace the rejected player-facing build hierarchy. Required
+  product-follow-up progress is 4 of 9.
+- **2026-09-09:** Approved Naming & Tone NT-05: Drive/Guard/Unity/Pulse Focuses,
+  the three beginner Loadouts, and future Anthem/Riff naming grammar. Required
+  product-follow-up progress is 5 of 9.
+- **2026-09-09:** Approved Naming & Tone NT-06: retained core gameplay vocabulary,
+  adopted Signature/Band Harmony/Order Ally/Last Stand, and established authored
+  location plus risk labels. Checkpoint B is complete; progress is 6 of 9.
+- **2026-09-09:** Approved Naming & Tone NT-07: Song Restoration, Order Rank,
+  Resonance, Boss Echoes, Song Fragments, Battle Supplies, Reforge, and retained
+  clear item/action language. Required product-follow-up progress is 7 of 9.
+- **2026-09-09:** Approved Naming & Tone NT-08: final navigation/utilities,
+  practice/Results/action labels, cooperative opt-ins, preset pings, and direct
+  failure-copy patterns. Required product-follow-up progress is 8 of 9.
+- **2026-09-09:** Approved Naming & Tone NT-09, completing the interview at 9 of
+  9. Canonical drafting and authoritative terminology reconciliation began.
+- **2026-09-09:** Published and audited canonical `NAMING_AND_TONE.md`, then
+  reconciled the approved player-facing terms across authoritative design
+  documents. The final public game title remains a separate publication task;
+  Technical Architecture is next.
+- **2026-09-10:** Opened the Technical Architecture interview with 24 questions
+  in eight checkpoints and a progressive working record. All thirteen system
+  design specifications remain approved.
+- **2026-09-10:** Approved Technical Architecture TA-01 through TA-03 and opened
+  the content foundation and publication checkpoint. Progress is 3 of 24.
+- **2026-09-10:** Approved Technical Architecture TA-04 through TA-06 and opened
+  the runtime components and contracts checkpoint. Progress is 6 of 24.
+- **2026-09-10:** Approved Technical Architecture TA-07 through TA-09 and opened
+  the rhythm timing and presentation checkpoint. Progress is 9 of 24.
+- **2026-09-10:** Approved Technical Architecture TA-10 through TA-12 and opened
+  the multiplayer and encounter-hosting checkpoint. Progress is 12 of 24.
+- **2026-09-10:** Approved Technical Architecture TA-13 through TA-15 after
+  clarifying distinct boss levels within the shared runtime, then opened the
+  durable data and transaction checkpoint. Progress is 15 of 24.
+- **2026-09-10:** Approved Technical Architecture TA-16 through TA-18 and opened
+  the client experience, assets, and performance checkpoint. Progress is 18 of
+  24.
+- **2026-09-10:** Approved Technical Architecture TA-19 through TA-21 and opened
+  the verification, operations, and delivery checkpoint. Progress is 21 of 24.
+- **2026-09-10:** Approved Technical Architecture TA-22 through TA-24, completing
+  the interview at 24 of 24. Published and reconciled canonical
+  `TECHNICAL_ARCHITECTURE.md`.

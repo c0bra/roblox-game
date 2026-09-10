@@ -9,9 +9,10 @@ and upgrade gear between battles. The style target is dark high-energy K-pop wit
 EDM, trap or 808 bass, soaring vocals, distorted guitar, cinematic supernatural
 bosses, and mobile-friendly controls.
 
-Current reality: this repo contains Python audio-processing tools and project
-notes. It does not yet contain Roblox/Luau game code, Rojo config, or `.rbxl`
-place files.
+Current reality: this repo contains audio-processing tools, a platform-neutral
+chart pipeline, a Roblox/Luau project with Rojo configuration, a browser gameplay
+prototype, approved game-design documents, and an approved production technical
+architecture.
 
 ## New developer quick start
 
@@ -28,19 +29,28 @@ Read these first:
    evidence requirements, and tuning change control.
 7. `PLAYTEST_AND_ANALYTICS.md`, lightweight session procedure, semantic evidence,
    readiness gates, basic analytics, and release review.
-8. `ART_DIRECTION.md`, canonical look and feel for characters, environments, UI,
+8. `NAMING_AND_TONE.md`, approved player vocabulary, voice, glossary, UI labels,
+   and future catalog naming rules.
+9. `ART_DIRECTION.md`, canonical look and feel for characters, environments, UI,
    materials, lighting, VFX, and visual production.
-9. `audio/Heavens_Edge/stems/spec.md`, lane-chart pipeline spec.
-10. `audio/Heavens_Edge/stems/sonic-annotator.md`, command cookbook for BeatRoot,
+10. [`TECHNICAL_ARCHITECTURE.md`](TECHNICAL_ARCHITECTURE.md), the canonical
+    runtime, content, data, deployment, verification, and release architecture.
+    Its [`question plan`](TECHNICAL_ARCHITECTURE_QUESTIONS.md) and
+    [`working record`](TECHNICAL_ARCHITECTURE_WORKING.md) preserve interview
+    history.
+11. `audio/Heavens_Edge/stems/spec.md`, lane-chart pipeline spec.
+12. `audio/Heavens_Edge/stems/sonic-annotator.md`, command cookbook for BeatRoot,
    pYIN, Aubio, and CREPE experiments.
-11. `audio/Heavens_Edge/stems/AGENTS.md`, local notes for the main audio workflow
+13. `audio/Heavens_Edge/stems/AGENTS.md`, local notes for the main audio workflow
    subtree.
 
 If you are here to build the Roblox game layer, start with `GAME_DESIGN.md` and
 `SYSTEMS_MAP.md`, then use `SYSTEM_SPECIFICATIONS_TRACKER.md` to enter the
 completed detailed-spec set and `BALANCE_FRAMEWORK.md` for shared numeric
-relationships. Use `PLAYTEST_AND_ANALYTICS.md` for the evidence contract before
-defining technical architecture.
+relationships. Use `PLAYTEST_AND_ANALYTICS.md` for the evidence contract,
+`NAMING_AND_TONE.md` for player-facing language, and
+`TECHNICAL_ARCHITECTURE.md` for implementation boundaries and order. The public
+game title remains intentionally undecided.
 
 If you are here to generate charts from songs, start with `Current audio pipeline`.
 
@@ -57,6 +67,8 @@ roblox-bands-battle/
 |-- SYSTEM_SPECIFICATIONS_TRACKER.md # links to all 13 approved system specs
 |-- BALANCE_FRAMEWORK.md          # shared balance and tuning contract
 |-- PLAYTEST_AND_ANALYTICS.md     # lightweight evidence and readiness contract
+|-- NAMING_AND_TONE.md            # player language and naming contract
+|-- TECHNICAL_ARCHITECTURE.md     # implementation and deployment architecture
 |-- CONTENT_AUTHORING.md          # reconciled offline content contract
 |-- PLAYER_DATA.md                # durable profile and transaction contract
 |-- ART_DIRECTION.md              # canonical visual style and asset guidance

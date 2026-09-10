@@ -5,6 +5,7 @@
 - **Reconciled:** 2026-09-02
 - **Parent system map:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md#81-song-chart--encounter-authoring)
 - **Player-facing authority:** [`GAME_DESIGN.md`](GAME_DESIGN.md)
+- **Player-language contract:** [`NAMING_AND_TONE.md`](NAMING_AND_TONE.md)
 - **Decision source:** [`CONTENT_AUTHORING_WORKING.md`](CONTENT_AUTHORING_WORKING.md)
 - **Interview plan:** [`CONTENT_AUTHORING_QUESTIONS.md`](CONTENT_AUTHORING_QUESTIONS.md)
 - **Existing implementation baseline:** [`tools/chart-pipeline/`](tools/chart-pipeline/README.md)
@@ -263,8 +264,8 @@ for solo and two-to-six-human play. It includes unrestricted duplicates,
 all-same-role, diverse-role, and dropout-sensitive rosters. Two-human play uses
 the approved consent flow; three-to-six remains the intended co-op range.
 
-Solo evaluation covers every role/difficulty with fixed acolyte support.
-Acolytes do not generate human charts or count as human playable coverage.
+Solo evaluation covers every role/difficulty with fixed Order Ally support.
+Order Allies do not generate human charts or count as human playable coverage.
 
 An allowed configuration cannot ship when a required event type lacks a valid
 opportunity within its maximum delay. Content is corrected or the configuration
@@ -545,9 +546,9 @@ provide authentic musical opportunity data for:
 - solo formations/locations, Vanguard clamp opportunities, Warden cadence/pulse,
   Herald opportunity references, suppression/recovery, and cue mappings.
 
-Global Hype gain/thresholds, ability power, group caps, cooldowns, acolyte fixed
+Global Hype gain/thresholds, ability power, group caps, cooldowns, Order Ally fixed
 contribution, and typed effect behavior remain Ability/balance catalogs. Packages
-do not grant acolytes charts, human judgments, performance credit, risk rewards,
+do not grant Order Allies charts, human judgments, performance credit, risk rewards,
 Resolve breaks, revival help, or player substitutions.
 
 Band Call invitation/performance and Crescendo preview/performance are mutually
@@ -562,7 +563,7 @@ compatibility for solo and every allowed two-to-six-human roster. Validation
 includes unrestricted duplicate and all-same-role cases. It never infers a role
 from item names or assumes drums, vocals, guitar, and bass must exist.
 
-Builds, Items, loadouts, three full spec presets, matchmaking, Ready, active
+Battle Styles, Items, Loadouts, matchmaking, Ready, active
 roster, disconnect, AFK, rejoin, and Player Data remain runtime/system state.
 The package declares only stable compatible role/hook/capability references and
 cannot hide modifiers, composition locks, substitutions, or player-specific data.
