@@ -52,6 +52,11 @@ relationships. Use `PLAYTEST_AND_ANALYTICS.md` for the evidence contract,
 `TECHNICAL_ARCHITECTURE.md` for implementation boundaries and order. The public
 game title remains intentionally undecided.
 
+Implementation planning is underway through a twelve-question
+[`question plan`](IMPLEMENTATION_PLAN_QUESTIONS.md) and progressive
+[`working record`](IMPLEMENTATION_PLAN_WORKING.md). These will produce
+`IMPLEMENTATION_PLAN.md`; proposed milestones and tasks are not yet approved.
+
 If you are here to generate charts from songs, start with `Current audio pipeline`.
 
 ## Repo map

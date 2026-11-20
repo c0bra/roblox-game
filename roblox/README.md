@@ -21,6 +21,11 @@ testing, and release boundaries. Its
 [`working record`](../TECHNICAL_ARCHITECTURE_WORKING.md) preserve interview
 history but do not override the canonical architecture.
 
+The downstream implementation-plan interview is tracked in its
+[`question plan`](../IMPLEMENTATION_PLAN_QUESTIONS.md) and
+[`working record`](../IMPLEMENTATION_PLAN_WORKING.md). The canonical
+`IMPLEMENTATION_PLAN.md` is pending; interview proposals are not execution tasks.
+
 ## One-time setup
 
 1. Install [Rokit](https://github.com/rojo-rbx/rokit), then run `rokit install` in this directory. The checked-in `rokit.toml` pins the supported Rojo version.

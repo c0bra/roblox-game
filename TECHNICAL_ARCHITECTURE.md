@@ -1130,6 +1130,11 @@ revision from new selection does not erase its history.
 
 ## 20. Content-first implementation sequence
 
+The downstream [`Implementation Plan question plan`](IMPLEMENTATION_PLAN_QUESTIONS.md)
+and [`working record`](IMPLEMENTATION_PLAN_WORKING.md) develop this sequence into
+milestones and bounded tasks. The canonical `IMPLEMENTATION_PLAN.md` is pending
+that interview; these records do not amend the approved architecture.
+
 | Phase | Bounded outcome | Exit gate |
 |---:|---|---|
 | 0 | Pin tools/dependencies; establish contracts, generated fixtures, test place, and target source layout without deleting prototypes | Reproducible local checks and source-tree build documented |
