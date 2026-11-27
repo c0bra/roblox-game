@@ -1,0 +1,14 @@
+{
+  "timeline": {
+    "schemaVersion": 1,
+    "contentRevision": "instrumental-r3",
+    "balanceRevision": "balance-r2",
+    "roles": ["piano"],
+    "events": [
+      {"eventId":"a-later","roleId":"piano","timeUs":1234567,"globalTieOrder":2},
+      {"eventId":"pickup","roleId":"piano","timeUs":-250001,"globalTieOrder":0},
+      {"eventId":"z-first","roleId":"piano","timeUs":1234567,"globalTieOrder":1}
+    ]
+  },
+  "expectedIds": ["pickup", "z-first", "a-later"]
+}

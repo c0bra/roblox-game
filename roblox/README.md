@@ -21,10 +21,8 @@ testing, and release boundaries. Its
 [`working record`](../TECHNICAL_ARCHITECTURE_WORKING.md) preserve interview
 history but do not override the canonical architecture.
 
-The downstream implementation-plan interview is tracked in its
-[`question plan`](../IMPLEMENTATION_PLAN_QUESTIONS.md) and
-[`working record`](../IMPLEMENTATION_PLAN_WORKING.md). The canonical
-`IMPLEMENTATION_PLAN.md` is pending; interview proposals are not execution tasks.
+Use the [implementation plan](../IMPLEMENTATION_PLAN.md) for the Blackened Crown
+staging tasks and their acceptance checks. Record results in [Implementation Progress](../IMPLEMENTATION_PROGRESS.md).
 
 ## One-time setup
 
@@ -64,3 +62,21 @@ rojo sourcemap --output sourcemap.json
 ```
 
 `build/` and `sourcemap.json` are generated and not committed.
+
+For the foundation sync check, open a disposable copy of `Place1.rbxl` and
+create a Folder named `T02StudioMarker` in ReplicatedStorage. Connect the
+Rojo plugin to the server above. Verify that the synced RhythmChart module
+appears under ReplicatedStorage/BandsBattle and that T02StudioMarker survives.
+Disconnect the plugin and record the observed result in [Implementation Progress](../IMPLEMENTATION_PROGRESS.md).
+
+For the shared timeline contract check, keep Rojo connected to the disposable
+place. From the repository root on macOS, copy the following Studio Command Bar
+check to the clipboard, then paste and run it in edit mode:
+
+```bash
+{ echo 'local run = (function()'; cat roblox/tests/timeline_contract.luau; echo 'end)()'; echo 'print(run([==['; cat roblox/tests/fixtures/instrumental-timeline.json; echo ']==]))'; } | pbcopy
+```
+
+The check loads the synced reader and reports whether the fixture and six
+rejection cases passed. Run `bun test tests/timeline-contract.test.ts` from
+`tools/chart-pipeline` to check the same fixture with the Bun reader.
