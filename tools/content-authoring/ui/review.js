@@ -78,3 +78,34 @@ export function activity(draft, duration) {
 		}),
 	);
 }
+
+// Fraction of the song clock occupied by beats containing a note start or hold.
+// Extend the nearest observed tempo only for measurement outside the beat grid.
+export function roleWorkload(charts, durationUs, beats) {
+	const beatBounds = (time) => {
+		let low = 0, high = beats.length;
+		while (low < high) {
+			const mid = Math.floor((low + high) / 2);
+			if (beats[mid] <= time) low = mid + 1;
+			else high = mid;
+		}
+		if (low > 0 && low < beats.length) return [beats[low - 1], beats[low]];
+		const before = low === 0;
+		const anchor = before ? beats[0] : beats.at(-1);
+		const period = before ? beats[1] - anchor : anchor - beats.at(-2);
+		const start = anchor + Math.floor((time - anchor) / period) * period;
+		return [Math.max(0, start), Math.min(durationUs, start + period)];
+	};
+	return Object.fromEntries(Object.entries(charts).map(([id, notes]) => {
+		let activeUs = 0, coveredUntil = 0;
+		if (beats.length >= 2) {
+			for (const n of notes) {
+				const [start] = beatBounds(n.timeUs);
+				const [, end] = beatBounds(n.timeUs + Math.max(0, n.durationUs - 1));
+				activeUs += Math.max(0, end - Math.max(start, coveredUntil));
+				coveredUntil = Math.max(coveredUntil, end);
+			}
+		}
+		return [id, { noteCount: notes.length, activeBeatFraction: beats.length >= 2 ? activeUs / durationUs : null }];
+	}));
+}

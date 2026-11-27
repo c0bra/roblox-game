@@ -13,3 +13,4 @@ export function activity(
 		nextNoteUs: number | null;
 	}[]
 >;
+export function roleWorkload(charts: Draft["charts"], durationUs: number, beats: readonly number[]): Record<string, {noteCount:number; activeBeatFraction:number|null}>;

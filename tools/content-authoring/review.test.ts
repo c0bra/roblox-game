@@ -106,3 +106,10 @@ test("a failed processor preserves the last usable suggestion on disk", async ()
 		await rm(folder, { recursive: true, force: true });
 	}
 });
+
+test("role workload counts shared beat time once, includes holds, and bounds the untracked outro", async () => {
+	const {roleWorkload} = await import("./ui/review.js");
+	const chart = {"bass/Normal":[{timeUs:1,lane:0,durationUs:7},{timeUs:3,lane:1,durationUs:0},{timeUs:18,lane:0,durationUs:0}]};
+	expect(roleWorkload(chart,20,[4,8,12])["bass/Normal"]).toEqual({noteCount:3,activeBeatFraction:.6});
+	expect(roleWorkload(chart,20,[])["bass/Normal"]?.activeBeatFraction).toBeNull();
+});

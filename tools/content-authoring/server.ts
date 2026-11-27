@@ -7,7 +7,7 @@ import { openProject } from "./intake";
 import { studioModel } from "./studio";
 import { AnalysisJobs } from "./jobs";
 import { Conflict, digest, DraftStore, initialDraft, validated } from "./draft";
-import { activity, findings } from "./ui/review.js";
+import { activity, findings, roleWorkload } from "./ui/review.js";
 import { timelineSchema } from "../chart-pipeline/src/timeline-contract";
 
 const arg = Bun.argv[2];
@@ -269,6 +269,7 @@ function serveEditor(hostname: string, port: number, prefix = "") {
 								...draft,
 								timelines,
 								activity: activity(draft, project.durationUs),
+								workload: roleWorkload(draft.charts, project.durationUs, draft.beats.length ? draft.beats : jobs.result?.beats ?? []),
 								findings: findings(draft),
 							},
 							{

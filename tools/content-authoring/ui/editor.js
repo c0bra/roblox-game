@@ -1,4 +1,4 @@
-import { findings } from "./review.js";
+import { findings, roleWorkload } from "./review.js";
 import { Transport, peaks } from "./transport.js";
 import { overview, pianoRoll } from "./timeline.js";
 import { clock, restRange, secondsToUs, upsert } from "./edits.js";
@@ -200,6 +200,19 @@ async function init() {
 				),
 			]);
 		$("activity").replaceChildren(table);
+		const whole = roleWorkload(draft.charts, durationUs, draft.beats.length ? draft.beats : suggestions?.beats ?? []);
+		const summary = document.createElement("table");
+		const header = summary.createTHead().insertRow();
+		for (const label of ["Role · " + difficulty, "Notes", "Song on active beats"]) {
+			const th = document.createElement("th"); th.textContent = label; header.append(th);
+		}
+		for (const role of roles) {
+			const {noteCount, activeBeatFraction} = whole[role.source + "/" + difficulty];
+			const tr = summary.insertRow();
+			for (const value of [role.role ?? role.layer, noteCount, activeBeatFraction === null ? "Clock needed" : Math.round(activeBeatFraction * 100) + "%"])
+				tr.insertCell().textContent = value;
+		}
+		$("workload").replaceChildren(summary);
 	}
 	function reviewTracks() {
 		$("meter").value = draft.meter;
@@ -304,6 +317,8 @@ async function init() {
 			suggestions?.charts[chartKey()] &&
 			JSON.stringify(activeGrid) !== JSON.stringify(suggestions.chartGrid);
 		$("applyChart").disabled = !suggestions?.charts[chartKey()] || !!stale;
+		$("saveAllCharts").disabled = saving || !suggestions || JSON.stringify(activeGrid) !== JSON.stringify(suggestions.chartGrid) ||
+			Object.keys(draft.charts).some(k => !Array.isArray(suggestions.charts[k]));
 		if (stale)
 			$("beatCount").textContent +=
 				" · Chart suggestions need a rerun for this clock.";
@@ -767,22 +782,21 @@ async function init() {
 		});
 		report("Suggested beats copied into the draft.");
 	});
+	function applySuggested(key) {
+		let notes = structuredClone(suggestions.charts[key]);
+		for (const rest of draft.rests.filter(r => r.source === key.split("/")[0]))
+			notes = restRange(notes, rest.startUs, rest.endUs);
+		draft.charts[key] = notes;
+		selected = null;
+	}
 	action("applyChart", () => {
-		if (
-			!confirm(
-				"Replace " +
-					chartKey() +
-					" with the generated suggestion? Undo is available.",
-			)
-		)
-			return;
-		edit(() => {
-			let notes = structuredClone(suggestions.charts[chartKey()]);
-			for (const r of draft.rests.filter((r) => r.source === source))
-				notes = restRange(notes, r.startUs, r.endUs);
-			draft.charts[chartKey()] = notes;
-			selected = null;
-		});
+		if (confirm("Replace " + chartKey() + " with the generated suggestion? Undo is available."))
+			edit(() => applySuggested(chartKey()));
+	});
+	action("saveAllCharts", async () => {
+		if (!confirm("Replace all role and difficulty charts with these suggestions and save the project? This also saves pending edits. Marked rests are preserved.")) return;
+		edit(() => Object.keys(draft.charts).forEach(applySuggested));
+		await save();
 	});
 	window.addEventListener("beforeunload", (e) => {
 		if (modified) {
