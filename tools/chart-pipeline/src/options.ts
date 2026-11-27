@@ -1,6 +1,7 @@
 import { basename, extname, join } from "node:path";
 import { parseArgs } from "node:util";
 import { z } from "zod";
+import { type Instrument, instruments } from "./chart-format";
 
 const buildBase = {
   output: z.string().min(1).optional(),
@@ -8,6 +9,7 @@ const buildBase = {
   duration: z.coerce.number().positive().optional(),
   model: z.string().min(1).default("htdemucs.yaml"),
   "snap-ms": z.coerce.number().positive().max(250).default(80),
+  "outro-role": z.array(z.enum(instruments)).optional(),
 };
 
 const defaultOutput = (input: string): string => {
@@ -37,6 +39,7 @@ export type BuildOptions =
   | {
       readonly command: "build";
       readonly song: string;
+      readonly outroRoles?: readonly Instrument[];
       readonly output: string;
       readonly start: number;
       readonly duration?: number;
@@ -46,6 +49,7 @@ export type BuildOptions =
   | {
       readonly command: "build";
       readonly stems: string;
+      readonly outroRoles?: readonly Instrument[];
       readonly output: string;
       readonly start: number;
       readonly duration?: number;
@@ -69,6 +73,7 @@ const parseBuild = (argv: readonly string[]): BuildOptions => {
       duration: { type: "string" },
       model: { type: "string" },
       "snap-ms": { type: "string" },
+      "outro-role": { type: "string", multiple: true },
     },
     strict: true,
   });
@@ -79,6 +84,7 @@ const parseBuild = (argv: readonly string[]): BuildOptions => {
     start: values.start,
     model: values.model,
     snapMs: values["snap-ms"],
+    ...(values["outro-role"] && { outroRoles: values["outro-role"] }),
     ...(values.duration === undefined ? {} : { duration: values.duration }),
   };
   return values.song === undefined

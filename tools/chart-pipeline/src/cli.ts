@@ -11,6 +11,7 @@ Usage:
   ./chart build --stems path/to/stems [--output build/song] [--start 0] [--duration 90]
   ./chart validate build/song
 
+Use --outro-role <instrument> to continue the final tempo for an audible outro part.
 If --output is omitted, charts are written to build/<input-name>.
 `;
 

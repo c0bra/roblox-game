@@ -1,6 +1,11 @@
 import { copyFile, mkdir } from "node:fs/promises";
 import { basename, extname, join, resolve } from "node:path";
-import { findAudioFiles, selectRequiredStems } from "./audio-files";
+import { z } from "zod";
+import {
+  decodedDurationSeconds,
+  findAudioFiles,
+  selectRequiredStems,
+} from "./audio-files";
 import { createBundleManifest, validateBundle } from "./bundle";
 import { compileDifficulties } from "./chart-compiler";
 import {
@@ -9,18 +14,21 @@ import {
   type Instrument,
   instruments,
 } from "./chart-format";
-import { extractDrumOnsets } from "./drum-onsets";
+import { analyzeDrums } from "./drum-onsets";
 import type { BuildOptions } from "./options";
 import type { ProcessRunner } from "./process-runner";
 import { systemProcessRunner } from "./process-runner";
 import { analyzeSong } from "./sonic-analysis";
 import { separateSong } from "./stem-separator";
-import type { CompileResult, RawChartEvent } from "./types";
+import type { InstrumentRecovery, BassRecovery, CompileResult, RawChartEvent } from "./types";
 
 type StemMap = Record<Instrument, string>;
 type EventMap = Record<Instrument, readonly RawChartEvent[]>;
 
 export type WriteChartBundleInput = {
+  readonly recovery?:Record<Instrument,InstrumentRecovery>;
+  readonly bassRecovery?: BassRecovery;
+  readonly outroRoles?: readonly Instrument[];
   readonly output: string;
   readonly source: string;
   readonly model: string;
@@ -63,6 +71,11 @@ export const writeChartBundle = async (
       instrument,
       compileDifficulties({
         instrument,
+        ...(instrument === "bass" && input.bassRecovery
+          ? { bassRecovery: input.bassRecovery }
+          : {}),
+        ...(input.recovery ? {recovery: input.recovery[instrument]} : {}),
+        continueFinalTempo: input.outroRoles?.includes(instrument) ?? false,
         events: input.events[instrument],
         beatTimes: input.beatTimes,
         clip: input.clip,
@@ -85,6 +98,7 @@ export const writeChartBundle = async (
       {
         clip: input.clip,
         beatCount: input.beatTimes.length,
+        outroRoles: input.outroRoles ?? [],
         maxSnapMs: input.maxSnapSeconds * 1_000,
         instruments: Object.fromEntries(
           instruments.map((instrument) => [
@@ -128,18 +142,28 @@ export const buildChartBundle = async (
         })
       : source;
   const sourceStems = selectRequiredStems(await findAudioFiles(stemsDirectory));
+  let duration = options.duration;
+  if (duration === undefined) {
+    const audio = "song" in options ? [source] : Object.values(sourceStems);
+    const lengths = await Promise.all(
+      audio.map((file) => decodedDurationSeconds(file, runner)),
+    );
+    duration = z
+      .number()
+      .positive("Clip start must precede the end of the recording")
+      .parse(Math.max(...lengths) - options.start);
+  }
   const analysis = await analyzeSong(sourceStems, runner);
-  const duration =
-    options.duration ??
-    Math.max(1, (analysis.beatTimes.at(-1) ?? 1) - options.start);
   const clip = { start: options.start, duration };
+  const drums=await analyzeDrums({audio:sourceStems.drums,clip,runner});
   const events: EventMap = {
-    drums: await extractDrumOnsets({ audio: sourceStems.drums, clip, runner }),
+    drums: drums.events,
     vocals: analysis.vocals,
     guitar: analysis.guitar,
     bass: analysis.bass,
   };
   return writeChartBundle({
+    outroRoles: options.outroRoles ?? [],
     output,
     source,
     model: options.model,
@@ -147,6 +171,7 @@ export const buildChartBundle = async (
     maxSnapSeconds: options.snapMs / 1_000,
     sourceStems,
     beatTimes: analysis.beatTimes,
+    recovery: {...analysis.recovery,drums:drums.recovery},
     events,
   });
 };

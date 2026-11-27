@@ -23,3 +23,28 @@ describe("Sonic Annotator output", () => {
     expect(analysis.vocals).toHaveLength(1);
   });
 });
+
+test("a low-register detection uses the stem clock and original pitch, with silence excluded", async () => {
+  const samples = new Float32Array(8000 * 4);
+  samples.fill(0.2, 8000, 16000);
+  const result = await analyzeSong(
+    { drums: "d", guitar: "g", vocals: "v", bass: "b" },
+    {
+      text: async (cmd) =>
+        cmd.includes("vamp:pyin:pyin:notes") &&
+        cmd.at(-1)?.endsWith("octave.wav")
+          ? "0.5,0.3,80\n1.5,0.2,80\n"
+          : "",
+      bytes: async () => samples.buffer,
+    },
+  );
+  expect(result.bassRecovery?.events).toHaveLength(1);
+  expect(result.bassRecovery?.events[0]).toMatchObject({
+    time: 1,
+    duration: 0.6,
+  });
+  expect(result.bassRecovery?.events[0]?.pitch).toBeCloseTo(
+    69 + 12 * Math.log2(40 / 440),
+    6,
+  );
+});

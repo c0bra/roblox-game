@@ -26,7 +26,14 @@ Optional build flags:
 
 - `--start 60` starts the playable clip at 60 seconds in the source.
 - `--duration 90` limits the playable clip to 90 seconds.
+- Without `--duration`, the clip runs from `--start` to the decoded end of the
+  master mix, or the longest selected layer for aligned stem-only input.
+  Each role shares that timeline, including its rests and the song's decay.
 - `--snap-ms 80` sets the maximum melodic correction to the local beat grid.
+- `--outro-role guitar` continues the final measured tempo after the last
+  detected beat for that role's draft. Use it for an audible part that continues
+  through a drum dropout. It snaps detected candidates within the usual tolerance.
+  Repeat the flag if several parts continue. Review timing by ear if the outro slows.
 - `--model htdemucs.yaml` selects the audio-separator model.
 
 Stem directories need files whose names identify drums, vocals, guitar, and bass.
@@ -64,9 +71,17 @@ The validation report includes note counts, rejected off-grid events, duplicate 
 events, and grid-error statistics. Generation is intentionally deterministic, but a
 new song still needs a listening pass before release.
 
+## Bass transcription
+
+Every build and editor chart rerun analyzes the original bass stem twice. The first pass keeps the ordinary pYIN notes. For the second pass, FFmpeg filters a temporary copy below 180 Hz and plays it one octave higher. The detector can then follow low fundamentals more reliably. The generator converts pitches, onsets, and holds back to the original song clock.
+
+A recovered note needs a detected pitch from 25–180 Hz and at least 100 ms of supporting energy in the original bass band. The generator considers it only on a beat with no original bass detection. Existing notes keep their lanes and holds. The same difficulty limits apply to recovered notes, and the editor reserves explicitly authored transcription windows.
+
+In `charts/validation.json`, `instruments.bass.bassRecovery.added` gives the extra notes by difficulty. `activeGaps` lists intervals of at least two seconds of continuous measured bass activity without a Normal note or hold, in source seconds. Audition those intervals. A separated stem can also lose a part audible in the master, so compare both when a long rest sounds wrong.
+
 ## Requirements
 
-- Bun
+- Bun 1.3.12 for the verified local build
 - `ffmpeg`
 - `sonic-annotator` with BeatRoot, Aubio onset, and pYIN Vamp plugins
 - Docker when using `--song`; the command runs `beveradb/audio-separator`
@@ -75,7 +90,7 @@ Install and verify the package itself with:
 
 ```bash
 cd tools/chart-pipeline
-bun install
+bun install --frozen-lockfile
 bun test
 bun run check
 ```

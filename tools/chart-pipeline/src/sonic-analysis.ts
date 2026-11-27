@@ -1,8 +1,12 @@
+import { guitarAttacks, vocalPhrases } from "./instrument-recovery";
+import { analyzeLowBass } from "./bass-recovery";
 import type { Instrument } from "./chart-format";
 import type { ProcessRunner } from "./process-runner";
-import type { RawChartEvent } from "./types";
+import type { BassRecovery, InstrumentRecovery, RawChartEvent } from "./types";
 
 export type SongAnalysis = {
+  readonly recovery: Record<"bass" | "guitar" | "vocals", InstrumentRecovery>;
+  readonly bassRecovery: BassRecovery;
   readonly beatTimes: readonly number[];
   readonly vocals: readonly RawChartEvent[];
   readonly guitar: readonly RawChartEvent[];
@@ -61,13 +65,24 @@ export const analyzeSong = async (
   stems: Record<Instrument, string>,
   runner: ProcessRunner,
 ): Promise<SongAnalysis> => {
-  const [beats, vocals, guitar, bass] = await Promise.all([
+  const { FFMPEG = "ffmpeg" } = process.env;
+  const band = async (file:string,filter:string) => new Float32Array(await runner.bytes([FFMPEG,"-v","error","-nostdin","-i",file,"-ac","1","-af",filter,"-ar","8000","-f","f32le","pipe:1"]));
+  const [beats, vocals, guitar, bass, bassRecovery, strums, guitarPcm, voiceTrack, voicePcm] = await Promise.all([
     sonicCsv(runner, "vamp:beatroot-vamp:beatroot:beats", stems.drums),
     sonicCsv(runner, "vamp:pyin:pyin:notes", stems.vocals),
     sonicCsv(runner, "vamp:pyin:pyin:notes", stems.guitar),
     sonicCsv(runner, "vamp:pyin:pyin:notes", stems.bass),
+    analyzeLowBass(stems.bass, runner, async (file) =>
+      melodicEvents(await sonicCsv(runner, "vamp:pyin:pyin:notes", file)),
+    ),
+    sonicCsv(runner,"vamp:qm-vamp-plugins:qm-onsetdetector:onsets",stems.guitar),
+    band(stems.guitar,"highpass=f=70,lowpass=f=3000"),
+    sonicCsv(runner,"vamp:pyin:pyin:smoothedpitchtrack",stems.vocals),
+    band(stems.vocals,"highpass=f=75,lowpass=f=3500"),
   ]);
   return {
+    recovery:{bass:bassRecovery, guitar:guitarAttacks(strums.flatMap(row=>row[0] === undefined ? [] : [row[0]]),guitarPcm),vocals:vocalPhrases(voiceTrack,voicePcm)},
+    bassRecovery,
     beatTimes: beats.flatMap((row) => (row[0] === undefined ? [] : [row[0]])),
     vocals: melodicEvents(vocals),
     guitar: melodicEvents(guitar),

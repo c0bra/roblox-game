@@ -1,10 +1,46 @@
 import { readdir } from "node:fs/promises";
 import { extname, join } from "node:path";
+import { z } from "zod";
 import type { Instrument } from "./chart-format";
-import { CommandFailure } from "./process-runner";
+import { CommandFailure, type ProcessRunner } from "./process-runner";
 import { selectStemCandidate } from "./stem-selection";
 
 const audioExtensions = new Set([".wav", ".mp3", ".flac", ".m4a", ".ogg"]);
+
+export const decodedDurationSeconds = async (
+  path: string,
+  runner: ProcessRunner,
+): Promise<number> => {
+  const { FFMPEG = "ffmpeg" } = process.env;
+  const progress = await runner.text([
+    FFMPEG,
+    "-nostdin",
+    "-v",
+    "error",
+    "-i",
+    path,
+    "-map",
+    "0:a:0",
+    "-af",
+    "asetpts=N/SR/TB",
+    "-f",
+    "null",
+    "-",
+    "-progress",
+    "pipe:1",
+    "-nostats",
+  ]);
+  const end = progress
+    .split(/\r?\n/)
+    .findLast((line) => line.startsWith("out_time_us="));
+  return (
+    z.coerce
+      .number()
+      .int()
+      .positive()
+      .parse(end?.slice("out_time_us=".length)) / 1_000_000
+  );
+};
 
 export const findAudioFiles = async (
   directory: string,

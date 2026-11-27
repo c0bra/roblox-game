@@ -2,10 +2,11 @@ import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { z } from "zod";
+import {drumTransients} from "./instrument-recovery";
 import { classifyDrumHits } from "./drum-hit-classifier";
 import type { ProcessRunner } from "./process-runner";
 import { systemProcessRunner } from "./process-runner";
-import type { RawChartEvent } from "./types";
+import type { InstrumentRecovery, RawChartEvent } from "./types";
 
 export { classifyDrumHits } from "./drum-hit-classifier";
 
@@ -18,9 +19,9 @@ export type DrumOnsetInput = {
 
 const onsetSchema = z.coerce.number().nonnegative();
 
-export const extractDrumOnsets = async (
+const readDrums = async (
   input: DrumOnsetInput,
-): Promise<readonly RawChartEvent[]> => {
+) => {
   const directory = await mkdtemp(join(tmpdir(), "drum-onsets-"));
   const wav = join(directory, "drums.wav");
   const runner = input.runner ?? systemProcessRunner;
@@ -78,12 +79,23 @@ export const extractDrumOnsets = async (
       "48000",
       "pipe:1",
     ]);
-    return classifyDrumHits({
+    const samples = new Float32Array(pcm);
+    const events = classifyDrumHits({
       onsetTimes,
-      samples: new Float32Array(pcm),
+      samples,
       sampleRate: 48_000,
     }).map((event) => ({ ...event, time: event.time + input.clip.start }));
+    return {events,samples};
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
 };
+
+
+export async function extractDrumOnsets(input: DrumOnsetInput):Promise<readonly RawChartEvent[]> {
+  return (await readDrums(input)).events;
+}
+export async function analyzeDrums(input: DrumOnsetInput):Promise<{events:readonly RawChartEvent[];recovery:InstrumentRecovery}> {
+ const {events,samples} = await readDrums(input);
+ return {events,recovery:drumTransients(samples,48000,input.clip.start)};
+}

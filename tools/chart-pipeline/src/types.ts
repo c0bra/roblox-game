@@ -22,7 +22,17 @@ export type QuantizedEvent = RawChartEvent &
     readonly gridError: number;
   };
 
+export type TimeSpan = { start: number; end: number };
+export type InstrumentRecovery = {
+  readonly events: readonly RawChartEvent[];
+  readonly active: readonly TimeSpan[];
+};
+export type BassRecovery = InstrumentRecovery;
 export type CompileInput = {
+  readonly recovery?: InstrumentRecovery;
+  readonly bassRecovery?: BassRecovery;
+  readonly reserved?: readonly TimeSpan[];
+  readonly continueFinalTempo?: boolean;
   readonly instrument: Instrument;
   readonly events: readonly RawChartEvent[];
   readonly beatTimes: readonly number[];
@@ -46,7 +56,13 @@ export type CompiledChart = {
   readonly notes: readonly CompiledNote[];
 };
 
+export type RecoveryReport = {
+    readonly added: Record<ChartDifficulty, number>;
+    readonly activeGaps: readonly TimeSpan[];
+};
 export type CompileReport = {
+  readonly recovery?: RecoveryReport;
+  readonly bassRecovery?: RecoveryReport;
   readonly inputEvents: number;
   readonly acceptedEvents: number;
   readonly rejectedOffGrid: number;

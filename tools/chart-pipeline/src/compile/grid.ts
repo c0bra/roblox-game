@@ -2,8 +2,7 @@ import type { CompileInput, GridPoint, QuantizedEvent } from "../types";
 
 const subdivisionsPerBeat = 4;
 
-const buildGrid = (beats: readonly number[]): readonly GridPoint[] => {
-  const sorted = [...new Set(beats)].sort((left, right) => left - right);
+const buildGrid = (sorted: readonly number[]): readonly GridPoint[] => {
   const grid: GridPoint[] = [];
   for (let beatIndex = 0; beatIndex < sorted.length - 1; beatIndex += 1) {
     const start = sorted[beatIndex];
@@ -46,13 +45,37 @@ export type QuantizeResult = {
 };
 
 export const quantize = (input: CompileInput): QuantizeResult => {
-  const grid = buildGrid(input.beatTimes);
+  const beats = [...new Set(input.beatTimes)].sort((a, b) => a - b);
+  const measuredGrid = buildGrid(beats);
+  const lastTime = beats.at(-1);
+  const last =
+    input.continueFinalTempo && beats.length >= 2 && lastTime !== undefined
+      ? { time: lastTime, beatIndex: beats.length - 1, slot: 0 }
+      : undefined;
+  const grid = last ? [...measuredGrid, last] : measuredGrid;
+  const previousBeat = beats.at(-2);
+  const subdivision =
+    last && previousBeat !== undefined
+      ? (last.time - previousBeat) / subdivisionsPerBeat
+      : 0;
   const clipEnd = input.clip.start + input.clip.duration;
   const byGridTime = new Map<number, QuantizedEvent>();
   let rejected = 0;
   let duplicates = 0;
   for (const event of input.events) {
-    const point = nearestGridPoint(grid, event.time);
+    let point: GridPoint | undefined;
+    if (last && subdivision > 0 && event.time > last.time) {
+      if (event.time >= clipEnd) continue;
+      // Continue the final measured tempo only where an actual candidate exists.
+      const step = Math.round((event.time - last.time) / subdivision);
+      point = {
+        time: last.time + step * subdivision,
+        beatIndex: last.beatIndex + Math.floor(step / subdivisionsPerBeat),
+        slot: step % subdivisionsPerBeat,
+      };
+    } else {
+      point = nearestGridPoint(grid, event.time);
+    }
     const gridError = point ? Math.abs(point.time - event.time) : Infinity;
     if (!point || gridError > input.maxSnapSeconds) {
       rejected += 1;
