@@ -1,0 +1,339 @@
+{
+  "sourceRevision": "2eda5d881bd74a4e0b132823dea76c3b1115a34e9c12b54547966ce7c4abf1bd",
+  "windows": [
+    {
+      "role": "bass",
+      "start": 155,
+      "end": 159.95,
+      "events": [
+        {
+          "time": 155.32898,
+          "pitch": 32.0318,
+          "strength": 0.070638,
+          "duration": 0.394739
+        },
+        {
+          "time": 155.92,
+          "pitch": 31,
+          "strength": 0.061809,
+          "duration": 0.37
+        },
+        {
+          "time": 156.350658,
+          "pitch": 32.0355,
+          "strength": 0.058677,
+          "duration": 0.383129
+        },
+        {
+          "time": 156.56,
+          "pitch": 31,
+          "strength": 0.103566,
+          "duration": 0.26
+        },
+        {
+          "time": 156.907937,
+          "pitch": 25.079,
+          "strength": 0.046932,
+          "duration": 0.394739
+        },
+        {
+          "time": 157.2,
+          "pitch": 24,
+          "strength": 0.082468,
+          "duration": 0.77
+        },
+        {
+          "time": 157.325896,
+          "pitch": 25.0226,
+          "strength": 0.091637,
+          "duration": 0.476009
+        },
+        {
+          "time": 157.883175,
+          "pitch": 25.1063,
+          "strength": 0.032427,
+          "duration": 0.2322
+        },
+        {
+          "time": 158.02,
+          "pitch": 24,
+          "strength": 0.084276,
+          "duration": 0.41
+        },
+        {
+          "time": 158.533333,
+          "pitch": 25.0003,
+          "strength": 0.059803,
+          "duration": 0.359909
+        },
+        {
+          "time": 158.928073,
+          "pitch": 24.9404,
+          "strength": 0.090732,
+          "duration": 0.383129
+        },
+        {
+          "time": 159.15,
+          "pitch": 34,
+          "strength": 0.101439,
+          "duration": 0.26
+        },
+        {
+          "time": 159.624671,
+          "pitch": 25.0417,
+          "strength": 0.075101,
+          "duration": 0.290249
+        }
+      ]
+    },
+    {
+      "role": "bass",
+      "start": 163.3,
+      "end": 165,
+      "events": [
+        {
+          "time": 163.32,
+          "pitch": 28,
+          "strength": 0.076206,
+          "duration": 0.22
+        },
+        {
+          "time": 163.59,
+          "pitch": 29,
+          "strength": 0.074973,
+          "duration": 0.34
+        },
+        {
+          "time": 164.245442,
+          "pitch": 29.057,
+          "strength": 0.029739,
+          "duration": 0.267029
+        },
+        {
+          "time": 164.39,
+          "pitch": 28,
+          "strength": 0.076856,
+          "duration": 0.08
+        },
+        {
+          "time": 164.59,
+          "pitch": 28,
+          "strength": 0.092981,
+          "duration": 0.22
+        },
+        {
+          "time": 164.988481,
+          "pitch": 25.0192,
+          "strength": 0.087825,
+          "duration": 0.011519
+        }
+      ]
+    },
+    {
+      "role": "guitar",
+      "start": 155,
+      "end": 159.95,
+      "events": [
+        {
+          "time": 155.01,
+          "pitch": 47,
+          "strength": 0.037387,
+          "duration": 0.22
+        },
+        {
+          "time": 155.28,
+          "pitch": 50,
+          "strength": 0.032553,
+          "duration": 0.29
+        },
+        {
+          "time": 155.62,
+          "pitch": 67,
+          "strength": 0.02043,
+          "duration": 0.94
+        },
+        {
+          "time": 155.83,
+          "pitch": 55,
+          "strength": 0.038295,
+          "duration": 0.38
+        },
+        {
+          "time": 156.26,
+          "pitch": 55,
+          "strength": 0.018623,
+          "duration": 0.07
+        },
+        {
+          "time": 156.38,
+          "pitch": 55,
+          "strength": 0.025404,
+          "duration": 0.18
+        },
+        {
+          "time": 156.61,
+          "pitch": 43,
+          "strength": 0.02947,
+          "duration": 0.15
+        },
+        {
+          "time": 156.9,
+          "pitch": 55,
+          "strength": 0.028081,
+          "duration": 0.11
+        },
+        {
+          "time": 157.06,
+          "pitch": 55,
+          "strength": 0.025025,
+          "duration": 0.2
+        },
+        {
+          "time": 157.2,
+          "pitch": 60,
+          "strength": 0.032842,
+          "duration": 0.06
+        },
+        {
+          "time": 157.31,
+          "pitch": 55,
+          "strength": 0.046336,
+          "duration": 0.05
+        },
+        {
+          "time": 157.41,
+          "pitch": 48,
+          "strength": 0.048544,
+          "duration": 0.37
+        },
+        {
+          "time": 157.62,
+          "pitch": 67,
+          "strength": 0.032625,
+          "duration": 1.76
+        },
+        {
+          "time": 157.83,
+          "pitch": 55,
+          "strength": 0.024321,
+          "duration": 0.2
+        },
+        {
+          "time": 158.01,
+          "pitch": 48,
+          "strength": 0.040212,
+          "duration": 0.37
+        },
+        {
+          "time": 158.08,
+          "pitch": 55,
+          "strength": 0.042081,
+          "duration": 0.3
+        },
+        {
+          "time": 158.27,
+          "pitch": 52,
+          "strength": 0.03187,
+          "duration": 0.11
+        },
+        {
+          "time": 158.43,
+          "pitch": 48,
+          "strength": 0.038959,
+          "duration": 0.33
+        },
+        {
+          "time": 158.81,
+          "pitch": 55,
+          "strength": 0.052723,
+          "duration": 0.36
+        },
+        {
+          "time": 158.91,
+          "pitch": 48,
+          "strength": 0.050333,
+          "duration": 0.26
+        },
+        {
+          "time": 159.22,
+          "pitch": 48,
+          "strength": 0.043019,
+          "duration": 0.16
+        },
+        {
+          "time": 159.43,
+          "pitch": 48,
+          "strength": 0.030333,
+          "duration": 0.11
+        },
+        {
+          "time": 159.59,
+          "pitch": 48,
+          "strength": 0.032792,
+          "duration": 0.17
+        }
+      ]
+    },
+    {
+      "role": "guitar",
+      "start": 162.825,
+      "end": 165,
+      "events": [
+        {
+          "time": 163.11,
+          "pitch": 59,
+          "strength": 0.056579,
+          "duration": 0.4
+        },
+        {
+          "time": 163.35,
+          "pitch": 52,
+          "strength": 0.07793,
+          "duration": 0.16
+        },
+        {
+          "time": 163.56,
+          "pitch": 52,
+          "strength": 0.067826,
+          "duration": 0.32
+        },
+        {
+          "time": 163.71,
+          "pitch": 47,
+          "strength": 0.080765,
+          "duration": 0.11
+        },
+        {
+          "time": 163.93,
+          "pitch": 47,
+          "strength": 0.088189,
+          "duration": 0.23
+        },
+        {
+          "time": 164.21,
+          "pitch": 83,
+          "strength": 0.076321,
+          "duration": 0.23
+        },
+        {
+          "time": 164.49,
+          "pitch": 83,
+          "strength": 0.083587,
+          "duration": 0.38
+        },
+        {
+          "time": 164.61,
+          "pitch": 47,
+          "strength": 0.086318,
+          "duration": 0.18
+        },
+        {
+          "time": 164.92,
+          "pitch": 48,
+          "strength": 0.087733,
+          "duration": 0.08
+        }
+      ]
+    }
+  ]
+}

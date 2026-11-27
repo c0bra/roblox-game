@@ -33,7 +33,8 @@ roblox-bands-battle/
 | Playtest and analytics | [`PLAYTEST_AND_ANALYTICS.md`](PLAYTEST_AND_ANALYTICS.md) | Lightweight sessions, semantic evidence, readiness gates, data quality, and release review |
 | Naming and tone | [`NAMING_AND_TONE.md`](NAMING_AND_TONE.md) | Approved player vocabulary, voice pillars, glossary, UI labels, and future catalog naming rules |
 | Technical architecture | [`TECHNICAL_ARCHITECTURE.md`](TECHNICAL_ARCHITECTURE.md) | Approved runtime, content/export, data, deployment, verification, and release architecture; question and working records preserve interview history |
-| Implementation planning | [`IMPLEMENTATION_PLAN_QUESTIONS.md`](IMPLEMENTATION_PLAN_QUESTIONS.md) and [`working record`](IMPLEMENTATION_PLAN_WORKING.md) | Active 12-question interview; canonical `IMPLEMENTATION_PLAN.md` pending, proposals are not approved execution tasks |
+| Implementation | [Implementation Plan](IMPLEMENTATION_PLAN.md) and [progress](IMPLEMENTATION_PROGRESS.md) | Milestones, bounded tasks, acceptance checks, and next ready work |
+| Local song editor | [Authoring app](tools/content-authoring/README.md) | Master/stem listening, note and beat editing, safe analysis reruns and draft export |
 | Beat grid inspection | `audio/Heavens_Edge/beats_dump.py` | madmom beat/downbeat dump + optional click track |
 | Single-stem transcription | `audio/Heavens_Edge/stem2midi.py` | Basic Pitch + madmom + quantization |
 | Stems pipeline details | `audio/Heavens_Edge/stems/` | Main code-heavy subtree; check child AGENTS.md |

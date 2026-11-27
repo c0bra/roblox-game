@@ -1,0 +1,401 @@
+:root {
+	color-scheme: dark;
+	--bg: #101413;
+	--panel: #1a201e;
+	--inset: #121715;
+	--line: #39433e;
+	--ink: #eeefe7;
+	--muted: #aeb8ad;
+	--mint: #b4ef9e;
+	--amber: #ffcc78;
+	--radius: 8px;
+	font-family: "Helvetica Neue", sans-serif;
+	color: var(--ink);
+	background: var(--bg);
+	font-size: 14px;
+}
+* {
+	box-sizing: border-box;
+}
+body {
+	margin: 0;
+}
+header {
+	height: 56px;
+	border-bottom: 1px solid var(--line);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 max(4vw, 20px);
+	background: var(--panel);
+}
+.brand {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-weight: 700;
+}
+.mark {
+	color: var(--mint);
+	font-size: 25px;
+}
+.project,
+label,
+.actions,
+.editbar,
+.titlebar,
+.chartbar,
+.passages,
+.transport,
+.inspector {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+label {
+	color: var(--muted);
+	font-size: 0.87rem;
+}
+main {
+	max-width: 1500px;
+	margin: auto;
+	padding: 26px max(3vw, 15px) 70px;
+}
+.titlebar {
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+.actions {
+	gap: 6px;
+}
+h1,
+h2,
+p {
+	margin: 0;
+}
+h1 {
+	font-size: clamp(25px, 3.5vw, 43px);
+	letter-spacing: -0.052em;
+}
+h2 {
+	font-size: 16px;
+	letter-spacing: -0.025em;
+}
+.sub,
+small,
+#saved {
+	color: var(--muted);
+	line-height: 1.5;
+}
+small {
+	display: block;
+	font-size: 12px;
+	margin-top: 8px;
+}
+button,
+select,
+input,
+textarea {
+	font: inherit;
+	color: inherit;
+}
+button,
+select,
+input[type="number"],
+textarea {
+	border: 1px solid var(--line);
+	border-radius: 5px;
+	background: #252d29;
+	padding: 7px 10px;
+}
+button,
+select {
+	cursor: pointer;
+}
+button:hover:not(:disabled) {
+	background: #364139;
+}
+button:active:not(:disabled) {
+	transform: translateY(1px);
+}
+button:disabled {
+	opacity: 0.48;
+	cursor: default;
+}
+button.primary,
+.play,
+button[aria-pressed="true"] {
+	background: var(--mint);
+	color: #182518;
+	border-color: transparent;
+}
+button.primary:hover:not(:disabled),
+button.play:hover:not(:disabled),
+button[aria-pressed="true"]:hover:not(:disabled) {
+	background: #cefac0;
+}
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+	outline: 2px solid var(--amber);
+	outline-offset: 2px;
+}
+.console,
+.panel {
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	background: var(--panel);
+}
+.console {
+	overflow: hidden;
+}
+.panel {
+	padding: 16px;
+	min-width: 0;
+}
+.transport,
+.passages {
+	padding: 10px 14px;
+}
+.play {
+	font-weight: 700;
+	min-width: 82px;
+}
+.spacer {
+	flex: 1;
+}
+#time {
+	font-family: ui-monospace, monospace;
+	font-size: 22px;
+	color: var(--amber);
+	font-variant-numeric: tabular-nums;
+}
+.overview {
+	height: 64px;
+	position: relative;
+	background: var(--inset);
+}
+canvas {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+#scrub {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: crosshair;
+	margin: 0;
+}
+.overview:focus-within {
+	outline: 2px solid var(--amber);
+	outline-offset: -2px;
+}
+.ruler {
+	display: flex;
+	justify-content: space-between;
+	padding: 3px 9px;
+	background: var(--inset);
+	color: var(--muted);
+	font:
+		11px ui-monospace,
+		monospace;
+}
+.passages {
+	border-top: 1px solid var(--line);
+}
+input[type="number"] {
+	width: 92px;
+	font-variant-numeric: tabular-nums;
+}
+.workspace,
+.lower {
+	display: grid;
+	gap: 12px;
+	margin: 12px 0;
+}
+.workspace {
+	grid-template-columns: minmax(220px, 24%) 1fr;
+}
+.lower {
+	grid-template-columns: 1fr 1fr;
+}
+.master {
+	width: 100%;
+	margin: 12px 0 7px;
+}
+.layer {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	padding: 5px 0;
+}
+.layer .choose {
+	flex: 1;
+	text-align: left;
+	min-width: 0;
+	border-left: 3px solid var(--muted);
+}
+.layer .selected {
+	font-weight: bold;
+	color: var(--mint);
+	background: #26382a;
+	border-left-color: var(--mint);
+}
+.layer button {
+	padding: 6px 9px;
+}
+.chartbar {
+	margin-bottom: 12px;
+}
+.chartbar > div {
+	margin-right: auto;
+}
+.chartbar small {
+	margin: 2px 0;
+}
+.roll {
+	background: var(--inset);
+	height: 158px;
+	border: 1px solid var(--line);
+	border-radius: 4px;
+	overflow: hidden;
+	cursor: crosshair;
+}
+.editbar,
+.inspector {
+	margin-top: 9px;
+}
+.inspector input {
+	width: 100px;
+}
+.chart .sub {
+	margin-top: 8px;
+	font-size: 12px;
+}
+.panel > p,
+.panel > .actions,
+.panel > textarea {
+	margin-top: 9px;
+}
+#activity table {
+	width: 100%;
+	border-collapse: collapse;
+	font-variant-numeric: tabular-nums;
+	margin: 8px 0;
+}
+th,
+td {
+	text-align: right;
+	font-size: 12px;
+	padding: 3px 9px;
+	border-bottom: 1px solid var(--line);
+}
+th:first-child,
+td:first-child {
+	text-align: left;
+}
+th {
+	color: var(--muted);
+}
+textarea {
+	width: 100%;
+	resize: vertical;
+}
+#message:not(:empty) {
+	position: sticky;
+	bottom: 12px;
+	margin: 10px auto 0;
+	padding: 10px 14px;
+	width: fit-content;
+	max-width: 100%;
+	border: 1px solid var(--mint);
+	background: var(--inset);
+	border-radius: 6px;
+}
+#backup {
+	margin-top: 8px;
+}
+.check input {
+	accent-color: var(--mint);
+}
+@media (max-width: 760px) {
+	.workspace,
+	.lower {
+		grid-template-columns: 1fr;
+	}
+	.mixer #layers {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0 10px;
+	}
+	.titlebar {
+		gap: 14px;
+	}
+	.passages select {
+		max-width: 220px;
+	}
+	.chartbar label {
+		font-size: 12px;
+	}
+	main {
+		padding-top: 18px;
+	}
+	.inspector {
+		gap: 5px;
+	}
+	.project select {
+		max-width: 170px;
+	}
+}
+@media (max-width: 400px) {
+	.mixer #layers {
+		display: block;
+	}
+	.project {
+		font-size: 0;
+	}
+	.project select {
+		font-size: 13px;
+	}
+}
+
+.details {
+	margin: 12px 0;
+}
+.details h3 {
+	font-size: 14px;
+	margin: 16px 0 6px;
+}
+input[type="text"] {
+	border: 1px solid var(--line);
+	background: var(--inset);
+	border-radius: 5px;
+	padding: 7px 10px;
+}
+.details #findings button,
+#rests button {
+	margin: 3px;
+	font-size: 12px;
+}
+.details select {
+	max-width: 225px;
+}
+.details input[type="checkbox"] {
+	accent-color: var(--mint);
+}
+
+@media (max-width: 760px) {
+	.passages label:first-child {
+		width: 100%;
+	}
+	.passages #passage {
+		flex: 1;
+		max-width: 100%;
+		min-width: 0;
+	}
+}

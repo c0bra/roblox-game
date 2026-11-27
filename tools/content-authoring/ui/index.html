@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Song editor</title>
+		<link rel="stylesheet" href="editor.css">
+		<script type="module" src="editor.js"></script>
+	</head>
+	<body>
+		<header>
+			<div class="brand">
+				<span class="mark" aria-hidden="true">▥</span>
+				Song editor
+			</div>
+			<label class="project">Project <select id="project"></select></label>
+		</header>
+		<main>
+			<div class="titlebar">
+				<div>
+					<h1 id="title">Opening project…</h1>
+					<div id="meta" class="sub"></div>
+				</div>
+				<div class="actions">
+					<span id="saved" role="status"></span
+					><button id="undo" disabled>Undo</button
+					><button id="save" class="primary" disabled>Save draft</button
+					><button id="export">Export JSON ↓</button
+					><button id="studio">Studio model ↓</button>
+				</div>
+			</div>
+			<section class="console" aria-label="Playback">
+				<div class="transport">
+					<button class="play" id="play" disabled>▶ Play</button
+					><button
+						id="home"
+						title="Back to song start"
+						aria-label="Back to song start"
+					>
+						|◀
+					</button><output id="time">0:00.000</output
+					><span class="sub" id="length"></span><span class="spacer"></span
+					><label class="check"
+						><input type="checkbox" id="clicks">Hear chart taps</label
+					>
+				</div>
+				<div class="overview">
+					<canvas
+						id="wave"
+						aria-label="Full song waveform. Click to seek."
+					></canvas><input
+						id="scrub"
+						type="range"
+						aria-label="Song position"
+						min="0"
+						value="0"
+						step="0.001"
+					>
+				</div>
+				<div class="ruler" id="overviewTimes"></div>
+				<div class="passages">
+					<label
+						>Passage
+						<select id="passage">
+							<option value="">Choose a passage</option>
+						</select></label
+					><label
+						>In
+						<input
+							type="number"
+							aria-label="Loop start in seconds"
+							id="start"
+							step="0.001"
+							min="0"
+							value="0"
+						></label
+					><label
+						>Out
+						<input
+							type="number"
+							aria-label="Loop end in seconds"
+							id="end"
+							step="0.001"
+							min="0"
+							value="8"
+						></label
+					><button id="loop" aria-pressed="false">↻ Loop</button
+					><button id="mark">Save passage…</button>
+				</div>
+			</section>
+			<div class="workspace">
+				<section class="panel mixer">
+					<h2>Layers</h2>
+					<button id="master" class="master" aria-pressed="true">
+						Full mix
+					</button>
+					<div id="layers"></div>
+					<small id="audio" role="status">Loading audio…</small>
+					<button id="retryAudio" hidden>Retry audio</button>
+				</section>
+				<section class="panel chart">
+					<div class="chartbar">
+						<div>
+							<h2 id="chartTitle">Chart</h2>
+							<small id="chartCount"></small>
+						</div>
+						<label>Difficulty <select id="difficulty"></select></label
+						><label
+							>View
+							<select id="zoom">
+								<option value="4">4 s</option>
+								<option value="8" selected>8 s</option>
+								<option value="16">16 s</option>
+								<option value="32">32 s</option>
+							</select></label
+						>
+					</div>
+					<div class="roll">
+						<canvas
+							id="roll"
+							aria-label="Three note lanes. Select a note to edit it, or click empty space to seek."
+						></canvas>
+					</div>
+					<div class="editbar">
+						<button id="prev" aria-label="Previous note">‹ Prev note</button
+						><button id="next" aria-label="Next note">Next note ›</button
+						><button id="add">＋ Add note</button
+						><button id="delete" disabled>Delete note</button>
+					</div>
+					<div class="inspector">
+						<label
+							>Start (s)<input
+								id="noteTime"
+								type="number"
+								step="0.001"
+								min="0"
+							></label
+						><label
+							>Hold (s)<input
+								id="hold"
+								type="number"
+								step="0.001"
+								min="0"
+							></label
+						><label
+							>Lane<select id="lane">
+								<option value="0">1</option>
+								<option value="1">2</option>
+								<option value="2">3</option>
+							</select></label
+						><button id="update">Apply edit</button>
+					</div>
+					<p id="selection" class="sub"></p>
+				</section>
+			</div>
+			<div class="lower">
+				<section class="panel">
+					<h2>Passage review</h2>
+					<p class="sub">
+						Note starts in the In–Out range, by layer and difficulty.
+					</p>
+					<div id="activity"></div>
+					<div id="rests"></div>
+					<div class="actions">
+						<button id="rest">Mark selected layer resting…</button>
+					</div>
+					<small
+						>Applies the rest to all three difficulties. Holds entering the rest
+						end at its start.</small
+					>
+				</section>
+				<section class="panel">
+					<h2>Analysis</h2>
+					<div class="actions">
+						<select aria-label="Processing stage" id="processor">
+							<option value="beats">Beat detection</option>
+							<option value="charts">Transcription and charts</option>
+						</select><button id="run">Run analysis</button
+						><button id="cancel" disabled>Cancel</button>
+					</div>
+					<p id="job" role="status" class="sub">Idle</p>
+					<div class="actions">
+						<button id="applyBeats" disabled>Use suggested beats</button
+						><button id="applyChart" disabled>Replace selected chart…</button>
+					</div>
+					<small id="beatCount"></small
+					><label
+						>Compare notes
+						<select id="overlay">
+							<option value="">Current draft</option>
+							<option value="generated">Overlay analysis suggestions</option>
+							<option value="prior">Overlay previous save</option>
+						</select></label
+					>
+				</section>
+			</div>
+			<section class="panel details">
+				<h2>Musical clock and encounter timeline</h2>
+				<div class="actions">
+					<label
+						>Beats per bar
+						<input id="meter" type="number" min="1" max="16"></label
+					><button id="setBeat">Add beat at playhead</button
+					><button id="moveBeat">Move nearest beat here</button
+					><button id="removeBeat">Remove nearest beat</button>
+				</div>
+				<div class="actions">
+					<label
+						>Event
+						<select id="eventList">
+							<option value="">New event</option>
+						</select></label
+					><input
+						id="eventName"
+						type="text"
+						placeholder="Event name"
+						aria-label="Event name"
+						maxlength="100"
+					><select id="eventKind" aria-label="Event type">
+						<option value="fixed">Fixed event</option>
+						<option value="candidate">Conditional opportunity</option>
+					</select><select id="eventLayer" aria-label="Event layer">
+						<option value="all">All layers</option>
+					</select><label
+						>Warning (s)
+						<input
+							type="number"
+							step="0.01"
+							min="0"
+							id="warning"
+							value="0"
+						></label
+					><label><input type="checkbox" id="reviewed">Reviewed</label>
+				</div>
+				<div class="actions">
+					<button id="writeEvent">Save event at In–Out</button
+					><button id="dropEvent" disabled>Delete event</button>
+				</div>
+				<h3>Review findings</h3>
+				<div id="findings"></div>
+			</section>
+			<section class="panel">
+				<h2><label for="notes">Listening notes</label></h2>
+				<textarea id="notes" rows="3"></textarea>
+			</section>
+			<div id="message" role="status"></div>
+			<button id="backup" hidden>Download unsaved edits</button>
+		</main>
+	</body>
+</html>

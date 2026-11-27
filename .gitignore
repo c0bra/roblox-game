@@ -13,3 +13,8 @@ node_modules/
 roblox/build/
 roblox/sourcemap.json
 Batch Stable Audio Sound Creation.json
+
+# Local authoring caches and prior-save recovery
+/content/projects/*/analysis-suggestions.json
+/content/projects/*/authoring-draft.json.previous
+/content/projects/*/authoring-draft.json.lock
