@@ -1,8 +1,12 @@
+import { mkdtemp, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { analyzeLowBass } from "./bass-recovery";
 import type { Instrument } from "./chart-format";
 import { guitarAttacks, vocalPhrases } from "./instrument-recovery";
 import type { ProcessRunner } from "./process-runner";
 import type { BassRecovery, InstrumentRecovery, RawChartEvent } from "./types";
+import { vocalAccents } from "./vocal-accents";
 
 export type SongAnalysis = {
   readonly recovery: Record<"bass" | "guitar" | "vocals", InstrumentRecovery>;
@@ -61,6 +65,55 @@ const melodicEvents = (
       : [];
   });
 
+async function instrumentOnsets(
+  audio: string,
+  runner: ProcessRunner,
+): Promise<number[]> {
+  const { FFMPEG = "ffmpeg" } = process.env;
+  const detect = async (file: string) =>
+    (
+      await sonicCsv(
+        runner,
+        "vamp:qm-vamp-plugins:qm-onsetdetector:onsets",
+        file,
+      )
+    ).flatMap((row) => (row[0] === undefined ? [] : [row[0]]));
+  const directory = await mkdtemp(join(tmpdir(), "chart-strums-"));
+  try {
+    const wav = join(directory, "levelled.wav");
+    await runner.text([
+      FFMPEG,
+      "-v",
+      "error",
+      "-nostdin",
+      "-i",
+      audio,
+      "-ac",
+      "1",
+      "-af",
+      "dynaudnorm=f=250:g=9:p=0.8:m=12:t=0.002",
+      "-ar",
+      "44100",
+      wav,
+    ]);
+    const [original, levelled] = await Promise.all([
+      detect(audio),
+      detect(wav),
+    ]);
+    // Keep the original attack when both passes hear the same strum.
+    let index = 0;
+    return [
+      ...original,
+      ...levelled.filter((t) => {
+        while ((original[index] ?? Infinity) < t - 0.06) index++;
+        return (original[index] ?? Infinity) > t + 0.06;
+      }),
+    ].sort((a, b) => a - b);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+}
+
 export const analyzeSong = async (
   stems: Record<Instrument, string>,
   runner: ProcessRunner,
@@ -96,31 +149,33 @@ export const analyzeSong = async (
     guitarPcm,
     voiceTrack,
     voicePcm,
+    vocalOnsets,
   ] = await Promise.all([
     sonicCsv(runner, "vamp:beatroot-vamp:beatroot:beats", stems.drums),
     sonicCsv(runner, "vamp:pyin:pyin:notes", stems.vocals),
     sonicCsv(runner, "vamp:pyin:pyin:notes", stems.guitar),
     sonicCsv(runner, "vamp:pyin:pyin:notes", stems.bass),
-    analyzeLowBass(stems.bass, runner, async (file) =>
-      melodicEvents(await sonicCsv(runner, "vamp:pyin:pyin:notes", file)),
-    ),
-    sonicCsv(
+    analyzeLowBass(
+      stems.bass,
       runner,
-      "vamp:qm-vamp-plugins:qm-onsetdetector:onsets",
-      stems.guitar,
+      async (file) =>
+        melodicEvents(await sonicCsv(runner, "vamp:pyin:pyin:notes", file)),
+      (file) => instrumentOnsets(file, runner),
     ),
+    instrumentOnsets(stems.guitar, runner),
     band(stems.guitar, "highpass=f=70,lowpass=f=3000"),
     sonicCsv(runner, "vamp:pyin:pyin:smoothedpitchtrack", stems.vocals),
     band(stems.vocals, "highpass=f=75,lowpass=f=3500"),
+    instrumentOnsets(stems.vocals, runner),
   ]);
   return {
     recovery: {
       bass: bassRecovery,
-      guitar: guitarAttacks(
-        strums.flatMap((row) => (row[0] === undefined ? [] : [row[0]])),
-        guitarPcm,
-      ),
-      vocals: vocalPhrases(voiceTrack, voicePcm),
+      guitar: guitarAttacks(strums, guitarPcm),
+      vocals: {
+        ...vocalPhrases(voiceTrack, voicePcm),
+        hardAccents: vocalAccents(vocalOnsets, voiceTrack, voicePcm),
+      },
     },
     bassRecovery,
     beatTimes: beats.flatMap((row) => (row[0] === undefined ? [] : [row[0]])),

@@ -24,6 +24,8 @@ export type QuantizedEvent = RawChartEvent &
 
 export type TimeSpan = { start: number; end: number };
 export type InstrumentRecovery = {
+  readonly hardAccents?: readonly RawChartEvent[];
+  readonly restrikes?: readonly RawChartEvent[];
   readonly events: readonly RawChartEvent[];
   readonly active: readonly TimeSpan[];
 };

@@ -1,4 +1,5 @@
 import { expect, test } from "bun:test";
+import { bassRestrikes } from "../src/bass-recovery";
 import { compileDifficulties } from "../src/chart-compiler";
 import { chartDifficulties } from "../src/chart-format";
 
@@ -43,4 +44,36 @@ test("bass recovery preserves existing notes and holds, respects reviewed window
   expect(result.report.bassRecovery?.activeGaps).toEqual([
     { start: 13, end: 15.75 },
   ]);
+});
+
+test("a measured bass restrike fits an unused subdivision while preserving the hold and the difficulty cap", () => {
+  const result = compileDifficulties({
+    instrument: "bass",
+    clip: { start: 4, duration: 2 },
+    beatTimes: [4, 4.5, 5, 5.5, 6],
+    events: [note(4, 0), note(5, 0.45)],
+    recovery: {
+      events: [],
+      active: [{ start: 4, end: 6 }],
+      restrikes: [note(4.25, 0), note(4.375, 0), note(5.25, 0)],
+    },
+    maxSnapSeconds: 0.05,
+  });
+  expect(result.charts.easy.notes.map((n) => n.time)).toEqual([0, 1]);
+  expect(result.charts.medium.notes.map((n) => n.time)).toEqual([0, 0.25, 1]);
+  expect(result.charts.hard.notes.map((n) => n.time)).toEqual([
+    0, 0.25, 0.375, 1,
+  ]);
+});
+
+test("a bass attack needs periodic energy after the onset and cannot cross the source rest", () => {
+  const pcm = Float32Array.from({ length: 8000 }, (_, i) =>
+    i < 4000 ? 0.2 * Math.sin((2 * Math.PI * 40 * i) / 8000) : 0,
+  );
+  const accepted = bassRestrikes([0.1, 0.25, 0.49, 0.7], pcm, [
+    { start: 0, end: 0.5 },
+    { start: 0.65, end: 0.9 },
+  ]);
+  expect(accepted.map((n) => n.time)).toEqual([0.1, 0.25]);
+  expect(accepted[0]?.pitch).toBeCloseTo(69 + 12 * Math.log2(40 / 440), 1);
 });

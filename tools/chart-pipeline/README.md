@@ -71,19 +71,24 @@ The validation report includes note counts, rejected off-grid events, duplicate 
 events, and grid-error statistics. Generation is intentionally deterministic, but a
 new song still needs a listening pass before release.
 
-## Bass transcription
+## Recovering missing notes
 
-Every build and editor chart rerun analyzes the original bass stem twice. The first pass keeps the ordinary pYIN notes. For the second pass, FFmpeg filters a temporary copy below 180 Hz and plays it one octave higher. The detector can then follow low fundamentals more reliably. The generator converts pitches, onsets, and holds back to the original song clock.
+Every build and editor chart run checks the four instrument stems independently. Pitch recovery uses beats with no accepted primary detection. Repeated bass attacks may also use available subdivisions. Both passes keep each difficulty's density cap and preserve established notes and holds. The editor also reserves authored transcription windows and honors marked rests.
 
-A recovered note needs a detected pitch from 25–180 Hz and at least 100 ms of supporting energy in the original bass band. The generator considers it only on a beat with no original bass detection. Existing notes keep their lanes and holds. The same difficulty limits apply to recovered notes, and the editor reserves explicitly authored transcription windows.
+| Instrument | Evidence for a recovered note |
+| --- | --- |
+| Bass | pYIN detects a low note on a filtered, octave-raised copy. At least 100 ms of bass energy must support the pitch detection on the original clock. A separate onset pass detects repeated plucks, checking for periodic low-frequency energy just after each attack. |
+| Guitar | The QM onset detector checks the stem and a temporary copy with locally balanced volume for quiet attacks. The sound after it must have a repeating waveform or a strong frequency shared across two short windows. A repeated chord can produce several strums. |
+| Vocals | Voiced pYIN pitch frames form a phrase. A break in voicing or a sustained dip and return in level can begin a new syllable. Pitch wobble alone keeps the hold intact. Hard also listens for distinct attacks followed by a settled sung pitch and either a fresh rise in volume or a pitch step of at least two semitones. These extra taps fit around established holds. |
+| Drums | A rapid rise above the recent amplitude and noise floor identifies a candidate hit. The drum classifier assigns its lane, and the chart uses its detected attack time. |
 
-In `charts/validation.json`, `instruments.bass.bassRecovery.added` gives the extra notes by difficulty. `activeGaps` lists intervals of at least two seconds of continuous measured bass activity without a Normal note or hold, in source seconds. Audition those intervals. A separated stem can also lose a part audible in the master, so compare both when a long rest sounds wrong.
+In `charts/validation.json`, each instrument's `recovery.added` gives additions by difficulty. `recovery.activeGaps` gives source-time ranges where measured stem activity spans at least two seconds without a Normal note or hold. The check groups activity separated by up to 350 ms so repeated short hits can be reviewed. The bass report also retains its previous `bassRecovery` key. Audition flagged passages against the stem and master. Bleed, decay, or an indistinct chord can trigger a review.
 
 ## Requirements
 
 - Bun 1.3.12 for the verified local build
 - `ffmpeg`
-- `sonic-annotator` with BeatRoot, Aubio onset, and pYIN Vamp plugins
+- `sonic-annotator` with BeatRoot, Aubio onset, pYIN, and QM Onset Detector Vamp plugins
 - Docker when using `--song`; the command runs `beveradb/audio-separator`
 
 Install and verify the package itself with:

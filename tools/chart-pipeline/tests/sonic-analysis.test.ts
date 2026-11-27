@@ -48,3 +48,23 @@ test("a low-register detection uses the stem clock and original pitch, with sile
     6,
   );
 });
+
+test("locally balanced guitar detection adds a quiet strum and keeps the original attack when both hear it", async () => {
+  const pcm = Float32Array.from(
+    { length: 16000 },
+    (_, i) => 0.12 * Math.sin((2 * Math.PI * 220 * i) / 8000),
+  );
+  const result = await analyzeSong(
+    { drums: "d", vocals: "v", guitar: "g", bass: "b" },
+    {
+      text: async (cmd) =>
+        cmd.includes("vamp:qm-vamp-plugins:qm-onsetdetector:onsets")
+          ? cmd.at(-1) === "g"
+            ? "0.25\n"
+            : "0.23\n1.1\n"
+          : "",
+      bytes: async () => pcm.buffer,
+    },
+  );
+  expect(result.recovery.guitar.events.map((e) => e.time)).toEqual([0.25, 1.1]);
+});

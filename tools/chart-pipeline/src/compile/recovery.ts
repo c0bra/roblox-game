@@ -9,12 +9,13 @@ import { quantize } from "./grid";
 export function recoveryCandidates(
   input: CompileInput,
   primary: readonly QuantizedEvent[],
+  raw = input.recovery?.events ?? [],
 ) {
   const recovery = input.recovery;
-  if (!recovery) return [];
+  if (!recovery || !raw.length) return [];
   const reserved = input.reserved ?? [];
   const occupied = new Set(primary.map((e) => e.beatIndex));
-  const events = recovery.events.filter(
+  const events = raw.filter(
     (e) => !reserved.some((w) => e.time >= w.start && e.time < w.end),
   );
   return quantize({ ...input, events }).events.flatMap((e) => {

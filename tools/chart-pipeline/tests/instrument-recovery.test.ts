@@ -53,3 +53,31 @@ test("isolated drum transients keep source times, enter only vacant beats and ge
     { time: 1.25, lane: 0, duration: 0 },
   ]);
 });
+
+test("two voiced syllables can share pitch across a brief dip in volume", () => {
+  const pcm = new Float32Array(rate).fill(0.2);
+  pcm.fill(0.025, 0.4 * rate, 0.5 * rate);
+  const track = Array.from({ length: 95 }, (_, i) => [i / 100, 205]);
+  const notes = vocalPhrases(track, pcm).events;
+  expect(notes).toHaveLength(2);
+  expect(notes[0]?.duration).toBeCloseTo(0.4, 1);
+  expect(notes[1]?.time).toBeCloseTo(0.5, 1);
+});
+
+test("a review finding spans repeated drum decays and stops at a genuine rest", () => {
+  const active = Array.from({ length: 10 }, (_, i) => ({
+    start: 10 + i * 0.25,
+    end: 10.1 + i * 0.25,
+  }));
+  const result = compileDifficulties({
+    instrument: "drums",
+    clip: { start: 10, duration: 5 },
+    beatTimes: [10, 11, 12, 13, 14, 15],
+    maxSnapSeconds: 0.08,
+    events: [],
+    recovery: { active: [...active, { start: 14, end: 14.15 }], events: [] },
+  });
+  expect(result.report.recovery?.activeGaps).toEqual([
+    { start: 10, end: 12.35 },
+  ]);
+});

@@ -34,6 +34,57 @@ function guitarFrequency(samples: Float32Array) {
   }
   return best >= 0.52 ? melodicRate / bestLag : 0;
 }
+// A chord may have no single repeating period. Measure whether the same narrow
+// frequency band carries substantial power in two consecutive windows.
+const windowSize = 256;
+const hann = Array.from(
+  { length: windowSize },
+  (_, i) => 0.5 - 0.5 * Math.cos((2 * Math.PI * i) / (windowSize - 1)),
+);
+const binCoefficients = Array.from(
+  { length: 96 },
+  (_, i) => 2 * Math.cos((2 * Math.PI * i) / windowSize),
+);
+function chordRegister(samples: Float32Array): number {
+  if (samples.length < 2 * windowSize) return 0;
+  const spectra = [0, windowSize].map((offset) => {
+    const window = hann.map((weight, i) => weight * (samples[offset + i] ?? 0));
+    const total = (window.reduce((sum, x) => sum + x * x, 0) * windowSize) / 2;
+    return binCoefficients.map((coefficient) => {
+      let prev = 0,
+        older = 0;
+      for (const x of window) {
+        const value = x + coefficient * prev - older;
+        older = prev;
+        prev = value;
+      }
+      return total > 0
+        ? (prev * prev + older * older - coefficient * prev * older) / total
+        : 0;
+    });
+  });
+  const [first, second] = spectra;
+  const scores = (spectrum: readonly number[] = []) =>
+    spectrum.map((center, i) =>
+      Math.max(
+        center / 0.14,
+        ((spectrum[i - 1] ?? 0) + center + (spectrum[i + 1] ?? 0)) / 0.27,
+      ),
+    );
+  const firstScores = scores(first),
+    secondScores = scores(second);
+  let strongest = 1,
+    bin = 0;
+  for (let i = 3; i < binCoefficients.length - 1; i++) {
+    const evidence = Math.min(firstScores[i] ?? 0, secondScores[i] ?? 0);
+    if (evidence > strongest) {
+      strongest = evidence;
+      bin = i;
+    }
+  }
+  return (bin * melodicRate) / windowSize;
+}
+
 export function guitarAttacks(
   onsets: readonly number[],
   pcm: Float32Array,
@@ -43,12 +94,12 @@ export function guitarAttacks(
     const span = active.find((s) => s.start <= time && time < s.end);
     if (!span) return [];
     const start = Math.round((time + 0.015) * melodicRate);
-    const hz = guitarFrequency(
-      pcm.subarray(
-        start,
-        Math.min(start + 480, Math.round(span.end * melodicRate)),
-      ),
+    const postAttack = pcm.subarray(
+      start,
+      Math.min(start + 512, Math.round(span.end * melodicRate)),
     );
+    const hz =
+      guitarFrequency(postAttack.subarray(0, 480)) || chordRegister(postAttack);
     return hz ? [{ time, pitch: midiPitch(hz), duration: 0, strength: 1 }] : [];
   });
   return { active, events };

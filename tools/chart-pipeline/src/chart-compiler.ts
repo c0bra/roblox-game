@@ -27,6 +27,14 @@ export const compileDifficulties = (source: CompileInput): CompileResult => {
   const input = recovery ? { ...source, recovery } : source;
   const quantized = quantize(input);
   const candidates = recoveryCandidates(input, quantized.events);
+  const restrikes = recoveryCandidates(input, [], recovery?.restrikes ?? []);
+  const hardDetails = recovery?.hardAccents?.length
+    ? recoveryCandidates(
+        input,
+        [],
+        [...(recovery.restrikes ?? []), ...recovery.hardAccents],
+      )
+    : restrikes;
   const added = { easy: 0, medium: 0, hard: 0 };
   const chartFor = (difficulty: ChartDifficulty): CompiledChart => {
     const settings = {
@@ -34,25 +42,34 @@ export const compileDifficulties = (source: CompileInput): CompileResult => {
       clipStart: input.clip.start,
       clipDuration: input.clip.duration,
     };
-    const primary = assignLanes({
-      ...settings,
-      events: chooseDifficulty(quantized.events, difficulty),
-    });
-    const extra = assignLanes({
-      ...settings,
-      events: chooseDifficulty(
-        protectExisting(candidates, primary, input.clip.start),
-        difficulty,
+    const primaryEvents = chooseDifficulty(quantized.events, difficulty);
+    const primary = assignLanes({ ...settings, events: primaryEvents });
+    const extraEvents = chooseDifficulty(
+      protectExisting(candidates, primary, input.clip.start),
+      difficulty,
+    );
+    const extra = assignLanes({ ...settings, events: extraEvents });
+    const established = extra.length
+      ? [...primary, ...extra].sort((a, b) => a.time - b.time)
+      : primary;
+    const attacks = chooseDifficulty(
+      protectExisting(
+        difficulty === "hard" ? hardDetails : restrikes,
+        established,
+        input.clip.start,
       ),
-    });
-    added[difficulty] = extra.length;
+      difficulty,
+      [...primaryEvents, ...extraEvents],
+    );
+    const repeats = assignLanes({ ...settings, events: attacks });
+    added[difficulty] = extra.length + repeats.length;
     return {
       instrument: input.instrument,
       difficulty,
       duration: input.clip.duration,
-      notes: extra.length
-        ? [...primary, ...extra].sort((a, b) => a.time - b.time)
-        : primary,
+      notes: repeats.length
+        ? [...established, ...repeats].sort((a, b) => a.time - b.time)
+        : established,
     };
   };
   const charts = {
