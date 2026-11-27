@@ -57,8 +57,8 @@ export type CompiledChart = {
 };
 
 export type RecoveryReport = {
-    readonly added: Record<ChartDifficulty, number>;
-    readonly activeGaps: readonly TimeSpan[];
+  readonly added: Record<ChartDifficulty, number>;
+  readonly activeGaps: readonly TimeSpan[];
 };
 export type CompileReport = {
   readonly recovery?: RecoveryReport;

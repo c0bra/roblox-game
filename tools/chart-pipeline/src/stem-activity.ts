@@ -24,4 +24,3 @@ export function activeSpans(samples: Float32Array, rate = 8000): TimeSpan[] {
   }
   return spans;
 }
-

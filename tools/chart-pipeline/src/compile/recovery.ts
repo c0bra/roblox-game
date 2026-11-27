@@ -65,20 +65,22 @@ export function protectExisting(
 }
 
 export function activeGaps(
-  input: CompileInput,
-  notes: readonly CompiledNote[],
+  active: readonly TimeSpan[],
+  clip: { start: number; duration: number },
+  coverage: readonly TimeSpan[],
 ): TimeSpan[] {
-  const covered = [
-    ...(input.reserved ?? []),
-    ...notes.map((n) => ({
-      start: input.clip.start + n.time,
-      end: input.clip.start + n.time + n.duration,
-    })),
-  ].sort((a, b) => a.start - b.start);
+  const covered = [...coverage].sort((a, b) => a.start - b.start);
+  const passages: TimeSpan[] = [];
+  // Nearby attacks belong to one passage even when a drum decays between hits.
+  for (const span of active) {
+    const previous = passages.at(-1);
+    if (previous && span.start - previous.end <= 0.35) previous.end = span.end;
+    else passages.push({ ...span });
+  }
   const gaps: TimeSpan[] = [];
-  for (const span of input.recovery?.active ?? []) {
-    let cursor = Math.max(input.clip.start, span.start);
-    const end = Math.min(input.clip.start + input.clip.duration, span.end);
+  for (const span of passages) {
+    let cursor = Math.max(clip.start, span.start);
+    const end = Math.min(clip.start + clip.duration, span.end);
     for (const note of covered) {
       if (note.start >= end) break;
       if (note.start - cursor >= 2)

@@ -1,12 +1,12 @@
 import type { ChartDifficulty } from "./chart-format";
+import { chooseDifficulty } from "./compile/difficulty";
+import { quantize } from "./compile/grid";
+import { assignLanes } from "./compile/lanes";
 import {
   activeGaps,
   protectExisting,
   recoveryCandidates,
 } from "./compile/recovery";
-import { chooseDifficulty } from "./compile/difficulty";
-import { quantize } from "./compile/grid";
-import { assignLanes } from "./compile/lanes";
 import type { CompiledChart, CompileInput, CompileResult } from "./types";
 
 export type {
@@ -21,8 +21,10 @@ export type {
 export { drumHitLabels } from "./types";
 
 export const compileDifficulties = (source: CompileInput): CompileResult => {
-  const recovery = source.recovery ?? (source.instrument === "bass" ? source.bassRecovery : undefined);
-  const input = recovery ? {...source, recovery} : source;
+  const recovery =
+    source.recovery ??
+    (source.instrument === "bass" ? source.bassRecovery : undefined);
+  const input = recovery ? { ...source, recovery } : source;
   const quantized = quantize(input);
   const candidates = recoveryCandidates(input, quantized.events);
   const added = { easy: 0, medium: 0, hard: 0 };
@@ -62,11 +64,27 @@ export const compileDifficulties = (source: CompileInput): CompileResult => {
     .map((event) => event.gridError * 1_000)
     .sort((left, right) => left - right);
   const medianGridErrorMs = errors[Math.floor(errors.length / 2)] ?? 0;
-  const review = recovery ? {added, activeGaps: activeGaps(input, charts.medium.notes)} : undefined;
+  const review = recovery
+    ? {
+        added,
+        activeGaps: activeGaps(recovery.active, input.clip, [
+          ...(input.reserved ?? []),
+          ...charts.medium.notes.map((n) => ({
+            start: n.time + input.clip.start,
+            end: n.time + input.clip.start + n.duration,
+          })),
+        ]),
+      }
+    : undefined;
   return {
     charts,
     report: {
-      ...(review ? {recovery:review, ...(input.instrument === "bass" ? {bassRecovery:review} : {})} : {}),
+      ...(review
+        ? {
+            recovery: review,
+            ...(input.instrument === "bass" ? { bassRecovery: review } : {}),
+          }
+        : {}),
       inputEvents: input.events.length,
       acceptedEvents: quantized.events.length,
       rejectedOffGrid: quantized.rejected,

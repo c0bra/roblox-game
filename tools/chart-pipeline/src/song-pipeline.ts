@@ -20,13 +20,18 @@ import type { ProcessRunner } from "./process-runner";
 import { systemProcessRunner } from "./process-runner";
 import { analyzeSong } from "./sonic-analysis";
 import { separateSong } from "./stem-separator";
-import type { InstrumentRecovery, BassRecovery, CompileResult, RawChartEvent } from "./types";
+import type {
+  BassRecovery,
+  CompileResult,
+  InstrumentRecovery,
+  RawChartEvent,
+} from "./types";
 
 type StemMap = Record<Instrument, string>;
 type EventMap = Record<Instrument, readonly RawChartEvent[]>;
 
 export type WriteChartBundleInput = {
-  readonly recovery?:Record<Instrument,InstrumentRecovery>;
+  readonly recovery?: Record<Instrument, InstrumentRecovery>;
   readonly bassRecovery?: BassRecovery;
   readonly outroRoles?: readonly Instrument[];
   readonly output: string;
@@ -74,7 +79,7 @@ export const writeChartBundle = async (
         ...(instrument === "bass" && input.bassRecovery
           ? { bassRecovery: input.bassRecovery }
           : {}),
-        ...(input.recovery ? {recovery: input.recovery[instrument]} : {}),
+        ...(input.recovery ? { recovery: input.recovery[instrument] } : {}),
         continueFinalTempo: input.outroRoles?.includes(instrument) ?? false,
         events: input.events[instrument],
         beatTimes: input.beatTimes,
@@ -155,7 +160,7 @@ export const buildChartBundle = async (
   }
   const analysis = await analyzeSong(sourceStems, runner);
   const clip = { start: options.start, duration };
-  const drums=await analyzeDrums({audio:sourceStems.drums,clip,runner});
+  const drums = await analyzeDrums({ audio: sourceStems.drums, clip, runner });
   const events: EventMap = {
     drums: drums.events,
     vocals: analysis.vocals,
@@ -171,7 +176,7 @@ export const buildChartBundle = async (
     maxSnapSeconds: options.snapMs / 1_000,
     sourceStems,
     beatTimes: analysis.beatTimes,
-    recovery: {...analysis.recovery,drums:drums.recovery},
+    recovery: { ...analysis.recovery, drums: drums.recovery },
     events,
   });
 };
