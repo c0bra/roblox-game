@@ -1,0 +1,35 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "tools/content-authoring/ui/index.html"
+        ],
+        "createdAt": "2026-11-25T22:57:23.708Z",
+        "reason": "Codex verified in Chromium: the detector omits the responsive h1, which renders at 25px on mobile and 43px on desktop above 16px section headings and 14px body text."
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "tools/content-authoring/ui/editor.css"
+        ],
+        "createdAt": "2026-11-25T23:18:02.688Z",
+        "reason": "Codex verified that the border is on the layer selection button. Its color follows the selected chart source and the button exposes the same state through aria-current."
+      },
+      {
+        "rule": "overused-font",
+        "value": "helvetica",
+        "files": [
+          "tools/content-authoring/ui/editor.css"
+        ],
+        "createdAt": "2026-11-25T23:18:02.767Z",
+        "reason": "Codex retained the locally available Helvetica Neue for the offline editor controls after verifying the actual rendered face in Chromium at desktop and mobile widths."
+      }
+    ]
+  }
+}
