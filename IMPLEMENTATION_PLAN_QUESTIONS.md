@@ -1,13 +1,13 @@
 # Implementation Plan Questions
 
-- **Status:** In progress (7 of 12 questions resolved)
+- **Status:** Complete (12 of 12 questions resolved)
 - **Started:** 2026-09-10
-- **Current checkpoint:** C - From a song test to a complete game
+- **Completed:** 2026-11-23
 - **Architecture authority:** [`TECHNICAL_ARCHITECTURE.md`](TECHNICAL_ARCHITECTURE.md), especially sections 18 through 21
 - **Design inputs:** [`SYSTEM_SPECIFICATIONS_TRACKER.md`](SYSTEM_SPECIFICATIONS_TRACKER.md)
 - **System coverage:** [`SYSTEMS_MAP.md`](SYSTEMS_MAP.md)
 - **Working record:** [`IMPLEMENTATION_PLAN_WORKING.md`](IMPLEMENTATION_PLAN_WORKING.md)
-- **Planned result:** `IMPLEMENTATION_PLAN.md`, to be written from resolved decisions
+- **Canonical result:** [Implementation Plan](IMPLEMENTATION_PLAN.md)
 
 ## 1. Interview method
 
@@ -173,7 +173,10 @@ work with their own evidence.
 
 #### IP-08 - How should we expand to the full first-release scope?
 
-- **Status:** Open.
+- **Status:** Resolved 2026-11-20.
+- **Decision:** Add the remaining two bosses one at a time with the same song
+  tools. Give each its own level and mechanics and playtest it when playable.
+  Introduce hub, ability, equipment, and progression features in those sessions.
 - **Question:** Once the first complete battle works, should we expand the game
   around that working example and bring the other two bosses through the tools?
 - **Recommendation:** Complete the required combat, abilities, progression,
@@ -186,7 +189,10 @@ work with their own evidence.
 
 #### IP-09 - What can wait until the game loop is reliable?
 
-- **Status:** Open.
+- **Status:** Resolved 2026-11-20.
+- **Decision:** Schedule paid purchases and final public release preparations
+  after tests demonstrate battle completion, saved rewards, and recovery from
+  an interrupted save.
 - **Question:** Should paid purchases and final publication work come after the
   battle, rewards, and save/recovery paths have been demonstrated?
 - **Recommendation:** Yes, following phase 6. Include basic diagnostics and
@@ -200,7 +206,8 @@ work with their own evidence.
 
 #### IP-10 - How should implementation tasks be packaged?
 
-- **Status:** Open.
+- **Status:** Resolved 2026-11-23.
+- **Decision:** Assign each task one independently checkable result and a handoff.
 - **Question:** Should each task deliver one small behavior that can be checked
   independently, with a clear handoff to the next task?
 - **Recommendation:** Yes. Use stable task IDs, specification sections, owned
@@ -213,7 +220,8 @@ work with their own evidence.
 
 #### IP-11 - How should progress and changes be tracked?
 
-- **Status:** Open.
+- **Status:** Resolved 2026-11-23.
+- **Decision:** Maintain a single [progress file](IMPLEMENTATION_PROGRESS.md) for results, blockers and the next task.
 - **Question:** Would a simple checked-in progress record, updated as tasks and
   milestones finish, be enough for you to see what works and what comes next?
 - **Recommendation:** Use the implementation plan as the roadmap and one compact
@@ -227,7 +235,8 @@ work with their own evidence.
 
 #### IP-12 - What makes the plan ready to use?
 
-- **Status:** Open.
+- **Status:** Resolved 2026-11-23.
+- **Decision:** Trace all thirteen specs to milestones and identify the first ready task.
 - **Question:** Should we finish by checking every required system has a place
   in the roadmap and identifying the exact first implementation task?
 - **Recommendation:** Yes. Reconcile the plan against architecture phases and

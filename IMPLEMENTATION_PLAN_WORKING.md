@@ -1,12 +1,12 @@
 # Implementation Plan Working Record
 
-- **Status:** In progress (7 of 12 questions resolved)
+- **Status:** Complete (12 of 12 questions resolved)
 - **Started:** 2026-09-10
-- **Current checkpoint:** C - From a song test to a complete game
+- **Completed:** 2026-11-23
 - **Question plan:** [`IMPLEMENTATION_PLAN_QUESTIONS.md`](IMPLEMENTATION_PLAN_QUESTIONS.md)
 - **Architecture authority:** [`TECHNICAL_ARCHITECTURE.md`](TECHNICAL_ARCHITECTURE.md)
 - **Design inputs:** [`SYSTEM_SPECIFICATIONS_TRACKER.md`](SYSTEM_SPECIFICATIONS_TRACKER.md)
-- **Planned result:** `IMPLEMENTATION_PLAN.md`, not yet written
+- **Canonical result:** [Implementation Plan](IMPLEMENTATION_PLAN.md)
 
 ## 1. Purpose
 
@@ -43,8 +43,8 @@ Inspected 2026-09-10:
 |---|---|---|---:|
 | A - First playable target | IP-01 through IP-03 | Approved 2026-10-06 | 3 of 3 |
 | B - Work before broader gameplay | IP-04 through IP-06 | Approved 2026-11-20 | 3 of 3 |
-| C - From a song test to a complete game | IP-07 through IP-09 | In progress | 1 of 3 |
-| D - Tasks, evidence, and plan completion | IP-10 through IP-12 | Not started | 0 of 3 |
+| C - From a song test to a complete game | IP-07 through IP-09 | Approved 2026-11-20 | 3 of 3 |
+| D - Tasks, evidence, and plan completion | IP-10 through IP-12 | Approved 2026-11-23 | 3 of 3 |
 
 ## 4. Decision record
 
@@ -161,6 +161,34 @@ both solo and co-op play. In a co-op attempt, disconnect and rejoin the
 ongoing fight. After earning a reward, leave the game, return, and verify the
 same reward appears on the reloaded profile.
 
+#### IP-08 - Bringing the remaining bosses into the game
+
+Once the first complete battle works, use the same song tools to bring in the
+other two bosses one at a time. Give each a distinct level and mechanics. As
+each fight becomes playable, playtest it alongside the hub, abilities,
+equipment, and progression features available at that point. This lets the
+owner judge how those features work together during a real session.
+
+#### IP-09 - Timing of purchases and public release work
+
+The owner approved scheduling paid purchases and final release preparations
+after a player can finish a battle, keep the reward across sessions, and
+recover from an interrupted save. Build the diagnostics needed to observe
+those outcomes alongside the systems they test.
+
+Phase 6 adds purchase-specific checks. Retry the same receipt after an
+interruption and verify that the player receives the item exactly once.
+Final publication follows the release checks and owner approval in
+Technical Architecture section 19.
+
+### Checkpoint D - Tasks, evidence, and plan completion
+
+The owner accepted the final three proposals together on 2026-11-23.
+
+- IP-10. Size a task around one result another contributor can check. The plan's task table pairs each deliverable with its prerequisites, scope and acceptance check.
+- IP-11. Keep a single [progress file](IMPLEMENTATION_PROGRESS.md). Update it as work finishes or becomes blocked, with the observed result and next ready task.
+- IP-12. Map all thirteen specs to milestones and identify the first ready task. The [completed plan](IMPLEMENTATION_PLAN.md) also assigns all seven architecture phases and ten outstanding architecture checks. T01 inventories the selected song inputs.
+
 ## 5. Change log
 
 - **2026-09-10:** Created the twelve-question interview and working record.
@@ -177,3 +205,6 @@ same reward appears on the reloaded profile.
 - **2026-11-20:** Recorded the three hands-on reviews and completed checkpoint B.
   Progress is 6 of 12. Checkpoint C begins with the first complete boss battle.
 - **2026-11-20:** Approved IP-07. Progress is 7 of 12.
+- **2026-11-20:** Approved IP-08. Progress is 8 of 12.
+- **2026-11-20:** Approved IP-09 and completed checkpoint C. Progress is 9 of 12.
+- **2026-11-23:** Completed IP-10 through IP-12 and created the canonical plan and execution record.

@@ -8,7 +8,7 @@
 - **Current specification:** Complete; supporting documents remain separate
 - **Current supporting document:** Complete
 - **Current product task:** Naming & Tone complete
-- **Current technical task:** Implementation Plan in progress (7 of 12 questions resolved, Technical Architecture complete)
+- **Current technical task:** Implementation Plan complete. See [execution progress](IMPLEMENTATION_PROGRESS.md).
 
 ## Purpose
 
@@ -92,8 +92,8 @@ and bounded tasks. It does not change the completed design/architecture status.
 
 - **Question plan:** [`IMPLEMENTATION_PLAN_QUESTIONS.md`](IMPLEMENTATION_PLAN_QUESTIONS.md)
 - **Working record:** [`IMPLEMENTATION_PLAN_WORKING.md`](IMPLEMENTATION_PLAN_WORKING.md)
-- **Started:** 2026-09-10. Checkpoints A and B are approved. Checkpoint C is in progress, with 7 of 12 questions resolved overall.
-- **Canonical result:** `IMPLEMENTATION_PLAN.md` pending the interview.
+- **Interview:** Completed 2026-11-23 with all four checkpoints and all twelve decisions resolved.
+- **Canonical result:** [Implementation Plan](IMPLEMENTATION_PLAN.md)
 
 ## Final audit coverage
 

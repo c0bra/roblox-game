@@ -782,11 +782,8 @@ implementation, deployment, data, verification, and release boundary for this
 map. Final public game-title selection remains a separate future publication gate
 and does not block implementation.
 
-The downstream Implementation Plan interview is in progress in its
-[`question plan`](IMPLEMENTATION_PLAN_QUESTIONS.md) and
-[`working record`](IMPLEMENTATION_PLAN_WORKING.md), with 7 of 12 questions
-resolved. Its eventual `IMPLEMENTATION_PLAN.md` will assign milestones and tasks
-to these approved boundaries; it is not yet canonical.
+The [Implementation Plan](IMPLEMENTATION_PLAN.md) assigns these systems to
+milestones. The [progress record](IMPLEMENTATION_PROGRESS.md) tracks execution.
 
 No standalone specification is initially required for Player Survival &
 Recovery, Tactical Positioning & Movement, Solo Support, Difficulty & Scaling,
